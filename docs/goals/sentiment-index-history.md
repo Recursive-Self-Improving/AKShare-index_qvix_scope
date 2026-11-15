@@ -9,9 +9,9 @@
 - At completion quote every non-done item with its status/reason; only external missing tools/access/services or external-system changes justify pause.
 
 ## Acceptance criteria
-1. Actually invoke AKShare `index_news_sentiment_scope`; persist real response, source/version, retrieval timestamp, available range, and evidence of history/backfill limits. Seek daily observations from 2000-01-01 through retrieval date; if unavailable, backfill all genuinely obtainable observations, recording gaps without synthesis.
+1. **Superseded by D9 / AC9**: original requirement to obtain `index_news_sentiment_scope` and backfill genuine ChinaScope history. Historical attempts/evidence retained, no longer a dependency of the active QVIX goal.
 2. Fetch and persist daily histories since 2000-01-01 (or earliest genuine available date) for 上证指数、上证50、沪深300、创业板指、创业板50、科创综指、科创50. Resolve canonical identifiers; include dates and close values, provenance/ranges/gaps; distinguish pre-inception and unavailable data.
-3. Deliver one HTML with seven clearly labelled charts, each overlaying the corresponding daily index and sentiment on readable separate scales, preserving real dates/missingness. Mouse drag/selection must zoom the time range; provide usable reset/navigation.
+3. **Superseded by D9 / AC10**: original seven sentiment-overlay requirement. Replace the active comparison series with QVIX; retain the original historical evidence but do not keep sentiment/doc samples in the active report.
 4. Provide runnable refresh/backfill/chart commands, machine-readable raw/normalized data and documentation sufficient for comparison/backtesting; clearly state publication/look-ahead limitations and do not imply causality. No scheduled task in this goal.
 5. Independent review converges; actual data and chart behavior are verified; all applicable project checks pass on final tree.
 
@@ -33,7 +33,7 @@
 ## Work items
 - W1 research/spike; AC1,2,4; done — observed actual AKShare invocation failure and seven real index histories; persisted docs/research/endpoint-feasibility.md.
 - W2 review; AC1–5; done — F1–F5 converge in plan-review-round2.md; sample delta PASS in sample-plan-review.md.
-- W3 impl; AC1–4; blocked — all reachable production/data/chart work implemented and independently verified; genuine live/full-history sentiment acquisition and genuine overlays remain blocked by external provider TLS/redirect/service availability and no authentic history access (D4). Unblock: restored authenticated source or authorized retained responses. No substitute data or weakened AC.
+- W3 impl; AC1–4; superseded — D9 user explicitly replaces sentiment with QVIX. All prior reachable work/evidence retained; W13–W16 and AC9–12 now cover the active comparison goal, no ChinaScope restoration prerequisite.
 - W4 review; AC1–5; done — independent whole-change implementation/data round2 PASS and offline-browser round2 PASS, no remaining Fix/Replan.
 - W5 fix; AC1,3,4,5; done — R1/R2/B1 implemented, independently re-reviewed, 28-test final full applicable gates and final browser exit0 pass.
 - W6 research; AC1,3; done — docs/research/sentiment-recovery.md finds ten historical documentation rows; no authenticated live/full archive source obtained; external blocker retained in D4.
@@ -95,3 +95,24 @@
 - I16: Broader research finds genuine licensed news-sentiment interfaces and runtime-successful nonequivalent public news/breadth feeds. Choose one independent full research review, correct CFND-history qualification, re-review PASS; reject falsely equating a same-vendor product, query-date minimum or raw news with the original index/history.
 - I17: Final union gates first expose two lint errors in archived final-browser fixture added after earlier gate; treat failure as ground truth, delegate formatting correction and independent narrow review. Rerun frozen sync/compileall/Ruff/pytest/actual artifact verify: exit0, 28 passed, two upstream warnings, seven raw/CSV/report arrays agree. This supersedes prior final-tree lint timing claim; report hash/data behavior unchanged.
 - Final gate (AC6–8 supplement): PASS. Reread/reconciled ledger: original W3 remains externally blocked under D4; AC6–8 research verified, W8–W12 done, both research/evidence reviews converge, no open Fix/Replan/decision or unknown plan section, full applicable final gates pass. No production/chart source migration or scheduling, no credentialed data claimed retrieved. Only non-done item remains **W3 — blocked** for authenticated original sentiment access/history.
+
+## QVIX replacement — active goal (supersedes previous final dispositions where inconsistent)
+### Acceptance criteria
+- AC9: actually invoke AKShare `index_option_50etf_qvix`; obtain and retain all genuine available daily history within 2000-01-01 through retrieval date, exact raw response/hash/source/version/time and validated machine-readable rows. Report observed coverage/holes and actual history limits; no invented early values.
+- AC10: replace the comparison series in all seven offline charts with the same **50ETF QVIX daily close**, labelled with accurate units/source and independent right scale. Preserve the seven index histories, real dates/null gaps and mouse zoom/reset/range navigation; no old sentiment/doc-example trace, warnings or claimed equivalence in the active report.
+- AC11: cleanly migrate active fetch/chart/verify commands, schemas/tests and README to QVIX without runtime sentiment shims, dead imports or misleading fallbacks. Preserve immutable prior acquisition/research evidence rather than rewrite it. Refresh/backfill and offline replay must work; failures/stale state remain honest. No scheduler.
+- AC12: document volatility versus news sentiment, 50ETF target versus other indices and publication/closing-time/retrospective-history limitations. Independent plan and whole-change reviews converge; real acquisition/raw replay and final seven-panel offline browser interactions pass; full applicable project gates pass on final tree.
+### Plan
+- P-Q1 [firm; unreviewed]: one scratch runtime research/planning worker probes pinned AKShare QVIX endpoint, upstream response/semantics, history/date coverage, and current-code migration boundaries; persist docs/research/qvix-feasibility.md. No production edits yet.
+- P-Q2 [unknown-until(QVIX spike); unreviewed]: replace active comparison feed/end-to-end interfaces with real QVIX, regenerate data/report. Independent PLAN-REVIEW of precise source/schema/legacy cutover contract before implementation; no speculative endpoint substitution.
+- P-Q3 [firm; unreviewed]: independent original-scope code/data review plus one gated offline browser review after implementation; fix/re-review until clean, run union gates after last changes (including archived evidence scripts), commit each green checkpoint and final ledger, no push.
+### Work items
+- W13 research/spike; AC9–12; active — real QVIX capability and explicit cutover plan.
+- W14 review; AC9–12; todo — independent PLAN-REVIEW.
+- W15 impl; AC9–12; todo — clean active QVIX acquisition/data/HTML/README/tests migration.
+- W16 review/fix; AC9–12; todo — independent whole-change and offline-browser proof, findings loop and final gates/ledger.
+### Decision log
+- D9: User requests “换成 QVIX 波动率指数… index_option_50etf_qvix”. Choose that named 50ETF QVIX as common comparison series on all seven existing charts, not seven new volatility feeds, and explicitly distinguish implied volatility from news sentiment. Supersede original AC1/AC3 and blocked W3, covered by AC9/AC10/W13–W16; AC2/4/5 remain applicable and AC6–8 research remains historically done. Plan diff: keep seven genuine index histories/identity citations, raw capture/immutable snapshots/validation/offline Plotly interactions; rewrite active comparison source/schema/labels/verifier/tests/README; remove obsolete sentiment-specific invocation workaround/sample-import runtime/active example traces rather than add a second convention. Preserve prior immutable data and research/review evidence, do not fabricate a sentiment-to-QVIX migration of observations. Dependent implementation unknown until spike; no uncommitted code to revert.
+### Findings and iterations
+- Q-Q1: source accessibility, earliest/last dates, format/units and backfill contract unknown; triage research, open W13.
+- I18: Resume clean tree at 0a49025; no leftover active workers/worktrees. Choose scratch QVIX spike first, reject coding guessed source or reusing ten sentiment samples. Positive observed history and explicit cutover plan unlock independent review.
