@@ -1,0 +1,20 @@
+[
+  {
+    "url": "http://1.optbbs.com/d/csv/d/k.csv",
+    "requested_url": "http://1.optbbs.com/d/csv/d/k.csv",
+    "status": 200,
+    "headers": {
+      "Server": "nginx/1.0.15",
+      "Date": "Sun, 15 Nov 2026 21:31:09 GMT",
+      "Content-Type": "application/octet-stream",
+      "Content-Length": "928727",
+      "Last-Modified": "Fri, 13 Nov 2026 09:25:13 GMT",
+      "Connection": "keep-alive",
+      "Accept-Ranges": "bytes"
+    },
+    "encoding": null,
+    "sha256": "2e0f2edc8a6bd80cc4ec71fec22d01d933cc29af7de7b2337c406b0fea436071",
+    "bytes": 928727,
+    "retrieved_at": "2026-11-15T21:31:16.783982+00:00"
+  }
+]
