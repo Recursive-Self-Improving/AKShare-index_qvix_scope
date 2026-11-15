@@ -1,0 +1,108 @@
+{
+  "feed": "sh000688",
+  "attempted_at": "2026-11-15T21:47:40.515894+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-15"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "invocation": "index_zh_daily_sina(symbol='sh000688')",
+  "request_timeout_seconds": [
+    5,
+    12
+  ],
+  "csv": "/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/data/runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000688/observations.csv",
+  "csv_sha256": "71cb5b7f338be5f609c002dae0b3a0e4df0d4ce8527b4873fcc8835462be8240",
+  "count": 1663,
+  "range": [
+    "2020-01-02",
+    "2026-11-13"
+  ],
+  "identity": {
+    "official_name": "上证科创板50成份指数",
+    "base_date": "2019-12-31",
+    "release_date": "2020-07-23",
+    "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf"
+  },
+  "retrospective_count": 133,
+  "status": "success",
+  "raw": {
+    "body": "/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/data/runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000688/response-0.body",
+    "sha256": "73b99e3d12a8264ed441a5f0888345983abfc8a71124b6e8d470ef4c9c304ab7",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "20666",
+      "Connection": "keep-alive",
+      "Date": "Sun, 15 Nov 2026 21:47:40 GMT",
+      "Expires": "Sun, 15 Nov 2026 21:48:45 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 cmcc.huanan2.union.23 (ApacheTrafficServer/6.2.1 [cRs f ]), cache10.l2so158-2[9,9,304-0,H], cache25.l2so158-2[10,0], cache25.l2so158-2[11,0], ens-cache35.l2hk11[16,16,304-0,H], ens-cache6.l2hk11[17,0], ens-cache6.l2hk11[17,0], ens-cache29.l2de4[218,219,304-0,H], ens-cache25.l2de4[220,0], ens-cache25.l2de4[221,0], ens-cache10.de10[222,222,200-0,H], ens-cache24.de10[227,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache24.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=ctc.guangzhou.union.288.nb.sinaedge.com,c=113.96.59.6;f=Edge,s=cmcc.huanan2.union.23,c=10.33.79.28",
+      "X-Via-Edge": "179477926064813d1090a1c4f210a0732ba5e",
+      "X-Via-SSL": "ssl.31.sinag1.hj4.lb.sinanode.com",
+      "Edge-Copy-Time": "1794562331433",
+      "Last-Modified": "Fri, 13 Nov 2026 09:30:59 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "W/\"6af6d8d3-69bd\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794779260",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:546467314",
+      "X-Swift-SaveTime": "Sun, 15 Nov 2026 21:47:40 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5feac17947792605047732e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-15T21:47:40.764069+00:00",
+    "http_decompressed": true
+  },
+  "successful_at": "2026-11-15T21:47:40.868147+00:00",
+  "finished_at": "2026-11-15T21:47:40.868166+00:00",
+  "captures": [
+    {
+      "body": "/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/data/runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000688/response-0.body",
+      "sha256": "73b99e3d12a8264ed441a5f0888345983abfc8a71124b6e8d470ef4c9c304ab7",
+      "url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+      "requested_url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+      "status": 200,
+      "headers": {
+        "Server": "Tengine",
+        "Content-Type": "application/x-javascript",
+        "Content-Length": "20666",
+        "Connection": "keep-alive",
+        "Date": "Sun, 15 Nov 2026 21:47:40 GMT",
+        "Expires": "Sun, 15 Nov 2026 21:48:45 GMT",
+        "Cache-Control": "max-age=120",
+        "Via": "http/1.1 cmcc.huanan2.union.23 (ApacheTrafficServer/6.2.1 [cRs f ]), cache10.l2so158-2[9,9,304-0,H], cache25.l2so158-2[10,0], cache25.l2so158-2[11,0], ens-cache35.l2hk11[16,16,304-0,H], ens-cache6.l2hk11[17,0], ens-cache6.l2hk11[17,0], ens-cache29.l2de4[218,219,304-0,H], ens-cache25.l2de4[220,0], ens-cache25.l2de4[221,0], ens-cache10.de10[222,222,200-0,H], ens-cache24.de10[227,0]",
+        "X-Via-CDN": "f=aliyun,s=ens-cache24.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=ctc.guangzhou.union.288.nb.sinaedge.com,c=113.96.59.6;f=Edge,s=cmcc.huanan2.union.23,c=10.33.79.28",
+        "X-Via-Edge": "179477926064813d1090a1c4f210a0732ba5e",
+        "X-Via-SSL": "ssl.31.sinag1.hj4.lb.sinanode.com",
+        "Edge-Copy-Time": "1794562331433",
+        "Last-Modified": "Fri, 13 Nov 2026 09:30:59 GMT",
+        "Vary": "Accept-Encoding",
+        "ETag": "W/\"6af6d8d3-69bd\"",
+        "Content-Encoding": "gzip",
+        "Age": "0",
+        "Ali-Swift-Global-Savetime": "1794779260",
+        "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:546467314",
+        "X-Swift-SaveTime": "Sun, 15 Nov 2026 21:47:40 GMT",
+        "X-Swift-CacheTime": "120",
+        "Timing-Allow-Origin": "*",
+        "EagleId": "a3b5feac17947792605047732e"
+      },
+      "encoding": "utf-8",
+      "retrieved_at": "2026-11-15T21:47:40.764069+00:00",
+      "http_decompressed": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+Round2 independent browser review. Automation scratch stays outside repository.
+
+First resource preflight:
+  free -m
+  ~/.omp/bin/heavy-gate --status
+  MemAvailable8328 MiB; both slots free; swap0.
+
+Scratch preparation:
+  cp /tmp/sentiment-browser-round1/qvix-review.cjs /tmp/sentiment-browser-round1/qvix-review-round2.cjs
+  Hashline edits: current compact snapshot.accounting, final report hash, active/derived equality, exact index CSV arrays and declared hashes, actual visible index status/times/ranges, QVIX disclosures/geometry, independent source-only membership, provenance, corrected actual-UID main-trace selector excluding ALL rangeslider descendants, nonzero exit for any failed assertion.
+  A scratch edit had an extra closing parenthesis; parser warning caught it and it was corrected before launch. No browser or product failure attributed to that typo.
+
+ONE launch (finite bash async:true timeout:0):
+  ~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/qvix-review-round2.cjs > docs/reviews/qvix-browser-evidence-round2/harness-output.txt 2>&1
+  Shell stores exact status in harness-exit.txt and exits with that status.
+
+One browser/context/reused page;1440x1100;headless Google Chrome;playwright-core;context offline:true and serviceWorkers:block;external routes aborted;real file://report.html;browser.close awaited in finally.
+
+No fetch/provider retry, production/README/ledger/data edits, historical evidence edits, commits, subdelegates, synthetic fixture, Python evidence script, or static/full-suite gates.
+
+Final actual result: complete harness PASS, failures=[], seven panels, both actual UID-selected gap views, shell exit0 (harness-exit.txt). Console/page errors=[], requests=[only file://report.html], blocked=[].
+After completion a Python/PIL montage convenience call failed with ModuleNotFoundError: PIL before doing anything. No install or browser rerun. All seven initial screenshots, report provenance and both actual gaps were instead opened directly with the image reader and visually inspected.
+Post-run resource status saved in resource-after.txt. Exact intermediate date ranges extracted from the completed observations into ranges.json; SVG paths into main-trace-gaps.json. No assertion rerun or browser relaunch.

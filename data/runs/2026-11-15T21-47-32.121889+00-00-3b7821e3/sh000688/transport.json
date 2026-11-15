@@ -1,0 +1,37 @@
+[
+  {
+    "body": "/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/data/runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000688/response-0.body",
+    "sha256": "73b99e3d12a8264ed441a5f0888345983abfc8a71124b6e8d470ef4c9c304ab7",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "20666",
+      "Connection": "keep-alive",
+      "Date": "Sun, 15 Nov 2026 21:47:40 GMT",
+      "Expires": "Sun, 15 Nov 2026 21:48:45 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 cmcc.huanan2.union.23 (ApacheTrafficServer/6.2.1 [cRs f ]), cache10.l2so158-2[9,9,304-0,H], cache25.l2so158-2[10,0], cache25.l2so158-2[11,0], ens-cache35.l2hk11[16,16,304-0,H], ens-cache6.l2hk11[17,0], ens-cache6.l2hk11[17,0], ens-cache29.l2de4[218,219,304-0,H], ens-cache25.l2de4[220,0], ens-cache25.l2de4[221,0], ens-cache10.de10[222,222,200-0,H], ens-cache24.de10[227,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache24.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=ctc.guangzhou.union.288.nb.sinaedge.com,c=113.96.59.6;f=Edge,s=cmcc.huanan2.union.23,c=10.33.79.28",
+      "X-Via-Edge": "179477926064813d1090a1c4f210a0732ba5e",
+      "X-Via-SSL": "ssl.31.sinag1.hj4.lb.sinanode.com",
+      "Edge-Copy-Time": "1794562331433",
+      "Last-Modified": "Fri, 13 Nov 2026 09:30:59 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "W/\"6af6d8d3-69bd\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794779260",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:546467314",
+      "X-Swift-SaveTime": "Sun, 15 Nov 2026 21:47:40 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5feac17947792605047732e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-15T21:47:40.764069+00:00",
+    "http_decompressed": true
+  }
+]

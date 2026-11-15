@@ -1,0 +1,40 @@
+Independent QVIX browser review, round1
+
+Resource preflight (first command):
+free -m
+  Mem total15985 MiB, available8308 MiB, swap0.
+~/.omp/bin/heavy-gate --status
+  MemAvailable8307 MiB; required4500; slot-0 free; slot-1 free.
+
+Actual launches, sequential (never concurrent):
+~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/qvix-review.cjs
+  Attempt1: gate/process exit0; 7 panels exercised; harness printed FIX.
+  Incorrect harness checks: legend background/title bounding boxes overlapped by3px despite separated visible text; nonexistent '.plot .subplot.xy2' ancestor selected zero paths.
+  Original observations retained in harness-attempt1.json.
+~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/qvix-review.cjs
+  Attempt2 after scratch-only fixes: gate/process exit0; all seven panel data/status/geometry/interactions passed.
+  Two remaining harness failures in observations.json: '.subplot.xy2 .scatterlayer' selected no paths because actual overlaid traces are not descendants of that subplot group.
+  These are selector failures, not missing/disconnected-line production failures. Screenshots already showed actual visible gaps.
+~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/qvix-gap.cjs
+  Exit0, PASS, main-trace-gaps.json.
+  Selected QVIX by _fullData[1].uid -> .scatterlayer .trace.trace<uid>, explicitly excluding every .rangeslider-container descendant.
+  Exactly one main QVIX trace;6 line paths; distinct6-path rangeslider copy excluded in each inspected range.
+
+All finite launches used async:true timeout:0. Gate systemd isolation succeeded. Each script used exactly one browser/context/reused page and awaited browser.close() in finally. Browser stderr contained only D-Bus/accessibility activation messages. Browser console and pageerror arrays empty; report issued only its own file:// request, no external requests or blocked dependencies.
+
+Environment:
+Google Chrome156.0.8078.79; playwright-core1.65.1; viewport1440x1100; headless; context offline:true; serviceWorkers:block; file://report.html.
+
+Scratch scripts (outside repo):
+/tmp/sentiment-browser-round1/qvix-review.cjs
+SHA256 3611f4ee771dfdcbc9166d64a9832a4ed02ec7456fac7e49c42912369d1e3105
+/tmp/sentiment-browser-round1/qvix-gap.cjs
+SHA256 121a2c7bececfb5a297a12752f98f6654e275693f2aa82f89a4c455a336a6669
+
+Additional read-only Node probe:
+Parsed data/latest.json and its manifest_path; JSON.stringify(latest.feeds) === JSON.stringify(manifest.feeds):true.
+Every one of seven current index observations.csv SHA256 matched its snapshot.csv_sha256. QVIX CSV/quality and comparator SHA256 matched manifest snapshot declarations in browser harness.
+Manifest bytes SHA256 c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66.
+Probe exited1 solely because the scratch command additionally compared that digest to nonexistent latest.manifest_sha256 (undefined). Active schema supplies manifest_path, not that digest field. No production finding; feeds and all seven declared CSV hashes matched before the mistaken extra check.
+
+No fetch, provider retry, production/data/README/ledger edits, synthetic fixture, Python evidence, tests/full gates, commits, network service, or subdelegates.

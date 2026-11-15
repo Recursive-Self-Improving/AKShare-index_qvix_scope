@@ -1,0 +1,37 @@
+[
+  {
+    "body": "/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/data/runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sz399006/response-0.body",
+    "sha256": "a648ef8452f91b3f99f3a70ce55859ab343de1abcfb2cf56b08dc21761b2b901",
+    "url": "https://finance.sina.com.cn/realstock/company/sz399006/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sz399006/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "52263",
+      "Connection": "keep-alive",
+      "Date": "Sun, 15 Nov 2026 21:47:37 GMT",
+      "Expires": "Sun, 15 Nov 2026 21:48:27 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 ctc.guangzhou.union.444 (ApacheTrafficServer/6.2.1 [cRs f ]), cache18.l2so158-2[15,15,304-0,H], cache18.l2so158-2[16,0], cache18.l2so158-2[16,0], ens-cache15.l2hk11[21,21,304-0,H], ens-cache33.l2hk11[23,0], ens-cache33.l2hk11[23,0], ens-cache24.l2de4[240,241,304-0,H], ens-cache35.l2de4[242,0], ens-cache35.l2de4[242,0], ens-cache18.de10[247,248,200-0,H], ens-cache16.de10[250,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache16.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=cnc.huanan2.union.28.nb.sinaedge.com,c=120.241.4.147;f=Edge,s=ctc.guangzhou.union.444,c=10.67.1.28",
+      "X-Via-Edge": "1794779257117280f090a1c01430a6f462461",
+      "X-Via-SSL": "ssl.24.sinag1.hn1.lb.sinanode.com",
+      "Edge-Copy-Time": "1794565499877",
+      "Last-Modified": "Fri, 13 Nov 2026 10:24:27 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "W/\"6af6e55b-109b7\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794779257",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:155355282",
+      "X-Swift-SaveTime": "Sun, 15 Nov 2026 21:47:37 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5fea417947792569456684e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-15T21:47:37.229576+00:00",
+    "http_decompressed": true
+  }
+]
