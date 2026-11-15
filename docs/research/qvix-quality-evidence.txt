@@ -1,0 +1,8 @@
+QVIX same-provider clarification, 2026-11-15 UTC
+
+1. curl -sS --max-time 20 -D headers -o body -w ... https://1.optbbs.com/d/csv/d/k.csv
+   HTTP 200; curl ssl_verify_result=0; no redirect; response Date Sun, 15 Nov 2026 21:35:37 GMT; Content-Length 928727; Last-Modified Fri, 13 Nov 2026 09:25:13 GMT; SHA-256 2e0f2edc8a6bd80cc4ec71fec22d01d933cc29af7de7b2337c406b0fea436071. cmp against qvix-evidence/response-0.body returned 0. Thus the previously retained bytes are also the exact HTTPS response bytes and need not be duplicated. This independently retrieved response does not retroactively make the original HTTP transport authenticated. TLS authenticates the observed endpoint, not the correctness or provenance of its content.
+
+2. HTTPS https://1.optbbs.com/s/vix.shtml?50ETF, body SHA-256 8e9ac74cc227c5d97b9d3c78cb2d234cd90a32ffbbc5ed5f400bdb4d26db9c6e: links js/vix50.js, describes possible errors, 50ETF separately, SSE variance-swap algorithm, free use subject to its requirements and commercial authorization, and membership for 2015-present K-line access. These statements do not resolve a specific duplicate or grant unconditional redistribution rights.
+
+3. HTTPS https://1.optbbs.com/s/js/vix50.js, 57904 bytes, SHA-256 5f0f0bfd08fe3d4e3cf732ccaeedd1d0dd49746c29b4c4ec971e50439d4b2c4e: lines 852-865 mm() GETs ../d/csv/d/k.csv with timestamp, splits lines and columns; 50ETF default intraday URL line 11 is vix50.csv. The page's historical chart uses the same k.csv, not an independent authoritative correction. No interpretation of the conflicting records was identified. Script and page hashes identify observed bodies; these small notes are excerpts/observations, not archived complete JS/HTML.
