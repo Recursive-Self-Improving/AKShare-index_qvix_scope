@@ -16,24 +16,27 @@
 5. Independent review converges; actual data and chart behavior are verified; all applicable project checks pass on final tree.
 
 ## Plan
-- Research and feasibility [firm; unreviewed]: delegate a runtime spike in scratch space and a proposed implementation plan; persist evidence under docs/research/. Empty repository has no prior artifacts.
-- Acquisition and visualization [unknown-until(runtime spike); unreviewed]: choose dependencies, sources, history limits and chart delivery based on observed endpoint behavior.
-- Verification and delivery [tentative; unreviewed]: independent plan review before implementation; independent whole-change review and gated visual browser verification; final full checks.
+- Research and feasibility [firm; unreviewed]: runtime evidence and proposed plan in [endpoint feasibility](../research/endpoint-feasibility.md); targeted same-source recovery research remains before accepting the sentiment blocker.
+- Acquisition and visualization [firm; unreviewed]: sequential bounded Python acquisition, AKShare 1.20.53 for actual sentiment invocation and Sina decoder; retain exactly fetched raw bytes, normalized CSV and provenance/gap metadata. Build one offline Plotly HTML with seven dual-axis charts, drag zoom, reset/navigation, no fabricated sentiment. Missing sentiment must be prominently marked as externally blocked, not successful overlay completion. Preserve prior successful snapshots on errors. Detailed proposal: endpoint-feasibility.md §Bounded implementation plan.
+- Verification and delivery [firm; unreviewed]: independent PLAN-REVIEW; implement bounded acquisition+HTML slice; independent whole-change review with gated real-browser zoom/offline proof; full project gates after final code change. Targeted same-source recovery research may improve the source plan; a changed source contract requires re-review.
 
 ## Work items
-- W1 research/spike; AC1,2,4; active — probe endpoints and propose feasible plan with persisted evidence.
-- W2 review; AC1–5; todo — independent PLAN-REVIEW.
+- W1 research/spike; AC1,2,4; done — observed actual AKShare invocation failure and seven real index histories; persisted docs/research/endpoint-feasibility.md.
+- W2 review; AC1–5; active — independent PLAN-REVIEW of evidence and firm proposal.
 - W3 impl; AC1–4; todo — acquire genuine history and build reproducible seven-chart artifact.
 - W4 review; AC1–5; todo — independent whole-change review and visual verification.
 - W5 fix; AC5; todo — resolve findings, run final gates, commit final ledger.
+- W6 research; AC1,3; active — targeted independent same-provider recovery/archive investigation before treating sentiment as externally blocked.
 
 ## Decision log
 - D1: No existing ledger, code or commits found (`ls -la`, `git status`, `git log`, 2026-11-15). Choose a new ledger here rather than competing artifacts. Use T3 delegates rather than unavailable in-process workers. Preserve original goal, including partial-history fallback and explicit exclusion of scheduling.
+- D2: Runtime spike fires unknown-until trigger. Evidence: docs/research/endpoint-feasibility.md. All seven Sina symbols work; sentiment was removed in AKShare 1.20.54 and old invocation fails after provider redirect/certificate error. Choose bounded raw-preserving acquisition and self-contained Plotly over CDN or a server; do not substitute a different sentiment metric. Plan diff replaces unknown acquisition section with firm proposal; no owned production code exists to remove/rewrite/keep. W3 covers all original acquisition/visualization scope; W6 tests whether the external sentiment failure is recoverable. AC1/3 are not weakened: absent sentiment remains an explicit external blocker, not a completed overlay.
 
 ## Findings and open questions
-- Q1: Actual sentiment history depth and historical query support unknown; triage research, open, W1.
-- Q2: Canonical 科创综指 and 创业板50 identifiers/source history need evidence; triage research, open, W1.
-- Q3: Browser/chart packaging and offline portability depend on runtime findings; triage design, open, W1/W2.
+- Q1: Sentiment wrapper has no dates/pagination; actual history unknown because provider is inaccessible. Triage research, open, W6; evidence endpoint-feasibility.md §Sentiment.
+- Q2: Canonical identifiers resolved and seven histories observed; triage research, closed, W1. Pre-publication history requires explicit retrospective flags, not pre-inception labels.
+- Q3: Choose offline Plotly bundled once; triage design, closed by D2, subject to W2 review.
 
 ## Iteration log
 - I1: Choose scratch runtime research + plan before implementation; reject guessing API history or using fabricated historical sentiment. Replan when endpoint capability is observed.
+- I2: Evaluate W1 and replan on runtime evidence; choose independent plan review plus focused same-source recovery investigation. Reject declaring all sentiment history impossible from a short timeout alone. A genuine same-source response changes the acquisition plan; otherwise finish all index/chart work with an explicit external blocker.
