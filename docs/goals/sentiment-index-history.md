@@ -76,3 +76,15 @@
 - PASS under the explicitly permitted external-blocker rule, **not** a claim that complete genuine sentiment/overlays were obtained.
 - Non-done work item: **W3 — blocked**: genuine live/full-history sentiment and overlays require restored authenticated provider access or authentic authorized retained history; all reachable repository work is implemented, verified and committed. See D4/D6 and AC1/AC3 dispositions.
 - Delivered: root `report.html`, `data/`, locked reproducible commands in `README.md`, provenance/research/reviews and this ledger. Independent final report hash and exact gate evidence recorded above. No remaining actionable repository item.
+
+## Reopened source research — user clarification
+- AC6: distinguish whether the original ChinaScope metric has a publicly documented migrated endpoint, and whether it is actually callable; do not infer nonexistence from bounded failures.
+- AC7: investigate other sources of the identical metric/history, documenting authenticity, access/license and observed coverage separately from documentation examples.
+- AC8: compare genuinely similar news-sentiment APIs and broader market-sentiment proxies, with semantics, frequency, historical depth, credentials/cost, and actual runtime probes where publicly accessible. Do not silently substitute any in report.html.
+- Plan [firm; unreviewed]: one self-contained research worker, persisted evidence report; independent evidence review before conclusions. Research only, no production/chart changes; original final gate above describes the prior delivery, not completion of AC6–8.
+- W8 research; AC6; active — migration/official API investigation without repeating established endpoint failures just to confirm.
+- W9 research; AC7; active — identical-metric historical sources/archives.
+- W10 research; AC8; active — alternative interfaces and measured coverage/semantic comparison.
+- W11 review; AC6–8; todo — independent review of research claims and recommendation.
+- D7: User asks explicitly about migrated/same/similar interfaces. Prior D4 established environment-specific original-source failure, not absence of alternatives. Expand research scope (AC6–8), preserve current truthful partial chart and all existing blockers until positive evidence changes them. No replacement is selected yet.
+- I15: Choose broader source research with concrete callable/history evidence; reject interpreting the former same-provider-only bounded search as an exhaustive alternative search.
