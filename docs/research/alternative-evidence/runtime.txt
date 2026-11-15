@@ -1,0 +1,30 @@
+Observed 2026-11-15 UTC; repository .venv, Python and AKShare 1.20.53. Each subprocess had a wall-clock limit of at most 35 seconds; no credentials. These are alternate endpoints, not retries of the failed ChinaScope endpoint. Returned news text is intentionally not republished.
+
+$ timeout 35s .venv/bin/python -u -c 'import akshare as ak; print("version",ak.__version__,flush=True); d=ak.stock_news_em(symbol="600519"); print("rows",len(d),"columns",list(d.columns)); print(d.head(2).to_string(index=False))'
+exit 0
+version 1.20.53
+rows 10 columns ['关键词', '新闻标题', '新闻内容', '发布时间', '文章来源', '新闻链接']
+First returned row timestamp 2026-11-15 12:09:48; second 2026-11-10 15:52:00. The first two are not necessarily the chronological extrema.
+
+$ timeout 25s .venv/bin/python -u -c 'import akshare as ak; d=ak.stock_news_em(symbol="600519"); print("rows",len(d),"first",d["发布时间"].min(),"last",d["发布时间"].max()); print("dates",d["发布时间"].tolist())'
+exit 0
+rows 10 first 2026-11-10 15:34:00 last 2026-11-15 12:09:48
+dates ['2026-11-15 12:09:48', '2026-11-10 15:52:00', '2026-11-12 18:45:00', '2026-11-13 09:07:00', '2026-11-10 15:56:00', '2026-11-10 16:58:19', '2026-11-10 16:50:00', '2026-11-10 16:14:53', '2026-11-10 16:01:08', '2026-11-10 15:34:00']
+
+$ timeout 35s .venv/bin/python -u -c 'import akshare as ak; d=ak.stock_market_activity_legu(); print("rows",len(d),"columns",list(d.columns)); print(d.to_string(index=False))'
+exit 0
+rows 12 columns ['item', 'value']
+上涨 744.0
+涨停 38.0
+真实涨停 34.0
+st st*涨停 1.0
+下跌 4415.0
+跌停 39.0
+真实跌停 38.0
+st st*跌停 1.0
+平盘 57.0
+停牌 8.0
+活跃度 14.24%
+统计日期 2026-11-13 15:00:00
+
+These are snapshots, not proof of historical coverage, availability in another network, a permitted redistribution license, or sentiment labels. The observed news timestamps are upstream labels; timezone and point-in-time availability are not independently verified.
