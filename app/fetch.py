@@ -1,4 +1,4 @@
-"""Sequential AKShare calls in bounded subprocesses, capture before application decoding."""
+"""Eight sequential bounded actual AKShare invocations and atomic whole snapshots."""
 import argparse
 import importlib.metadata
 import json
@@ -9,7 +9,8 @@ from datetime import date
 from pathlib import Path
 
 from app.core import (
-    INDICES, PUBLICATION, atomic, csv_bytes, decode, dump, now, selected, selected_history, sha,
+    INDICES, OHLC, QVIX, SCHEMA, artifact_ref, atomic, compact_quality, comparator_history,
+    csv_bytes, decode, dump, now, qvix_artifacts, raw_qvix, replay_qvix, selected, sha,
 )
 from app.identities import IDENTITIES
 
@@ -21,116 +22,96 @@ def worker(feed, directory, start, end):
 
     directory = Path(directory)
     captures = []
-    attempted = now()
-    versions = {k: importlib.metadata.version(k) for k in ("akshare", "requests", "pandas", "mini-racer")}
+    result = {"feed": feed, "attempted_at": now(), "window": [start, end],
+              "versions": {k: importlib.metadata.version(k)
+                           for k in ("akshare", "requests", "pandas", "mini-racer")},
+              "invocation": "index_option_50etf_qvix()" if feed == QVIX
+              else f"index_zh_daily_sina(symbol={feed!r})", "request_timeout_seconds": [5, 12]}
 
     def capture(response, *args, **kwargs):
-        body = response.content  # HTTP-decompressed, before JSON/JS decoding; not wire bytes.
-        index = len(captures)
-        path = directory / f"response-{index}.body"
+        body = response.content
+        path = directory / f"response-{len(captures)}.body"
         path.write_bytes(body)
-        meta = {"body": str(path), "sha256": sha(body), "url": response.url,
-                "requested_url": response.request.url, "status": response.status_code,
-                "headers": dict(response.headers), "encoding": response.encoding or "utf-8",
-                "retrieved_at": now(), "http_decompressed": True}
-        captures.append(meta)
+        captures.append({"body": str(path), "sha256": sha(body), "url": response.url,
+                         "requested_url": response.request.url, "status": response.status_code,
+                         "headers": dict(response.headers), "encoding": response.encoding or "utf-8",
+                         "retrieved_at": now(), "http_decompressed": True})
         dump(directory / "transport.json", captures)
+        if feed == QVIX and response.status_code == 200:
+            raw_qvix(body)  # Before the wrapper's coercive conversion.
         return response
 
     def get(url, **kwargs):
         return requests.get(url, **kwargs, timeout=(5, 12), hooks={"response": capture})
 
     original = http.get
-    result = {"feed": feed, "attempted_at": attempted, "versions": versions,
-              "window": [start, end], "invocation": "index_news_sentiment_scope()" if feed == "sentiment"
-              else f"index_zh_daily_sina(symbol={feed!r})", "request_timeout_seconds": [5, 12]}
     try:
         http.get = get
-        if feed == "sentiment":
-            try:
-                ak.index_news_sentiment_scope()  # Actual pinned invocation, not a direct-request substitute.
-            except KeyError as error:
-                # 1.20.53 projects missing columns on its empty DataFrame. Accept only
-                # that frame/state, plus an independently validated HTTP200 [] below.
-                tb = error.__traceback__
-                while tb and tb.tb_frame.f_code is not ak.index_news_sentiment_scope.__code__:
-                    tb = tb.tb_next
-                empty_projection = (
-                    tb is not None and tb.tb_next is not None
-                    and tb.tb_next.tb_frame.f_globals.get("__name__") == "pandas.core.frame"
-                    and tb.tb_next.tb_frame.f_code.co_name == "__getitem__"
-                    and tb.tb_next.tb_frame.f_locals.get("key") == ["日期", "市场情绪指数", "沪深300指数"]
-                    and tb.tb_frame.f_locals.get("data_json") == []
-                    and tb.tb_frame.f_locals.get("temp_df") is not None
-                    and tb.tb_frame.f_locals["temp_df"].shape == (0, 0)
-                )
-                if not (empty_projection and captures and captures[-1]["status"] == 200
-                        and decode(feed, Path(captures[-1]["body"]).read_bytes(),
-                                   captures[-1]["encoding"]) == []):
-                    raise
-                result["wrapper_empty_projection"] = "AKShare 1.20.53 empty DataFrame column KeyError"
+        if feed == QVIX:
+            import akshare.index.index_option_qvix as module
+            getattr(module, "__get_optbbs_daily").cache_clear()
+            wrapper = ak.index_option_50etf_qvix().to_csv(index=False).encode()
+            (directory / "wrapper.csv").write_bytes(wrapper)
         else:
             ak.index_zh_daily_sina(symbol=feed)
-        if not captures or captures[-1]["status"] != 200:
-            raise ValueError("no successful captured body")
-        raw = captures[-1]
-        rows = decode(feed, Path(raw["body"]).read_bytes(), raw["encoding"])
-        rows = selected(rows, start, end)
-        fields = ["sentiment", "market_close"] if feed == "sentiment" else ["close", "pre_release", "pre_base"]
-        body = csv_bytes(rows, fields)
-        path = directory / "observations.csv"
-        path.write_bytes(body)
-        result.update(status="success", csv=str(path), csv_sha256=sha(body), raw=raw,
-                      count=len(rows), range=[rows[0]["date"], rows[-1]["date"]] if rows else None,
-                      successful_at=now(), publication_date=PUBLICATION.get(feed),
-                      retrospective_count=sum(r["date"] < PUBLICATION[feed] for r in rows)
-                      if feed in PUBLICATION else None,
-                      identity=IDENTITIES.get(feed))
+        if len(captures) != 1 or captures[0]["status"] != 200:
+            raise ValueError("expected one HTTP200 response; redirects are not accepted")
+        raw = captures[0]
+        body = Path(raw["body"]).read_bytes()
+        if feed == QVIX:
+            if replay_qvix(body) != wrapper:
+                raise ValueError("captured body/wrapper replay mismatch")
+            result.update(wrapper=str(directory / "wrapper.csv"), wrapper_sha256=sha(wrapper))
+        else:
+            rows = selected(decode(feed, body, raw["encoding"]), start, end)
+            content = csv_bytes(rows, ["close", "pre_release", "pre_base"])
+            (directory / "observations.csv").write_bytes(content)
+            result.update(csv=str(directory / "observations.csv"), csv_sha256=sha(content),
+                          count=len(rows), range=[rows[0]["date"], rows[-1]["date"]] if rows else None,
+                          identity=IDENTITIES[feed],
+                          retrospective_count=sum(r["pre_release"] for r in rows))
+        result.update(status="success", raw=raw, successful_at=now())
     except Exception as error:
-        transport_error = isinstance(error, requests.RequestException) and not isinstance(error, ValueError)
-        result.update(status="transport_failure" if transport_error else "validation_failure",
-                      error=f"{type(error).__name__}: {error}")
+        result.update(status="failure", error=f"{type(error).__name__}: {error}")
     finally:
         http.get = original
-        result["finished_at"] = now()
-        result["captures"] = captures
+        result.update(finished_at=now(), captures=captures)
         dump(directory / "result.json", result)
 
 
+def state_after(old, result):
+    usable = result["status"] in ("success", "partial")
+    snapshot = result if usable else old.get("snapshot")
+    return {"attempt": result, "snapshot": snapshot,
+            "stale_reuse": not usable and bool(snapshot)}
+
+
 def promote(root, manifest):
-    """Only publish after all referenced immutable artifacts validate."""
-    for feed, state in manifest["feeds"].items():
-        revisions = state.get("revisions", [])
-        if state.get("snapshot") != (revisions[-1] if revisions else None):
-            raise ValueError("stale snapshot identity differs from latest successful revision")
-        for snapshot in revisions:
-            if snapshot["feed"] != feed or snapshot["status"] != "success":
-                raise ValueError("snapshot source identity mismatch")
-            for key, hashkey in (("csv", "csv_sha256"),):
-                if sha((root / snapshot[key]).read_bytes()) != snapshot[hashkey]:
-                    raise ValueError("snapshot hash mismatch")
-            raw = snapshot["raw"]
-            if sha((root / raw["body"]).read_bytes()) != raw["sha256"]:
-                raise ValueError("raw hash mismatch")
-            rows = selected(decode(feed, (root / raw["body"]).read_bytes(), raw["encoding"]),
-                            *snapshot["window"])
-            fields = ["sentiment", "market_close"] if feed == "sentiment" else ["close", "pre_release", "pre_base"]
-            if csv_bytes(rows, fields) != (root / snapshot["csv"]).read_bytes():
-                raise ValueError("raw/CSV replay mismatch")
-    dump(root / manifest["manifest_path"], manifest)
+    from app.verify import validate_manifest
+    validate_manifest(root, manifest)
+    path = root / manifest["manifest_path"]
+    if path.exists():
+        if json.loads(path.read_text()) != manifest:
+            raise ValueError("refusing immutable manifest overwrite")
+    else:
+        dump(path, manifest)
     atomic(root / "latest.json", manifest)
 
 
 def fetch(root, start, end):
-    root = Path(root)
+    root = Path(root).resolve()
     root.mkdir(parents=True, exist_ok=True)
     previous = json.loads((root / "latest.json").read_text()) if (root / "latest.json").exists() else {}
+    if previous and previous.get("schema") != SCHEMA:
+        raise ValueError("incompatible active schema; explicit derived migration required")
     run = "runs/" + now().replace(":", "-") + "-" + uuid.uuid4().hex[:8]
-    manifest = {"run": run, "attempted_at": now(), "window": [start, end], "feeds": {},
-                "manifest_path": run + "/manifest.json", "worker_wall_seconds": 45,
-                "revision_policy": "latest successful snapshot observation by date; not point-in-time",
-                "calendar": "sh000001 relative comparator, non-independent; common omissions unknown"}
-    for feed in [*INDICES, "sentiment"]:
+    manifest = {"schema": SCHEMA, "run": run, "attempted_at": now(), "window": [start, end],
+                "feeds": {}, "manifest_path": run + "/manifest.json", "worker_wall_seconds": 45,
+                "revision_policy": "latest usable whole snapshot; never merge dates; not point-in-time"}
+    manifest["operation"] = "acquisition"
+    if previous:
+        manifest["previous"] = artifact_ref(root, previous["manifest_path"])
+    for feed in [*INDICES, QVIX]:
         directory = root / run / feed
         directory.mkdir(parents=True)
         try:
@@ -138,28 +119,53 @@ def fetch(root, start, end):
                            timeout=45, check=True)
             result = json.loads((directory / "result.json").read_text())
         except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
-            result = {"feed": feed, "status": "wall_deadline_failure", "attempted_at": manifest["attempted_at"],
+            result = {"feed": feed, "status": "failure", "attempted_at": manifest["attempted_at"],
                       "error": str(error), "finished_at": now()}
-            dump(directory / "result.json", result)
+            transport = directory / "transport.json"
+            result["captures"] = json.loads(transport.read_text()) if transport.exists() else []
+        if result["status"] == "success" and feed == QVIX:
+            try:
+                comparator_state = manifest["feeds"]["sh000001"]
+                comparator_snap = comparator_state["snapshot"]
+                comparator = ({"csv": comparator_snap["csv"], "csv_sha256": comparator_snap["csv_sha256"],
+                               "successful_at": comparator_snap["successful_at"],
+                               "origin": comparator_snap["origin"],
+                               "stale_reuse": comparator_state["stale_reuse"]} if comparator_snap else None)
+                calendar = comparator_history(root, comparator)
+                rows, quality, status = qvix_artifacts(
+                    Path(result["raw"]["body"]).read_bytes(), Path(result["wrapper"]).read_bytes(),
+                    [start, end], calendar, comparator)
+                dump(directory / "quality.json", quality)
+                content = csv_bytes(rows, [*OHLC, "quality"])
+                (directory / "observations.csv").write_bytes(content)
+                result.update(status=status, csv=str(directory / "observations.csv"), csv_sha256=sha(content),
+                              quality=str(directory / "quality.json"),
+                              quality_sha256=sha((directory / "quality.json").read_bytes()),
+                              count=len(rows), range=quality["selected"]["range"],
+                              source_range=quality["full"]["range"], accounting=compact_quality(quality),
+                              schema=SCHEMA)
+            except Exception as error:
+                result.update(status="failure", error=f"{type(error).__name__}: {error}")
+        snapshot = json.loads(json.dumps(result))
+        if snapshot["status"] in ("success", "partial"):
+            for key in ("csv", "wrapper", "quality"):
+                if key in snapshot:
+                    snapshot[key] = str(Path(snapshot[key]).relative_to(root))
+            snapshot["raw"]["body"] = str(Path(snapshot["raw"]["body"]).relative_to(root))
+            snapshot["transport"] = str((directory / "transport.json").relative_to(root))
+            snapshot["transport_sha256"] = sha((directory / "transport.json").read_bytes())
+            snapshot.pop("captures", None)
+        # Persist the actual result once; future active snapshots bind its immutable hash.
+        dump(directory / "result.json", snapshot)
+        if snapshot["status"] in ("success", "partial"):
+            snapshot["origin"] = artifact_ref(root, str((directory / "result.json").relative_to(root)))
+            snapshot["origin"]["kind"] = "result"
         old = previous.get("feeds", {}).get(feed, {})
-        revisions = list(old.get("revisions", []))
-        if result["status"] == "success":
-            # Stored references are root-relative; worker evidence remains immutable too.
-            snapshot = dict(result)
-            snapshot["csv"] = str(Path(result["csv"]).relative_to(root))
-            snapshot["raw"] = dict(result["raw"])
-            snapshot["raw"]["body"] = str(Path(result["raw"]["body"]).relative_to(root))
-            revisions.append(snapshot)
-        manifest["feeds"][feed] = {"attempt": result, "revisions": revisions,
-                                   "snapshot": revisions[-1] if revisions else None,
-                                   "stale_reuse": result["status"] != "success" and bool(revisions)}
+        if previous.get("schema") != SCHEMA:
+            old = {}
+        manifest["feeds"][feed] = state_after(old, snapshot)
         print(feed, result["status"], result.get("count", "unknown"), flush=True)
     manifest["finished_at"] = now()
-    dump(root / "identities.json", IDENTITIES)
-    coverage = selected_history(root, manifest)
-    for feed, state in manifest["feeds"].items():
-        state["selected_history"] = coverage[feed]
-        state["early_interval"] = "Before first vendor observation: availability unknown, not inferred pre-inception"
     promote(root, manifest)
     return int(any(s["attempt"]["status"] != "success" for s in manifest["feeds"].values()))
 

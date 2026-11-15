@@ -1,0 +1,12 @@
+{
+  "decision": "PASS",
+  "scope": "Actual offline browser surface and seven-panel interactions only",
+  "report_sha256": "97885ead3795f8986a85c6a1b4e148c62b08cab2e8e104e7a80465ce9b346c1f",
+  "seven_panel_data_status_geometry_interactions": "observations.json: all non-gap assertions passed; two obsolete selector failures preserved",
+  "actual_main_trace_gap_assertions": "main-trace-gaps.json: PASS, UID-selected main trace, rangeslider excluded",
+  "visual_inspection": "All seven initial panels, report status, 2024 missing-date gap and 2026 conflict/missing cluster inspected",
+  "production_findings": [],
+  "source_quality": "Fresh partial; not clean-source certification",
+  "harness_errors": "See commands-errors.txt and review report; recorded failures are not hidden or relabelled",
+  "full_gates_or_raw_replay_run_by_this_reviewer": false
+}

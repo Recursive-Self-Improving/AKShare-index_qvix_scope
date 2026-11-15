@@ -1,0 +1,2341 @@
+{
+  "report_sha256": "384c57b2e79c95b0ca66727e7867b4c1230b3e04a03c6b22be29fdc95ee26544",
+  "browser": "Google Chrome via playwright-core, one browser/context/page, offline file://",
+  "requests": [
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html"
+  ],
+  "blocked": [],
+  "console": [],
+  "page_errors": [],
+  "failures": [],
+  "panels": [
+    {
+      "i": 0,
+      "initial": [
+        "2000-01-04",
+        "2026-11-13"
+      ],
+      "code": "sh000001",
+      "axis": {
+        "left": "上证指数 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "上证指数 · sh000001\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:32.671274+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2000-01-04\", \"2026-11-13\"], \"rows\": 6509, \"successful_at\": \"2026-11-15T21:47:33.656860+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"1991-07-15\", \"base_date\": \"1990-12-19\", \"official_name\": \"上证综合指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000001factsheet.pdf\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2005\n2010\n2015\n2020\n2025\n1000\n2000\n3000\n4000\n5000\n6000\n8.2\n19.1\n30\n40.9\n51.9\n62.8\n上证指数 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n上证指数 · sh000001\n上证指数 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:32.671274+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2000-01-04",
+          "2026-11-13"
+        ],
+        "rows": 6509,
+        "successful_at": "2026-11-15T21:47:33.656860+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "1991-07-15",
+        "base_date": "1990-12-19",
+        "official_name": "上证综合指数",
+        "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000001factsheet.pdf",
+        "retrospective_rows": 0
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "上证指数 · sh000001",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:32.671274+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2000-01-04\", \"2026-11-13\"], \"rows\": 6509, \"successful_at\": \"2026-11-15T21:47:33.656860+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"1991-07-15\", \"base_date\": \"1990-12-19\", \"official_name\": \"上证综合指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000001factsheet.pdf\", \"retrospective_rows\": 0}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 439.59375,
+          "right": 1416,
+          "bottom": 1099.59375,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 548.6537475585938,
+              "right": 235.625,
+              "bottom": 563.6537475585938,
+              "width": 81.625,
+              "height": 15
+            },
+            "text": "上证指数 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 568.5537109375,
+              "right": 294.875,
+              "bottom": 583.5537109375,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 611.59375,
+              "right": 225.59375,
+              "bottom": 632.7937622070312,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 79.68000030517578,
+              "y": 521.59375,
+              "right": 265.3206253051758,
+              "bottom": 543.59375,
+              "width": 185.640625,
+              "height": 22
+            },
+            "text": "上证指数 · sh000001"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 944.59375,
+              "right": 1324.5,
+              "bottom": 975.2437744140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 705.2265625,
+              "right": 74,
+              "bottom": 845.9609375,
+              "width": 19,
+              "height": 140.734375
+            },
+            "text": "上证指数 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 683.4921875,
+              "right": 1372.5,
+              "bottom": 867.6953125,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 995.2437744140625,
+              "right": 808.5,
+              "bottom": 1014.2437744140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "上证指数 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 548.6537475585938,
+              "right": 235.625,
+              "bottom": 563.6537475585938,
+              "width": 81.625,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 568.5537109375,
+              "right": 294.875,
+              "bottom": 583.5537109375,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2005-05-15 17:39:02.0965",
+        "2020-02-21 10:03:47.6206"
+      ],
+      "reset": [
+        "2000-01-04",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2000-01-04",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2010-10-03 15:10:28.9517",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2000-01-04",
+        "2026-11-13"
+      ]
+    },
+    {
+      "i": 1,
+      "initial": [
+        "2004-01-02",
+        "2026-11-13"
+      ],
+      "code": "sh000016",
+      "axis": {
+        "left": "上证50 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "上证50 · sh000016\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:34.458730+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2004-01-02\", \"2026-11-13\"], \"rows\": 5552, \"successful_at\": \"2026-11-15T21:47:34.941005+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2004-01-02\", \"base_date\": \"2003-12-31\", \"official_name\": \"上证50指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2005\n2010\n2015\n2020\n2025\n1000\n2000\n3000\n4000\n12.4\n26.2\n40\n53.7\n上证50 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n上证50 · sh000016\n上证50 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:34.458730+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2004-01-02",
+          "2026-11-13"
+        ],
+        "rows": 5552,
+        "successful_at": "2026-11-15T21:47:34.941005+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "2004-01-02",
+        "base_date": "2003-12-31",
+        "official_name": "上证50指数",
+        "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf",
+        "retrospective_rows": 0
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "上证50 · sh000016",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:34.458730+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2004-01-02\", \"2026-11-13\"], \"rows\": 5552, \"successful_at\": \"2026-11-15T21:47:34.941005+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2004-01-02\", \"base_date\": \"2003-12-31\", \"official_name\": \"上证50指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf\", \"retrospective_rows\": 0}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 219.75,
+          "right": 1416,
+          "bottom": 879.75,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 328.80999755859375,
+              "right": 224.078125,
+              "bottom": 343.80999755859375,
+              "width": 70.078125,
+              "height": 15
+            },
+            "text": "上证50 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 348.7099914550781,
+              "right": 294.875,
+              "bottom": 363.7099914550781,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 391.75,
+              "right": 225.59375,
+              "bottom": 412.95001220703125,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 79.68000030517578,
+              "y": 301.75,
+              "right": 247.57062530517578,
+              "bottom": 323.75,
+              "width": 167.890625,
+              "height": 22
+            },
+            "text": "上证50 · sh000016"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 724.75,
+              "right": 1324.5,
+              "bottom": 755.4000244140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 492.9296875,
+              "right": 74,
+              "bottom": 618.5703125,
+              "width": 19,
+              "height": 125.640625
+            },
+            "text": "上证50 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 463.6484375,
+              "right": 1372.5,
+              "bottom": 647.8515625,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 775.4000244140625,
+              "right": 808.5,
+              "bottom": 794.4000244140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "上证50 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 328.80999755859375,
+              "right": 224.078125,
+              "bottom": 343.80999755859375,
+              "width": 70.078125,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 348.7099914550781,
+              "right": 294.875,
+              "bottom": 363.7099914550781,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2008-07-26 10:06:11.381",
+        "2021-02-20 18:37:44.2263"
+      ],
+      "reset": [
+        "2004-01-02",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2004-01-02",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2013-02-24 18:56:54.3095",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2004-01-02",
+        "2026-11-13"
+      ]
+    },
+    {
+      "i": 2,
+      "initial": [
+        "2002-01-04",
+        "2026-11-13"
+      ],
+      "code": "sh000300",
+      "axis": {
+        "left": "沪深300 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "沪深300 · sh000300\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:35.733267+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2002-01-04\", \"2026-11-13\"], \"rows\": 6030, \"successful_at\": \"2026-11-15T21:47:36.202752+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2005-04-08\", \"base_date\": \"2004-12-31\", \"official_name\": \"沪深300指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf\", \"retrospective_rows\": 782}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2005\n2010\n2015\n2020\n2025\n1000\n2000\n3000\n4000\n5000\n6000\n10.3\n21.3\n32.2\n43.2\n54.2\n65.1\n沪深300 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n沪深300 · sh000300\n沪深300 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:35.733267+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2002-01-04",
+          "2026-11-13"
+        ],
+        "rows": 6030,
+        "successful_at": "2026-11-15T21:47:36.202752+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "2005-04-08",
+        "base_date": "2004-12-31",
+        "official_name": "沪深300指数",
+        "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf",
+        "retrospective_rows": 782
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "沪深300 · sh000300",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:35.733267+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2002-01-04\", \"2026-11-13\"], \"rows\": 6030, \"successful_at\": \"2026-11-15T21:47:36.202752+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2005-04-08\", \"base_date\": \"2004-12-31\", \"official_name\": \"沪深300指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf\", \"retrospective_rows\": 782}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 219.90625,
+          "right": 1416,
+          "bottom": 879.90625,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 328.96624755859375,
+              "right": 231.3125,
+              "bottom": 343.96624755859375,
+              "width": 77.3125,
+              "height": 15
+            },
+            "text": "沪深300 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 348.8662414550781,
+              "right": 294.875,
+              "bottom": 363.8662414550781,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 391.90625,
+              "right": 225.59375,
+              "bottom": 413.10626220703125,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 79.68000030517578,
+              "y": 301.90625,
+              "right": 258.6956253051758,
+              "bottom": 323.90625,
+              "width": 179.015625,
+              "height": 22
+            },
+            "text": "沪深300 · sh000300"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 724.90625,
+              "right": 1324.5,
+              "bottom": 755.5562744140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 488.359375,
+              "right": 74,
+              "bottom": 623.453125,
+              "width": 19,
+              "height": 135.09375
+            },
+            "text": "沪深300 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 463.8046875,
+              "right": 1372.5,
+              "bottom": 648.0078125,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 775.5562744140625,
+              "right": 808.5,
+              "bottom": 794.5562744140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "沪深300 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 328.96624755859375,
+              "right": 231.3125,
+              "bottom": 343.96624755859375,
+              "width": 77.3125,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 348.8662414550781,
+              "right": 294.875,
+              "bottom": 363.8662414550781,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2006-12-21 18:41:19.8669",
+        "2020-08-22 11:21:39.8336"
+      ],
+      "reset": [
+        "2002-01-04",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2002-01-04",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2011-12-16 02:39:20.0666",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2002-01-04",
+        "2026-11-13"
+      ]
+    },
+    {
+      "i": 3,
+      "initial": [
+        "2010-06-01",
+        "2026-11-13"
+      ],
+      "code": "sz399006",
+      "axis": {
+        "left": "创业板指 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "创业板指 · sz399006\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:36.957276+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2010-06-01\", \"2026-11-13\"], \"rows\": 3995, \"successful_at\": \"2026-11-15T21:47:37.394555+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2010-06-01\", \"base_date\": \"2010-05-31\", \"official_name\": \"创业板指数P\", \"citation\": \"https://www.szse.cn/disclosure/notice/general/t20100531_500454.html\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2012\n2014\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n2000\n3000\n4000\n14.3\n29\n43.6\n58.3\n创业板指 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n创业板指 · sz399006\n创业板指 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:36.957276+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2010-06-01",
+          "2026-11-13"
+        ],
+        "rows": 3995,
+        "successful_at": "2026-11-15T21:47:37.394555+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "2010-06-01",
+        "base_date": "2010-05-31",
+        "official_name": "创业板指数P",
+        "citation": "https://www.szse.cn/disclosure/notice/general/t20100531_500454.html",
+        "retrospective_rows": 0
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "创业板指 · sz399006",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:36.957276+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2010-06-01\", \"2026-11-13\"], \"rows\": 3995, \"successful_at\": \"2026-11-15T21:47:37.394555+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2010-06-01\", \"base_date\": \"2010-05-31\", \"official_name\": \"创业板指数P\", \"citation\": \"https://www.szse.cn/disclosure/notice/general/t20100531_500454.html\", \"retrospective_rows\": 0}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 220.0625,
+          "right": 1416,
+          "bottom": 880.0625,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 329.12249755859375,
+              "right": 235.625,
+              "bottom": 344.12249755859375,
+              "width": 81.625,
+              "height": 15
+            },
+            "text": "创业板指 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 349.0224914550781,
+              "right": 294.875,
+              "bottom": 364.0224914550781,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 392.0625,
+              "right": 225.59375,
+              "bottom": 413.26251220703125,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 79.68000030517578,
+              "y": 302.0625,
+              "right": 264.1956253051758,
+              "bottom": 324.0625,
+              "width": 184.515625,
+              "height": 22
+            },
+            "text": "创业板指 · sz399006"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 725.0625,
+              "right": 1324.5,
+              "bottom": 755.7125244140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 485.6953125,
+              "right": 74,
+              "bottom": 627.4296875,
+              "width": 19,
+              "height": 141.734375
+            },
+            "text": "创业板指 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 463.9609375,
+              "right": 1372.5,
+              "bottom": 648.1640625,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 775.7125244140625,
+              "right": 808.5,
+              "bottom": 794.7125244140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "创业板指 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 329.12249755859375,
+              "right": 235.625,
+              "bottom": 344.12249755859375,
+              "width": 81.625,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 349.0224914550781,
+              "right": 294.875,
+              "bottom": 364.0224914550781,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2013-09-12 19:12:28.7521",
+        "2022-09-30 06:00:35.9401"
+      ],
+      "reset": [
+        "2010-06-01",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2010-06-01",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2016-12-30 14:23:45.624",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2010-06-01",
+        "2026-11-13"
+      ]
+    },
+    {
+      "i": 4,
+      "initial": [
+        "2014-06-18",
+        "2026-11-13"
+      ],
+      "code": "sz399673",
+      "axis": {
+        "left": "创业板50 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "创业板50 · sz399673\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:38.150691+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2014-06-18\", \"2026-11-13\"], \"rows\": 3017, \"successful_at\": \"2026-11-15T21:47:38.604457+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2014-06-18\", \"base_date\": \"2010-05-31\", \"official_name\": \"创业板50指数\", \"citation\": \"https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n2000\n3000\n4000\n8.7\n23.6\n38.5\n53.3\n创业板50 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n创业板50 · sz399673\n创业板50 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:38.150691+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2014-06-18",
+          "2026-11-13"
+        ],
+        "rows": 3017,
+        "successful_at": "2026-11-15T21:47:38.604457+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "2014-06-18",
+        "base_date": "2010-05-31",
+        "official_name": "创业板50指数",
+        "citation": "https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html",
+        "retrospective_rows": 0
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "创业板50 · sz399673",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:38.150691+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2014-06-18\", \"2026-11-13\"], \"rows\": 3017, \"successful_at\": \"2026-11-15T21:47:38.604457+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2014-06-18\", \"base_date\": \"2010-05-31\", \"official_name\": \"创业板50指数\", \"citation\": \"https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html\", \"retrospective_rows\": 0}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 220.21875,
+          "right": 1416,
+          "bottom": 880.21875,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 329.27874755859375,
+              "right": 237.078125,
+              "bottom": 344.27874755859375,
+              "width": 83.078125,
+              "height": 15
+            },
+            "text": "创业板50 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 349.1787414550781,
+              "right": 294.875,
+              "bottom": 364.1787414550781,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 392.21875,
+              "right": 225.59375,
+              "bottom": 413.41876220703125,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 79.68000030517578,
+              "y": 302.21875,
+              "right": 266.4456253051758,
+              "bottom": 324.21875,
+              "width": 186.765625,
+              "height": 22
+            },
+            "text": "创业板50 · sz399673"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 725.21875,
+              "right": 1324.5,
+              "bottom": 755.8687744140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 484.8984375,
+              "right": 74,
+              "bottom": 628.5390625,
+              "width": 19,
+              "height": 143.640625
+            },
+            "text": "创业板50 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 464.1171875,
+              "right": 1372.5,
+              "bottom": 648.3203125,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 775.8687744140625,
+              "right": 808.5,
+              "bottom": 794.8687744140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "创业板50 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 329.27874755859375,
+              "right": 237.078125,
+              "bottom": 344.27874755859375,
+              "width": 83.078125,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 349.1787414550781,
+              "right": 294.875,
+              "bottom": 364.1787414550781,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2016-12-08 16:36:44.3261",
+        "2023-10-05 08:45:55.4077"
+      ],
+      "reset": [
+        "2014-06-18",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2014-06-18",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2019-06-05 03:41:37.8369",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2014-06-18",
+        "2026-11-13"
+      ]
+    },
+    {
+      "i": 5,
+      "initial": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "code": "sh000680",
+      "axis": {
+        "left": "科创综指 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "科创综指 · sh000680\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:39.388212+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2020-01-02\", \"2026-11-13\"], \"rows\": 1663, \"successful_at\": \"2026-11-15T21:47:39.807994+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2025-01-20\", \"base_date\": \"2019-12-31\", \"official_name\": \"上证科创板综合指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf\", \"retrospective_rows\": 1224}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n1500\n2000\n2500\n15.8\n31.6\n47.4\n63.1\n科创综指 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n科创综指 · sh000680\n科创综指 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:39.388212+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2020-01-02",
+          "2026-11-13"
+        ],
+        "rows": 1663,
+        "successful_at": "2026-11-15T21:47:39.807994+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "2025-01-20",
+        "base_date": "2019-12-31",
+        "official_name": "上证科创板综合指数",
+        "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf",
+        "retrospective_rows": 1224
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "科创综指 · sh000680",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:39.388212+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2020-01-02\", \"2026-11-13\"], \"rows\": 1663, \"successful_at\": \"2026-11-15T21:47:39.807994+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2025-01-20\", \"base_date\": \"2019-12-31\", \"official_name\": \"上证科创板综合指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf\", \"retrospective_rows\": 1224}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 220.375,
+          "right": 1416,
+          "bottom": 880.375,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 329.43499755859375,
+              "right": 235.625,
+              "bottom": 344.43499755859375,
+              "width": 81.625,
+              "height": 15
+            },
+            "text": "科创综指 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 349.3349914550781,
+              "right": 294.875,
+              "bottom": 364.3349914550781,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 392.375,
+              "right": 225.59375,
+              "bottom": 413.57501220703125,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 78.68000030517578,
+              "y": 302.375,
+              "right": 265.3206253051758,
+              "bottom": 324.375,
+              "width": 186.640625,
+              "height": 22
+            },
+            "text": "科创综指 · sh000680"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 725.375,
+              "right": 1324.5,
+              "bottom": 756.0250244140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 486.0078125,
+              "right": 74,
+              "bottom": 626.7421875,
+              "width": 19,
+              "height": 140.734375
+            },
+            "text": "科创综指 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 464.2734375,
+              "right": 1372.5,
+              "bottom": 648.4765625,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 776.0250244140625,
+              "right": 808.5,
+              "bottom": 795.0250244140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "科创综指 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 329.43499755859375,
+              "right": 235.625,
+              "bottom": 344.43499755859375,
+              "width": 81.625,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 349.3349914550781,
+              "right": 294.875,
+              "bottom": 364.3349914550781,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2017-06-15 13:41:49.817",
+        "2023-12-03 11:07:17.2712"
+      ],
+      "reset": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2019-10-24 17:09:05.0915",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2015-02-09",
+        "2026-11-13"
+      ]
+    },
+    {
+      "i": 6,
+      "initial": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "code": "sh000688",
+      "axis": {
+        "left": "科创50 收盘点位",
+        "right": "50ETF QVIX 收盘（%）",
+        "side": "right",
+        "overlay": "y"
+      },
+      "visible_text": "科创50 · sh000688\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:40.515894+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2020-01-02\", \"2026-11-13\"], \"rows\": 1663, \"successful_at\": \"2026-11-15T21:47:40.868147+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2020-07-23\", \"base_date\": \"2019-12-31\", \"official_name\": \"上证科创板50成份指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf\", \"retrospective_rows\": 133}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n1500\n2000\n21\n38.7\n56.4\n科创50 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n科创50 · sh000688\n科创50 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+      "index_disclosure": {
+        "attempt": "success",
+        "attempted_at": "2026-11-15T21:47:40.515894+00:00",
+        "stale_reuse": false,
+        "snapshot_status": "success",
+        "range": [
+          "2020-01-02",
+          "2026-11-13"
+        ],
+        "rows": 1663,
+        "successful_at": "2026-11-15T21:47:40.868147+00:00",
+        "relative_gaps": [],
+        "calendar_stale": false,
+        "publication_date": "2020-07-23",
+        "base_date": "2019-12-31",
+        "official_name": "上证科创板50成份指数",
+        "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf",
+        "retrospective_rows": 133
+      },
+      "nonnull": 2847,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31",
+        "2025-11-10",
+        "2026-09-10",
+        "2026-09-11",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ],
+      "source_only": [
+        {
+          "date": "2026-08-22",
+          "value": 16.53
+        },
+        {
+          "date": "2026-09-12",
+          "value": 15.67
+        },
+        {
+          "date": "2026-09-13",
+          "value": 15.92
+        },
+        {
+          "date": "2026-11-01",
+          "value": 16.58
+        }
+      ],
+      "disclosure_geometry": [
+        {
+          "tag": "H2",
+          "cls": "",
+          "text": "科创50 · sh000688",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "index-status",
+          "text": "{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:40.515894+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2020-01-02\", \"2026-11-13\"], \"rows\": 1663, \"successful_at\": \"2026-11-15T21:47:40.868147+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2020-07-23\", \"base_date\": \"2019-12-31\", \"official_name\": \"上证科创板50成份指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf\", \"retrospective_rows\": 133}",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "P",
+          "cls": "quality",
+          "text": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "",
+          "text": "重置本图",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn active",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        },
+        {
+          "tag": "BUTTON",
+          "cls": "modebar-btn",
+          "text": "",
+          "visible": true,
+          "unclipped": true
+        }
+      ],
+      "geometry": {
+        "bounds": {
+          "x": 24,
+          "y": 415.53125,
+          "right": 1416,
+          "bottom": 1075.53125,
+          "width": 1392,
+          "height": 660
+        },
+        "entries": [
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 524.5912475585938,
+              "right": 224.078125,
+              "bottom": 539.5912475585938,
+              "width": 70.078125,
+              "height": 15
+            },
+            "text": "科创50 收盘"
+          },
+          {
+            "selector": "legendtext",
+            "box": {
+              "x": 154,
+              "y": 544.4912109375,
+              "right": 294.875,
+              "bottom": 559.4912109375,
+              "width": 140.875,
+              "height": 15
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "rangeselector",
+            "box": {
+              "x": 114,
+              "y": 587.53125,
+              "right": 225.59375,
+              "bottom": 608.7312622070312,
+              "width": 111.59375,
+              "height": 21.20001220703125
+            },
+            "text": "1年5年全部"
+          },
+          {
+            "selector": "gtitle",
+            "box": {
+              "x": 78.68000030517578,
+              "y": 497.53125,
+              "right": 247.57062530517578,
+              "bottom": 519.53125,
+              "width": 168.890625,
+              "height": 22
+            },
+            "text": "科创50 · sh000688"
+          },
+          {
+            "selector": "rangeslider-container",
+            "box": {
+              "x": 111.5,
+              "y": 920.53125,
+              "right": 1324.5,
+              "bottom": 951.1812744140625,
+              "width": 1213,
+              "height": 30.6500244140625
+            },
+            "text": ""
+          },
+          {
+            "selector": "ytitle",
+            "box": {
+              "x": 55,
+              "y": 688.7109375,
+              "right": 74,
+              "bottom": 814.3515625,
+              "width": 19,
+              "height": 125.640625
+            },
+            "text": "科创50 收盘点位"
+          },
+          {
+            "selector": "y2title",
+            "box": {
+              "x": 1353.5,
+              "y": 659.4296875,
+              "right": 1372.5,
+              "bottom": 843.6328125,
+              "width": 19,
+              "height": 184.203125
+            },
+            "text": "50ETF QVIX 收盘（%）"
+          },
+          {
+            "selector": "xtitle",
+            "box": {
+              "x": 621.5,
+              "y": 971.1812744140625,
+              "right": 808.5,
+              "bottom": 990.1812744140625,
+              "width": 187,
+              "height": 19
+            },
+            "text": "观察日期（非发布时间）"
+          }
+        ],
+        "collisions": [],
+        "legends": [
+          {
+            "text": "科创50 收盘",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 524.5912475585938,
+              "right": 224.078125,
+              "bottom": 539.5912475585938,
+              "width": 70.078125,
+              "height": 15
+            }
+          },
+          {
+            "text": "50ETF QVIX 收盘（%）",
+            "font": "13px",
+            "box": {
+              "x": 154,
+              "y": 544.4912109375,
+              "right": 294.875,
+              "bottom": 559.4912109375,
+              "width": 140.875,
+              "height": 15
+            }
+          }
+        ],
+        "contained": true
+      },
+      "drag": [
+        "2017-06-15 13:41:49.817",
+        "2023-12-03 11:07:17.2712"
+      ],
+      "reset": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "one_year": [
+        "2025-11-13",
+        "2026-11-13"
+      ],
+      "five_year": [
+        "2021-11-13",
+        "2026-11-13"
+      ],
+      "all": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "slider": [
+        "2019-10-24 17:09:05.0915",
+        "2026-11-13"
+      ],
+      "final_reset": [
+        "2015-02-09",
+        "2026-11-13"
+      ]
+    }
+  ],
+  "hashes": {
+    "runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/qvix_50etf/observations.csv": "0ad3d7206585721f30fcd5905fb2074ff3f613577ea3c5897f7b610666ae9849",
+    "runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/qvix_50etf/quality.json": "9d4ac0b2aa5e46516011438fc1055b4fefbcad50955ed245702c8b47ec7e3a85",
+    "runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv": "e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c",
+    "derived/qvix-v3-round1/manifest.json": "c3f54a0fc5ec00620040aa8deb8f1f0454e73984a6d2797a26315e4bbeeb07dc"
+  },
+  "quality": {
+    "source_rows": 2849,
+    "dates": 2848,
+    "distinct_candidates": 2849,
+    "exact_duplicates": 0,
+    "conflicts": 1,
+    "envelope_rows": 8,
+    "source_only": [
+      "2026-08-22",
+      "2026-09-12",
+      "2026-09-13",
+      "2026-11-01"
+    ],
+    "missing": [
+      "2024-05-22",
+      "2024-05-23",
+      "2024-05-24",
+      "2024-05-27",
+      "2024-05-29",
+      "2024-05-30",
+      "2024-05-31",
+      "2025-11-10",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05"
+    ],
+    "range": [
+      "2015-02-09",
+      "2026-11-13"
+    ]
+  },
+  "body_text": "七指数历史与50ETF QVIX — 真实来源，显式部分质量\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n\n指数来源新浪；50ETF QVIX 来源期权论坛 optbbs，经 AKShare index_option_50etf_qvix。波动率不是新闻情绪；50ETF是其标的，不是其余六指数的波动率。右轴百分数读数，绘制每日close。各图独立拖动/滚轮缩放、滑条、1年/5年/全部及重置。\n\n缺失源日期与冲突日期均画断线null；冲突的全部OHLC置空，候选留在quality.json，null通常不能悬停。源外日期和OHLC包络异常保留原值，不插值、不补周末、不外推。上证指数快照只是非独立相对日历，共同遗漏未知。\n\n首次观察2015年不表示2000年已有值，也不证明正式创设日期。提供方期限、年化约定、收盘计算/截止、发布时间、修订和重建方法未知。观察日期不是可交易时间，不能推导安全滞后、预测或因果。整快照修订非point-in-time；发布前指数记录标记pre_release/pre_base，新浪回溯重建未知。科创综指包括股息，不同于科创50价格指数。\n\n固定wrapper使用HTTP；后续同源HTTPS字节匹配不追认原HTTP认证，也非独立准确性证明。哈希只证明留存字节一致。提供方提示可能有错、商业使用需授权；原始数据、派生数据及嵌入值HTML的再分发许可未确认。仅本地非商业实验，分发前核对提供方条款。\n\n上证指数 · sh000001\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:32.671274+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2000-01-04\", \"2026-11-13\"], \"rows\": 6509, \"successful_at\": \"2026-11-15T21:47:33.656860+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"1991-07-15\", \"base_date\": \"1990-12-19\", \"official_name\": \"上证综合指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000001factsheet.pdf\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2005\n2010\n2015\n2020\n2025\n1000\n2000\n3000\n4000\n5000\n6000\n8.2\n19.1\n30\n40.9\n51.9\n62.8\n上证指数 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n上证指数 · sh000001\n上证指数 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）\n上证50 · sh000016\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:34.458730+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2004-01-02\", \"2026-11-13\"], \"rows\": 5552, \"successful_at\": \"2026-11-15T21:47:34.941005+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2004-01-02\", \"base_date\": \"2003-12-31\", \"official_name\": \"上证50指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2005\n2010\n2015\n2020\n2025\n1000\n2000\n3000\n4000\n12.4\n26.2\n40\n53.7\n上证50 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n上证50 · sh000016\n上证50 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）\n沪深300 · sh000300\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:35.733267+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2002-01-04\", \"2026-11-13\"], \"rows\": 6030, \"successful_at\": \"2026-11-15T21:47:36.202752+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2005-04-08\", \"base_date\": \"2004-12-31\", \"official_name\": \"沪深300指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf\", \"retrospective_rows\": 782}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2005\n2010\n2015\n2020\n2025\n1000\n2000\n3000\n4000\n5000\n6000\n10.3\n21.3\n32.2\n43.2\n54.2\n65.1\n沪深300 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n沪深300 · sh000300\n沪深300 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）\n创业板指 · sz399006\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:36.957276+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2010-06-01\", \"2026-11-13\"], \"rows\": 3995, \"successful_at\": \"2026-11-15T21:47:37.394555+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2010-06-01\", \"base_date\": \"2010-05-31\", \"official_name\": \"创业板指数P\", \"citation\": \"https://www.szse.cn/disclosure/notice/general/t20100531_500454.html\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2012\n2014\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n2000\n3000\n4000\n14.3\n29\n43.6\n58.3\n创业板指 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n创业板指 · sz399006\n创业板指 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）\n创业板50 · sz399673\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:38.150691+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2014-06-18\", \"2026-11-13\"], \"rows\": 3017, \"successful_at\": \"2026-11-15T21:47:38.604457+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2014-06-18\", \"base_date\": \"2010-05-31\", \"official_name\": \"创业板50指数\", \"citation\": \"https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html\", \"retrospective_rows\": 0}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n2000\n3000\n4000\n8.7\n23.6\n38.5\n53.3\n创业板50 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n创业板50 · sz399673\n创业板50 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）\n科创综指 · sh000680\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:39.388212+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2020-01-02\", \"2026-11-13\"], \"rows\": 1663, \"successful_at\": \"2026-11-15T21:47:39.807994+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2025-01-20\", \"base_date\": \"2019-12-31\", \"official_name\": \"上证科创板综合指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf\", \"retrospective_rows\": 1224}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n1500\n2000\n2500\n15.8\n31.6\n47.4\n63.1\n科创综指 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n科创综指 · sh000680\n科创综指 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）\n科创50 · sh000688\n\n{\"attempt\": \"success\", \"attempted_at\": \"2026-11-15T21:47:40.515894+00:00\", \"stale_reuse\": false, \"snapshot_status\": \"success\", \"range\": [\"2020-01-02\", \"2026-11-13\"], \"rows\": 1663, \"successful_at\": \"2026-11-15T21:47:40.868147+00:00\", \"relative_gaps\": [], \"calendar_stale\": false, \"publication_date\": \"2020-07-23\", \"base_date\": \"2019-12-31\", \"official_name\": \"上证科创板50成份指数\", \"citation\": \"https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf\", \"retrospective_rows\": 133}\n\nQVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n\n重置本图\n2016\n2018\n2020\n2022\n2024\n2026\n1000\n1500\n2000\n21\n38.7\n56.4\n科创50 收盘\n50ETF QVIX 收盘（%）\n1年\n5年\n全部\n科创50 · sh000688\n科创50 收盘点位\n50ETF QVIX 收盘（%）\n观察日期（非发布时间）",
+  "warning": "QVIX 尝试 partial @ 2026-11-15T21:47:41.624102+00:00；请求 ['2000-01-01', '2026-11-15']；快照 partial / fresh 新鲜 @ 2026-11-15T21:47:48.027025+00:00；源范围 ['2015-02-09', '2026-11-13']；选中 ['2015-02-09', '2026-11-13'] / 2848日期；缺失源日期 13（无源行，以null断线）；冲突日期 1（全部OHLC为null，不选任一候选）；源外日期 4；包络异常源行 8；精确重复 0；源有序 False；全响应质量计数 {'source_rows': 2849, 'dates': 2848, 'distinct_candidates': 2849, 'exact_duplicates': 0, 'conflicts': 1, 'envelope_rows': 8, 'source_only': ['2026-08-22', '2026-09-12', '2026-09-13', '2026-11-01'], 'missing': ['2024-05-22', '2024-05-23', '2024-05-24', '2024-05-27', '2024-05-29', '2024-05-30', '2024-05-31', '2025-11-10', '2026-09-10', '2026-09-11', '2026-11-03', '2026-11-04', '2026-11-05'], 'range': ['2015-02-09', '2026-11-13']}；比较日历身份 {'csv': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/sh000001/observations.csv', 'csv_sha256': 'e72c43dbd2b3bf97736d8be6b4d09ce4ff2ebac6432a507f0d70ff861b02d52c', 'successful_at': '2026-11-15T21:47:33.656860+00:00', 'stale_reuse': False, 'origin': {'path': 'runs/2026-11-15T21-47-32.121889+00-00-3b7821e3/manifest.json', 'sha256': 'c99274d7755b8b3a0e3ca9dc55e312fd771bcb7eb8333eabc994e0cfebb55d66', 'kind': 'manifest'}}（非官方独立日历；陈旧/未知不能声称完整）。\n",
+  "gaps": [
+    {
+      "range": [
+        "2024-05-15",
+        "2024-06-07"
+      ],
+      "uid": "f14585",
+      "selector": ".scatterlayer .trace.trace<actual uid>, excluding ALL .rangeslider-container descendants",
+      "main_trace_count": 1,
+      "paths": [
+        "M-24040,64.72L-24040,156.59743677029292L-21949.57,172.72L-21897.3,179.02L-21165.65,179.22L-21113.39,187.15L-11027.04,195.07L-10974.78,196.09L-10870.26,163.17L-10713.48,155.85L-10504.43,195.51L-10347.65,187.45L-8518.52,187.15L-8466.26,169.47L-8152.7,177.8L-8100.43,183.18L-7630.09,172.31L-7577.83,179.22L-6689.39,184L-6637.13,168.05L-6480.35,170.18L-6323.57,180.24L-6114.52,174.75L-5957.74,136.04L-5748.7,183.18L-5591.91,171.4L-5382.87,114.6L-5226.09,101.7L-5069.3,144.58L-4494.43,142.95L-4389.91,157.99L-4337.65,146.81L-4128.61,147.83L-4076.35,150.37L-3971.83,158.07L-3919.57,162.86L-3658.26,180.64L-3606,185.93L-3344.7,188.98L-3292.43,189.59L-2874.35,195.68L-2822.09,187.76L-1829.13,205.13L-1776.87,206.86L-1515.57,191.62L-1463.3,199.03L-1358.78,178.82L-1202,197.51L-1045.22,204.42L-992.96,203.64L-836.17,190.6L-783.91,203L-470.35,192.94L-418.09,201.17L-365.83,203.61L-313.57,203L-261.3,204.32L-104.52,206.86L-52.26,205.33L0,204.72L52.26,209.8L104.52,212.55L261.3,205.84L313.57,214.99",
+        "M679.39,214.99",
+        "M992.96,214.17L1045.22,216.31L1097.48,215.49L1149.74,212.85L1202,212.24L1411.04,204.62L1463.3,209.7L1515.57,214.07L1567.83,215.39L1881.39,212.45L1933.65,217.83L2090.43,218.54L2142.7,211.23L2299.48,226.08L2456.26,225.55L2613.04,232.36L2665.3,224.23L2926.61,211.33L2978.87,223.52L3031.13,229.01L3187.91,229.72L3344.7,222.61L3396.96,219.35L3762.78,215.19L3919.57,211.12L4128.61,208.38L4285.39,177.8L4651.22,212.95L4703.48,212.65L5173.83,215.7L5226.09,220.47L6114.52,217.22L6166.78,196.49L6323.57,202.18L6584.87,206.04L6846.17,223.01L6898.43,187.55L7002.96,134.21L7055.22,65.43L7212,-143.66L7630.09,-187.96L7734.61,-42.37L7786.87,-26.11L7943.65,23.67L7995.91,105.46L8100.43,113.08L8152.7,34.75L8309.48,91.44L8361.74,53.34L8518.52,90.12L8675.3,50.7L8884.35,23.98L9041.13,113.08L9093.39,34.75L9145.65,91.44L9197.91,53.34L9250.17,81.08L9877.3,103.53L9929.57,120.7L10190.87,118.47L10243.13,115.82L10347.65,123.65L10504.43,106.27L11079.3,116.74L11236.09,131.98L11810.96,170.69L11967.74,168.55L13169.74,164.69L13222,157.48L14371.74,178.31L14528.52,170.59L16880.26,199.64L17089.3,36.88L17298.35,157.48L17455.13,182.17L17977.74,202.08L18030,201.68L19806.87,200.15L19859.13,201.07L23883.22,151.38L24040,129.13L24249.04,124.97L24405.83,93.68L25242,129.32565338618187L25242,190.2",
+        "M25242,180.54L25242,199.34",
+        "M25242,196.39L25242,187.15",
+        "M25242,193.55L25242,218.74"
+      ],
+      "slider_copies_excluded": 1,
+      "null_dates": [
+        "2024-05-22",
+        "2024-05-23",
+        "2024-05-24",
+        "2024-05-27",
+        "2024-05-29",
+        "2024-05-30",
+        "2024-05-31"
+      ]
+    },
+    {
+      "range": [
+        "2026-10-26",
+        "2026-11-13"
+      ],
+      "uid": "f14585",
+      "selector": ".scatterlayer .trace.trace<actual uid>, excluding ALL .rangeslider-container descendants",
+      "main_trace_count": 1,
+      "paths": [
+        "M-24040,64.72L-24040,214.99",
+        "M-24040,214.99",
+        "M-24040,214.17L-24040,190.74794620762793L-23572.56,190.2",
+        "M-23305.44,180.54L-21235.33,214.58L-21035,210.01L-20033.33,203.2L-19966.56,205.13L-18096.78,172.82L-18030,172.82L-17028.33,174.14L-16293.78,187.05L-15826.33,169.47L-15759.56,162.36L-15626,198.32L-15425.67,173.94L-14958.22,176.07L-14891.44,173.94L-14691.11,153.01L-14490.78,-72.75L-14290.44,167.23L-14223.67,180.04L-12153.56,208.08L-12086.78,210.31L-11018.33,173.53L-10951.56,178L-7278.78,151.69L-7212,161.14L-6744.56,127.3L-6544.22,125.37L-6343.89,171.2L-6277.11,173.33L-5876.44,138.99L-5809.67,155.85L-4340.56,187.66L-4207,181.86L-3472.44,197L-3272.11,197.82L-3138.56,199.34",
+        "M-2938.22,196.39L-2671.11,194.87L-2604.33,202.59L-2537.56,210.82L-2337.22,213.46L-2136.89,205.94L-1869.78,198.12L-1736.22,214.99L-1202,197L-1135.22,188.26L-934.89,181.86L-868.11,195.07L-801.33,186.64L-734.56,173.23L-667.78,189.38L-467.44,191.92L-400.67,197.41L-333.89,195.99L-267.11,189.28L-200.33,188.26L0,189.89L66.78,190.7L133.56,198.73L200.33,201.88L267.11,194.87L400.67,187.15",
+        "M734.56,193.55L934.89,196.49L1001.67,207.67L1068.44,217.02L1135.22,211.02L1202,218.74"
+      ],
+      "slider_copies_excluded": 1,
+      "null_dates": [
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05"
+      ]
+    }
+  ],
+  "status": "PASS"
+}
