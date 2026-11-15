@@ -1,0 +1,7 @@
+               total        used        free      shared  buff/cache   available
+Mem:           15985        9375        1055        2030        7919        6610
+Swap:              0           0           0
+MemAvailable 6610 MiB (need 4500), 2 slots in /tmp/heavy-gate
+slot-0 free
+slot-1 free
+9545c8e93a44a83489b2db018ee071cacf7957019f9033d8b20124be294698c0  report.html

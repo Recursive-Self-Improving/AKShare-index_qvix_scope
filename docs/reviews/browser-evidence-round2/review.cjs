@@ -1,0 +1,58 @@
+const {chromium}=require('playwright-core');
+const fs=require('fs');const crypto=require('crypto');
+const repo='/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope';
+const out=repo+'/docs/reviews/browser-evidence-round2';fs.mkdirSync(out,{recursive:true});
+const result={report_sha256:crypto.createHash('sha256').update(fs.readFileSync(repo+'/report.html')).digest('hex'),console:[],page_errors:[],requests:[],blocked:[],panels:[]};
+const assert=(v,m)=>{if(!v)throw Error(m)};
+const width=r=>Date.parse(r[1])-Date.parse(r[0]);
+(async()=>{let browser;try{
+ browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-background-networking','--disable-component-update','--disable-sync','--no-first-run']});
+ const context=await browser.newContext({viewport:{width:1440,height:1100},serviceWorkers:'block',offline:true});
+ await context.route('**/*',async route=>{const u=route.request().url();result.requests.push(u);if(!u.startsWith('file:')&&!u.startsWith('data:')){result.blocked.push(u);await route.abort();}else await route.continue();});
+ const page=await context.newPage();page.on('console',m=>result.console.push({type:m.type(),text:m.text()}));page.on('pageerror',e=>result.page_errors.push(String(e)));
+ await page.goto('file://'+repo+'/report.html');await page.waitForFunction(()=>document.querySelectorAll('.js-plotly-plot').length===7&&[...document.querySelectorAll('.js-plotly-plot')].every(e=>e._fullLayout));
+ result.warning=await page.locator('.warning').innerText();await page.screenshot({path:out+'/01-warning.png'});
+ assert(result.report_sha256==='9545c8e93a44a83489b2db018ee071cacf7957019f9033d8b20124be294698c0','wrong final artifact');
+ assert(['transport_failure','当前提供方不可用','真实情绪覆盖未知','无最近成功快照','仅十个历史文档示例点','231'].every(t=>result.warning.includes(t)),'warning weakened');
+ result.actual_arrays=await page.evaluate(()=>{const payload=JSON.parse(document.querySelector('#report-data').textContent);return payload.panels.map((p,i)=>{const g=document.querySelector('#panel-'+i);return {code:p.code,equal:JSON.stringify(g.data.map(t=>({x:t.x,y:t.y,yaxis:t.yaxis,mode:t.mode})))===JSON.stringify(p.data.map(t=>({x:t.x,y:t.y,yaxis:t.yaxis,mode:t.mode}))),trace_count:g.data.length,markers:g.data[1].x.length};});});
+ assert(result.actual_arrays.every(v=>v.equal&&v.trace_count===2&&v.markers===10),'rendered arrays mismatch');
+ const ranges=()=>page.evaluate(()=>[...document.querySelectorAll('.js-plotly-plot')].map(g=>g._fullLayout.xaxis.range.slice()));
+ for(let i=0;i<7;i++){
+  const section=page.locator('section').nth(i);await section.scrollIntoViewIfNeeded();
+  const graph=page.locator('#panel-'+i);const allBefore=await ranges();const initial=allBefore[i];
+  const facts=await graph.evaluate(g=>{
+   const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};
+   const legend=g.querySelector('.legend'), plot=g.querySelector('.nsewdrag'), selector=g.querySelector('.rangeselector'), slider=g.querySelector('.rangeslider-container'),title=g.querySelector('.gtitle');
+   const texts=[...g.querySelectorAll('.legendtext')].map(e=>({text:e.textContent,box:rect(e),font:getComputedStyle(e).fontSize}));
+   const overlap=(a,b)=>a.x<b.right&&a.right>b.x&&a.y<b.bottom&&a.bottom>b.y;
+   const legendBox=rect(legend), bounds=rect(g), obstacles={plot:rect(plot),selector:rect(selector),slider:rect(slider),title:rect(title)};
+   return {title:g._fullLayout.title.text,left:g._fullLayout.yaxis.range,right:g._fullLayout.yaxis2.range,left_title:g._fullLayout.yaxis.title.text,right_title:g._fullLayout.yaxis2.title.text,right_side:g._fullLayout.yaxis2.side,overlay:g._fullLayout.yaxis2.overlaying,visible_markers:[...g.querySelectorAll('.scatterlayer .point')].filter(e=>e.closest('.subplot')&&!e.closest('.rangeslider-container')).length,legend:{texts,box:legendBox,bounds,obstacles,overlaps:Object.entries(obstacles).filter(([k,b])=>texts.some(t=>overlap(t.box,b))).map(([k])=>k),contained:legendBox.x>=bounds.x&&legendBox.right<=bounds.right&&legendBox.y>=bounds.y&&legendBox.bottom<=bounds.bottom},modes:g.data.map(t=>t.mode),codes:g._fullLayout.title.text};
+  });
+  assert(facts.legend.texts.length===2&&facts.legend.texts[0].text.includes('收盘')&&facts.legend.texts[1].text==='文档示例 documentation example, not live/full history','legend labels wrong '+i);
+  result.legend_checks??=[];result.legend_checks.push({i,...facts.legend});
+  assert(facts.visible_markers===10&&facts.modes[1]==='markers','samples not isolated '+i);
+  assert(facts.right_side==='right'&&facts.overlay==='y'&&facts.right_title.includes('独立刻度')&&JSON.stringify(facts.left)!==JSON.stringify(facts.right),'axes not independent '+i);
+  await section.screenshot({path:out+`/panel-${i+1}-initial.png`});
+  const box=await graph.locator('.nsewdrag').first().boundingBox();
+  await page.mouse.move(box.x+box.width*.2,box.y+box.height*.2);await page.mouse.down();await page.mouse.move(box.x+box.width*.75,box.y+box.height*.8,{steps:16});await page.mouse.up();await page.waitForTimeout(300);
+  const afterDrag=await ranges();assert(width(afterDrag[i])<width(initial)*.8,'drag not narrowing '+i);assert(afterDrag.every((r,j)=>j===i||JSON.stringify(r)===JSON.stringify(allBefore[j])),'cross-panel mutation');
+  await section.screenshot({path:out+`/panel-${i+1}-drag.png`});
+  await section.getByRole('button',{name:'重置本图',exact:true}).click();await page.waitForTimeout(250);const reset=(await ranges())[i];assert(JSON.stringify(reset)===JSON.stringify(initial),'reset differs '+i);
+  await graph.locator('.rangeselector .button').filter({hasText:'1年'}).click();await page.waitForTimeout(250);const one=(await ranges())[i];assert(width(one)<370*86400000,'1y broken');
+  await graph.locator('.rangeselector .button').filter({hasText:'5年'}).click();await page.waitForTimeout(250);const five=(await ranges())[i];assert(width(five)>width(one)&&width(five)<1830*86400000,'5y broken');
+  await graph.locator('.rangeselector .button').filter({hasText:'全部'}).click();await page.waitForTimeout(250);const all=(await ranges())[i];assert(JSON.stringify(all)===JSON.stringify(initial),'all differs');
+  const slider=await graph.locator('.rangeslider-bg').boundingBox();await page.mouse.move(slider.x+slider.width*.25,slider.y+slider.height*.5);await page.mouse.down();await page.mouse.move(slider.x+slider.width*.65,slider.y+slider.height*.5,{steps:14});await page.mouse.up();await page.waitForTimeout(250);const slid=(await ranges())[i];assert(width(slid)<width(initial),'slider not narrowing');
+  await section.getByRole('button',{name:'重置本图',exact:true}).click();await page.waitForTimeout(200);const final=(await ranges())[i];assert(JSON.stringify(final)===JSON.stringify(initial),'final reset differs');
+  result.panels.push({i,...facts,initial,drag:afterDrag[i],reset,one_year:one,five_year:five,all,slider:slid,final_reset:final,other_panels_unchanged:true});
+ }
+ await page.goto('file:///tmp/sentiment-browser-round1/synthetic-fixture.html');await page.waitForFunction(()=>document.querySelector('#panel-1')?._fullLayout);
+ await page.evaluate(async()=>{const banner=document.createElement('h1');banner.textContent='SYNTHETIC TEST FIXTURE — NOT REAL DATA';banner.style.color='red';document.querySelectorAll('section')[1].prepend(banner);await Plotly.relayout('panel-1',{'xaxis.range':['2024-10-20','2024-11-01']});});
+ const fixture=page.locator('section').nth(1);await fixture.scrollIntoViewIfNeeded();await fixture.screenshot({path:out+'/synthetic-gap-fixture.png'});
+ result.fixture=await page.locator('#panel-1').evaluate(g=>({x:g.data[0].x,y:g.data[0].y,connectgaps:g.data[0].connectgaps,svg_line_paths:[...g.querySelectorAll('.scatterlayer .trace:first-child .js-line')].filter(e=>e.closest('.subplot.xy')&&!e.closest('.rangeslider-container')).map(e=>e.getAttribute('d')),zero_calc:g.calcdata[0].map(v=>({x:v.x,y:v.y})),range:g._fullLayout.xaxis.range}));
+ assert(JSON.stringify(result.fixture.y)===JSON.stringify([10,11,null,13,14,null,0,12,14]),'gap/null/zero wrong');assert(result.fixture.svg_line_paths.length===3,'gap rendered as connected');
+ assert(result.fixture.connectgaps===false&&result.fixture.zero_calc[6].y===0,'zero or disconnect policy lost');
+ assert(result.fixture.x.length===9&&!result.fixture.x.includes('2024-10-26')&&!result.fixture.x.includes('2024-10-27'),'weekend invented');
+ assert(result.page_errors.length===0&&result.blocked.length===0,'unexpected errors/network');
+ assert(result.legend_checks.every(v=>v.contained&&v.overlaps.length===0),'legend clipped/overlapping: '+JSON.stringify(result.legend_checks.map(v=>({i:v.i,contained:v.contained,overlaps:v.overlaps}))));
+ result.status='PASS';
+ }catch(e){result.status='Fix';result.failure=String(e);process.exitCode=1;}finally{if(browser)await browser.close();fs.writeFileSync(out+'/observations.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));}})();
