@@ -1,9 +1,12 @@
-import sys, shutil, json
+import sys
+import shutil
+import json
 from pathlib import Path
 sys.path.insert(0, '/root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope')
 from app.chart import build
 from app.core import csv_bytes
-repo=Path(sys.path[0]); root=Path('/tmp/sentiment-browser-round1/fixture-data')
+repo=Path(sys.path[0])
+root=Path('/tmp/sentiment-browser-round1/fixture-data')
 shutil.copytree(repo/'data',root)
 m=json.loads((root/'latest.json').read_text())
 dates=['2024-10-21','2024-10-22','2024-10-23','2024-10-24','2024-10-25','2024-10-28','2024-10-29','2024-10-30','2024-10-31']
