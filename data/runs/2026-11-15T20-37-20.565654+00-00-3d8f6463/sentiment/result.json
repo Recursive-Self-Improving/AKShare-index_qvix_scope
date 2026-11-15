@@ -1,0 +1,42 @@
+{
+  "feed": "sentiment",
+  "attempted_at": "2026-11-15T20:37:32.340823+00:00",
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "window": [
+    "2000-01-01",
+    "2026-11-15"
+  ],
+  "invocation": "index_news_sentiment_scope()",
+  "request_timeout_seconds": [
+    5,
+    12
+  ],
+  "status": "transport_failure",
+  "error": "SSLError: HTTPSConnectionPool(host='www.chinascope.com.cn', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)')))",
+  "finished_at": "2026-11-15T20:37:34.449912+00:00",
+  "captures": [
+    {
+      "body": "data/runs/2026-11-15T20-37-20.565654+00-00-3d8f6463/sentiment/response-0.body",
+      "sha256": "9e17cb15dd75bbbd5dbb984eda674863c3b10ab72613cf8a39a00c3e11a8492a",
+      "url": "https://www.chinascope.com/inews/senti/index?period=YEAR",
+      "requested_url": "https://www.chinascope.com/inews/senti/index?period=YEAR",
+      "status": 301,
+      "headers": {
+        "Date": "Sun, 15 Nov 2026 20:37:33 GMT",
+        "Content-Type": "text/html",
+        "Content-Length": "162",
+        "Connection": "keep-alive",
+        "Set-Cookie": "tgw_l7_route=b88fad117a585ef3db3ca60c8ab02fbf; Expires=Sun, 15-Nov-2026 20:38:03 GMT; Path=/; sameSite=None; Secure",
+        "Location": "https://www.chinascope.com.cn"
+      },
+      "encoding": "ISO-8859-1",
+      "retrieved_at": "2026-11-15T20:37:33.323862+00:00",
+      "http_decompressed": true
+    }
+  ]
+}

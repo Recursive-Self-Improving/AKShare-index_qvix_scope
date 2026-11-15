@@ -1,0 +1,57 @@
+{
+  "report_sha256": "9545c8e93a44a83489b2db018ee071cacf7957019f9033d8b20124be294698c0",
+  "console": [],
+  "page_errors": [],
+  "requests": [
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html"
+  ],
+  "blocked": [],
+  "panels": [],
+  "warning": "当前情绪采集：transport_failure；尝试时间 2026-11-15T20:37:32.340823+00:00；当前提供方不可用；真实情绪覆盖未知（不是零值、不是零历史）；无最近成功快照\n仅十个历史文档示例点：2023-10-31—2023-11-06 / 2024-10-25—2024-10-31；documentation example, not live/full history。缺失年不连线，未恢复其余231行。",
+  "actual_arrays": [
+    {
+      "code": "sh000001",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000016",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000300",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sz399006",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sz399673",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000680",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000688",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    }
+  ],
+  "status": "Fix",
+  "failure": "Error: legend clipped/overlapping 0"
+}

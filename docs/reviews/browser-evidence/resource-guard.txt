@@ -1,0 +1,23 @@
+Before launch:
+$ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           15985        8243        1275        1988        8788        7741
+Swap:              0           0           0
+$ ~/.omp/bin/heavy-gate --status
+MemAvailable 7741 MiB (need 4500), 2 slots in /tmp/heavy-gate
+slot-0 free
+slot-1 free
+
+Exactly one browser launch:
+$ ~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/review.cjs
+Bash async:true timeout:0; no timeout wrapper.
+Chrome: /usr/bin/google-chrome, headless; one browser/context/page, viewport 1440x1100.
+Context offline:true; serviceWorkers:block; HTTP/HTTPS routes abort; only file:/data: allowed.
+Browser closed in finally, including harness assertion failure. Browser run took 25.67s.
+No browser console or page errors. D-Bus accessibility activation messages were process stderr, not page errors.
+
+After finally:
+$ ~/.omp/bin/heavy-gate --status
+MemAvailable 7455 MiB (need 4500), 2 slots in /tmp/heavy-gate
+slot-0 free
+slot-1 free

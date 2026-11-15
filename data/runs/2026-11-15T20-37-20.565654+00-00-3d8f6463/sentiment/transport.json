@@ -1,0 +1,20 @@
+[
+  {
+    "body": "data/runs/2026-11-15T20-37-20.565654+00-00-3d8f6463/sentiment/response-0.body",
+    "sha256": "9e17cb15dd75bbbd5dbb984eda674863c3b10ab72613cf8a39a00c3e11a8492a",
+    "url": "https://www.chinascope.com/inews/senti/index?period=YEAR",
+    "requested_url": "https://www.chinascope.com/inews/senti/index?period=YEAR",
+    "status": 301,
+    "headers": {
+      "Date": "Sun, 15 Nov 2026 20:37:33 GMT",
+      "Content-Type": "text/html",
+      "Content-Length": "162",
+      "Connection": "keep-alive",
+      "Set-Cookie": "tgw_l7_route=b88fad117a585ef3db3ca60c8ab02fbf; Expires=Sun, 15-Nov-2026 20:38:03 GMT; Path=/; sameSite=None; Secure",
+      "Location": "https://www.chinascope.com.cn"
+    },
+    "encoding": "ISO-8859-1",
+    "retrieved_at": "2026-11-15T20:37:33.323862+00:00",
+    "http_decompressed": true
+  }
+]

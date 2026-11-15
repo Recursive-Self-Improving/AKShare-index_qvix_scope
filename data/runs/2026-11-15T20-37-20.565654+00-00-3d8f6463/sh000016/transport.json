@@ -1,0 +1,37 @@
+[
+  {
+    "body": "data/runs/2026-11-15T20-37-20.565654+00-00-3d8f6463/sh000016/response-0.body",
+    "sha256": "fbf301efa532729281a77ffcc168fc347fbe1adae93c742fcc360fe418faac8f",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "72273",
+      "Connection": "keep-alive",
+      "Date": "Sun, 15 Nov 2026 20:37:25 GMT",
+      "Expires": "Sun, 15 Nov 2026 20:38:07 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 ctc.guangzhou.union.60 (ApacheTrafficServer/6.2.1 [cRs f ]), cache19.l2so158-2[8,8,304-0,H], cache29.l2so158-2[9,0], cache29.l2so158-2[10,0], ens-cache21.l2hk11[15,15,304-0,H], ens-cache26.l2hk11[16,0], ens-cache26.l2hk11[16,0], ens-cache29.l2de4[240,240,304-0,H], ens-cache40.l2de4[241,0], ens-cache40.l2de4[242,0], ens-cache10.de10[244,250,200-0,H], ens-cache4.de10[253,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache4.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=cmcc.huanan2.union.37.nb.sinaedge.com,c=113.96.59.35;f=Edge,s=ctc.guangzhou.union.60,c=10.67.2.37",
+      "X-Via-Edge": "17947750455050bcd090a2502430a29417aa4",
+      "X-Via-SSL": "ssl.26.sinag1.hn1.lb.sinanode.com",
+      "Edge-Copy-Time": "1794562299737",
+      "Last-Modified": "Fri, 13 Nov 2026 09:30:23 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "W/\"6af6d8af-16ea5\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794775045",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:169322204",
+      "X-Swift-SaveTime": "Sun, 15 Nov 2026 20:37:25 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5fe9817947750453445607e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-15T20:37:25.618108+00:00",
+    "http_decompressed": true
+  }
+]

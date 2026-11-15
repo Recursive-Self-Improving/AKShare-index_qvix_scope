@@ -1,0 +1,1 @@
+Wrote /tmp/sentiment-browser-round1/synthetic-fixture.html: seven panels; 当前情绪采集：transport_failure；尝试时间 2026-11-15T20:37:32.340823+00:00；当前提供方不可用；真实情绪覆盖未知（不是零值、不是零历史）；无最近成功快照

@@ -1,0 +1,37 @@
+[
+  {
+    "body": "data/runs/2026-11-15T20-37-20.565654+00-00-3d8f6463/sh000680/response-0.body",
+    "sha256": "fa71e50523fd9eba71be6d430257ddbdb933355cd642ede77f5d2e0cb4d6da57",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "21160",
+      "Connection": "keep-alive",
+      "Date": "Sun, 15 Nov 2026 20:37:30 GMT",
+      "Expires": "Sun, 15 Nov 2026 20:39:30 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[20,19,304-0,H], cache3.l2so158-2[20,0], cache3.l2so158-2[21,0], ens-cache20.l2hk11[26,26,304-0,H], ens-cache17.l2hk11[28,0], ens-cache17.l2hk11[28,0], ens-cache39.l2de4[221,221,304-0,H], ens-cache23.l2de4[222,0], ens-cache23.l2de4[223,0], ens-cache24.de10[228,232,200-0,H], ens-cache1.de10[234,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache1.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=ctc.guangzhou.union.5656.nb.sinaedge.com,c=113.96.59.21;f=Edge,s=cnc.huanan2.union.38,c=10.33.67.56;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.34.253.25;",
+      "X-Via-Edge": "179477505032320d6090a3843210a19e7687a",
+      "X-Via-SSL": "ssl.22.sinag1.hj4.lb.sinanode.com",
+      "Edge-Copy-Time": "1794562819024",
+      "Last-Modified": "Fri, 13 Nov 2026 09:31:02 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "\"6af6d8d6-6c54\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794775050",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:359921665",
+      "X-Swift-SaveTime": "Sun, 15 Nov 2026 20:37:30 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5fe9517947750501798957e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-15T20:37:30.434061+00:00",
+    "http_decompressed": true
+  }
+]

@@ -1,0 +1,36 @@
+Initial resource checks:
+free -m
+~/.omp/bin/heavy-gate --status
+
+Read-only report identity:
+sha256sum report.html
+# 9545c8e93a44a83489b2db018ee071cacf7957019f9033d8b20124be294698c0
+
+Offline data identity verification (exit 0):
+.venv/bin/python -m app.verify --input data --report report.html
+# Output: offline-verify.txt
+
+Scratch-only fixture build (exit 0; current app.chart.build, copied data only):
+.venv/bin/python /tmp/sentiment-browser-round1/fixture.py
+# Saved builder: fixture.py; output: fixture-build.txt
+# Does not modify production report.html or data/.
+
+Final browser command (exit 0; async:true, timeout:0):
+~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/review-round2.cjs > docs/reviews/browser-evidence-round2/harness-output.txt 2>&1
+# Saved final harness: review.cjs
+# Exact exit: harness-exit.txt; observations/ranges: observations.json
+# Executed externally, no eval browser launch, no server, workers=1 equivalent serial loop.
+# One browser, one context, one reused page per attempt; finally browser.close().
+
+Harness-development attempts (same gated command, serial; both closed before next):
+# attempt1-output.txt / attempt1-observations.json: exit 1, overstrict overall legend background/title bounds intersection (~0.96px), before real mouse loop.
+# attempt2-output.txt / attempt2-observations.json: exit 1, invalid direct-child marker selector, before real mouse loop.
+# Final attempt uses visible legend text bounds plus screenshot review, and main-subplot ancestry excluding rangeslider for rendered markers/fixture paths. All assertions run to completion, exit 0; no waived final assertion.
+
+Post-run resource check:
+free -m
+~/.omp/bin/heavy-gate --status
+# resource-after.txt: both slots free.
+
+Evidence extraction (read-only):
+jq '{status,report_sha256,warning,requests,blocked,console,page_errors,actual_arrays,panels,fixture}' docs/reviews/browser-evidence-round2/observations.json

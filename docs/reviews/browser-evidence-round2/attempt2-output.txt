@@ -1,0 +1,147 @@
+dbus-daemon[2452570]: [session uid=0 pid=2452570 pidfd=4] Activating service name='org.a11y.Bus' requested by ':1.1' (uid=0 pid=2452584 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+dbus-daemon[2452570]: [session uid=0 pid=2452570 pidfd=4] Successfully activated service 'org.a11y.Bus'
+dbus-daemon[2452680]: Activating service name='org.a11y.atspi.Registry' requested by ':1.0' (uid=0 pid=2452584 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+dbus-daemon[2452680]: Successfully activated service 'org.a11y.atspi.Registry'
+SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+{
+  "report_sha256": "9545c8e93a44a83489b2db018ee071cacf7957019f9033d8b20124be294698c0",
+  "console": [],
+  "page_errors": [],
+  "requests": [
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html"
+  ],
+  "blocked": [],
+  "panels": [],
+  "warning": "当前情绪采集：transport_failure；尝试时间 2026-11-15T20:37:32.340823+00:00；当前提供方不可用；真实情绪覆盖未知（不是零值、不是零历史）；无最近成功快照\n仅十个历史文档示例点：2023-10-31—2023-11-06 / 2024-10-25—2024-10-31；documentation example, not live/full history。缺失年不连线，未恢复其余231行。",
+  "actual_arrays": [
+    {
+      "code": "sh000001",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000016",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000300",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sz399006",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sz399673",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000680",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    },
+    {
+      "code": "sh000688",
+      "equal": true,
+      "trace_count": 2,
+      "markers": 10
+    }
+  ],
+  "legend_checks": [
+    {
+      "i": 0,
+      "texts": [
+        {
+          "text": "上证指数 收盘",
+          "box": {
+            "x": 154,
+            "y": 550.813720703125,
+            "width": 75.34375,
+            "height": 14,
+            "right": 229.34375,
+            "bottom": 564.813720703125
+          },
+          "font": "12px"
+        },
+        {
+          "text": "文档示例 documentation example, not live/full history",
+          "box": {
+            "x": 154,
+            "y": 569.813720703125,
+            "width": 280.796875,
+            "height": 14,
+            "right": 434.796875,
+            "bottom": 583.813720703125
+          },
+          "font": "12px"
+        }
+      ],
+      "box": {
+        "x": 114,
+        "y": 542.6337280273438,
+        "width": 326,
+        "height": 48.00006103515625,
+        "right": 440,
+        "bottom": 590.6337890625
+      },
+      "bounds": {
+        "x": 24,
+        "y": 439.59375,
+        "width": 1392,
+        "height": 660,
+        "right": 1416,
+        "bottom": 1099.59375
+      },
+      "obstacles": {
+        "plot": {
+          "x": 114,
+          "y": 639.59375,
+          "width": 1202,
+          "height": 272,
+          "right": 1316,
+          "bottom": 911.59375
+        },
+        "selector": {
+          "x": 114,
+          "y": 611.59375,
+          "width": 111.59375,
+          "height": 21.20001220703125,
+          "right": 225.59375,
+          "bottom": 632.7937622070312
+        },
+        "slider": {
+          "x": 111.5,
+          "y": 940.86376953125,
+          "width": 1213,
+          "height": 37.4599609375,
+          "right": 1324.5,
+          "bottom": 978.32373046875
+        },
+        "title": {
+          "x": 79.68000030517578,
+          "y": 521.59375,
+          "width": 185.640625,
+          "height": 22,
+          "right": 265.3206253051758,
+          "bottom": 543.59375
+        }
+      },
+      "overlaps": [
+        "title"
+      ],
+      "contained": true
+    }
+  ],
+  "status": "Fix",
+  "failure": "Error: samples not isolated 0"
+}
