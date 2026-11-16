@@ -1,0 +1,170 @@
+{
+  "feed": "qvix_300index",
+  "attempted_at": "2026-11-16T01:34:05.264802+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-16"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    12
+  ],
+  "group_id": "f5ec5a52083e470386c25bbea96256a7",
+  "invocation": "index_option_300index_qvix()",
+  "invoked": true,
+  "columns": [
+    0,
+    17,
+    18,
+    19,
+    20
+  ],
+  "status": "partial",
+  "schema": "qvix-comparison-v4",
+  "successful_at": "2026-11-16T01:34:05.455175+00:00",
+  "acquired_at": "2026-11-16T01:34:04.446448+00:00",
+  "shared": {
+    "path": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/group.json",
+    "sha256": "027fcfaaa923fcbc2ff6aaa22e45590879fff926720a0964e93e20d89a9f26c7"
+  },
+  "accounting": {
+    "algorithm": "qvix-comparison-v4",
+    "feed": "qvix_300index",
+    "comparator": {
+      "origin": {
+        "path": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sh000300/result.json",
+        "sha256": "6bfed751388deabacccb57c56cf76a40e0ddda866b4118686a58e65a928630da",
+        "kind": "result"
+      },
+      "csv": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sh000300/observations.csv",
+      "csv_sha256": "1806640fa7d8420eabb77a9888ac916f94a46e2549665e559e4948c5ce6d2d52",
+      "successful_at": "2026-11-16T01:33:51.246786+00:00",
+      "feed": "sh000300",
+      "raw_sha256": "e8eac72351095080e2e67f256ee137a4e4925b0fd790908f7206867e9705ea4a",
+      "stale_reuse": false
+    },
+    "ordered": false,
+    "full": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "range": [
+        "2019-12-23",
+        "2026-11-13"
+      ],
+      "close_range": [
+        "2019-12-23",
+        "2026-11-13"
+      ],
+      "source_rows": 2849,
+      "dates": 1660,
+      "finite_close_dates": 1482,
+      "all_cells_nonblank": 1661,
+      "finite_complete_rows": 1447,
+      "invalid_fields": 819,
+      "invalid_dates": 213,
+      "incomplete_rows": 0,
+      "zero_rows": 45,
+      "zero_close_rows": 42,
+      "envelope_rows": 24,
+      "distinct_candidates": 1660,
+      "exact_duplicates": 1,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1187,
+      "blank_internal_rows": 1,
+      "blank_tail_rows": 0,
+      "blank_no_source_rows": 0,
+      "nonblank": 1660,
+      "usable_close": 1482,
+      "conflict": 0,
+      "invalid_close_dates": 178,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1187,
+      "blank_internal": 1,
+      "blank_tail": 0,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 1,
+      "conflict_holes": 0,
+      "invalid_close": 174,
+      "missing_close": 0,
+      "holes": 188,
+      "source_only": 4,
+      "blank_source_only": 0
+    },
+    "selected": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "range": [
+        "2019-12-23",
+        "2026-11-13"
+      ],
+      "close_range": [
+        "2019-12-23",
+        "2026-11-13"
+      ],
+      "source_rows": 2849,
+      "dates": 1660,
+      "finite_close_dates": 1482,
+      "all_cells_nonblank": 1661,
+      "finite_complete_rows": 1447,
+      "invalid_fields": 819,
+      "invalid_dates": 213,
+      "incomplete_rows": 0,
+      "zero_rows": 45,
+      "zero_close_rows": 42,
+      "envelope_rows": 24,
+      "distinct_candidates": 1660,
+      "exact_duplicates": 1,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1187,
+      "blank_internal_rows": 1,
+      "blank_tail_rows": 0,
+      "blank_no_source_rows": 0,
+      "nonblank": 1660,
+      "usable_close": 1482,
+      "conflict": 0,
+      "invalid_close_dates": 178,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1187,
+      "blank_internal": 1,
+      "blank_tail": 0,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 1,
+      "conflict_holes": 0,
+      "invalid_close": 174,
+      "missing_close": 0,
+      "holes": 188,
+      "source_only": 4,
+      "blank_source_only": 0
+    }
+  },
+  "count": 1674,
+  "range": [
+    "2019-12-23",
+    "2026-11-13"
+  ],
+  "source_range": [
+    "2019-12-23",
+    "2026-11-13"
+  ],
+  "csv": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/qvix_300index/observations.csv",
+  "csv_sha256": "7e572b0b859278d550405109c3bda25c849af5aa29eb64ea6435e643d9eacfd6",
+  "quality": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/qvix_300index/quality.json",
+  "quality_sha256": "18a86d9912d9548218fe66992f00dff3275881b9c4db818ab218682de915e0d8",
+  "wrapper": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/qvix_300index/wrapper.csv",
+  "wrapper_sha256": "50a29326e8377835a4d62021c041f930ebb495c191005adf5671301cc61fe44e",
+  "finished_at": "2026-11-16T01:34:05.457026+00:00"
+}

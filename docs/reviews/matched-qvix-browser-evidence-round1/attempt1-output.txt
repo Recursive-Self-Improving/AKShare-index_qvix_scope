@@ -1,0 +1,24 @@
+dbus-daemon[2562354]: [session uid=0 pid=2562354 pidfd=4] Activating service name='org.a11y.Bus' requested by ':1.1' (uid=0 pid=2562367 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+dbus-daemon[2562354]: [session uid=0 pid=2562354 pidfd=4] Successfully activated service 'org.a11y.Bus'
+dbus-daemon[2562464]: Activating service name='org.a11y.atspi.Registry' requested by ':1.0' (uid=0 pid=2562367 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+dbus-daemon[2562464]: Successfully activated service 'org.a11y.atspi.Registry'
+SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+FAIL individual legend toggle 0:0
+FAIL legend restore 0:0
+FAIL individual legend toggle 0:1
+{
+  "status": "HARNESS_ERROR",
+  "failures": [
+    "individual legend toggle 0:0",
+    "legend restore 0:0",
+    "individual legend toggle 0:1"
+  ],
+  "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#panel-0').locator('.legendtoggle').nth(2)\n    - locator resolved to <rect x=\"0\" y=\"-9.5\" height=\"19\" width=\"172.53125\" class=\"legendtoggle\" pointer-events=\"all\"></rect>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"modebar-group\">…</div> from <div class=\"modebar-container\">…</div> subtree intercepts pointer events\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      - done scrolling\n      - <div class=\"modebar-group\">…</div> from <div class=\"modebar-container\">…</div> subtree intercepts pointer events\n    - retrying click action\n      - waiting 100ms\n    57 × waiting for element to be visible, enabled and stable\n       - element is visible, enabled and stable\n       - scrolling into view if needed\n       - done scrolling\n       - <div class=\"modebar-group\">…</div> from <div class=\"modebar-container\">…</div> subtree intercepts pointer events\n     - retrying click action\n       - waiting 500ms\n    - waiting for element to be visible, enabled and stable\n\n    at /tmp/sentiment-browser-round1/matched-review.cjs:37:118",
+  "panels": 0,
+  "gaps": 0,
+  "requests": [
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html"
+  ],
+  "console": [],
+  "page_errors": []
+}

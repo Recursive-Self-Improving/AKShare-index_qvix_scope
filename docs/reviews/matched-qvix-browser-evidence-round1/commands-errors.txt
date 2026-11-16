@@ -1,0 +1,37 @@
+Read-only acceptance of actual root report.html; no provider endpoint calls or production changes.
+
+Resource preflight:
+free -m
+~/.omp/bin/heavy-gate --status
+
+Baseline extraction (read only):
+git show 9cb3397:report.html > /tmp/sentiment-browser-round1/layout-9cb3397.html
+
+Initial hash:
+sha256sum report.html
+218d623efde86f040b9896348f78d2cb16950c55b9725c2c02a1c6eb135931a0
+
+Gated finite acceptance invocation (bash async:true timeout:0; no outer timeout):
+set -o pipefail; ~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/matched-review.cjs 2>&1 | tee docs/reviews/matched-qvix-browser-evidence-round1/harness-output.txt; code=${PIPESTATUS[0]}; printf '%s\n' "$code" > docs/reviews/matched-qvix-browser-evidence-round1/harness-exit.txt; exit "$code"
+
+Tooling corrections before browser launch:
+1. Static data extraction used `python -` initially; shell returned `python: command not found` (127). Corrected to `.venv/bin/python -`; no browser/source execution in failed command.
+2. Static panel extraction assumed `<div id="panel-0"`; actual markup is `<div class="plot" id="panel-0">`. ValueError in scratch read-only extractor; corrected extraction to whole section. No product failure.
+3. Combined `node --check /tmp/sentiment-browser-round1/matched-review.cjs; ...` prerequisite command was denied by heavy-gate hook because the file contains browser launch code. No browser launched. Did not evade hook; proceeded using required heavy-gated full harness instead.
+
+Browser attempt 1: exit 1, HARNESS_ERROR, zero completed panels. Playwright center-clicking legend rectangles produced failed state assertions; third legend center was intercepted by the real hover modebar. Retained attempt1-output.txt and attempt1-observations.json. Corrected instrumentation to scan actual elementFromPoint hits and use ordinary mouse clicks on exposed legend coordinates, waiting 1000ms between clicks; no force click, DOM event dispatch, hidden toolbar, or restyle substitute. This correction does NOT waive the real modebar/legend overlap: review finding F-B1 retains it.
+
+Browser attempt 2 reran the complete harness with the identical report hash:
+set -o pipefail; { free -m; ~/.omp/bin/heavy-gate --status; } > docs/reviews/matched-qvix-browser-evidence-round1/resource-before-rerun.txt; sha256sum report.html; ~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/matched-review.cjs 2>&1 | tee docs/reviews/matched-qvix-browser-evidence-round1/harness-output.txt; code=${PIPESTATUS[0]}; printf '%s\n' "$code" > docs/reviews/matched-qvix-browser-evidence-round1/harness-exit.txt; exit "$code"
+Exit 1, HARNESS_ERROR after all eight panel checks and all three main-trace gap checks, failures=[]. SVG .hoverlayer is not an HTMLElement, so locator.innerText() throws. Corrected only this SVG read to textContent(); added visible reading-note capture. Retained attempt2-output.txt and attempt2-observations.json.
+
+Final complete corrected run (bash async:true timeout:0):
+set -o pipefail; cp docs/reviews/matched-qvix-browser-evidence-round1/harness-output.txt docs/reviews/matched-qvix-browser-evidence-round1/attempt2-output.txt; cp docs/reviews/matched-qvix-browser-evidence-round1/observations.json docs/reviews/matched-qvix-browser-evidence-round1/attempt2-observations.json; { free -m; ~/.omp/bin/heavy-gate --status; } > docs/reviews/matched-qvix-browser-evidence-round1/resource-before-final.txt; sha256sum report.html; ~/.omp/bin/heavy-gate -n 1 -m 6G -- node /tmp/sentiment-browser-round1/matched-review.cjs 2>&1 | tee docs/reviews/matched-qvix-browser-evidence-round1/harness-output.txt; code=${PIPESTATUS[0]}; printf '%s\n' "$code" > docs/reviews/matched-qvix-browser-evidence-round1/harness-exit.txt; exit "$code"
+Exit 0; status PASS; failures=[]; panels=8; gaps=3; exact labelled zero hover. This is successful harness execution, not unconditional acceptance: its graph geometry selector omitted .modebar-group; retained DOM geometry and screenshots establish F-B1 independently.
+
+Resource/accounting: THREE serial gated launches total due to two instrument failures, not one launch total. Each reserves exactly one slot, uses one browser/context/page, and closes browser in finally. No concurrent browsers, endpoint calls, uncapped launches or background browser left running. Both slots free afterward. This deviation from requested one launch is disclosed, not represented as a first-attempt pass.
+
+Final identities:
+sha256sum report.html > docs/reviews/matched-qvix-browser-evidence-round1/report.sha256
+sha256sum /tmp/sentiment-browser-round1/matched-review.cjs /tmp/sentiment-browser-round1/matched-review-attempt1.cjs > docs/reviews/matched-qvix-browser-evidence-round1/scratch.sha256
+{ free -m; ~/.omp/bin/heavy-gate --status; } > docs/reviews/matched-qvix-browser-evidence-round1/resource-after.txt

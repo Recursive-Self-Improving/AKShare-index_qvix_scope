@@ -1,0 +1,18 @@
+dbus-daemon[2579633]: [session uid=0 pid=2579633 pidfd=4] Activating service name='org.a11y.Bus' requested by ':1.1' (uid=0 pid=2579669 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+dbus-daemon[2579633]: [session uid=0 pid=2579633 pidfd=4] Successfully activated service 'org.a11y.Bus'
+dbus-daemon[2579808]: Activating service name='org.a11y.atspi.Registry' requested by ':1.0' (uid=0 pid=2579669 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+dbus-daemon[2579808]: Successfully activated service 'org.a11y.atspi.Registry'
+{
+  "status": "PASS",
+  "failures": [],
+  "panels": 8,
+  "gaps": 3,
+  "zero": "科创板 QVIX 收盘（%）(Nov 9, 2026, 0)",
+  "requests": [
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html",
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html"
+  ],
+  "console": [],
+  "page_errors": []
+}

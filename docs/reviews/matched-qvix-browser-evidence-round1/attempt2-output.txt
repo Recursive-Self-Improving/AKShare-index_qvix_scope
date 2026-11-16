@@ -1,0 +1,17 @@
+dbus-daemon[2563166]: [session uid=0 pid=2563166 pidfd=4] Activating service name='org.a11y.Bus' requested by ':1.1' (uid=0 pid=2563179 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+dbus-daemon[2563166]: [session uid=0 pid=2563166 pidfd=4] Successfully activated service 'org.a11y.Bus'
+dbus-daemon[2563276]: Activating service name='org.a11y.atspi.Registry' requested by ':1.0' (uid=0 pid=2563179 comm="/opt/google/chrome/chrome --disable-field-trial-co" label="chrome (unconfined)")
+SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+dbus-daemon[2563276]: Successfully activated service 'org.a11y.atspi.Registry'
+{
+  "status": "HARNESS_ERROR",
+  "failures": [],
+  "error": "locator.innerText: Error: Node is not an HTMLElement\nCall log:\n  - waiting for locator('#panel-6').locator('.hoverlayer')\n\n    at /tmp/sentiment-browser-round1/matched-review.cjs:53:421",
+  "panels": 8,
+  "gaps": 3,
+  "requests": [
+    "file:///root/github.com/Recursive-Self-Improving/AKShare-index_news_sentiment_scope/report.html"
+  ],
+  "console": [],
+  "page_errors": []
+}

@@ -1,0 +1,26 @@
+{
+  "review_status": "PASS",
+  "report_sha256": "84d5570f1551e6e193310fec3e769ad356fa95187e9e3ec8ce725bf112da5d58",
+  "final_harness_exit": 0,
+  "final_harness_status": "PASS",
+  "failed_assertions": [],
+  "completed_panels": 8,
+  "ordinary_label_center_hide_restore_pairs": 19,
+  "hover_modebar_light_dark_panel_measurements": 16,
+  "modebar_legend_rectangle_intersections": 0,
+  "genuine_main_trace_gap_views": 3,
+  "labelled_zero_hover": "科创板 QVIX 收盘（%）(Nov 9, 2026, 0)",
+  "browser_launches_total": 1,
+  "maximum_concurrent_owned_browsers": 1,
+  "external_requests": 0,
+  "console_messages": 0,
+  "page_errors": 0,
+  "baseline_9cb3397_css_equal": true,
+  "findings": [{
+    "id": "F-B1",
+    "disposition": "Closed",
+    "evidence": "All eight panels: real hover exposes modebar; ordinary center clicks on all19 legend labels hide/restore only their trace; actual text/hit rectangles disjoint from modebar groups in both themes; all16 panel screenshots visually inspected."
+  }],
+  "open_browser_findings": [],
+  "scope_limit": "Browser acceptance and CSV/quality/manifest array binding, not economic/source certification or replacement of independent code/data review and project gates."
+}

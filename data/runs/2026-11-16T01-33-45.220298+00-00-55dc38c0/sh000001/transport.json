@@ -1,0 +1,37 @@
+[
+  {
+    "body": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sh000001/response-0.body",
+    "sha256": "8652957f0248b9637a5ed6715028ceea8af2eccf57e9fbd6e78972da41e25eb8",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000001/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000001/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "112465",
+      "Connection": "keep-alive",
+      "Date": "Mon, 16 Nov 2026 01:33:13 GMT",
+      "Expires": "Mon, 16 Nov 2026 01:34:58 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cRs f ]), cache22.l2so158-2[23,22,304-0,H], cache24.l2so158-2[24,0], cache24.l2so158-2[24,0], ens-cache22.l2hk11[0,0,304-0,H], ens-cache17.l2hk11[1,0], ens-cache17.l2hk11[2,0], ens-cache19.l2de4[196,203,304-0,H], ens-cache4.l2de4[205,0], ens-cache4.l2de4[205,0], ens-cache17.de10[207,207,200-0,H], ens-cache18.de10[210,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache18.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=cmcc.huanan2.union.36.nb.sinaedge.com,c=113.96.59.10;f=Edge,s=cnc.huanan2.union.30,c=10.67.2.36",
+      "X-Via-Edge": "179479279363429c8090a2402430a1a60a4bb",
+      "X-Via-SSL": "ssl.24.sinag1.hn1.lb.sinanode.com",
+      "Edge-Copy-Time": "1794562293128",
+      "Last-Modified": "Fri, 13 Nov 2026 09:30:23 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "W/\"6af6d8af-23b4a\"",
+      "Content-Encoding": "gzip",
+      "Age": "33",
+      "Ali-Swift-Global-Savetime": "1794792793",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:504893480",
+      "X-Swift-SaveTime": "Mon, 16 Nov 2026 01:33:46 GMT",
+      "X-Swift-CacheTime": "87",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5fea617947928266007517e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-16T01:33:46.832578+00:00",
+    "http_decompressed": true
+  }
+]

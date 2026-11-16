@@ -1,0 +1,458 @@
+[
+  {
+    "panel": 1,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1031.71875,
+      "y": 258.9981384277344,
+      "width": 172.53125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 243.578125,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 1,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1031.71875,
+      "y": 258.9981384277344,
+      "width": 172.53125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 243.578125,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 1,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1031.71875,
+      "y": 258.9981384277344,
+      "width": 172.53125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 243.578125,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 39.25,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 2,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1031.0625,
+      "y": 258.7950134277344,
+      "width": 172.53125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 243.375,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 2,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1031.0625,
+      "y": 258.7950134277344,
+      "width": 172.53125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 243.375,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 2,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1031.0625,
+      "y": 258.7950134277344,
+      "width": 172.53125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 243.375,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 38.59375,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 3,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1000.359375,
+      "y": 195.5918731689453,
+      "width": 203.203125,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 180.171875,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 3,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1000.359375,
+      "y": 195.5918731689453,
+      "width": 203.203125,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 180.171875,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 3,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1000.359375,
+      "y": 195.5918731689453,
+      "width": 203.203125,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 180.171875,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 38.5625,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 4,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1024.40625,
+      "y": 259.3887634277344,
+      "width": 179.203125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 243.96875,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 4,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1024.40625,
+      "y": 259.3887634277344,
+      "width": 179.203125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 243.96875,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 4,
+    "trace": 2,
+    "legend_rect": {
+      "x": 1024.40625,
+      "y": 259.3887634277344,
+      "width": 179.203125,
+      "height": 18.999969482421875
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 243.96875,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 38.609375,
+    "intersection_height": 9.970611572265625,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 5,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.34375,
+      "y": 195.1856231689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 179.765625,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 5,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.34375,
+      "y": 195.1856231689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 179.765625,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 5,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.34375,
+      "y": 195.1856231689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 179.765625,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 38.859375,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 6,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.6875,
+      "y": 194.9824981689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 179.5625,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 6,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.6875,
+      "y": 194.9824981689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 179.5625,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 6,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.6875,
+      "y": 194.9824981689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 179.5625,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 39.203125,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 7,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.34375,
+      "y": 194.7793731689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 179.359375,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 7,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.34375,
+      "y": 194.7793731689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 179.359375,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 7,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.34375,
+      "y": 194.7793731689453,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 179.359375,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 38.859375,
+    "intersection_height": 9.970626831054688,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 8,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.6875,
+      "y": 554.5762329101562,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1053,
+      "y": 539.15625,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.97064208984375,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 8,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.6875,
+      "y": 554.5762329101562,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1109,
+      "y": 539.15625,
+      "width": 56,
+      "height": 25.390625
+    },
+    "intersection_width": 56,
+    "intersection_height": 9.97064208984375,
+    "actual_mouse_toggle_passed": true
+  },
+  {
+    "panel": 8,
+    "trace": 1,
+    "legend_rect": {
+      "x": 1030.6875,
+      "y": 554.5762329101562,
+      "width": 173.515625,
+      "height": 19
+    },
+    "modebar_rect": {
+      "x": 1165,
+      "y": 539.15625,
+      "width": 104,
+      "height": 25.390625
+    },
+    "intersection_width": 39.203125,
+    "intersection_height": 9.97064208984375,
+    "actual_mouse_toggle_passed": true
+  }
+]

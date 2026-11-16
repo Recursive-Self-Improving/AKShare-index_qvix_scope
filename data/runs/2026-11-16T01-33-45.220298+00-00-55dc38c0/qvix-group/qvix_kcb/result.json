@@ -1,0 +1,170 @@
+{
+  "feed": "qvix_kcb",
+  "attempted_at": "2026-11-16T01:34:05.863046+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-16"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    12
+  ],
+  "group_id": "f5ec5a52083e470386c25bbea96256a7",
+  "invocation": "index_option_kcb_qvix()",
+  "invoked": true,
+  "columns": [
+    0,
+    83,
+    84,
+    85,
+    86
+  ],
+  "status": "partial",
+  "schema": "qvix-comparison-v4",
+  "successful_at": "2026-11-16T01:34:06.002817+00:00",
+  "acquired_at": "2026-11-16T01:34:04.446448+00:00",
+  "shared": {
+    "path": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/group.json",
+    "sha256": "027fcfaaa923fcbc2ff6aaa22e45590879fff926720a0964e93e20d89a9f26c7"
+  },
+  "accounting": {
+    "algorithm": "qvix-comparison-v4",
+    "feed": "qvix_kcb",
+    "comparator": {
+      "origin": {
+        "path": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sh000688/result.json",
+        "sha256": "8dd005f127d8895ab851bfc3ce8bb056172ad7cf915f2bded07de95e0012dc7d",
+        "kind": "result"
+      },
+      "csv": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sh000688/observations.csv",
+      "csv_sha256": "71cb5b7f338be5f609c002dae0b3a0e4df0d4ce8527b4873fcc8835462be8240",
+      "successful_at": "2026-11-16T01:33:56.028426+00:00",
+      "feed": "sh000688",
+      "raw_sha256": "73b99e3d12a8264ed441a5f0888345983abfc8a71124b6e8d470ef4c9c304ab7",
+      "stale_reuse": false
+    },
+    "ordered": false,
+    "full": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "range": [
+        "2023-06-05",
+        "2026-11-13"
+      ],
+      "close_range": [
+        "2023-06-05",
+        "2026-11-13"
+      ],
+      "source_rows": 2849,
+      "dates": 826,
+      "finite_close_dates": 825,
+      "all_cells_nonblank": 827,
+      "finite_complete_rows": 824,
+      "invalid_fields": 6,
+      "invalid_dates": 3,
+      "incomplete_rows": 0,
+      "zero_rows": 1,
+      "zero_close_rows": 1,
+      "envelope_rows": 6,
+      "distinct_candidates": 827,
+      "exact_duplicates": 0,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 2022,
+      "blank_internal_rows": 0,
+      "blank_tail_rows": 0,
+      "blank_no_source_rows": 0,
+      "nonblank": 826,
+      "usable_close": 825,
+      "conflict": 1,
+      "invalid_close_dates": 0,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 2022,
+      "blank_internal": 0,
+      "blank_tail": 0,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 0,
+      "conflict_holes": 1,
+      "invalid_close": 0,
+      "missing_close": 0,
+      "holes": 14,
+      "source_only": 4,
+      "blank_source_only": 1194
+    },
+    "selected": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "range": [
+        "2023-06-05",
+        "2026-11-13"
+      ],
+      "close_range": [
+        "2023-06-05",
+        "2026-11-13"
+      ],
+      "source_rows": 2849,
+      "dates": 826,
+      "finite_close_dates": 825,
+      "all_cells_nonblank": 827,
+      "finite_complete_rows": 824,
+      "invalid_fields": 6,
+      "invalid_dates": 3,
+      "incomplete_rows": 0,
+      "zero_rows": 1,
+      "zero_close_rows": 1,
+      "envelope_rows": 6,
+      "distinct_candidates": 827,
+      "exact_duplicates": 0,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 2022,
+      "blank_internal_rows": 0,
+      "blank_tail_rows": 0,
+      "blank_no_source_rows": 0,
+      "nonblank": 826,
+      "usable_close": 825,
+      "conflict": 1,
+      "invalid_close_dates": 0,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 2022,
+      "blank_internal": 0,
+      "blank_tail": 0,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 0,
+      "conflict_holes": 1,
+      "invalid_close": 0,
+      "missing_close": 0,
+      "holes": 14,
+      "source_only": 4,
+      "blank_source_only": 1194
+    }
+  },
+  "count": 839,
+  "range": [
+    "2023-06-05",
+    "2026-11-13"
+  ],
+  "source_range": [
+    "2023-06-05",
+    "2026-11-13"
+  ],
+  "csv": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/qvix_kcb/observations.csv",
+  "csv_sha256": "a8c44b03c30e4641d643346adcf06c1b48e871da1dcd618abc851bd5a5cb7c06",
+  "quality": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/qvix_kcb/quality.json",
+  "quality_sha256": "f838f3f81369a0b66a232f715d0e4d13f7f0d976c327fec3fc8e5b08fe48916d",
+  "wrapper": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/qvix_kcb/wrapper.csv",
+  "wrapper_sha256": "e70fb6a6849877d7c3832ab5af1cb1022da63072b39ec23e58992aaa62dc1352",
+  "finished_at": "2026-11-16T01:34:06.003917+00:00"
+}

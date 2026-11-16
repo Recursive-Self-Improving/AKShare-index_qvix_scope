@@ -1,4 +1,4 @@
-"""Seven independent date/dual-axis panels; embedded JS and arrays, no companion fetch."""
+"""Eight independent date/dual-axis panels, preserving the offline card layout."""
 import argparse
 import html
 import json
@@ -6,22 +6,19 @@ from pathlib import Path
 
 from plotly.offline import get_plotlyjs
 
-from app.core import INDICES, PUBLICATION, QVIX, comparator_history, histories, load_manifest, trace_points
+from app.core import INDICES, MAPPINGS, PUBLICATION, QVIX_FEEDS, histories, load_manifest, trace_points
 from app.identities import IDENTITIES
 
-QVIX_LABEL = "50ETF QVIX 收盘（%）"
 INDEX_COLOR, QVIX_COLOR = "#2f5fd0", "#d9822b"
 
 
 def panels(root, manifest):
     data = histories(root, manifest)
     calendar = [r["date"] for r in data.get("sh000001", [])]
-    genuine = data.get(QVIX, [])
-    qsnap = manifest["feeds"][QVIX]["snapshot"]
-    comparator = qsnap["accounting"]["comparator"] if qsnap else None
-    qcalendar = comparator_history(root, comparator)
-    qbounds = ([max(qsnap["window"][0], qsnap["source_range"][0]),
-                min(qsnap["window"][1], qsnap["source_range"][1])] if qsnap else None)
+    qtraces = {}
+    for feed in QVIX_FEEDS:
+        rows = data.get(feed, [])
+        qtraces[feed] = ([r["date"] for r in rows], [r["close"] for r in rows])
     result = []
     for code, name in INDICES.items():
         rows = data.get(code, [])
@@ -29,10 +26,13 @@ def panels(root, manifest):
         x, y = trace_points(rows, "close", calendar)
         traces = [{"name": f"{name} 收盘", "type": "scatter", "mode": "lines", "x": x, "y": y,
                    "yaxis": "y", "connectgaps": False, "line": {"color": INDEX_COLOR, "width": 1.4}}]
-        sx, sy = trace_points(genuine, "close", qcalendar, qbounds)
-        traces.append({"name": QVIX_LABEL, "type": "scatter", "mode": "lines",
-                       "x": sx, "y": sy, "yaxis": "y2", "connectgaps": False,
-                       "line": {"color": QVIX_COLOR, "width": 1.1}, "opacity": 0.85})
+        for position, feed in enumerate(MAPPINGS[code]):
+            sx, sy = qtraces[feed]
+            traces.append({"name": QVIX_FEEDS[feed]["label"], "type": "scatter", "mode": "lines",
+                           "x": sx, "y": sy, "yaxis": "y2", "connectgaps": False,
+                           "line": {"color": QVIX_COLOR if position == 0 else "#9b51b0",
+                                    "dash": "solid" if position == 0 else "dash", "width": 1.2},
+                           "opacity": 0.85})
         state = manifest["feeds"][code]
         snapshot = state.get("snapshot")
         layout = {
@@ -46,7 +46,8 @@ def panels(root, manifest):
             "yaxis": {"title": {"text": "收盘点位"}, "autorange": True, "fixedrange": False},
             "yaxis2": {"title": {"text": "QVIX（%）"}, "overlaying": "y", "side": "right",
                        "autorange": True, "fixedrange": False, "showgrid": False},
-            "legend": {"orientation": "h", "x": 1, "xanchor": "right", "y": 1.06, "yanchor": "bottom"},
+            # Keep the legend row left of Plotly's upper-right hover modebar.
+            "legend": {"orientation": "h", "x": 0, "xanchor": "left", "y": 1.17, "yanchor": "bottom"},
             "hovermode": "x unified", "paper_bgcolor": "rgba(0,0,0,0)", "plot_bgcolor": "rgba(0,0,0,0)"}
         result.append({"code": code, "name": name, "data": traces, "layout": layout,
                        "status": {"attempt": state["attempt"]["status"],
@@ -77,7 +78,7 @@ def span(pair):
 
 
 def count(values):
-    return "未知" if values is None else str(len(values))
+    return "未知" if values is None else str(values)
 
 
 def index_line(s):
@@ -96,16 +97,25 @@ def index_line(s):
     return text
 
 
-def qvix_line(state):
-    """Compact per-panel QVIX quality badge."""
+def qvix_line(feed, state):
+    """Visible feed-local material quality; never masked by a clean sibling."""
     snap = state["snapshot"]
-    head = f"QVIX 本次尝试 {state['attempt']['status']} · "
+    head = f"{QVIX_FEEDS[feed]['label']} · 本次尝试 {state['attempt']['status']} @ {stamp(state['attempt']['attempted_at'])} · "
     if not snap:
         return head + "无可用快照，范围未知"
-    c = snap["accounting"]["selected"]
-    return (head + f"快照 {snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'} · {span(c['range'])} · "
-            f"缺失 {count(c['missing'])} · 冲突 {c['conflicts']} · 源外 {count(c['source_only'])} · "
-            f"包络异常 {c['envelope_rows']}")
+    q = snap["accounting"]
+    c, full, comp = q["selected"], q["full"], q["comparator"]
+    provenance = (f"{comp['feed']} {comp['raw_sha256'][:12]} @ {stamp(comp['successful_at'])}"
+                  f"（{'陈旧' if comp['stale_reuse'] else '新鲜'}）" if comp else "未知")
+    return (head + f"快照 {snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'} @ "
+            f"{stamp(snap['successful_at'])} · 身份 {snap['origin']['sha256'][:12]} · "
+            f"全源 {span(full['range'])} / 收盘 {span(full['close_range'])} · "
+            f"选中 {span(c['range'])} / 收盘 {span(c['close_range'])} · "
+            f"全量/选中 缺口 {count(full['holes'])}/{count(c['holes'])} · "
+            f"冲突 {full['conflict']}/{c['conflict']} · 无效字段 {full['invalid_fields']}/{c['invalid_fields']} · "
+            f"零值行 {full['zero_rows']}/{c['zero_rows']} · 源外 {count(full['source_only'])}/{count(c['source_only'])} · "
+            f"包络异常 {full['envelope_rows']}/{c['envelope_rows']} · "
+            f"空白内部/尾部 {full['blank_internal']}/{full['blank_tail']} · 比较日历 {provenance}")
 
 
 def tile(label, value, tone=""):
@@ -113,48 +123,25 @@ def tile(label, value, tone=""):
             f'<b>{html.escape(str(value))}</b></div>')
 
 
-def qvix_card(state, window):
+def qvix_card(feed, state, window):
     snap = state["snapshot"]
-    attempt = f"本次尝试 {state['attempt']['status']} @ {stamp(state['attempt']['attempted_at'])}"
+    heading = html.escape(QVIX_FEEDS[feed]["label"])
     if not snap:
-        return (f'<section class="card qcard"><h2>50ETF QVIX 数据质量</h2>'
-                f'<p class="lead bad">{html.escape(attempt)} · 无可用快照，曲线为空。</p></section>')
+        return f'<details class="card"><summary>{heading} · 无可用快照</summary></details>'
     q = snap["accounting"]
-    c, full = q["selected"], q["full"]
-    tiles = "".join([
-        tile("快照", f"{snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'}",
-             "warn" if snap["status"] != "success" or state["stale_reuse"] else "ok"),
-        tile("有效日期", c["dates"]),
-        tile("缺失日期", count(c["missing"]), "warn" if c["missing"] != [] else ""),
-        tile("冲突日期", c["conflicts"], "warn" if c["conflicts"] else ""),
-        tile("源外日期", count(c["source_only"]), "warn" if c["source_only"] != [] else ""),
-        tile("包络异常行", c["envelope_rows"], "warn" if c["envelope_rows"] else ""),
-        tile("精确重复", c["exact_duplicates"]),
-        tile("源顺序", "有序" if q["ordered"] else "乱序", "" if q["ordered"] else "warn"),
-    ])
-
-    def dates(values):
-        return "未知" if values is None else ("无" if not values else "、".join(values))
-
-    comp = q["comparator"]
-    comp_text = (f"上证指数快照 {comp['csv_sha256'][:12]}… @ {stamp(comp['successful_at'])}"
-                 f"{'（陈旧）' if comp['stale_reuse'] else ''}" if comp else "未知")
-    rows = [
-        ("请求窗口", span(window)),
-        ("选中范围", span(c["range"])),
-        ("完整响应", f"{full['source_rows']} 源行 · {full['dates']} 日期 · 范围 {span(full['range'])} · "
-                     f"缺失 {count(full['missing'])} · 冲突 {full['conflicts']} · 源外 {count(full['source_only'])} · "
-                     f"包络异常 {full['envelope_rows']} · 重复 {full['exact_duplicates']}"),
-        ("缺失日期", dates(c["missing"])),
-        ("源外日期", dates(c["source_only"])),
-        ("比较日历", comp_text + "；非官方日历，共同遗漏无法发现"),
-        ("获取", f"{attempt} · 快照 @ {stamp(snap['successful_at'])}"),
-    ]
+    tiles = "".join(tile(label, count(q["full"][key]), "warn" if q["full"][key] else "")
+                    for label, key in [("收盘日期", "finite_close_dates"), ("缺口日期", "holes"),
+                                       ("冲突日期", "conflict"), ("无效字段", "invalid_fields"),
+                                       ("零值行", "zero_rows"), ("源外日期", "source_only")])
+    rows = [("请求窗口", span(window)), ("共享来源", snap.get("shared", {}).get("path", "派生历史")),
+            ("候选证据", snap["quality"] + " · " + snap["quality_sha256"]),
+            ("完整质量", json.dumps(q["full"], ensure_ascii=False)),
+            ("选中质量", json.dumps(q["selected"], ensure_ascii=False)),
+            ("比较日历", json.dumps(q["comparator"], ensure_ascii=False)),
+            ("源顺序", "有序" if q["ordered"] else "乱序；排序不是修复")]
     table = "".join(f"<tr><th>{html.escape(k)}</th><td>{html.escape(v)}</td></tr>" for k, v in rows)
-    return (f'<section class="card qcard"><h2>50ETF QVIX 数据质量'
-            f'<small>右轴，每日收盘；断线 = 缺失或冲突日期</small></h2>'
-            f'<div class="tiles">{tiles}</div>'
-            f'<table class="facts">{table}</table></section>')
+    return (f'<details class="card"><summary>{heading} · {snap["status"]} · 质量详情</summary>'
+            f'<div class="tiles">{tiles}</div><table class="facts">{table}</table></details>')
 
 
 CSS = """
@@ -206,8 +193,9 @@ a{color:var(--accent)}
 """
 
 NOTES = [
-    "QVIX 是上证50ETF期权隐含波动率，<b>不是新闻情绪</b>，也不是其余六个指数的波动率。",
-    "断线表示缺失或冲突日期：冲突日的 OHLC 全部置空（候选见 quality.json）；不插值、不补日、不外推。",
+    "QVIX 是期权隐含波动率代理，<b>不是新闻情绪</b>、指数点位或已实现波动率；期限、年化、截止及修订时间未知。",
+    "上证指数/上证50→50股指+50ETF；深证100→100ETF；沪深300→300股指+300ETF；创业板指/50→创业板；科创综指/50→科创板。"
+    "宽基/子集、ETF跟踪及衍生品流动性不同，未证明提供方具体ETF合约代码。断线含空白、无效收盘、缺口和冲突；冲突全OHLC为空，不修复、不插值、不外推；零值保留且不保证经济有效。",
     "横轴是观察日期，不是发布时间；不能据此推导滞后、预测或因果。整快照可被修订，非 point-in-time。",
     "新浪首个观察日 ≠ 指数发布日；发布前的行是回溯数据，重建方法未知。科创综指含股息，不同于科创50价格指数。",
     "来源：指数为新浪，QVIX 为期权论坛 optbbs（经 AKShare，HTTP 获取）。提供方提示数据可能有误；"
@@ -219,9 +207,7 @@ NOTES = [
 def build(root, output):
     manifest = load_manifest(root)
     payload = {"run": manifest["run"], "panels": panels(root, manifest),
-               "qvix_status": manifest["feeds"][QVIX], "window": manifest["window"]}
-    state = manifest["feeds"][QVIX]
-    badge = qvix_line(state)
+               "qvix_status": {f: manifest["feeds"][f] for f in QVIX_FEEDS}, "window": manifest["window"]}
     encoded = json.dumps(payload, ensure_ascii=False, allow_nan=False).replace("<", "\\u003c")
     nav = "".join(f'<a href="#panel-section-{p["code"]}">{html.escape(p["name"])}</a>' for p in payload["panels"])
     sections = "".join(
@@ -232,18 +218,20 @@ def build(root, output):
         f'<span>发布 {p["status"]["publication_date"]}</span>'
         f'<a href="{html.escape(p["status"]["citation"])}">官方资料 ↗</a></div>'
         f'<p class="index-status" id="index-status-{p["code"]}">{html.escape(index_line(p["status"]))}</p>'
-        f'<p class="quality" id="qvix-status-{p["code"]}">{html.escape(badge)}</p></div>'
+        + "".join(f'<p class="quality" id="qvix-status-{p["code"]}-{f}">'
+                  f'{html.escape(qvix_line(f, manifest["feeds"][f]))}</p>' for f in MAPPINGS[p["code"]])
+        + '</div>'
         f'<button onclick="resetPanel({i})">重置</button></div>'
         f'<div class="plot" id="panel-{i}"></div></section>'
         for i, p in enumerate(payload["panels"]))
     page = ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>七指数与 QVIX</title><style>{CSS}</style></head><body><main>'
-            '<header><h1>七指数历史 × 50ETF QVIX</h1>'
+            f'<title>八指数与匹配 QVIX</title><style>{CSS}</style></head><body><main>'
+            '<header><h1>八指数历史 × 匹配 QVIX</h1>'
             f'<p>观察区间 {html.escape(span(manifest["window"]))}<span class="legend">'
             f'<span><i style="background:{INDEX_COLOR}"></i>指数收盘（左轴）</span>'
             f'<span><i style="background:{QVIX_COLOR}"></i>QVIX（右轴）</span></span></p></header>'
-            f'<nav>{nav}</nav>' + qvix_card(state, manifest["window"]) +
+            f'<nav>{nav}</nav>' + "".join(qvix_card(f, manifest["feeds"][f], manifest["window"]) for f in QVIX_FEEDS) +
             '<details class="card"><summary>读图须知</summary><ul>' +
             "".join(f"<li>{n}</li>" for n in NOTES) + '</ul></details>' + sections)
     page += '<script>' + get_plotlyjs() + '</script>'
@@ -266,7 +254,7 @@ report.panels.forEach((p,i)=>{
 function resetPanel(i){Plotly.relayout('panel-'+i,{'xaxis.autorange':true,'yaxis.autorange':true,'yaxis2.autorange':true});}
 </script></main></body></html>'''
     Path(output).write_text(page)
-    print(f"Wrote {output}: seven panels; {badge}")
+    print(f"Wrote {output}: eight panels; seven independently disclosed QVIX feeds")
 
 
 def main():

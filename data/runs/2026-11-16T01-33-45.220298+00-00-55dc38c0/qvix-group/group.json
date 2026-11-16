@@ -1,0 +1,30 @@
+{
+  "raw": {
+    "body": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/response-0.body",
+    "sha256": "2e0f2edc8a6bd80cc4ec71fec22d01d933cc29af7de7b2337c406b0fea436071",
+    "url": "http://1.optbbs.com/d/csv/d/k.csv",
+    "requested_url": "http://1.optbbs.com/d/csv/d/k.csv",
+    "status": 200,
+    "headers": {
+      "Server": "nginx/1.0.15",
+      "Date": "Mon, 16 Nov 2026 01:33:57 GMT",
+      "Content-Type": "application/octet-stream",
+      "Content-Length": "928727",
+      "Last-Modified": "Fri, 13 Nov 2026 09:25:13 GMT",
+      "Connection": "keep-alive",
+      "Accept-Ranges": "bytes"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-16T01:34:04.446448+00:00",
+    "http_decompressed": true
+  },
+  "transport": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/transport.json",
+  "transport_sha256": "a133da3fc9b3ff758d8cfa345c4028af123fa7127ee51d856f0c555bd864766b",
+  "group_id": "f5ec5a52083e470386c25bbea96256a7",
+  "acquired_at": "2026-11-16T01:34:04.446448+00:00",
+  "global_validated": true,
+  "config": {
+    "path": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/qvix-group/config.json",
+    "sha256": "eee542fbc141d24f1ee3e2bc5dfa4724f6b9956c8841098879e3750b3d7e8b41"
+  }
+}

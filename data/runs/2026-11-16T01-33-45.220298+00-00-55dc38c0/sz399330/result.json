@@ -1,0 +1,74 @@
+{
+  "feed": "sz399330",
+  "attempted_at": "2026-11-16T01:33:49.122684+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-16"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    12
+  ],
+  "invocation": "index_zh_daily_sina(symbol='sz399330')",
+  "raw": {
+    "body": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sz399330/response-0.body",
+    "sha256": "f717c0e02f2712784c98c00a21aab40f612746e1ec3cc6d97b35d261db4ed6a6",
+    "url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "68089",
+      "Connection": "keep-alive",
+      "Date": "Mon, 16 Nov 2026 01:33:49 GMT",
+      "Expires": "Mon, 16 Nov 2026 01:35:49 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache1.l2so158-2[81,80,304-0,H], cache12.l2so158-2[82,0], cache12.l2so158-2[82,0], ens-cache25.l2hk11[89,89,304-0,H], ens-cache8.l2hk11[90,0], ens-cache8.l2hk11[92,0], ens-cache32.l2de4[677,676,304-0,H], ens-cache22.l2de4[678,0], ens-cache22.l2de4[678,0], ens-cache5.de10[684,684,200-0,H], ens-cache11.de10[687,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache11.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=cmcc.huanan2.union.24.nb.sinaedge.com,c=113.96.59.30;f=Edge,s=cnc.huanan2.union.30,c=10.67.2.24;f=edge,s=cnc.zhangjiakou.bsd-storage.70.nb.sinaedge.com,c=10.34.253.28;",
+      "X-Via-Edge": "179479282964126c8090a1802430a222d892d",
+      "X-Via-SSL": "ssl.67.sinag1.hj4.lb.sinanode.com",
+      "Edge-Copy-Time": "1794566537530",
+      "Last-Modified": "Fri, 13 Nov 2026 10:25:24 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "\"6af6e594-15a45\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794792829",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:235237386",
+      "X-Swift-SaveTime": "Mon, 16 Nov 2026 01:33:49 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5fe9f17947928291111703e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-16T01:33:49.839321+00:00",
+    "http_decompressed": true
+  },
+  "transport": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sz399330/transport.json",
+  "transport_sha256": "7e551212eef8fdc62cd1c214f8ed81ac8dc970cb01d437ceee51bfae820e6c97",
+  "status": "success",
+  "csv": "runs/2026-11-16T01-33-45.220298+00-00-55dc38c0/sz399330/observations.csv",
+  "csv_sha256": "dcfa858759984ad214bcad775808113cc94f00e2550c2d07055a66ce077a4b95",
+  "count": 5053,
+  "range": [
+    "2006-01-24",
+    "2026-11-13"
+  ],
+  "identity": {
+    "official_name": "深证100指数",
+    "base_date": "2002-12-31",
+    "release_date": "2006-01-24",
+    "citation": "https://www.cnindex.com.cn/html2pdf/preview/jj_399330.pdf",
+    "retained_evidence": "docs/research/matched-qvix-evidence/cnindex-399330-excerpt.md"
+  },
+  "retrospective_count": 0,
+  "successful_at": "2026-11-16T01:33:50.005887+00:00",
+  "finished_at": "2026-11-16T01:33:50.005927+00:00"
+}
