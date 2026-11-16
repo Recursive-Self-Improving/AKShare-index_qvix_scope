@@ -1,12 +1,12 @@
 # 情绪与七指数历史对照
 
 ## Control summary
-- Mode: proactive; orchestrator chooses the next move from evidence, delegates implementation/research/review, and maintains this single ledger.
+- Mode: ask-when-material; orchestrator chooses evidence-led moves, delegates implementation/research/review, maintains this ledger, and asks only for consequential decisions research cannot resolve.
 - Scope is the AC below; never silently weaken or drop it. Persist evidence and append decisions.
 - Implementation and review use different workers; implement only firm, independently reviewed plan sections.
 - Commit every green checkpoint with Conventional Commits; protect unrelated changes; never push.
-- Final gate: Reread the ledger. The gate passes only when every AC has verified evidence or a valid recorded blocker or deferral; every dropped, weakened, superseded, or invalidated AC or work item cites its decision-log entry; no decision is open; no finding is open with triage Fix or Replan; no plan section is still unknown-until unless its trigger is recorded as blocked; a final whole-change REVIEW-LOOP has converged; and you have rerun the full project gates (build/typecheck, tests, lint as applicable) on the final tree after the last change, and they pass. If any item is still doable now, continue the loop instead.
-- At completion quote every non-done item with its status/reason; only external missing tools/access/services or external-system changes justify pause.
+- Final gate: Reread the ledger. The gate passes only when every AC has verified evidence or a valid recorded blocker or deferral; every dropped, weakened, superseded, or invalidated AC or work item cites its decision-log entry; no decision is open; no finding is open with triage Fix, Replan, or Ask; no plan section is still unknown-until unless its trigger is recorded as blocked; a final whole-change REVIEW-LOOP has converged; and you have rerun the full project gates (build/typecheck, tests, lint as applicable) on the final tree after the last change, and they pass. If any item is still doable now, continue the loop instead.
+- At completion quote every non-done item with its status/reason and commit the final ledger; pause only for missing tools, credentials, services, approvals, external state, external-system changes, or a product decision blocking all remaining work.
 
 ## Acceptance criteria
 1. **Superseded by D9 / AC9**: original requirement to obtain `index_news_sentiment_scope` and backfill genuine ChinaScope history. Historical attempts/evidence retained, no longer a dependency of the active QVIX goal.
@@ -144,3 +144,25 @@
 - Green code/data/artifact checkpoint committed as `6ceb68f5cad7dc7abe1ab7993fcf882fd5f64cb4`; final ledger committed separately. No push, deployment or scheduler.
 - Only non-done historical work item: **W3 — superseded** by D9 at the user's explicit source-change request; AC9–12 and W13–W16 cover its replacement. It is not an active blocker. Original AC1/AC3 also explicitly superseded by D9/AC9/AC10, never silently forgotten.
 - Delivered `report.html`, QVIX/index raw/CSV/quality evidence and reproducible fetch/chart/verify in README. Source is fresh partial with13 relative gaps,1 conflict,4 source-only dates and8 envelope rows; the actual fetch exit1 remains evidence, not a failed code gate disguised as success.
+
+## Eight-index matched-QVIX expansion — active goal
+### Acceptance criteria
+- AC13: fetch genuine daily 深证100 (`sz399330`, identity and official base/release dates to verify) since 2000-01-01 or earliest available through acquisition date; retain exact raw bodies, normalized dates/closes, hashes, acquisition identity/time and retrospective flags under existing provenance contracts.
+- AC14: deliver eight offline panels in user order with exact mappings: 上证指数→50index+50etf; 上证50→50index+50etf; 深证100→100etf; 沪深300→300index+300etf; 创业板指→cyb; 创业板50→cyb; 科创综指→kcb; 科创50→kcb. Each QVIX means its AKShare daily close, individually labelled, right-axis percent, independently toggleable. Preserve real source coverage/null gaps and mouse zoom/reset/navigation.
+- AC15: acquire all seven distinct requested QVIX histories (50index,50etf,100etf,300index,300etf,cyb,kcb) using actual pinned wrappers, with per-feed structural/quality/calendar/provenance/status accounting and honest partial/failure/stale semantics. No substituted series, stitched history, fabricated pre-inception values or repeat fetch solely to seek clean data.
+- AC16: migrate active fetch/chart/verify/schema/tests/README end-to-end while preserving immutable historical evidence and latest user layout from 9cb3397. Clearly disclose proxy mappings (especially 上证综指、创业板50、科创综指), source quality and timing limits. Independent plan, whole-change and gated eight-panel browser reviews converge; final full project gates pass. No scheduler or push.
+### Plan
+- P-M1 [unknown-until(research and acquisition spike); unreviewed]: establish pinned-wrapper availability, exact shared-source column identities, attainable per-feed history/quality, 深证100 official identity and minimal migration design. Research evidence only before approved implementation.
+- P-M2 [tentative; unreviewed]: extend existing immutable acquisition/quality/compact state conventions to multiple distinct feeds; retain per-snapshot full raw comparator binding and source-specific null gaps. Preserve the recent layout; use distinguishable lines and readable legends for two-QVIX panels.
+- P-M3 [firm; unreviewed]: independent PLAN-REVIEW before implementation, sole implementation writer, independent static/data and one gated browser review, fix/review loop, final union gates and green commits.
+### Work items
+- W17 research/spike/design; AC13–16; active — bounded isolated feasibility spike, identity evidence and proposed migration contract.
+- W18 review; AC13–16; todo — independently approve changed firm plan before code.
+- W19 impl; AC13–16; todo — eight-index/seven-QVIX acquisition and full offline-report migration.
+- W20 review/fix; AC13–16; todo — independent whole-change/browser convergence and final project gates.
+### Decision log
+- D13: User explicitly adds 深证100 and supplies eight exact panel mappings. Accept mappings as exploratory comparisons, not claims of exact underlying equivalence or better predictive power; no unresolved product decision requires asking. Supersede AC10's common-50ETF-on-seven-panels requirement with AC14; extend AC2 through AC13 and AC9/11/12 through AC15/16 without weakening quality/provenance contracts. Keep existing index histories, source normalization, immutable audit artifacts and latest user-owned layout commit 9cb3397; rewrite only active single-QVIX assumptions in acquisition/schema/chart/verifier/tests/docs. W17–20 cover all new work; previous completed work remains historical evidence.
+### Findings and iterations
+- I27: Resume clean tree at 9cb3397, sole worktree, no leftover active goal workers. Latest layout is pre-existing/user-owned and must be preserved. Choose isolated feasibility/identity/design research before migration; reject guessing new source columns or launching overlapping code writers. Runtime/source evidence determines firm contract; unavailable provider state would be recorded, not silently substituted.
+### Final gate
+- OPEN: AC13–16 and W17–20 require evidence; prior final gates are historical, not acceptance of this expansion.
