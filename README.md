@@ -18,7 +18,7 @@
 前三条双QVIX面板（第1、2、4图）各三条可独立图例切换曲线；其余各两条。
 同feed跨面板使用完全相同数组及固定比较日历，不随所在面板改变。
 保留卡片、浅/深色、导航、独立缩放、重置、滑条和1年/5年/全部控制。
-一次内嵌Plotly JS，无CDN或伴随文件读取；直接用浏览器打开 `report.html`，无需Python运行时、安装依赖或启动服务器。
+一次内嵌Plotly JS，无CDN或伴随文件读取；直接用浏览器打开 `index.html`，无需Python运行时、安装依赖或启动服务器。
 [独立代码/数据复核](docs/reviews/matched-qvix-implementation-review-round2.md)与[最终浏览器复核](docs/reviews/matched-qvix-browser-review-round2.md)均PASS；M-R1、M-R2、F-B1均已关闭。
 
 ## 运行（Python 3.14，固定锁）
@@ -30,9 +30,15 @@ uv run ruff check .
 uv run pytest -q
 uv run python -m app.fetch --start 2000-01-01
 # partial/失败退出1；不要用 && 跳过仍可运行的离线命令
-uv run python -m app.chart --input data --output report.html
-uv run python -m app.verify --input data --report report.html
+uv run python -m app.chart --input data --output index.html
+uv run python -m app.verify --input data --report index.html
 ```
+
+## GitHub Pages
+
+将根目录的 `index.html` 提交并推送后，在仓库 Settings → Pages 中选择
+Deploy from a branch、`master` 分支和 `/ (root)`，然后保存。
+页面内嵌数据会公开；部署前请核对提供方的再分发许可。
 
 `--end YYYY-MM-DD` 默认当天。先严格验证完整响应，再按包含边界的窗口选行。
 八个指数串行独立子进程，各45秒墙钟；随后一个共享QVIX组子进程，总共45秒，

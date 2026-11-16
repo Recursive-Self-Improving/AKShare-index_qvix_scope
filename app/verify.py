@@ -463,7 +463,7 @@ def verify(root, report):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="data")
-    parser.add_argument("--report", default="report.html")
+    parser.add_argument("--report", default="index.html")
     args = parser.parse_args()
     verify(args.input, args.report)
 
