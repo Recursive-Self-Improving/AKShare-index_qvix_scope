@@ -260,7 +260,7 @@ function resetPanel(i){Plotly.relayout('panel-'+i,{'xaxis.autorange':true,'yaxis
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="data")
-    parser.add_argument("--output", default="report.html")
+    parser.add_argument("--output", default="index.html")
     args = parser.parse_args()
     build(args.input, args.output)
 
