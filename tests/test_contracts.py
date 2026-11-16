@@ -463,7 +463,9 @@ def test_visible_per_feed_and_index_disclosure_tampering(active, tmp_path, condi
     for identity in ids:
         match = re.search(rf'<p class="[^"]+" id="{identity}">.*?</p>', original)
         assert match
-        for replacement in ("", match[0].replace("本次尝试", "隐藏尝试"),
+        contradiction = re.sub(r" · [^·<]*</p>$", "</p>", match[0])
+        assert contradiction != match[0]
+        for replacement in ("", contradiction, match[0].replace("</p>", " · 已修复</p>"),
                             match[0].replace('<p ', '<p hidden '),
                             match[0].replace('<p ', '<p style="display:none" '),
                             '<div hidden>' + match[0] + '</div>',
@@ -475,8 +477,12 @@ def test_visible_per_feed_and_index_disclosure_tampering(active, tmp_path, condi
             with pytest.raises(ValueError, match="disclosure"):
                 verify(root, report)
     for old, new in [
-        ('<div class="panel-head">', '<div class="panel-head" hidden>'),
-        ('<div class="panel-head">', '<div class="panel-head" style="display:none">'),
+        ('<div class="status">', '<div class="status" hidden>'),
+        ('<div class="status">', '<div class="status" style="display:none">'),
+        ('<div class="status">', '<div class="status" class="notes">'),
+        ('class="quality warn"', 'class="quality ok"'),
+        ('class="index-status ' + ("ok" if condition == "fresh" else "warn") + '"',
+         'class="index-status ' + ("warn" if condition == "fresh" else "ok") + '"'),
         ('<body>', '<body hidden>'),
         ('<main>', '<main style="display:none">'),
     ]:
@@ -628,3 +634,38 @@ def test_derived_completion_cannot_replace_original_times(tmp_path, field):
     manifest["feeds"][FEED] = state_after({}, completed(root, path))
     with pytest.raises(ValueError, match="migration origin/time"):
         validate_manifest(root, manifest)
+
+
+@pytest.mark.parametrize("edit", ["clean", "zero_success", "no_comparator", "stale_comparator",
+                                  "unknown", "window", "stale", "missing"])
+def test_visible_qvix_edge_states_match_and_never_look_clean(active, edit):
+    from app.chart import qvix_clean, qvix_line
+    from app.verify import visible_qvix
+    state = copy.deepcopy(active["feeds"]["qvix_50etf"])
+    snap = state["snapshot"]
+    q = snap["accounting"]
+    for part in ("full", "selected"):
+        q[part].update({k: 0 for k in ("holes", "conflict", "invalid_fields", "zero_rows", "source_only",
+                                       "envelope_rows", "blank_internal", "blank_tail")})
+    snap["status"] = "success"
+    if edit == "zero_success":
+        q["full"]["zero_rows"] = q["selected"]["zero_rows"] = 2
+    elif edit == "no_comparator":
+        q["comparator"] = None
+    elif edit == "stale_comparator":
+        q["comparator"]["stale_reuse"] = True
+    elif edit == "unknown":
+        q["full"]["holes"] = q["selected"]["holes"] = None
+    elif edit == "window":
+        q["selected"]["close_range"] = ["2020-01-02", "2026-11-13"]
+        q["full"]["holes"] = 3
+    elif edit == "stale":
+        state.update(stale_reuse=True, attempt={"status": "failure", "attempted_at": "2026-11-17T00:00:00+00:00"})
+    elif edit == "missing":
+        state["snapshot"] = None
+    text = qvix_line("qvix_50etf", state)
+    assert text == visible_qvix("qvix_50etf", state)
+    assert qvix_clean(state) == (edit == "clean")
+    assert ("无质量异常" in text) == (edit in ("clean", "no_comparator", "stale_comparator", "stale"))
+    if edit == "window":
+        assert "窗口内收盘 2020-01-02" in text and "缺口 3（窗口内 0）" in text
