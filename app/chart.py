@@ -196,7 +196,7 @@ def quality_table(manifest):
                     f'<td>{html.escape(span(full["close_range"]))}</td>{counts}'
                     f'<td class="mono">{html.escape(compared)}</td>'
                     f'<td class="mono">{html.escape(snap["origin"]["sha256"][:12])}</td></tr>')
-    return f'<div class="scroll"><table class="grid"><thead><tr>{head}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
+    return f'<div class="scroll"><table class="grid" id="quality-table"><thead><tr>{head}</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
 
 
 def summary(manifest, items):
@@ -326,7 +326,7 @@ def build(root, output):
             f'<span><i style="background:{QVIX_COLOR}"></i>QVIX · 右轴</span>'
             f'<span><i style="background:{QVIX_ALT_COLOR}"></i>第二条 QVIX · 右轴</span>'
             f'<span>观察区间 {html.escape(span(manifest["window"]))}</span></div></header>'
-            f'<div class="stats">{summary(manifest, payload["panels"])}</div>'
+            f'<div class="stats" id="summary">{summary(manifest, payload["panels"])}</div>'
             '<p class="callout"><b>注意：</b>QVIX 衡量期权市场预期波动，不是新闻情绪；数据仅供本地非商业实验。'
             '<a href="#notes">读图须知 ↓</a></p>'
             f'<nav>{nav}</nav>{sections}'

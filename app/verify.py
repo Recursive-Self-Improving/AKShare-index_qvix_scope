@@ -34,6 +34,9 @@ class Embedded(HTMLParser):
         self.section = None
         self.disclosure_sections = {}
         self.disclosure_classes = {}
+        self.regions = {}
+        self.region = None
+        self.region_depth = None
         self.ancestors = []
 
     def handle_starttag(self, tag, attrs):
@@ -42,6 +45,10 @@ class Embedded(HTMLParser):
         if tag not in ("area", "base", "br", "col", "embed", "hr", "img", "input",
                        "link", "meta", "param", "source", "track", "wbr"):
             self.ancestors.append((tag, attrs))
+        if self.region is not None:
+            self.regions[self.region].append([tag, attrs, ""])
+        elif attrs.get("id") in REGIONS:
+            self.enter_region(tag, attrs)
         if tag == "section":
             require(not any(k in attrs for k in ("hidden", "style")), "hidden panel")
             self.section = attrs.get("id")
@@ -72,10 +79,22 @@ class Embedded(HTMLParser):
         if tag in ("link", "img", "iframe"):
             self.external.append(attrs)
 
+    def enter_region(self, tag, attrs):
+        """Summary/quality table: fixed visible path, exact attributes, captured cell by cell."""
+        rid = attrs["id"]
+        path, parents, own = REGIONS[rid]
+        require(rid not in self.regions, "duplicate visible region disclosure")
+        require([t for t, _ in self.ancestors] == path and
+                [a for _, a in self.ancestors[:-1]] == parents and attrs == own,
+                "hidden/disallowed visible region disclosure")
+        self.region, self.region_depth, self.regions[rid] = rid, len(self.ancestors), []
+
     def handle_endtag(self, tag):
         require(bool(self.ancestors) and self.ancestors[-1][0] == tag,
                 "invalid disclosure container nesting")
         self.ancestors.pop()
+        if self.region is not None and len(self.ancestors) < self.region_depth:
+            self.region = None
         if tag == "section":
             self.section = None
         if tag == "p":
@@ -94,11 +113,21 @@ class Embedded(HTMLParser):
             self.payload += value
         elif not self.script:
             self.visible.append(value)
+            if self.region is not None:
+                cells = self.regions[self.region]
+                if cells:
+                    cells[-1][2] += value
+                else:
+                    cells.append(["#text", {}, value])
             if self.disclosure:
                 self.disclosures[self.disclosure] += value
 
 
 _WORD = {"success": "成功", "partial": "部分成功", "failure": "失败"}
+_TOP = [{"lang": "zh-CN"}, {}, {}]
+REGIONS = {"summary": (["html", "body", "main", "div"], _TOP, {"class": "stats", "id": "summary"}),
+           "quality-table": (["html", "body", "main", "div", "table"], _TOP + [{"class": "scroll"}],
+                             {"class": "grid", "id": "quality-table"})}
 
 
 def _utc(value):
@@ -134,6 +163,57 @@ def visible_index(s):
 _ISSUES = (("缺口", "holes"), ("冲突", "conflict"), ("无效字段", "invalid_fields"),
            ("零值行", "zero_rows"), ("源外", "source_only"), ("包络异常", "envelope_rows"),
            ("内部空白", "blank_internal"), ("尾部空白", "blank_tail"))
+
+
+def _qvix_calm(state):
+    snap = state["snapshot"]
+    return (bool(snap) and snap["status"] == "success" and not state["stale_reuse"] and
+            snap["accounting"]["comparator"] is not None and
+            not snap["accounting"]["comparator"]["stale_reuse"] and
+            all(snap["accounting"][part][k] == 0 for _, k in _ISSUES for part in ("full", "selected")))
+
+
+def visible_summary(manifest):
+    """Independently expected header stat cards as [tag, attrs, text] cells."""
+    index_states = [manifest["feeds"][c] for c in INDICES]
+    feed_states = [manifest["feeds"][f] for f in QVIX_FEEDS]
+    good = len([s for s in index_states if s["snapshot"] and not s["stale_reuse"]
+                and s["snapshot"]["status"] == "success"])
+    calm = len([s for s in feed_states if _qvix_calm(s)])
+    ends = [s["snapshot"]["range"][1] for s in index_states if s["snapshot"] and s["snapshot"]["range"]]
+    times = [s["attempt"]["attempted_at"] for s in index_states + feed_states if s["attempt"].get("attempted_at")]
+    cards = [("指数", f"{good} / 8", "本次获取成功", good != 8),
+             ("QVIX 质量", f"{7 - calm} / 7", "条需留意，见各图下方", calm != 7),
+             ("数据截至", max(ends) if ends else "未知", "最新观察日", False),
+             ("获取时间", _utc(max(times) if times else None)[:16], "UTC", False)]
+    cells = []
+    for label, value, note, warn in cards:
+        cells += [["div", {"class": "stat warn" if warn else "stat"}, ""], ["span", {}, label],
+                  ["b", {}, value], ["small", {}, note]]
+    return cells
+
+
+def visible_quality_table(manifest):
+    """Independently expected bottom QVIX table, including snapshot ID and comparator staleness."""
+    cells = [["thead", {}, ""], ["tr", {}, ""]] + [
+        ["th", {}, h] for h in ["QVIX", "状态", "收盘范围", *[label for label, _ in _ISSUES], "比较指数", "快照 ID"]]
+    cells.append(["tbody", {}, ""])
+    for feed in QVIX_FEEDS:
+        state, name = manifest["feeds"][feed], QVIX_FEEDS[feed]["label"].removesuffix(" 收盘（%）")
+        snap = state["snapshot"]
+        cells += [["tr", {}, ""], ["th", {"scope": "row"}, name]]
+        if snap is None:
+            status = state["attempt"]["status"]
+            cells.append(["td", {"colspan": str(len(_ISSUES) + 4)}, "无可用快照 · 本次获取" + _WORD.get(status, status)])
+            continue
+        full, comp = snap["accounting"]["full"], snap["accounting"]["comparator"]
+        cells += [["td", {}, _WORD.get(snap["status"], snap["status"]) + ("（陈旧）" if state["stale_reuse"] else "")],
+                  ["td", {}, _span(full["close_range"])]]
+        cells += [["td", {"class": "num" if full[k] == 0 else "num warn"}, "未知" if full[k] is None else str(full[k])]
+                  for _, k in _ISSUES]
+        cells += [["td", {"class": "mono"}, "未知" if comp is None else comp["feed"] + ("（陈旧）" if comp["stale_reuse"] else "")],
+                  ["td", {"class": "mono"}, snap["origin"]["sha256"][:12]]]
+    return cells
 
 
 def visible_qvix(feed, state):
@@ -444,6 +524,9 @@ def verify(root, report):
     require(payload["run"] == manifest["run"] and payload["window"] == manifest["window"], "HTML run")
     require(payload["qvix_status"] == {f: manifest["feeds"][f] for f in QVIX_FEEDS}, "HTML QVIX status")
     require([p["code"] for p in payload["panels"]] == list(INDICES), "eight ordered panels")
+    require(parser.regions.get("summary") == visible_summary(manifest), "visible summary disclosure")
+    require(parser.regions.get("quality-table") == visible_quality_table(manifest),
+            "visible quality table disclosure")
     calendar = {r["date"] for r in data["sh000001"]}
     for panel in payload["panels"]:
         code = panel["code"]
@@ -463,12 +546,7 @@ def verify(root, report):
                     parser.disclosures.get(qid) == visible_qvix(feed, manifest["feeds"][feed]),
                     "visible QVIX disclosure")
             qstate = manifest["feeds"][feed]
-            qsnap = qstate["snapshot"]
-            clean = (bool(qsnap) and qsnap["status"] == "success" and not qstate["stale_reuse"] and
-                     qsnap["accounting"]["comparator"] is not None and
-                     not qsnap["accounting"]["comparator"]["stale_reuse"] and
-                     all(qsnap["accounting"][part][k] == 0 for _, k in _ISSUES for part in ("full", "selected")))
-            require(parser.disclosure_classes.get(qid) == ("quality ok" if clean else "quality warn"),
+            require(parser.disclosure_classes.get(qid) == ("quality ok" if _qvix_calm(qstate) else "quality warn"),
                     "visible QVIX disclosure tone")
         for trace, x, y, axis, label in traces:
             require(trace["x"] == x and trace["y"] == y, "embedded trace arrays")

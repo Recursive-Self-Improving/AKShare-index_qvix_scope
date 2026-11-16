@@ -481,13 +481,30 @@ def test_visible_per_feed_and_index_disclosure_tampering(active, tmp_path, condi
         ('<div class="status">', '<div class="status" style="display:none">'),
         ('<div class="status">', '<div class="status" class="notes">'),
         ('class="quality warn"', 'class="quality ok"'),
+        ('<div class="scroll">', '<div class="scroll" hidden>'),
+        ('<table class="grid" id="quality-table">', '<table class="grid" id="quality-table" style="display:none">'),
+        ('<div class="stats" id="summary">', '<div class="stats" id="summary" hidden>'),
+        ('<div class="stats" id="summary">', '<details><div class="stats" id="summary">'),
+        ('<td class="mono">', '<td class="mono"><span hidden>'),
+        ('<span>指数</span>', '<span>指数（已修复）</span>'),
+        ('<tbody><tr>', '<tbody><tr hidden>'),
+        ('<b>', '<b style="display:none">'),
         ('class="index-status ' + ("ok" if condition == "fresh" else "warn") + '"',
          'class="index-status ' + ("warn" if condition == "fresh" else "ok") + '"'),
         ('<body>', '<body hidden>'),
         ('<main>', '<main style="display:none">'),
     ]:
+        if old not in original:
+            assert condition == "unavailable" and "mono" in old
+            continue
         report.write_text(original.replace(old, new, 1))
         with pytest.raises(ValueError, match="disclosure"):
+            verify(root, report)
+    hashes = re.findall(r'<td class="mono">([0-9a-f]{12})</td>', original)
+    assert len(hashes) == (0 if condition == "unavailable" else 7)
+    for value in hashes[:1]:
+        report.write_text(original.replace(value, "0" * 12, 1))
+        with pytest.raises(ValueError, match="quality table disclosure"):
             verify(root, report)
 
 
