@@ -468,27 +468,24 @@ def test_visible_disclosure_removal_and_contradiction(tmp_path, condition):
             with pytest.raises(ValueError, match="visible .* disclosure"):
                 verify(root, report)
         if kind == "index":
-            content = html.unescape(match[0].split(">", 1)[1].removesuffix("</p>"))
-            disclosed = json.loads(content)
-            for key, value in (("stale_reuse", condition != "stale"),
-                               ("successful_at", "2099"), ("range", ["1900", "1901"]),
-                               ("snapshot_status", "success" if condition == "unavailable" else "unavailable")):
-                altered = disclosed | {key: value}
-                replacement = match[0].split(">", 1)[0] + ">" + html.escape(json.dumps(altered)) + "</p>"
-                report.write_text(original[:match.start()] + replacement + original[match.end():])
-                with pytest.raises(ValueError, match="visible index disclosure"):
-                    verify(root, report)
+            snap = manifest["feeds"]["sh000300"]["snapshot"]
+            swaps = [("本次尝试", "隐藏尝试"), ("发布前回溯", "隐藏回溯")]
+            if condition != "unavailable":
+                swaps += [("新鲜" if condition == "fresh" else "陈旧（沿用旧快照）", "无可用快照"),
+                          (snap["range"][0], "1900-01-01"), (snap["successful_at"][:10], "2099-01-01"),
+                          ("快照 success", "快照 partial")]
         elif condition != "unavailable":
-            for old, new in (("fresh 新鲜" if condition == "fresh" else "stale 陈旧", "unavailable"),
-                             ("快照 partial", "快照 success"), ("冲突日期 1", "冲突日期 0"),
-                             ("缺失源日期 13", "缺失源日期 0"),
-                             ("源范围", "隐藏范围"), ("选中", "隐藏选中"),
-                             (manifest["feeds"][QVIX]["snapshot"]["successful_at"], "2099")):
-                assert old in html.unescape(match[0])
-                replacement = match[0].replace(html.escape(old), html.escape(new))
-                report.write_text(original[:match.start()] + replacement + original[match.end():])
-                with pytest.raises(ValueError, match="visible QVIX disclosure"):
-                    verify(root, report)
+            swaps = [("新鲜" if condition == "fresh" else "陈旧", "unavailable"),
+                     ("快照 partial", "快照 success"), ("冲突 1", "冲突 0"), ("缺失 13", "缺失 0"),
+                     ("2015-02-09", "2016-01-01")]
+        else:
+            swaps = [("无可用快照", "快照 success")]
+        for old, new in swaps:
+            assert old in html.unescape(match[0]), old
+            replacement = match[0].replace(html.escape(old), html.escape(new), 1)
+            report.write_text(original[:match.start()] + replacement + original[match.end():])
+            with pytest.raises(ValueError, match="visible .* disclosure"):
+                verify(root, report)
 
 
 def test_fetch_narrow_window_replays_full_raw_comparator(tmp_path, monkeypatch):
