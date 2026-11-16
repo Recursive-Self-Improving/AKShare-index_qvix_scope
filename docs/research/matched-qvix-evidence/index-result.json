@@ -1,0 +1,51 @@
+{
+  "invocation": "index_zh_daily_sina(symbol=\"sz399330\")",
+  "version": "1.20.53",
+  "attempted_at": "2026-11-16T01:02:27.696108+00:00",
+  "captures": [
+    {
+      "path": "index-response-0.body",
+      "sha256": "f717c0e02f2712784c98c00a21aab40f612746e1ec3cc6d97b35d261db4ed6a6",
+      "bytes": 88645,
+      "url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+      "requested_url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+      "status": 200,
+      "encoding": null,
+      "headers": {
+        "Server": "Tengine",
+        "Content-Type": "application/x-javascript",
+        "Content-Length": "68089",
+        "Connection": "keep-alive",
+        "Date": "Mon, 16 Nov 2026 01:02:28 GMT",
+        "Expires": "Mon, 16 Nov 2026 01:04:28 GMT",
+        "Cache-Control": "max-age=120",
+        "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache1.l2so158-2[46,46,304-0,H], cache24.l2so158-2[46,0], cache24.l2so158-2[48,0], ens-cache25.l2hk11[53,53,200-0,H], ens-cache35.l2hk11[55,0], ens-cache35.l2hk11[56,0], ens-cache32.l2de4[645,650,200-0,M], ens-cache39.l2de4[652,0], ens-cache39.l2de4[652,0], ens-cache5.de10[657,656,200-0,M], ens-cache24.de10[658,0]",
+        "X-Via-CDN": "f=aliyun,s=ens-cache24.de10,c=2a0e:6a80:3:1b7::;f=sinaedge,s=ctc.guangzhou.union.53.nb.sinaedge.com,c=113.96.59.30;f=Edge,s=cnc.huanan2.union.30,c=10.33.67.53;f=edge,s=ctc.wuqing.bsd-storage.70.nb.sinaedge.com,c=10.54.255.52;",
+        "X-Via-Edge": "17947909487792dc8090a3543210a5a3e2e04",
+        "X-Via-SSL": "ssl.67.sinag1.hj4.lb.sinanode.com",
+        "Edge-Copy-Time": "1794566537530",
+        "Last-Modified": "Fri, 13 Nov 2026 10:25:24 GMT",
+        "Vary": "Accept-Encoding",
+        "ETag": "\"6af6e594-15a45\"",
+        "Content-Encoding": "gzip",
+        "Age": "0",
+        "Ali-Swift-Global-Savetime": "1794790948",
+        "X-Cache": "MISS TCP_MISS dirn:-2:-2",
+        "X-Swift-SaveTime": "Mon, 16 Nov 2026 01:02:28 GMT",
+        "X-Swift-CacheTime": "120",
+        "Timing-Allow-Origin": "*",
+        "EagleId": "a3b5feac17947909482353317e"
+      },
+      "retrieved_at": "2026-11-16T01:02:29.123385+00:00",
+      "http_decompressed": true
+    }
+  ],
+  "status": "success",
+  "rows": 5053,
+  "range": [
+    "2006-01-24",
+    "2026-11-13"
+  ],
+  "wrapper_sha256": "cc797110c2effcbf1eb2b27cb1cff8659b6d9435e6d640d0863c877f11fa80ca",
+  "finished_at": "2026-11-16T01:02:29.249341+00:00"
+}
