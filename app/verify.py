@@ -33,6 +33,7 @@ class Embedded(HTMLParser):
         self.disclosure = None
         self.section = None
         self.disclosure_sections = {}
+        self.disclosure_classes = {}
         self.ancestors = []
 
     def handle_starttag(self, tag, attrs):
@@ -47,17 +48,19 @@ class Embedded(HTMLParser):
         if tag == "p" and attrs.get("id", "").startswith(("index-status-", "qvix-status-")):
             self.disclosure = attrs["id"]
             require(self.disclosure not in self.disclosures, "duplicate visible disclosure")
-            require(not any(k in attrs for k in ("hidden", "style")) and
-                    attrs.get("class", "") in ("index-status", "quality"), "hidden disclosure")
+            classes = ("index-status ok", "index-status warn") if self.disclosure.startswith("index-") else ("quality ok", "quality warn")
+            require(not any(k in attrs for k in ("hidden", "style")) and attrs.get("class", "") in classes,
+                    "hidden disclosure")
+            self.disclosure_classes[self.disclosure] = attrs["class"]
             # Accept only the renderer's visible path, not arbitrary HTML containers
             # (details, template, extra wrappers/classes or inline CSS can hide text).
             require([t for t, _ in self.ancestors] ==
-                    ["html", "body", "main", "section", "div", "div", "p"],
+                    ["html", "body", "main", "section", "div", "p"],
                     "disallowed disclosure containers")
-            allowed = ({"lang"}, set(), set(), {"class", "id"}, {"class"}, set(), {"class", "id"})
+            allowed = ({"lang"}, set(), set(), {"class", "id"}, {"class"}, {"class", "id"})
             require(all(set(a) <= keys for (_, a), keys in zip(self.ancestors, allowed, strict=True)) and
-                    self.ancestors[3][1].get("class") == "card" and
-                    self.ancestors[4][1].get("class") == "panel-head",
+                    self.ancestors[3][1].get("class") == "panel" and
+                    self.ancestors[4][1].get("class") == "status",
                     "hidden/style-bearing disclosure containers")
             self.disclosures[self.disclosure] = ""
             self.disclosure_sections[self.disclosure] = self.section
@@ -95,47 +98,71 @@ class Embedded(HTMLParser):
                 self.disclosures[self.disclosure] += value
 
 
+_WORD = {"success": "成功", "partial": "部分成功", "failure": "失败"}
+
+
 def _utc(value):
-    return value[:19].replace("T", " ") + " UTC" if value else "未知"
+    return value[:16].replace("T", " ") + " UTC" if value else "未知"
 
 
 def _span(pair):
     return f"{pair[0]} → {pair[1]}" if pair else "范围未知"
 
 
+def _stale(status, when):
+    return f"陈旧：本次获取{_WORD.get(status, status)}，沿用 {_utc(when)} 快照"
+
+
 def visible_index(s):
-    """Independently expected compact index disclosure."""
+    """Independently expected compact index disclosure (deviations only)."""
     if s["snapshot_status"] == "unavailable":
-        text = f"无可用快照 · 本次尝试 {s['attempt']} @ {_utc(s['attempted_at'])} · 范围未知"
+        out = [f"无可用快照（本次获取{_WORD.get(s['attempt'], s['attempt'])} @ {_utc(s['attempted_at'])}）"]
     else:
-        text = (f"快照 {s['snapshot_status']} · {'陈旧（沿用旧快照）' if s['stale_reuse'] else '新鲜'} @ "
-                f"{_utc(s['successful_at'])} · 本次尝试 {s['attempt']} · {_span(s['range'])} · "
-                f"{s['rows']} 行 · 相对上证缺口 {len(s['relative_gaps'])} 日")
-    text += f" · 发布前回溯 {'未知' if s['retrospective_rows'] is None else s['retrospective_rows']} 行"
-    return text + (" · 上证日历陈旧" if s["calendar_stale"] else "")
+        out = [f"新浪收盘 {_span(s['range'])}", f"{s['rows']} 行"]
+        if s["snapshot_status"] != "success":
+            out.append("快照" + _WORD.get(s["snapshot_status"], s["snapshot_status"]))
+        if s["stale_reuse"]:
+            out.append(_stale(s["attempt"], s["successful_at"]))
+        if len(s["relative_gaps"]) > 0:
+            out.append(f"较上证缺 {len(s['relative_gaps'])} 日")
+    retro = s["retrospective_rows"]
+    out += ["发布前回溯行数未知"] if retro is None else [f"发布前回溯 {retro} 行"] if retro != 0 else []
+    out += ["上证日历陈旧"] if s["calendar_stale"] else []
+    return " · ".join(out)
+
+
+_ISSUES = (("缺口", "holes"), ("冲突", "conflict"), ("无效字段", "invalid_fields"),
+           ("零值行", "zero_rows"), ("源外", "source_only"), ("包络异常", "envelope_rows"),
+           ("内部空白", "blank_internal"), ("尾部空白", "blank_tail"))
 
 
 def visible_qvix(feed, state):
     """Independent expected visible feed-local material disclosures."""
     snap = state["snapshot"]
-    text = f"{QVIX_FEEDS[feed]['label']} · 本次尝试 {state['attempt']['status']} @ {_utc(state['attempt']['attempted_at'])} · "
+    name = QVIX_FEEDS[feed]["label"].removesuffix(" 收盘（%）")
     if snap is None:
-        return text + "无可用快照，范围未知"
+        a = state["attempt"]
+        return f"{name} · 无可用快照（本次获取{_WORD.get(a['status'], a['status'])} @ {_utc(a['attempted_at'])}）"
     q = snap["accounting"]
     c, full, comp = q["selected"], q["full"], q["comparator"]
-    source = (f"{comp['feed']} {comp['raw_sha256'][:12]} @ {_utc(comp['successful_at'])}"
-              f"（{'陈旧' if comp['stale_reuse'] else '新鲜'}）" if comp else "未知")
-    def number(v):
-        return "未知" if v is None else str(v)
-    return (text + f"快照 {snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'} @ "
-            f"{_utc(snap['successful_at'])} · 身份 {snap['origin']['sha256'][:12]} · "
-            f"全源 {_span(full['range'])} / 收盘 {_span(full['close_range'])} · "
-            f"选中 {_span(c['range'])} / 收盘 {_span(c['close_range'])} · "
-            f"全量/选中 缺口 {number(full['holes'])}/{number(c['holes'])} · "
-            f"冲突 {full['conflict']}/{c['conflict']} · 无效字段 {full['invalid_fields']}/{c['invalid_fields']} · "
-            f"零值行 {full['zero_rows']}/{c['zero_rows']} · 源外 {number(full['source_only'])}/{number(c['source_only'])} · "
-            f"包络异常 {full['envelope_rows']}/{c['envelope_rows']} · "
-            f"空白内部/尾部 {full['blank_internal']}/{full['blank_tail']} · 比较日历 {source}")
+    flagged = [k for _, k in _ISSUES if full[k] is None or full[k] != 0 or c[k] != 0]
+    out = [name, "有质量异常" if snap["status"] != "success" else "需留意" if flagged else "无质量异常"]
+    out += [] if full["range"] == full["close_range"] else ["源 " + _span(full["range"])]
+    out.append("收盘 " + _span(full["close_range"]))
+    if c["range"] != full["range"] or c["close_range"] != full["close_range"]:
+        out.append("窗口内收盘 " + _span(c["close_range"]))
+    if state["stale_reuse"]:
+        out.append(_stale(state["attempt"]["status"], snap["successful_at"]))
+    for label, key in _ISSUES:
+        if full[key] is None:
+            out.append(label + " 未知")
+        elif full[key] != 0 or c[key] != 0:
+            out.append(f"{label} {full[key]}" + ("" if c[key] == full[key] else f"（窗口内 {c[key]}）"))
+    if comp is None:
+        out.append("比较日历未知")
+    elif comp["stale_reuse"]:
+        out.append(f"比较日历 {comp['feed']} 陈旧")
+    return " · ".join(out)
 
 
 def independent_qvix(body, wrapper, window, calendar, comparator, feed):
@@ -435,6 +462,14 @@ def verify(root, report):
             require(parser.disclosure_sections.get(qid) == "panel-section-" + code and
                     parser.disclosures.get(qid) == visible_qvix(feed, manifest["feeds"][feed]),
                     "visible QVIX disclosure")
+            qstate = manifest["feeds"][feed]
+            qsnap = qstate["snapshot"]
+            clean = (bool(qsnap) and qsnap["status"] == "success" and not qstate["stale_reuse"] and
+                     qsnap["accounting"]["comparator"] is not None and
+                     not qsnap["accounting"]["comparator"]["stale_reuse"] and
+                     all(qsnap["accounting"][part][k] == 0 for _, k in _ISSUES for part in ("full", "selected")))
+            require(parser.disclosure_classes.get(qid) == ("quality ok" if clean else "quality warn"),
+                    "visible QVIX disclosure tone")
         for trace, x, y, axis, label in traces:
             require(trace["x"] == x and trace["y"] == y, "embedded trace arrays")
             require(trace["connectgaps"] is False and trace["yaxis"] == axis and trace["name"] == label,
@@ -456,6 +491,11 @@ def verify(root, report):
         disclosure_id = "index-status-" + code
         require(parser.disclosure_sections.get(disclosure_id) == "panel-section-" + code and
                 parser.disclosures.get(disclosure_id) == visible_index(expected), "visible index disclosure")
+        calm = (expected["snapshot_status"] == "success" and not expected["stale_reuse"] and
+                not expected["calendar_stale"] and not expected["relative_gaps"] and
+                expected["retrospective_rows"] is not None)
+        require(parser.disclosure_classes.get(disclosure_id) == ("index-status ok" if calm else "index-status warn"),
+                "visible index disclosure tone")
         print(code, len(data[code]), expected["range"], state["attempt"]["status"])
     print("Offline verification passed: eight panels, seven raw/wrapper/artifact/quality replays")
 
