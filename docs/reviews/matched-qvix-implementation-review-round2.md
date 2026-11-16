@@ -1,0 +1,57 @@
+# Matched-QVIX independent implementation review — round 2
+
+## Disposition: PASS — whole-change code/data review
+
+Reviewed baseline `a18afebada` plus the complete uncommitted v4 implementation and corrections against active AC13–16, the approved `docs/research/matched-qvix-plan.md` including F1–F3, its round-two approval, original implementation evidence, round-one M-R1/M-R2 and retained reproduction, and corrective evidence. This is an original-whole-scope review, not just a timestamp/HTML patch review.
+
+**M-R1 and M-R2 are closed. No new or reopened Fix, Replan or Ask finding; no Discard or accepted-risk waiver.** Source partial quality is intentional evidence, not clean quality or a code finding. F-B1 is statically consistent with its requested correction; its browser closure belongs to the separate final browser reviewer. This PASS does not close that surface obligation or the orchestrator's final project gates.
+
+Final report reviewed: SHA-256 **`84d5570f1551e6e193310fec3e769ad356fa95187e9e3ec8ce725bf112da5d58`**.
+
+## Original findings
+
+### M-R1 — closed: mandatory original completion timestamps
+
+- `app/verify.py:295–303,306–350` now validates the immutable origin's attempted/successful/finished times before accepting snapshot identity. It requires valid full ISO timestamps through seconds with UTC `Z` or `+00:00`; malformed, impossible-date, missing, null, empty and timezone-less values cannot pass. Native QVIX additionally requires original member/shared acquisition and raw retrieval times, with shared/member/transport equality retained. Index origins pass through the same required completion-time boundary.
+- Independently ran all **40 native immutable-result cases**, with and without prior snapshots: four required member times × five invalid/missing forms × two prior states. These mutate the actual disposable `result.json` and obtain its new origin hash, not merely mutate the manifest against an unchanged origin. Direct promotion rejects before changing `latest.json`; recovery fails only the attacked feed while siblings stay fresh; own prior survives only as stale, otherwise the feed is unavailable. Recovered promotion, actual chart build and independent HTML/raw replay pass; plotted prior prices or empty arrays match the state.
+- Four shared-origin cases remove/corrupt shared acquisition or raw retrieval times and rebind members to the changed shared hash. Recovery rejects all affected members. These checks exercise the underlying original shared evidence, not only hash mismatch.
+- Derived-v3 migration remains explicit and preserves original attempt/success/finish times, raw/transport and wrapper identity separately from derivation time. Actual derived-manifest validation passed; three mutations of the derived immutable result to otherwise usable replacement completion times were rejected against original v3 lineage.
+- `recover_group` converts validator exceptions into feed-local failed attempts; `state_after` retains only that member's prior whole snapshot; `promote` validates before pointer replacement. The original incomplete-origin acceptance/chart-availability defect is corrected without a fetch-layer workaround.
+
+### M-R2 — closed: disclosure ancestor/context validation
+
+- `app/verify.py:24–95` tracks non-void ancestors and matching closures, requires the existing `html/body/main/section/div/div/p` disclosure path and restrictive attributes/classes, and rejects hidden/style-bearing ancestors, extra/disallowed wrappers and nested disclosure elements.
+- Exact independently reconstructed per-feed/per-index text and panel-section identity checks remain at `app/verify.py:431–458`; JSON is not accepted as a substitute for visible warnings.
+- Independently ran fresh/stale/unavailable disclosure tampering regressions: removal, contradictory text, direct hidden/style attributes, hidden/styled ancestor wrappers, `details`, `template`, hidden nested content, hidden/styled panel-head and body/main context. Rejection coexists with successful verification of ordinary generated reports and the actual final report.
+
+## Original whole-scope coverage
+
+- **Eight indices / seven requested feeds:** inspected registry order, exact callable/positional columns, deterministic comparators and mappings in `core`, acquisition, rendering and independent replay. Actual final report verifies ordered trace counts 3/3/2/3/2/2/2/2, left index/right QVIX identity and explicit null gaps. Shared feeds have common source arrays, not panel-dependent calendar recalculation. 深证100 is `sz399330`, base 2002-12-31, release 2006-01-24, with retained compiler evidence; 399004/family-anniversary dates are not substituted.
+- **Actual retained acquisition:** independently replayed the delivered report and immutable chains for all eight index histories and seven QVIX raw/wrapper/CSV/quality artifacts. Index selected counts are **6509/5552/5053/6030/3995/3017/1663/1663**, each ending 2026-11-13. No endpoint was called. The recorded real production fetch remains eight index successes/seven fresh QVIX partials, exit 1, not a newly claimed fetch or clean-source success.
+- **Provenance and calendars:** inspected origin/member/shared-body/transport/config/invocation bindings, original timestamps, fixed comparator identity/hash and stale-at-binding state. Full retained Sina raw history supplies QVIX calendars independently of selected CSVs. Narrow-window regression preserves a hole even with no source row in the selection. Later index state does not replace the old QVIX snapshot's bound comparator.
+- **F1/F2 normalization:** inspected both production and independent raw interpretations, strict full-response structure/date/nonfinite validation, invalid-token spelling/field/ordinal retention, blank versus invalid identity, full-OHLC conflict nulling including equal-close/different-open, duplicate notices and zero preservation. Ran exact F2 trace/set oracle, disjoint hole partition, overlapping quality counts, blank collision ordinals, source-only/error-tail nulls, empty selection and absent/stale comparator cases. Nonblank-source, usable-close and common bounds remain distinct; selected sets filter full sets rather than recomputing their bounds.
+- **Fresh/no-close/fatal transitions:** deterministic regressions cover all-blank, all-error and all-conflict fresh evidence with/without prior, plus durable no-close artifacts through promotion/chart/replay. A separate native five-refresh probe exercised **all seven feeds** with genuine bound retained comparator histories: clean → partial → shared fatal/own-prior stale → fresh blank/no-close replacement → corrected clean. Each stage used actual pinned wrappers against injected HTTP bytes, exactly one HTTP shim call, immutable member recovery and actual promotion/chart/independent replay. All stages passed; blank traces became `[null]` instead of retaining prior prices; corrected traces became `[2.0]`. Temporary copies were removed automatically.
+- **F3 durability/failure:** inspected fsync and atomic completion ordering before the next wrapper, loader boundary tracking, global versus member-local failure isolation and 45-second subprocess bounds. Ran shared-loader once/not-invoked, wrapper-local-before-loader continuation, global width/date/status rejection, member nonfinite isolation, completed-sibling termination survival, timeout evidence, incomplete/substituted completion, artifact corruption and interrupted member-commit tests. Completed siblings stay fresh; unfinished/invalid feeds cannot borrow sibling snapshots. Atomic promotion/rename failure preserves the previous pointer.
+- **Clean migration / compact evidence:** active v3 rejection is explicit; no runtime single-feed compatibility pipeline was found. Actual derived-v4 validation preserves historical source identity/times and leaves new feeds unavailable rather than inventing priors. Candidate/date-set evidence stays in sidecars, shared body/transport once, compact current state and hashed previous-manifest references. README describes runnable locked commands, partial/nonzero and failure behavior, proxy limitations, unknown contracts/methodology/timing, retrospective history, HTTP authenticity and redistribution limits without claiming economic certification.
+
+## F-B1: static inspection only
+
+Read the original browser finding. Current source and actual final payload left-anchor every panel's horizontal legend (`x=0`, `xanchor=left`, `y=1.17`, bottom anchor). A source AST comparison against `9cb3397` confirmed **identical CSS and identical non-legend panel layout dictionaries**, including geometry, axes, range selector and slider configuration. Existing Plotly modebar, scrolling zoom, reset and navigation remain in source. This is not proof of rendered non-overlap or ordinary text-center clicks; the separate browser review must establish those on the final report hash, including all 19 legend labels.
+
+## Verification actually run
+
+1. `sha256sum -c docs/matched-qvix-pre-edit.sha256`: exit 0, **213 OK** entries. Inventory SHA-256 `43b51cde41546bf404599266064b5e8a250715ce8f9f55878f9f79c0f3b720c7`.
+2. Data-only entries from the corrective pre-edit `/tmp/matched-qvix-fix-production.sha256`, checked with `sha256sum -c -`: exit 0, **152 OK** entries, including active data and native/derived artifacts. Check outputs retained during this review at `/tmp/matched-qvix-review-round2-{historical,production}-check.txt`.
+3. `.venv/bin/python -m app.verify --input data --report report.html`: exit 0; eight panels and seven raw/wrapper/artifact/quality replays passed. Root report was read only.
+4. Focused existing regression selection:
+
+```sh
+.venv/bin/python -m pytest -q tests/test_contracts.py -k 'native_completion_times or native_shared_original_times or derived_completion_cannot or visible_per_feed or f2_exact or fresh_no_close or full_history or hole_partition or invalid_nonclose or duplicates_full or shared_loader or wrapper_local or completed_sibling or global_failure or member_nonfinite or recovery_rejects or mandatory_provenance or stale_comparator or durable_no_close or member_commit or explicit_derived or fetch_narrow or durable_artifact or fetch_sequential or atomic_validation'
+```
+
+Observed **92 passed, 16 deselected**, exit 0, 219.85 seconds; two upstream mini-racer deprecation warnings. This is not a claim to have rerun the full 108-test project gate.
+
+5. Inline offline native five-refresh and static-layout probe: exit 0, 31.63 seconds. Injected HTTP response bytes, blocked `Session.request`, temporary data/report copies only. Each refresh promoted, built and independently verified a real eight-panel report; all seven clean/partial/fatal-stale/blank/corrected state and array assertions passed. CSS/nonlegend-layout and final eight legend-anchor assertions passed. No persistent probe script or generated data retained.
+6. LSP references for `validate_snapshot` were attempted; server returned `Unknown request: textDocument/references`. Direct source inspection continued; no refactor was performed.
+
+Only this new review document was written as a repository deliverable. No endpoint calls, browser/Electron/emulator launch, production/data/root-report/ledger edits, historical evidence edits, commit or subdelegation. **Whole-change static/data review converged: PASS.** Browser acceptance and final union gates remain separately owned obligations, not waived findings.

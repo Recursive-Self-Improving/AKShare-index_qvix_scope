@@ -1,0 +1,18 @@
+missing_times_recovery: partial {'attempted_at': True, 'successful_at': False, 'finished_at': False}
+missing_times_promotion: ACCEPTED
+missing_times_chart: KeyError 'successful_at'
+sh000001 6509 ['2000-01-04', '2026-11-13'] success
+sh000016 5552 ['2004-01-02', '2026-11-13'] success
+sz399330 5053 ['2006-01-24', '2026-11-13'] success
+sh000300 6030 ['2002-01-04', '2026-11-13'] success
+sz399006 3995 ['2010-06-01', '2026-11-13'] success
+sz399673 3017 ['2014-06-18', '2026-11-13'] success
+sh000680 1663 ['2020-01-02', '2026-11-13'] success
+sh000688 1663 ['2020-01-02', '2026-11-13'] success
+Offline verification passed: eight panels, seven raw/wrapper/artifact/quality replays
+hidden_ancestor_verification: ACCEPTED
+native_transition: populated {'qvix_50index': ('partial', False), 'qvix_50etf': ('partial', False), 'qvix_100etf': ('partial', False), 'qvix_300index': ('partial', False), 'qvix_300etf': ('partial', False), 'qvix_cyb': ('partial', False), 'qvix_kcb': ('partial', False)}
+native_transition: failed {'qvix_50index': ('failure', True), 'qvix_50etf': ('failure', True), 'qvix_100etf': ('failure', True), 'qvix_300index': ('failure', True), 'qvix_300etf': ('failure', True), 'qvix_cyb': ('failure', True), 'qvix_kcb': ('failure', True)}
+native_transition: blank {'qvix_50index': ('partial', False), 'qvix_50etf': ('partial', False), 'qvix_100etf': ('partial', False), 'qvix_300index': ('partial', False), 'qvix_300etf': ('partial', False), 'qvix_cyb': ('partial', False), 'qvix_kcb': ('partial', False)}
+native_transition: corrected {'qvix_50index': ('partial', False), 'qvix_50etf': ('partial', False), 'qvix_100etf': ('partial', False), 'qvix_300index': ('partial', False), 'qvix_300etf': ('partial', False), 'qvix_cyb': ('partial', False), 'qvix_kcb': ('partial', False)}
+probe_complete

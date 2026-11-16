@@ -1,0 +1,27 @@
+Scope: independent read-only acceptance of root report.html, expected SHA256 84d5570f1551e6e193310fec3e769ad356fa95187e9e3ec8ce725bf112da5d58. Only round2 review/evidence paths written; scratch automation /tmp/sentiment-browser-round2. No production/data/report/ledger edits, commits, endpoint calls or delegates.
+
+Prerequisite reads: round1 complete review/harness, retained commands-errors, final observations/output/exit/disposition, original failed-attempt outputs and overlap geometry; fix-evidence-round1; active AC13-16/P-M1-3/D13-17 and approved plan/round2 review.
+
+Before launch corrections (not product changes):
+- Removed round1 exposed-line-sample point-scanning workaround entirely. Each click uses the exact geometric center of SVG .legendtext, with actual mouse move/click; verifies elementFromPoint belongs to that legend entry while modebar groups are visible.
+- Added actual DOM .legendtext and .legendtoggle versus .modebar-group intersection assertions in light and dark, all eight panels, with computed modebar-group opacity and visibility.
+- Retained 1000ms between legend clicks to avoid double-click isolation and retained SVG textContent (not unsupported innerText).
+- Added all19 completion, explicit different coverage, visible index/399330 identity and navigation range-independence checks. No failed acceptance assertion removed or waived.
+- One edit-tool insertion-anchor request was rejected before any edit; read exact anchors and applied corrected scratch patch. No browser launched by that tool error.
+
+Execution (functions.bash async:true timeout:0, no outer timeout):
+set -o pipefail
+{ free -m; ~/.omp/bin/heavy-gate --status; } | tee docs/reviews/matched-qvix-browser-evidence-round2/resource-before.txt
+sha256sum report.html > docs/reviews/matched-qvix-browser-evidence-round2/report.sha256
+cp /tmp/sentiment-browser-round2/matched-review.cjs docs/reviews/matched-qvix-browser-evidence-round2/harness-source.txt
+sha256sum /tmp/sentiment-browser-round2/matched-review.cjs > docs/reviews/matched-qvix-browser-evidence-round2/scratch.sha256
+~/.omp/bin/heavy-gate -n 1 -m 6G -- bash -c 'node --check /tmp/sentiment-browser-round2/matched-review.cjs && node /tmp/sentiment-browser-round2/matched-review.cjs' 2>&1 | tee docs/reviews/matched-qvix-browser-evidence-round2/harness-output.txt
+code=${PIPESTATUS[0]}; printf '%s\n' "$code" > docs/reviews/matched-qvix-browser-evidence-round2/harness-exit.txt
+{ free -m; ~/.omp/bin/heavy-gate --status; } > docs/reviews/matched-qvix-browser-evidence-round2/resource-after.txt
+exit "$code"
+
+One requested slot, 6G scoped memory cap, one browser/context/reused page, offline file:// report with external request abort routing and blocked service workers. Finally closes owned browser. Source retained as non-executable harness-source.txt; runnable automation remains outside repo. Preliminary resource inspection found one unrelated holder; both slots were free immediately before this launch and afterward. No unrelated process was terminated.
+
+Observed complete execution: exit0, status PASS, failures=[], eight panels, all19 label center hide/restore pairs, 16 light/dark hover geometry measurements with zero intersections, three real main-trace gap views, exact labelled zero hover. Two report-file requests, no external requests/blocked dependencies/console messages/page errors. One launch total; 104.00 seconds shell wall time. resource-before.txt: free -m available6732MiB, gate6726MiB; resource-after.txt: free -m available7013MiB, gate7019MiB; no swap.
+
+Post-run evidence extraction only (no second launch): jq retained complete observations into legend-center-and-modebar.json, and inspected all16 panel screenshots plus header, source-detail, reading-note, three gap views and zero view. PASS is based on both complete material assertions and visual inspection, not only the harness status string.

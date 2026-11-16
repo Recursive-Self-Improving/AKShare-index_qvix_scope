@@ -1,0 +1,2553 @@
+{
+  "status": "PASS",
+  "failures": [],
+  "report_sha256": "84d5570f1551e6e193310fec3e769ad356fa95187e9e3ec8ce725bf112da5d58",
+  "baseline_css_equal": true,
+  "panels": [
+    {
+      "i": 0,
+      "code": "sh000001",
+      "traces": [
+        {
+          "feed": "qvix_50index",
+          "name": "50股指 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 939,
+          "nulls": 186,
+          "zeros": [
+            "2025-09-17",
+            "2025-09-24",
+            "2025-09-25",
+            "2025-09-26",
+            "2025-10-20",
+            "2025-10-27",
+            "2026-02-02",
+            "2026-04-29",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-21",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-15",
+            "2026-10-16",
+            "2026-10-19",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30",
+            "2026-11-06",
+            "2026-11-09",
+            "2026-11-10",
+            "2026-11-11",
+            "2026-11-12",
+            "2026-11-13"
+          ]
+        },
+        {
+          "feed": "qvix_50etf",
+          "name": "50ETF QVIX 收盘（%）",
+          "color": "#9b51b0",
+          "dash": "dash",
+          "rows": 2861,
+          "nulls": 14,
+          "zeros": []
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "上证指数 收盘",
+            "box": {
+              "x": 273,
+              "y": 262.1781311035156,
+              "right": 348.34375,
+              "bottom": 276.1781311035156,
+              "width": 75.34375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 258.9981384277344,
+              "right": 350.84375,
+              "bottom": 277.99810791015625,
+              "width": 117.84375,
+              "height": 18.999969482421875
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "50股指 QVIX 收盘（%）",
+            "box": {
+              "x": 393.34375,
+              "y": 262.1781311035156,
+              "right": 524.71875,
+              "bottom": 276.1781311035156,
+              "width": 131.375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 353.34375,
+              "y": 258.9981384277344,
+              "right": 527.21875,
+              "bottom": 277.99810791015625,
+              "width": 173.875,
+              "height": 18.999969482421875
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "50ETF QVIX 收盘（%）",
+            "box": {
+              "x": 569.71875,
+              "y": 262.1781311035156,
+              "right": 699.75,
+              "bottom": 276.1781311035156,
+              "width": 130.03125,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 529.71875,
+              "y": 258.9981384277344,
+              "right": 702.25,
+              "bottom": 277.99810791015625,
+              "width": 172.53125,
+              "height": 18.999969482421875
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 243.578125,
+              "right": 1109,
+              "bottom": 268.96875,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 243.578125,
+              "right": 1165,
+              "bottom": 268.96875,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 243.578125,
+              "right": 1269,
+              "bottom": 268.96875,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 310.671875,
+            "y": 269.1781311035156
+          },
+          "hit": {
+            "label": "上证指数 收盘",
+            "rect": {
+              "x": 273,
+              "y": 262.1781311035156,
+              "width": 75.34375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true,
+            true
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 459.03125,
+            "y": 269.1781311035156
+          },
+          "hit": {
+            "label": "50股指 QVIX 收盘（%）",
+            "rect": {
+              "x": 393.34375,
+              "y": 262.1781311035156,
+              "width": 131.375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 2,
+          "center": {
+            "x": 634.734375,
+            "y": 269.1781311035156
+          },
+          "hit": {
+            "label": "50ETF QVIX 收盘（%）",
+            "rect": {
+              "x": 569.71875,
+              "y": 262.1781311035156,
+              "width": 130.03125,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 1,
+      "code": "sh000016",
+      "traces": [
+        {
+          "feed": "qvix_50index",
+          "name": "50股指 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 939,
+          "nulls": 186,
+          "zeros": [
+            "2025-09-17",
+            "2025-09-24",
+            "2025-09-25",
+            "2025-09-26",
+            "2025-10-20",
+            "2025-10-27",
+            "2026-02-02",
+            "2026-04-29",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-21",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-15",
+            "2026-10-16",
+            "2026-10-19",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30",
+            "2026-11-06",
+            "2026-11-09",
+            "2026-11-10",
+            "2026-11-11",
+            "2026-11-12",
+            "2026-11-13"
+          ]
+        },
+        {
+          "feed": "qvix_50etf",
+          "name": "50ETF QVIX 收盘（%）",
+          "color": "#9b51b0",
+          "dash": "dash",
+          "rows": 2861,
+          "nulls": 14,
+          "zeros": []
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "上证50 收盘",
+            "box": {
+              "x": 273,
+              "y": 261.9750061035156,
+              "right": 337.6875,
+              "bottom": 275.9750061035156,
+              "width": 64.6875,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 258.7950134277344,
+              "right": 340.1875,
+              "bottom": 277.79498291015625,
+              "width": 107.1875,
+              "height": 18.999969482421875
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "50股指 QVIX 收盘（%）",
+            "box": {
+              "x": 382.6875,
+              "y": 261.9750061035156,
+              "right": 514.0625,
+              "bottom": 275.9750061035156,
+              "width": 131.375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 342.6875,
+              "y": 258.7950134277344,
+              "right": 516.5625,
+              "bottom": 277.79498291015625,
+              "width": 173.875,
+              "height": 18.999969482421875
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "50ETF QVIX 收盘（%）",
+            "box": {
+              "x": 559.0625,
+              "y": 261.9750061035156,
+              "right": 689.09375,
+              "bottom": 275.9750061035156,
+              "width": 130.03125,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 519.0625,
+              "y": 258.7950134277344,
+              "right": 691.59375,
+              "bottom": 277.79498291015625,
+              "width": 172.53125,
+              "height": 18.999969482421875
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 243.375,
+              "right": 1109,
+              "bottom": 268.765625,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 243.375,
+              "right": 1165,
+              "bottom": 268.765625,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 243.375,
+              "right": 1269,
+              "bottom": 268.765625,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 305.34375,
+            "y": 268.9750061035156
+          },
+          "hit": {
+            "label": "上证50 收盘",
+            "rect": {
+              "x": 273,
+              "y": 261.9750061035156,
+              "width": 64.6875,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true,
+            true
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 448.375,
+            "y": 268.9750061035156
+          },
+          "hit": {
+            "label": "50股指 QVIX 收盘（%）",
+            "rect": {
+              "x": 382.6875,
+              "y": 261.9750061035156,
+              "width": 131.375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 2,
+          "center": {
+            "x": 624.078125,
+            "y": 268.9750061035156
+          },
+          "hit": {
+            "label": "50ETF QVIX 收盘（%）",
+            "rect": {
+              "x": 559.0625,
+              "y": 261.9750061035156,
+              "width": 130.03125,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 2,
+      "code": "sz399330",
+      "traces": [
+        {
+          "feed": "qvix_100etf",
+          "name": "深证100ETF QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 954,
+          "nulls": 14,
+          "zeros": []
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "深证100 收盘",
+            "box": {
+              "x": 273,
+              "y": 198.77188110351562,
+              "right": 344.359375,
+              "bottom": 212.77188110351562,
+              "width": 71.359375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 195.5918731689453,
+              "right": 346.859375,
+              "bottom": 214.5918731689453,
+              "width": 113.859375,
+              "height": 19
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "深证100ETF QVIX 收盘（%）",
+            "box": {
+              "x": 389.359375,
+              "y": 198.77188110351562,
+              "right": 550.0625,
+              "bottom": 212.77188110351562,
+              "width": 160.703125,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 349.359375,
+              "y": 195.5918731689453,
+              "right": 552.5625,
+              "bottom": 214.5918731689453,
+              "width": 203.203125,
+              "height": 19
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 180.171875,
+              "right": 1109,
+              "bottom": 205.5625,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 180.171875,
+              "right": 1165,
+              "bottom": 205.5625,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 180.171875,
+              "right": 1269,
+              "bottom": 205.5625,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 308.6796875,
+            "y": 205.77188110351562
+          },
+          "hit": {
+            "label": "深证100 收盘",
+            "rect": {
+              "x": 273,
+              "y": 198.77188110351562,
+              "width": 71.359375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 469.7109375,
+            "y": 205.77188110351562
+          },
+          "hit": {
+            "label": "深证100ETF QVIX 收盘（%）",
+            "rect": {
+              "x": 389.359375,
+              "y": 198.77188110351562,
+              "width": 160.703125,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 3,
+      "code": "sh000300",
+      "traces": [
+        {
+          "feed": "qvix_300index",
+          "name": "300股指 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 1674,
+          "nulls": 192,
+          "zeros": [
+            "2024-06-17",
+            "2025-02-11",
+            "2025-03-20",
+            "2025-04-24",
+            "2025-04-28",
+            "2025-09-17",
+            "2025-09-24",
+            "2025-10-13",
+            "2025-10-17",
+            "2025-10-20",
+            "2025-10-30",
+            "2025-11-06",
+            "2025-12-02",
+            "2025-12-03",
+            "2026-02-02",
+            "2026-04-21",
+            "2026-04-29",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-21",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-15",
+            "2026-10-16",
+            "2026-10-19",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30",
+            "2026-11-06",
+            "2026-11-09",
+            "2026-11-10",
+            "2026-11-11",
+            "2026-11-12",
+            "2026-11-13"
+          ]
+        },
+        {
+          "feed": "qvix_300etf",
+          "name": "300ETF QVIX 收盘（%）",
+          "color": "#9b51b0",
+          "dash": "dash",
+          "rows": 1674,
+          "nulls": 15,
+          "zeros": []
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "沪深300 收盘",
+            "box": {
+              "x": 272,
+              "y": 262.5687561035156,
+              "right": 344.359375,
+              "bottom": 276.5687561035156,
+              "width": 72.359375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 259.3887634277344,
+              "right": 347.859375,
+              "bottom": 278.38873291015625,
+              "width": 114.859375,
+              "height": 18.999969482421875
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "300股指 QVIX 收盘（%）",
+            "box": {
+              "x": 390.359375,
+              "y": 262.5687561035156,
+              "right": 528.40625,
+              "bottom": 276.5687561035156,
+              "width": 138.046875,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 350.359375,
+              "y": 259.3887634277344,
+              "right": 530.90625,
+              "bottom": 278.38873291015625,
+              "width": 180.546875,
+              "height": 18.999969482421875
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "300ETF QVIX 收盘（%）",
+            "box": {
+              "x": 573.40625,
+              "y": 262.5687561035156,
+              "right": 710.109375,
+              "bottom": 276.5687561035156,
+              "width": 136.703125,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 533.40625,
+              "y": 259.3887634277344,
+              "right": 712.609375,
+              "bottom": 278.38873291015625,
+              "width": 179.203125,
+              "height": 18.999969482421875
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 243.96875,
+              "right": 1109,
+              "bottom": 269.359375,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 243.96875,
+              "right": 1165,
+              "bottom": 269.359375,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 243.96875,
+              "right": 1269,
+              "bottom": 269.359375,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 308.1796875,
+            "y": 269.5687561035156
+          },
+          "hit": {
+            "label": "沪深300 收盘",
+            "rect": {
+              "x": 272,
+              "y": 262.5687561035156,
+              "width": 72.359375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true,
+            true
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 459.3828125,
+            "y": 269.5687561035156
+          },
+          "hit": {
+            "label": "300股指 QVIX 收盘（%）",
+            "rect": {
+              "x": 390.359375,
+              "y": 262.5687561035156,
+              "width": 138.046875,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 2,
+          "center": {
+            "x": 641.7578125,
+            "y": 269.5687561035156
+          },
+          "hit": {
+            "label": "300ETF QVIX 收盘（%）",
+            "rect": {
+              "x": 573.40625,
+              "y": 262.5687561035156,
+              "width": 136.703125,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 4,
+      "code": "sz399006",
+      "traces": [
+        {
+          "feed": "qvix_cyb",
+          "name": "创业板 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 1009,
+          "nulls": 14,
+          "zeros": []
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "创业板指 收盘",
+            "box": {
+              "x": 272,
+              "y": 198.36563110351562,
+              "right": 348.34375,
+              "bottom": 212.36563110351562,
+              "width": 76.34375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 195.1856231689453,
+              "right": 351.84375,
+              "bottom": 214.1856231689453,
+              "width": 118.84375,
+              "height": 19
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "创业板 QVIX 收盘（%）",
+            "box": {
+              "x": 393.34375,
+              "y": 198.36563110351562,
+              "right": 524.359375,
+              "bottom": 212.36563110351562,
+              "width": 131.015625,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 354.34375,
+              "y": 195.1856231689453,
+              "right": 527.859375,
+              "bottom": 214.1856231689453,
+              "width": 173.515625,
+              "height": 19
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 179.765625,
+              "right": 1109,
+              "bottom": 205.15625,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 179.765625,
+              "right": 1165,
+              "bottom": 205.15625,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 179.765625,
+              "right": 1269,
+              "bottom": 205.15625,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 310.171875,
+            "y": 205.36563110351562
+          },
+          "hit": {
+            "label": "创业板指 收盘",
+            "rect": {
+              "x": 272,
+              "y": 198.36563110351562,
+              "width": 76.34375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 458.8515625,
+            "y": 205.36563110351562
+          },
+          "hit": {
+            "label": "创业板 QVIX 收盘（%）",
+            "rect": {
+              "x": 393.34375,
+              "y": 198.36563110351562,
+              "width": 131.015625,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 5,
+      "code": "sz399673",
+      "traces": [
+        {
+          "feed": "qvix_cyb",
+          "name": "创业板 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 1009,
+          "nulls": 14,
+          "zeros": []
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "创业板50 收盘",
+            "box": {
+              "x": 272,
+              "y": 198.16250610351562,
+              "right": 349.6875,
+              "bottom": 212.16250610351562,
+              "width": 77.6875,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 194.9824981689453,
+              "right": 353.1875,
+              "bottom": 213.9824981689453,
+              "width": 120.1875,
+              "height": 19
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "创业板 QVIX 收盘（%）",
+            "box": {
+              "x": 394.6875,
+              "y": 198.16250610351562,
+              "right": 525.703125,
+              "bottom": 212.16250610351562,
+              "width": 131.015625,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 355.6875,
+              "y": 194.9824981689453,
+              "right": 529.203125,
+              "bottom": 213.9824981689453,
+              "width": 173.515625,
+              "height": 19
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 179.5625,
+              "right": 1109,
+              "bottom": 204.953125,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 179.5625,
+              "right": 1165,
+              "bottom": 204.953125,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 179.5625,
+              "right": 1269,
+              "bottom": 204.953125,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 310.84375,
+            "y": 205.16250610351562
+          },
+          "hit": {
+            "label": "创业板50 收盘",
+            "rect": {
+              "x": 272,
+              "y": 198.16250610351562,
+              "width": 77.6875,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 460.1953125,
+            "y": 205.16250610351562
+          },
+          "hit": {
+            "label": "创业板 QVIX 收盘（%）",
+            "rect": {
+              "x": 394.6875,
+              "y": 198.16250610351562,
+              "width": 131.015625,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 6,
+      "code": "sh000680",
+      "traces": [
+        {
+          "feed": "qvix_kcb",
+          "name": "科创板 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 839,
+          "nulls": 14,
+          "zeros": [
+            "2026-11-09"
+          ]
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "科创综指 收盘",
+            "box": {
+              "x": 272,
+              "y": 197.95938110351562,
+              "right": 348.34375,
+              "bottom": 211.95938110351562,
+              "width": 76.34375,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 194.7793731689453,
+              "right": 351.84375,
+              "bottom": 213.7793731689453,
+              "width": 118.84375,
+              "height": 19
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "科创板 QVIX 收盘（%）",
+            "box": {
+              "x": 393.34375,
+              "y": 197.95938110351562,
+              "right": 524.359375,
+              "bottom": 211.95938110351562,
+              "width": 131.015625,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 354.34375,
+              "y": 194.7793731689453,
+              "right": 527.859375,
+              "bottom": 213.7793731689453,
+              "width": 173.515625,
+              "height": 19
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 179.359375,
+              "right": 1109,
+              "bottom": 204.75,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 179.359375,
+              "right": 1165,
+              "bottom": 204.75,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 179.359375,
+              "right": 1269,
+              "bottom": 204.75,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 310.171875,
+            "y": 204.95938110351562
+          },
+          "hit": {
+            "label": "科创综指 收盘",
+            "rect": {
+              "x": 272,
+              "y": 197.95938110351562,
+              "width": 76.34375,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 458.8515625,
+            "y": 204.95938110351562
+          },
+          "hit": {
+            "label": "科创板 QVIX 收盘（%）",
+            "rect": {
+              "x": 393.34375,
+              "y": 197.95938110351562,
+              "width": 131.015625,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "i": 7,
+      "code": "sh000688",
+      "traces": [
+        {
+          "feed": "qvix_kcb",
+          "name": "科创板 QVIX 收盘（%）",
+          "color": "#d9822b",
+          "dash": "solid",
+          "rows": 839,
+          "nulls": 14,
+          "zeros": [
+            "2026-11-09"
+          ]
+        }
+      ],
+      "hover_geometry": {
+        "legends": [
+          {
+            "kind": "legendtext",
+            "text": "科创50 收盘",
+            "box": {
+              "x": 272,
+              "y": 557.7562255859375,
+              "right": 337.6875,
+              "bottom": 571.7562255859375,
+              "width": 65.6875,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 233,
+              "y": 554.5762329101562,
+              "right": 341.1875,
+              "bottom": 573.5762329101562,
+              "width": 108.1875,
+              "height": 19
+            }
+          },
+          {
+            "kind": "legendtext",
+            "text": "科创板 QVIX 收盘（%）",
+            "box": {
+              "x": 382.6875,
+              "y": 557.7562255859375,
+              "right": 513.703125,
+              "bottom": 571.7562255859375,
+              "width": 131.015625,
+              "height": 14
+            }
+          },
+          {
+            "kind": "legendtoggle",
+            "text": "",
+            "box": {
+              "x": 343.6875,
+              "y": 554.5762329101562,
+              "right": 517.203125,
+              "bottom": 573.5762329101562,
+              "width": 173.515625,
+              "height": 19
+            }
+          }
+        ],
+        "modebar": [
+          {
+            "box": {
+              "x": 1053,
+              "y": 539.15625,
+              "right": 1109,
+              "bottom": 564.546875,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1109,
+              "y": 539.15625,
+              "right": 1165,
+              "bottom": 564.546875,
+              "width": 56,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          },
+          {
+            "box": {
+              "x": 1165,
+              "y": 539.15625,
+              "right": 1269,
+              "bottom": 564.546875,
+              "width": 104,
+              "height": 25.390625
+            },
+            "opacity": "1",
+            "parent_opacity": "1",
+            "visibility": "visible"
+          }
+        ],
+        "intersections": [],
+        "anchor": {
+          "x": 0,
+          "xanchor": "left",
+          "y": 1.17
+        }
+      },
+      "toggles": [
+        {
+          "trace": 0,
+          "center": {
+            "x": 304.84375,
+            "y": 564.7562255859375
+          },
+          "hit": {
+            "label": "科创50 收盘",
+            "rect": {
+              "x": 272,
+              "y": 557.7562255859375,
+              "width": 65.6875,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            "legendonly",
+            true
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        },
+        {
+          "trace": 1,
+          "center": {
+            "x": 448.1953125,
+            "y": 564.7562255859375
+          },
+          "hit": {
+            "label": "科创板 QVIX 收盘（%）",
+            "rect": {
+              "x": 382.6875,
+              "y": 557.7562255859375,
+              "width": 131.015625,
+              "height": 14
+            },
+            "center_hits_own_entry": true,
+            "target": "legendtoggle",
+            "modebar_opacity": 1
+          },
+          "hidden": [
+            true,
+            "legendonly"
+          ],
+          "restored": [
+            true,
+            true
+          ]
+        }
+      ]
+    }
+  ],
+  "dark_hover_geometry": [
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "上证指数 收盘",
+          "box": {
+            "x": 273,
+            "y": 660.1781005859375,
+            "right": 348.34375,
+            "bottom": 674.1781005859375,
+            "width": 75.34375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 656.9981079101562,
+            "right": 350.84375,
+            "bottom": 675.9981079101562,
+            "width": 117.84375,
+            "height": 19
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "50股指 QVIX 收盘（%）",
+          "box": {
+            "x": 393.34375,
+            "y": 660.1781005859375,
+            "right": 524.71875,
+            "bottom": 674.1781005859375,
+            "width": 131.375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 353.34375,
+            "y": 656.9981079101562,
+            "right": 527.21875,
+            "bottom": 675.9981079101562,
+            "width": 173.875,
+            "height": 19
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "50ETF QVIX 收盘（%）",
+          "box": {
+            "x": 569.71875,
+            "y": 660.1781005859375,
+            "right": 699.75,
+            "bottom": 674.1781005859375,
+            "width": 130.03125,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 529.71875,
+            "y": 656.9981079101562,
+            "right": 702.25,
+            "bottom": 675.9981079101562,
+            "width": 172.53125,
+            "height": 19
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 641.578125,
+            "right": 1109,
+            "bottom": 666.96875,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 641.578125,
+            "right": 1165,
+            "bottom": 666.96875,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 641.578125,
+            "right": 1269,
+            "bottom": 666.96875,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "上证50 收盘",
+          "box": {
+            "x": 273,
+            "y": 340.9750061035156,
+            "right": 337.6875,
+            "bottom": 354.9750061035156,
+            "width": 64.6875,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 337.7950134277344,
+            "right": 340.1875,
+            "bottom": 356.79498291015625,
+            "width": 107.1875,
+            "height": 18.999969482421875
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "50股指 QVIX 收盘（%）",
+          "box": {
+            "x": 382.6875,
+            "y": 340.9750061035156,
+            "right": 514.0625,
+            "bottom": 354.9750061035156,
+            "width": 131.375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 342.6875,
+            "y": 337.7950134277344,
+            "right": 516.5625,
+            "bottom": 356.79498291015625,
+            "width": 173.875,
+            "height": 18.999969482421875
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "50ETF QVIX 收盘（%）",
+          "box": {
+            "x": 559.0625,
+            "y": 340.9750061035156,
+            "right": 689.09375,
+            "bottom": 354.9750061035156,
+            "width": 130.03125,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 519.0625,
+            "y": 337.7950134277344,
+            "right": 691.59375,
+            "bottom": 356.79498291015625,
+            "width": 172.53125,
+            "height": 18.999969482421875
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 322.375,
+            "right": 1109,
+            "bottom": 347.765625,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 322.375,
+            "right": 1165,
+            "bottom": 347.765625,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 322.375,
+            "right": 1269,
+            "bottom": 347.765625,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "深证100 收盘",
+          "box": {
+            "x": 273,
+            "y": 660.7718505859375,
+            "right": 344.359375,
+            "bottom": 674.7718505859375,
+            "width": 71.359375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 657.5918579101562,
+            "right": 346.859375,
+            "bottom": 676.5918579101562,
+            "width": 113.859375,
+            "height": 19
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "深证100ETF QVIX 收盘（%）",
+          "box": {
+            "x": 389.359375,
+            "y": 660.7718505859375,
+            "right": 550.0625,
+            "bottom": 674.7718505859375,
+            "width": 160.703125,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 349.359375,
+            "y": 657.5918579101562,
+            "right": 552.5625,
+            "bottom": 676.5918579101562,
+            "width": 203.203125,
+            "height": 19
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 642.171875,
+            "right": 1109,
+            "bottom": 667.5625,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 642.171875,
+            "right": 1165,
+            "bottom": 667.5625,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 642.171875,
+            "right": 1269,
+            "bottom": 667.5625,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "沪深300 收盘",
+          "box": {
+            "x": 272,
+            "y": 340.5687561035156,
+            "right": 344.359375,
+            "bottom": 354.5687561035156,
+            "width": 72.359375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 337.3887634277344,
+            "right": 347.859375,
+            "bottom": 356.38873291015625,
+            "width": 114.859375,
+            "height": 18.999969482421875
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "300股指 QVIX 收盘（%）",
+          "box": {
+            "x": 390.359375,
+            "y": 340.5687561035156,
+            "right": 528.40625,
+            "bottom": 354.5687561035156,
+            "width": 138.046875,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 350.359375,
+            "y": 337.3887634277344,
+            "right": 530.90625,
+            "bottom": 356.38873291015625,
+            "width": 180.546875,
+            "height": 18.999969482421875
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "300ETF QVIX 收盘（%）",
+          "box": {
+            "x": 573.40625,
+            "y": 340.5687561035156,
+            "right": 710.109375,
+            "bottom": 354.5687561035156,
+            "width": 136.703125,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 533.40625,
+            "y": 337.3887634277344,
+            "right": 712.609375,
+            "bottom": 356.38873291015625,
+            "width": 179.203125,
+            "height": 18.999969482421875
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 321.96875,
+            "right": 1109,
+            "bottom": 347.359375,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 321.96875,
+            "right": 1165,
+            "bottom": 347.359375,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 321.96875,
+            "right": 1269,
+            "bottom": 347.359375,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "创业板指 收盘",
+          "box": {
+            "x": 272,
+            "y": 660.3656005859375,
+            "right": 348.34375,
+            "bottom": 674.3656005859375,
+            "width": 76.34375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 657.1856079101562,
+            "right": 351.84375,
+            "bottom": 676.1856079101562,
+            "width": 118.84375,
+            "height": 19
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "创业板 QVIX 收盘（%）",
+          "box": {
+            "x": 393.34375,
+            "y": 660.3656005859375,
+            "right": 524.359375,
+            "bottom": 674.3656005859375,
+            "width": 131.015625,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 354.34375,
+            "y": 657.1856079101562,
+            "right": 527.859375,
+            "bottom": 676.1856079101562,
+            "width": 173.515625,
+            "height": 19
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 641.765625,
+            "right": 1109,
+            "bottom": 667.15625,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 641.765625,
+            "right": 1165,
+            "bottom": 667.15625,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 641.765625,
+            "right": 1269,
+            "bottom": 667.15625,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "创业板50 收盘",
+          "box": {
+            "x": 272,
+            "y": 340.1625061035156,
+            "right": 349.6875,
+            "bottom": 354.1625061035156,
+            "width": 77.6875,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 336.9825134277344,
+            "right": 353.1875,
+            "bottom": 355.98248291015625,
+            "width": 120.1875,
+            "height": 18.999969482421875
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "创业板 QVIX 收盘（%）",
+          "box": {
+            "x": 394.6875,
+            "y": 340.1625061035156,
+            "right": 525.703125,
+            "bottom": 354.1625061035156,
+            "width": 131.015625,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 355.6875,
+            "y": 336.9825134277344,
+            "right": 529.203125,
+            "bottom": 355.98248291015625,
+            "width": 173.515625,
+            "height": 18.999969482421875
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 321.5625,
+            "right": 1109,
+            "bottom": 346.953125,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 321.5625,
+            "right": 1165,
+            "bottom": 346.953125,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 321.5625,
+            "right": 1269,
+            "bottom": 346.953125,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "科创综指 收盘",
+          "box": {
+            "x": 272,
+            "y": 660.9593505859375,
+            "right": 348.34375,
+            "bottom": 674.9593505859375,
+            "width": 76.34375,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 657.7793579101562,
+            "right": 351.84375,
+            "bottom": 676.7793579101562,
+            "width": 118.84375,
+            "height": 19
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "科创板 QVIX 收盘（%）",
+          "box": {
+            "x": 393.34375,
+            "y": 660.9593505859375,
+            "right": 524.359375,
+            "bottom": 674.9593505859375,
+            "width": 131.015625,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 354.34375,
+            "y": 657.7793579101562,
+            "right": 527.859375,
+            "bottom": 676.7793579101562,
+            "width": 173.515625,
+            "height": 19
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 642.359375,
+            "right": 1109,
+            "bottom": 667.75,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 642.359375,
+            "right": 1165,
+            "bottom": 667.75,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 642.359375,
+            "right": 1269,
+            "bottom": 667.75,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    },
+    {
+      "legends": [
+        {
+          "kind": "legendtext",
+          "text": "科创50 收盘",
+          "box": {
+            "x": 272,
+            "y": 557.7562255859375,
+            "right": 337.6875,
+            "bottom": 571.7562255859375,
+            "width": 65.6875,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 233,
+            "y": 554.5762329101562,
+            "right": 341.1875,
+            "bottom": 573.5762329101562,
+            "width": 108.1875,
+            "height": 19
+          }
+        },
+        {
+          "kind": "legendtext",
+          "text": "科创板 QVIX 收盘（%）",
+          "box": {
+            "x": 382.6875,
+            "y": 557.7562255859375,
+            "right": 513.703125,
+            "bottom": 571.7562255859375,
+            "width": 131.015625,
+            "height": 14
+          }
+        },
+        {
+          "kind": "legendtoggle",
+          "text": "",
+          "box": {
+            "x": 343.6875,
+            "y": 554.5762329101562,
+            "right": 517.203125,
+            "bottom": 573.5762329101562,
+            "width": 173.515625,
+            "height": 19
+          }
+        }
+      ],
+      "modebar": [
+        {
+          "box": {
+            "x": 1053,
+            "y": 539.15625,
+            "right": 1109,
+            "bottom": 564.546875,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1109,
+            "y": 539.15625,
+            "right": 1165,
+            "bottom": 564.546875,
+            "width": 56,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        },
+        {
+          "box": {
+            "x": 1165,
+            "y": 539.15625,
+            "right": 1269,
+            "bottom": 564.546875,
+            "width": 104,
+            "height": 25.390625
+          },
+          "opacity": "1",
+          "parent_opacity": "1",
+          "visibility": "visible"
+        }
+      ],
+      "intersections": [],
+      "anchor": {
+        "x": 0,
+        "xanchor": "left",
+        "y": 1.17
+      }
+    }
+  ],
+  "zero_hover": "科创板 QVIX 收盘（%）(Nov 9, 2026, 0)",
+  "dark": {
+    "bg": "rgb(15, 19, 24)",
+    "card": "rgb(23, 28, 35)",
+    "font": "#e6e9ee"
+  }
+}

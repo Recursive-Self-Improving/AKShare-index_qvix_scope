@@ -1,0 +1,20 @@
+{
+  "review_status": "FIX",
+  "report_sha256": "218d623efde86f040b9896348f78d2cb16950c55b9725c2c02a1c6eb135931a0",
+  "final_harness_exit": 0,
+  "final_harness_status": "PASS",
+  "completed_panels": 8,
+  "genuine_gap_views": 3,
+  "browser_launches_total": 3,
+  "maximum_concurrent_owned_browsers": 1,
+  "findings": [
+    {
+      "id": "F-B1",
+      "severity": "medium",
+      "disposition": "Fix",
+      "summary": "Hover modebar overlaps rightmost QVIX legend on all eight panels and intercepts ordinary center clicks.",
+      "evidence": ["attempt1-output.txt", "legend-modebar-overlap.json", "gap-conflict.png", "zero-kcb.png"],
+      "automated_geometry_coverage_limit": "Harness geometry assertion excludes modebar; PASS does not waive this observed overlap."
+    }
+  ]
+}

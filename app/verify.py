@@ -5,12 +5,12 @@ import io
 import json
 import math
 import re
-from datetime import date
+from datetime import date, datetime, timedelta
 from html.parser import HTMLParser
 from pathlib import Path
 
 from app.core import (
-    INDICES, OHLC, QVIX, SCHEMA, compact_quality, compact_snapshot, comparator_history,
+    INDICES, MAPPINGS, OHLC, QVIX_FEEDS, SCHEMA, compact_quality, compact_snapshot,
     csv_bytes, decode, load_manifest, origin_snapshot, replay_qvix, sha,
 )
 from app.identities import IDENTITIES
@@ -33,9 +33,14 @@ class Embedded(HTMLParser):
         self.disclosure = None
         self.section = None
         self.disclosure_sections = {}
+        self.ancestors = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        require(self.disclosure is None, "disallowed disclosure content container")
+        if tag not in ("area", "base", "br", "col", "embed", "hr", "img", "input",
+                       "link", "meta", "param", "source", "track", "wbr"):
+            self.ancestors.append((tag, attrs))
         if tag == "section":
             require(not any(k in attrs for k in ("hidden", "style")), "hidden panel")
             self.section = attrs.get("id")
@@ -44,6 +49,16 @@ class Embedded(HTMLParser):
             require(self.disclosure not in self.disclosures, "duplicate visible disclosure")
             require(not any(k in attrs for k in ("hidden", "style")) and
                     attrs.get("class", "") in ("index-status", "quality"), "hidden disclosure")
+            # Accept only the renderer's visible path, not arbitrary HTML containers
+            # (details, template, extra wrappers/classes or inline CSS can hide text).
+            require([t for t, _ in self.ancestors] ==
+                    ["html", "body", "main", "section", "div", "div", "p"],
+                    "disallowed disclosure containers")
+            allowed = ({"lang"}, set(), set(), {"class", "id"}, {"class"}, set(), {"class", "id"})
+            require(all(set(a) <= keys for (_, a), keys in zip(self.ancestors, allowed, strict=True)) and
+                    self.ancestors[3][1].get("class") == "card" and
+                    self.ancestors[4][1].get("class") == "panel-head",
+                    "hidden/style-bearing disclosure containers")
             self.disclosures[self.disclosure] = ""
             self.disclosure_sections[self.disclosure] = self.section
         if tag == "script":
@@ -55,6 +70,9 @@ class Embedded(HTMLParser):
             self.external.append(attrs)
 
     def handle_endtag(self, tag):
+        require(bool(self.ancestors) and self.ancestors[-1][0] == tag,
+                "invalid disclosure container nesting")
+        self.ancestors.pop()
         if tag == "section":
             self.section = None
         if tag == "p":
@@ -62,6 +80,11 @@ class Embedded(HTMLParser):
         if tag == "script":
             self.in_data = False
             self.script = False
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if self.ancestors and self.ancestors[-1][0] == tag:
+            self.handle_endtag(tag)
 
     def handle_data(self, value):
         if self.in_data:
@@ -92,188 +115,293 @@ def visible_index(s):
     return text + (" · 上证日历陈旧" if s["calendar_stale"] else "")
 
 
-def visible_qvix(state):
-    """Independently expected compact per-panel QVIX disclosure."""
+def visible_qvix(feed, state):
+    """Independent expected visible feed-local material disclosures."""
     snap = state["snapshot"]
-    text = f"QVIX 本次尝试 {state['attempt']['status']} · "
-    if not snap:
+    text = f"{QVIX_FEEDS[feed]['label']} · 本次尝试 {state['attempt']['status']} @ {_utc(state['attempt']['attempted_at'])} · "
+    if snap is None:
         return text + "无可用快照，范围未知"
-    c = snap["accounting"]["selected"]
-    missing = "未知" if c["missing"] is None else len(c["missing"])
-    outside = "未知" if c["source_only"] is None else len(c["source_only"])
-    return (text + f"快照 {snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'} · "
-            f"{_span(c['range'])} · 缺失 {missing} · 冲突 {c['conflicts']} · 源外 {outside} · "
-            f"包络异常 {c['envelope_rows']}")
+    q = snap["accounting"]
+    c, full, comp = q["selected"], q["full"], q["comparator"]
+    source = (f"{comp['feed']} {comp['raw_sha256'][:12]} @ {_utc(comp['successful_at'])}"
+              f"（{'陈旧' if comp['stale_reuse'] else '新鲜'}）" if comp else "未知")
+    def number(v):
+        return "未知" if v is None else str(v)
+    return (text + f"快照 {snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'} @ "
+            f"{_utc(snap['successful_at'])} · 身份 {snap['origin']['sha256'][:12]} · "
+            f"全源 {_span(full['range'])} / 收盘 {_span(full['close_range'])} · "
+            f"选中 {_span(c['range'])} / 收盘 {_span(c['close_range'])} · "
+            f"全量/选中 缺口 {number(full['holes'])}/{number(c['holes'])} · "
+            f"冲突 {full['conflict']}/{c['conflict']} · 无效字段 {full['invalid_fields']}/{c['invalid_fields']} · "
+            f"零值行 {full['zero_rows']}/{c['zero_rows']} · 源外 {number(full['source_only'])}/{number(c['source_only'])} · "
+            f"包络异常 {full['envelope_rows']}/{c['envelope_rows']} · "
+            f"空白内部/尾部 {full['blank_internal']}/{full['blank_tail']} · 比较日历 {source}")
 
 
-def independent_qvix(body, wrapper, window, calendar, comparator):
-    """Separate raw parser/grouping, not renderer/normalizer expected helpers."""
+def independent_qvix(body, wrapper, window, calendar, comparator, feed):
+    """Separate full raw interpretation; no production parser, normalizer or renderer."""
     table = list(csv.reader(io.StringIO(body.decode("gbk")), strict=True))
-    require(table and table[0][:5] == ["", "2", "3", "4", "5"], "raw schema")
-    groups = {}
-    order = []
-    wr = list(csv.DictReader(io.StringIO(wrapper.decode())))
-    require(len(wr) == len(table) - 1 and wr, "wrapper row count")
-    for ordinal, (row, decoded) in enumerate(zip(table[1:], wr, strict=True), 1):
-        require(len(row) == len(table[0]) and
-                re.fullmatch(r"\d{4}/\d{1,2}/\d{1,2}", row[0]), "raw row/date")
-        day = date(*map(int, row[0].split("/"))).isoformat()
-        raw_values = list(map(float, row[1:5]))
-        values = [float(decoded[k]) for k in OHLC]
-        require(decoded["date"] == day and all(math.isfinite(v) and math.isfinite(r)
-                and math.isclose(v, r, rel_tol=1e-14, abs_tol=0)
-                for v, r in zip(values, raw_values, strict=True)), "raw/wrapper values")
-        o, h, lo, c = values
-        groups.setdefault(day, []).append({"ordinal": ordinal, "ohlc": values,
-                                           "envelope_anomaly": h < max(o, c, lo) or lo > min(o, c, h)})
-        order.append(day)
-    details = {}
-    rows = []
-    for day, occurrences in sorted(groups.items()):
-        distinct = len(set(tuple(v["ohlc"]) for v in occurrences))
-        anomaly = any(v["envelope_anomaly"] for v in occurrences)
-        details[day] = {"occurrences": occurrences, "distinct_candidates": distinct,
-                        "conflict": distinct > 1, "envelope_anomaly": anomaly,
-                        "source_only": day not in calendar if comparator else None}
-        values = [None] * 4 if distinct > 1 else occurrences[0]["ohlc"]
-        rows.append(dict(date=day, **dict(zip(OHLC, values)),
-                         quality="conflict" if distinct > 1 else "envelope_anomaly" if anomaly else "ok"))
+    require(len(table) > 1 and table[0][:5] == ["", "2", "3", "4", "5"], "raw schema")
+    positions = QVIX_FEEDS[feed]["columns"][1:]
+    require(max(positions) < len(table[0]), "member positional schema")
+    decoded = list(csv.DictReader(io.StringIO(wrapper.decode())))
+    require(decoded and list(decoded[0]) == ["date", *OHLC] and len(decoded) == len(table) - 1,
+            "wrapper schema/count")
+    source, grouped, blank = [], {}, {}
+    for ordinal, (record, wr) in enumerate(zip(table[1:], decoded, strict=True), 1):
+        require(len(record) == len(table[0]) and
+                re.fullmatch(r"\d{4}/(?:[1-9]|1[0-2])/(?:[1-9]|[12]\d|3[01])", record[0]),
+                "raw width/date")
+        day = date(*map(int, record[0].split("/"))).isoformat()
+        values, errors, missing = [], {}, []
+        for field, position in zip(OHLC, positions, strict=True):
+            token = record[position]
+            if token == "":
+                missing.append(field)
+                value = None
+            else:
+                try:
+                    value = float(token)
+                except ValueError:
+                    errors[field] = token
+                    value = None
+                else:
+                    require(math.isfinite(value), "nonfinite numeric")
+            values.append(value)
+            require((wr[field] == "" if value is None else bool(wr[field]) and
+                     math.isfinite(float(wr[field])) and
+                     math.isclose(float(wr[field]), value, rel_tol=1e-14, abs_tol=0)), "raw/wrapper values")
+        require(wr["date"] == day, "raw/wrapper date")
+        item = {"date": day, "ordinal": ordinal, "ohlc": values, "invalid": errors, "blank_fields": missing}
+        source.append(item)
+        if len(missing) == 4:
+            blank.setdefault(day, []).append(ordinal)
+        else:
+            o, h, lo, c = values
+            item["envelope_anomaly"] = (None not in values and (h < max(o, c, lo) or lo > min(o, c, h)))
+            grouped.setdefault(day, []).append(item)
+    nonblank, all_dates = set(grouped), {r["date"] for r in source}
+    blank_only = set(blank) - nonblank
+    def extent(values):
+        return [min(values), max(values)] if values else None
+    source_bounds = extent(nonblank)
+    def bucket(d):
+        if source_bounds is None:
+            return "no_source"
+        if d < source_bounds[0]:
+            return "prefix"
+        return "tail" if d > source_bounds[1] else "internal"
+    sets = {f"blank_{k}": {d for d in blank_only if bucket(d) == k}
+            for k in ("prefix", "internal", "tail", "no_source")}
+    sets.update(nonblank=nonblank, usable_close=set(), conflict=set(),
+                invalid_close_dates=set(), missing_close_dates=set(), blank_collision=set(blank) & nonblank)
+    details, values_by_day = {}, {}
+    for day in sorted(all_dates):
+        candidates = grouped.get(day, [])
+        identities = {(tuple(r["ohlc"]), tuple(sorted(r["invalid"].items())), tuple(r["blank_fields"]))
+                      for r in candidates}
+        conflict = len(identities) > 1
+        details[day] = {"occurrences": candidates, "distinct_candidates": len(identities),
+                        "conflict": conflict, "blank_ordinals": blank.get(day, [])}
+        if not candidates:
+            continue
+        if conflict:
+            sets["conflict"].add(day)
+            v = [None] * 4
+            flag = "conflict"
+        else:
+            first = candidates[0]
+            v = first["ohlc"]
+            category = ("usable_close" if v[3] is not None else
+                        "invalid_close_dates" if "close" in first["invalid"] else "missing_close_dates")
+            sets[category].add(day)
+            flag = ("partial" if first["invalid"] or first["blank_fields"] else
+                    "envelope_anomaly" if first["envelope_anomaly"] else "ok")
+        values_by_day[day] = dict(date=day, **dict(zip(OHLC, v)), quality=flag)
+    comparator_keys = ("absent", "blank", "conflict_holes", "invalid_close", "missing_close",
+                       "holes", "source_only", "blank_source_only")
+    if calendar is None:
+        sets.update(dict.fromkeys(comparator_keys))
+    else:
+        inside = {d for d in calendar if source_bounds and source_bounds[0] <= d <= source_bounds[1]}
+        sets.update(absent=inside - all_dates, blank=inside & blank_only,
+                    conflict_holes=inside & sets["conflict"],
+                    invalid_close=inside & sets["invalid_close_dates"],
+                    missing_close=inside & sets["missing_close_dates"],
+                    holes=inside - sets["usable_close"], source_only=nonblank - calendar,
+                    blank_source_only=blank_only - calendar)
+        categories = [sets[k] for k in comparator_keys[:5]]
+        require(sum(map(len, categories)) == len(set.union(*categories)) and
+                set.union(*categories) == sets["holes"], "hole partition")
+    trace_days = (nonblank | sets["blank_internal"] | sets["blank_tail"] | sets["blank_no_source"]
+                  | (sets["holes"] or set()))
+    rows = [values_by_day.get(d, dict(date=d, **dict.fromkeys(OHLC), quality="blank_or_absent"))
+            for d in sorted(trace_days) if window[0] <= d <= window[1]]
+    def summary(start=None, end=None):
+        def take(d):
+            return start is None or start <= d <= end
+        rr = [r for r in source if take(r["date"])]
+        nn = {d for d in nonblank if take(d)}
+        vv = {d for d in sets["usable_close"] if take(d)}
+        result = {"common_range": extent({r["date"] for r in rr}), "range": extent(nn),
+                  "close_range": extent(vv), "source_rows": len(rr), "dates": len(nn),
+                  "incomplete_rows": sum(0 < len(r["blank_fields"]) < 4 for r in rr),
+                  "finite_close_dates": len(vv),
+                  "all_cells_nonblank": sum(len(r["blank_fields"]) == 0 for r in rr),
+                  "finite_complete_rows": sum(None not in r["ohlc"] for r in rr),
+                  "invalid_fields": sum(len(r["invalid"]) for r in rr),
+                  "invalid_dates": len({r["date"] for r in rr if r["invalid"]}),
+                  "zero_rows": sum(any(v == 0 for v in r["ohlc"]) for r in rr),
+                  "zero_close_rows": sum(r["ohlc"][3] == 0 for r in rr),
+                  "envelope_rows": sum(r.get("envelope_anomaly", False) for r in rr),
+                  "distinct_candidates": sum(details[d]["distinct_candidates"] for d in nn),
+                  "exact_duplicates": sum(len(grouped[d]) - details[d]["distinct_candidates"] for d in nn),
+                  "blank_collision_rows": sum(len(blank[d]) for d in set(blank) & nonblank if take(d))}
+        for kind in ("prefix", "internal", "tail", "no_source"):
+            result[f"blank_{kind}_rows"] = sum(len(v) for d, v in blank.items() if take(d) and bucket(d) == kind)
+        result.update({k: None if v is None else len({d for d in v if take(d)}) for k, v in sets.items()})
+        return result
+    quality = {"algorithm": SCHEMA, "feed": feed, "comparator": comparator, "dates": details,
+               "sets": {k: None if v is None else sorted(v) for k, v in sets.items()},
+               "ordered": [r["date"] for r in source] == sorted(r["date"] for r in source),
+               "full": summary(), "selected": summary(*window)}
+    counts = quality["full"]
+    defect = (comparator is None or comparator["stale_reuse"] or not sets["usable_close"] or
+              any(counts[k] for k in ("conflict", "invalid_fields", "envelope_rows", "source_only",
+                                     "holes", "incomplete_rows", "blank_internal", "blank_tail")))
+    return rows, quality, "partial" if defect else "success"
 
-    bounds = min(groups), max(groups)
-    missing = sorted(d for d in calendar if bounds[0] <= d <= bounds[1] and d not in groups)
 
-    def count(days, selected=False):
-        days = sorted(days)
-        return {"source_rows": sum(len(groups[d]) for d in days), "dates": len(days),
-                "distinct_candidates": sum(details[d]["distinct_candidates"] for d in days),
-                "exact_duplicates": sum(len(groups[d]) - details[d]["distinct_candidates"] for d in days),
-                "conflicts": sum(details[d]["conflict"] for d in days),
-                "envelope_rows": sum(v["envelope_anomaly"] for d in days for v in groups[d]),
-                "source_only": sorted(set(days) - calendar) if comparator else None,
-                "missing": [d for d in missing if not selected or window[0] <= d <= window[1]]
-                           if comparator else None,
-                "range": [days[0], days[-1]] if days else None}
+def read_ref(root, ref):
+    content = (Path(root) / ref["path"]).read_bytes()
+    require(sha(content) == ref["sha256"], "artifact reference hash")
+    return json.loads(content)
 
-    chosen = [r for r in rows if window[0] <= r["date"] <= window[1]]
-    quality = {"algorithm": SCHEMA, "comparator": comparator, "dates": details,
-               "ordered": order == sorted(order), "full": count(groups),
-               "selected": count((r["date"] for r in chosen), selected=True)}
-    c = quality["full"]
-    partial = (not comparator or comparator["stale_reuse"] or c["conflicts"] or c["envelope_rows"]
-               or c["source_only"] or c["missing"])
-    return chosen, quality, "partial" if partial else "success"
+
+def check_transport(root, evidence):
+    raw = evidence["raw"]
+    body = (root / raw["body"]).read_bytes()
+    require(sha(body) == raw["sha256"] and raw["status"] == 200, "raw hash/status")
+    transport = (root / evidence["transport"]).read_bytes()
+    require(sha(transport) == evidence["transport_sha256"], "transport hash")
+    _require_time(raw.get("retrieved_at"), "raw.retrieved_at")
+    captures = json.loads(transport)
+    require(len(captures) == 1 and
+            {k: v for k, v in captures[0].items() if k != "body"} ==
+            {k: v for k, v in raw.items() if k != "body"}, "consumed transport identity")
+    return body
+
+
+def _require_time(value, label):
+    require(isinstance(value, str) and
+            re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|\+00:00)", value),
+            "missing/unusable timestamp: " + label)
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError as error:
+        raise ValueError("unusable timestamp: " + label) from error
+    require(parsed.utcoffset() == timedelta(0), "non-UTC timestamp: " + label)
+
+
+def validate_snapshot(root, snap, feed, cache=None):
+    root = Path(root)
+    cache = {} if cache is None else cache
+    key = (feed, json.dumps(snap, sort_keys=True))
+    if key in cache:
+        return cache[key]
+    require(snap["feed"] == feed and snap["status"] in ("success", "partial"), "snapshot identity")
+    require("origin" in snap, "mandatory origin provenance")
+    original, _ = origin_snapshot(root, snap["origin"], feed)
+    for key in ("attempted_at", "successful_at", "finished_at"):
+        _require_time(original.get(key), key)
+    actual = {k: v for k, v in snap.items() if k != "origin"}
+    require(actual == compact_snapshot(original), "immutable revision identity/time")
+    require(snap["origin"]["path"] == (str(Path(snap["csv"]).parent / "result.json")
+            if snap["origin"]["kind"] == "result" else
+            str(Path(snap["csv"]).parent.parent / "manifest.json")), "immutable origin membership")
+    if feed in QVIX_FEEDS:
+        require(snap["schema"] == SCHEMA and snap["columns"] == QVIX_FEEDS[feed]["columns"] and
+                snap["invocation"] == QVIX_FEEDS[feed]["wrapper"] + "()" and snap["invoked"],
+                "member callable/columns")
+        group = read_ref(root, snap["shared"])
+        _require_time(original.get("acquired_at"), "acquired_at")
+        _require_time(group.get("acquired_at"), "shared.acquired_at")
+        body = check_transport(root, group)
+        require(group["group_id"] == snap["group_id"] and group["global_validated"] is True and
+                group["acquired_at"] == group["raw"]["retrieved_at"] == snap["acquired_at"],
+                "shared identity/time")
+        require(group["raw"]["url"] == group["raw"]["requested_url"] == QVIX_FEEDS[feed]["url"],
+                "shared endpoint identity")
+        if "migration" not in snap:
+            directory = Path(snap["shared"]["path"]).parent
+            require(Path(snap["csv"]).parent == directory / feed, "cross-feed/body membership")
+            config = read_ref(root, group["config"])
+            invocation = json.loads((root / directory / feed / "invocation.json").read_text())
+            require(config["group_id"] == snap["group_id"] and snap["window"] == config["window"] and
+                    all(invocation[k] == snap[k] for k in invocation), "invocation identity/time")
+            require(snap["accounting"]["comparator"] == config["comparators"][feed], "bound comparator")
+            require(Path(group["raw"]["body"]).parent == directory and
+                    group["transport"] == str(directory / "transport.json"), "shared body membership")
+        else:
+            old, _ = origin_snapshot(root, snap["migration"], feed)
+            require(feed == "qvix_50etf" and all(snap[k] == old[k] for k in
+                    ("attempted_at", "successful_at", "finished_at", "window", "wrapper_sha256")) and
+                    group["raw"] == old["raw"] and group["transport"] == old["transport"] and
+                    group["transport_sha256"] == old["transport_sha256"], "migration origin/time")
+        comparator = snap["accounting"]["comparator"]
+        calendar = None
+        if comparator:
+            code = QVIX_FEEDS[feed]["comparator"]
+            require(comparator["feed"] == code, "fixed comparator identity")
+            origin, _ = origin_snapshot(root, comparator["origin"], code)
+            csnap = compact_snapshot(origin) | {"origin": comparator["origin"]}
+            validate_snapshot(root, csnap, code, cache)
+            require(all(comparator[k] == csnap[k] for k in ("csv", "csv_sha256", "successful_at")) and
+                    comparator["raw_sha256"] == csnap["raw"]["sha256"], "comparator origin/time/hash")
+            calendar = {r["date"] for r in decode(code, (root / csnap["raw"]["body"]).read_bytes(),
+                                                 csnap["raw"]["encoding"])}
+        wrapper = (root / snap["wrapper"]).read_bytes()
+        require(sha(wrapper) == snap["wrapper_sha256"] and replay_qvix(body, feed) == wrapper,
+                "wrapper hash/replay")
+        rows, quality, status = independent_qvix(body, wrapper, snap["window"], calendar, comparator, feed)
+        sidecar = (root / snap["quality"]).read_bytes()
+        require(sha(sidecar) == snap["quality_sha256"] and json.loads(sidecar) == quality, "quality sidecar")
+        require(snap["accounting"] == compact_quality(quality) and status == snap["status"] and
+                snap["source_range"] == quality["full"]["range"], "quality accounting/outcome")
+        fields = [*OHLC, "quality"]
+    else:
+        require("transport" in snap and "transport_sha256" in snap, "mandatory transport provenance")
+        body = check_transport(root, snap)
+        require(snap["identity"] == IDENTITIES[feed], "index identity")
+        rows = [r for r in decode(feed, body, snap["raw"]["encoding"])
+                if snap["window"][0] <= r["date"] <= snap["window"][1]]
+        require(sum(r["pre_release"] for r in rows) == snap["retrospective_count"], "retrospective count")
+        fields = ["close", "pre_release", "pre_base"]
+    content = (root / snap["csv"]).read_bytes()
+    require(sha(content) == snap["csv_sha256"] and csv_bytes(rows, fields) == content, "CSV hash/replay")
+    require(snap["count"] == len(rows) and snap["range"] ==
+            ([rows[0]["date"], rows[-1]["date"]] if rows else None), "count/range")
+    cache[key] = rows
+    return rows
 
 
 def validate_manifest(root, manifest):
     root = Path(root)
-    require(manifest.get("schema") == SCHEMA and set(manifest["feeds"]) == {*INDICES, QVIX},
+    require(manifest.get("schema") == SCHEMA and set(manifest["feeds"]) == {*INDICES, *QVIX_FEEDS},
             "incompatible active schema")
-    verified = {}
     if manifest.get("previous"):
-        reference = manifest["previous"]
-        require(sha((root / reference["path"]).read_bytes()) == reference["sha256"],
-                "previous immutable manifest hash")
-    cache = {}
-
-    def check(snap, feed):
-        key = (feed, json.dumps(snap, sort_keys=True))
-        if key in cache:
-            return cache[key]
-        require(snap["feed"] == feed and snap["status"] in ("success", "partial"), "snapshot identity")
-        require("origin" in snap and "transport" in snap and "transport_sha256" in snap,
-                "mandatory transport/origin provenance")
-        origin_path = (Path(snap["csv"]).parent.parent / "manifest.json"
-                       if snap["origin"]["kind"] == "manifest"
-                       else Path(snap["csv"]).parent / "result.json")
-        require(snap["origin"]["path"] == str(origin_path), "immutable origin membership")
-        original, origin_manifest = origin_snapshot(root, snap["origin"], feed)
-        expected = compact_snapshot(original)
-        actual = {k: v for k, v in snap.items() if k not in ("origin", "derivation")}
-        if "derivation" in snap:
-            require(feed == QVIX and snap["origin"]["kind"] == "manifest" and
-                    origin_manifest["schema"] == "qvix-comparison-v2" and
-                    snap["derivation"] == {"operation": "quality-format-migration",
-                                           "source_schema": "qvix-comparison-v2"},
-                    "invalid derived acquisition")
-            expected["schema"] = SCHEMA
-            expected["accounting"] = actual["accounting"]
-        require(actual == expected, "immutable revision identity/time")
-        raw = snap["raw"]
-        body = (root / raw["body"]).read_bytes()
-        require(sha(body) == raw["sha256"] and raw["status"] == 200, "raw hash/status")
-        transport = (root / snap["transport"]).read_bytes()
-        require(sha(transport) == snap["transport_sha256"], "transport hash")
-        captures = json.loads(transport)
-        require(len(captures) == 1 and
-                {k: v for k, v in captures[0].items() if k != "body"} ==
-                {k: v for k, v in raw.items() if k != "body"}, "consumed transport identity")
-        if feed == QVIX:
-            require(snap["schema"] == SCHEMA, "QVIX schema")
-            wrapper = (root / snap["wrapper"]).read_bytes()
-            require(sha(wrapper) == snap["wrapper_sha256"] and replay_qvix(body) == wrapper,
-                    "wrapper hash/replay")
-            comparator = snap["accounting"]["comparator"]
-            if "derivation" in snap:
-                origin_calendar = origin_manifest["feeds"]["sh000001"]
-                original_snap = origin_calendar["snapshot"]
-                require(comparator is not None and original_snap is not None,
-                        "migration comparator unavailable")
-                require({k: comparator[k] for k in ("csv", "csv_sha256", "successful_at")} ==
-                        {k: original_snap[k] for k in ("csv", "csv_sha256", "successful_at")} and
-                        comparator["stale_reuse"] == origin_calendar["stale_reuse"],
-                        "comparator origin/stale provenance")
-                require(comparator["origin"] == snap["origin"], "migration comparator origin")
-            calendar = set()
-            if comparator:
-                index_original, _ = origin_snapshot(root, comparator["origin"], "sh000001")
-                index_snap = compact_snapshot(index_original) | {"origin": comparator["origin"]}
-                check(index_snap, "sh000001")
-                require(all(comparator[k] == index_snap[k]
-                            for k in ("csv", "csv_sha256", "successful_at")), "comparator identity")
-                calendar = comparator_history(root, comparator)
-            rows, quality, status = independent_qvix(body, wrapper, snap["window"], calendar, comparator)
-            sidecar = (root / snap["quality"]).read_bytes()
-            require(sha(sidecar) == snap["quality_sha256"], "quality hash")
-            if "derivation" in snap:
-                # Original sidecar remains immutable. Recheck its complete candidate evidence;
-                # corrected calendar accounting lives only in the derived compact view.
-                stored = json.loads(sidecar)
-                require(set(stored["dates"]) == set(quality["dates"]), "quality dates")
-                for day, detail in quality["dates"].items():
-                    require({k: v for k, v in stored["dates"][day].items() if k != "source_only"} ==
-                            {k: v for k, v in detail.items() if k != "source_only"}, "quality candidates")
-            else:
-                canonical = (json.dumps(quality, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode()
-                require(sidecar == canonical, "quality sidecar")
-            require(snap["accounting"] == compact_quality(quality), "quality accounting")
-            require(status == snap["status"] and snap["source_range"] == quality["full"]["range"],
-                    "quality outcome/source range")
-            fields = [*OHLC, "quality"]
-        else:
-            require(snap["identity"] == IDENTITIES[feed], "index identity")
-            rows = [r for r in decode(feed, body, raw["encoding"])
-                    if snap["window"][0] <= r["date"] <= snap["window"][1]]
-            require(sum(r["pre_release"] for r in rows) == snap["retrospective_count"], "retrospective count")
-            fields = ["close", "pre_release", "pre_base"]
-        content = (root / snap["csv"]).read_bytes()
-        require(sha(content) == snap["csv_sha256"] and csv_bytes(rows, fields) == content, "CSV hash/replay")
-        require(snap["count"] == len(rows) and snap["range"] ==
-                ([rows[0]["date"], rows[-1]["date"]] if rows else None), "count/range")
-        cache[key] = rows
-        return rows
-
+        read_ref(root, manifest["previous"])
+    verified, cache = {}, {}
     for feed, state in manifest["feeds"].items():
         require(set(state) == {"attempt", "snapshot", "stale_reuse"}, "compact whole snapshot state")
         for capture in state["attempt"].get("captures", []):
-            path = root / manifest["run"] / feed / Path(capture["body"]).name
-            require(sha(path.read_bytes()) == capture["sha256"], "attempt capture hash")
+            require(sha((root / capture["body"]).read_bytes()) == capture["sha256"], "attempt capture hash")
         snap = state["snapshot"]
         usable = state["attempt"]["status"] in ("success", "partial")
         require(state["stale_reuse"] == (not usable and bool(snap)), "stale policy")
         if usable:
             require(state["attempt"] == snap, "fresh attempt identity")
-        verified[feed] = check(snap, feed) if snap else []
-    # A stale QVIX retains its own comparator, but every common trace must use that exact calendar.
+        verified[feed] = validate_snapshot(root, snap, feed, cache) if snap else []
     return verified
 
 
@@ -287,35 +415,32 @@ def verify(root, report):
     require(not parser.external, "external HTML resources")
     payload = json.loads(parser.payload)
     require(payload["run"] == manifest["run"] and payload["window"] == manifest["window"], "HTML run")
-    require(payload["qvix_status"] == manifest["feeds"][QVIX], "HTML QVIX status")
-    require([p["code"] for p in payload["panels"]] == list(INDICES), "seven panels")
-    qstate = manifest["feeds"][QVIX]
-    qsnap = qstate["snapshot"]
-    comparator = qsnap["accounting"]["comparator"] if qsnap else None
-    calendar = comparator_history(root, comparator)
-    qbounds = ([max(qsnap["window"][0], qsnap["source_range"][0]),
-                min(qsnap["window"][1], qsnap["source_range"][1])] if qsnap else None)
-
-    def compare(trace, rows, sessions, bounds=None):
-        values = {r["date"]: r["close"] for r in rows}
-        if bounds is None:
-            bounds = [min(values), max(values)] if values else None
-        days = sorted(set(values) | {d for d in sessions if bounds and bounds[0] <= d <= bounds[1]})
-        require(trace["x"] == days and trace["y"] == [values.get(d) for d in days], "embedded trace arrays")
-        require(trace["connectgaps"] is False, "connected null")
-
+    require(payload["qvix_status"] == {f: manifest["feeds"][f] for f in QVIX_FEEDS}, "HTML QVIX status")
+    require([p["code"] for p in payload["panels"]] == list(INDICES), "eight ordered panels")
+    calendar = {r["date"] for r in data["sh000001"]}
     for panel in payload["panels"]:
         code = panel["code"]
         state = manifest["feeds"][code]
         snap = state["snapshot"]
-        require(panel["name"] == INDICES[code] and len(panel["data"]) == 2, "panel identity/trace count")
-        compare(panel["data"][0], data[code], {r["date"] for r in data["sh000001"]})
-        compare(panel["data"][1], data[QVIX], calendar, qbounds)
-        require(panel["data"][0]["yaxis"] == "y" and panel["data"][1]["yaxis"] == "y2", "trace axes")
-        require(panel["data"][1]["name"] == "50ETF QVIX 收盘（%）" and
-                panel["layout"]["yaxis2"]["side"] == "right" and
+        require(panel["name"] == INDICES[code] and len(panel["data"]) == 1 + len(MAPPINGS[code]),
+                "panel identity/trace count")
+        values = {r["date"]: r["close"] for r in data[code]}
+        limits = (min(values), max(values)) if values else None
+        days = sorted(set(values) | {d for d in calendar if limits and limits[0] <= d <= limits[1]})
+        traces = [(panel["data"][0], days, [values.get(d) for d in days], "y", INDICES[code] + " 收盘")]
+        for trace, feed in zip(panel["data"][1:], MAPPINGS[code], strict=True):
+            traces.append((trace, [r["date"] for r in data[feed]], [r["close"] for r in data[feed]],
+                           "y2", QVIX_FEEDS[feed]["label"]))
+            qid = f"qvix-status-{code}-{feed}"
+            require(parser.disclosure_sections.get(qid) == "panel-section-" + code and
+                    parser.disclosures.get(qid) == visible_qvix(feed, manifest["feeds"][feed]),
+                    "visible QVIX disclosure")
+        for trace, x, y, axis, label in traces:
+            require(trace["x"] == x and trace["y"] == y, "embedded trace arrays")
+            require(trace["connectgaps"] is False and trace["yaxis"] == axis and trace["name"] == label,
+                    "trace identity/axes/nulls")
+        require(panel["layout"]["yaxis2"]["side"] == "right" and
                 panel["layout"]["yaxis2"]["overlaying"] == "y", "QVIX right axis")
-        status = panel["status"]
         expected = {"attempt": state["attempt"]["status"], "attempted_at": state["attempt"]["attempted_at"],
                     "stale_reuse": state["stale_reuse"], "range": snap["range"] if snap else None,
                     "snapshot_status": snap["status"] if snap else "unavailable",
@@ -323,31 +448,16 @@ def verify(root, report):
                     "publication_date": IDENTITIES[code]["release_date"],
                     "base_date": IDENTITIES[code]["base_date"], "official_name": IDENTITIES[code]["official_name"],
                     "citation": IDENTITIES[code]["citation"],
-                    "relative_gaps": [d for d in sorted({r["date"] for r in data["sh000001"]})
-                                      if data[code] and data[code][0]["date"] <= d <= data[code][-1]["date"]
-                                      and d not in {r["date"] for r in data[code]}],
+                    "relative_gaps": [d for d in sorted(calendar) if limits and limits[0] <= d <= limits[1]
+                                      and d not in values],
                     "calendar_stale": manifest["feeds"]["sh000001"]["stale_reuse"],
                     "retrospective_rows": snap["retrospective_count"] if snap else None}
-        require(status == expected, "panel status")
+        require(panel["status"] == expected, "panel status")
         disclosure_id = "index-status-" + code
-        require(parser.disclosure_sections.get(disclosure_id) == "panel-section-" + code,
-                "missing visible index disclosure")
-        require(parser.disclosures.get(disclosure_id) == visible_index(expected), "visible index disclosure")
-        qid = "qvix-status-" + code
-        require(parser.disclosure_sections.get(qid) == "panel-section-" + code,
-                "missing visible QVIX disclosure")
-        require(parser.disclosures[qid] == visible_qvix(qstate), "visible QVIX disclosure")
-        print(code, len(data[code]), status["range"], state["attempt"]["status"])
-    visible = "".join(parser.visible)
-    require(visible.count("QVIX 本次尝试 " + qstate["attempt"]["status"]) == 7, "visible per-panel QVIX status")
-    if qsnap:
-        c = qsnap["accounting"]["selected"]
-        require(f"冲突日期{c['conflicts']}" in visible, "visible conflict count")
-        require("缺失日期" + str(len(c["missing"]) if c["missing"] is not None else "未知") in visible,
-                "visible missing count")
-    else:
-        require("无可用快照，曲线为空" in visible, "visible QVIX unavailability")
-    print("Offline verification passed: raw/wrapper/artifacts/accounting and seven actual embedded trace pairs")
+        require(parser.disclosure_sections.get(disclosure_id) == "panel-section-" + code and
+                parser.disclosures.get(disclosure_id) == visible_index(expected), "visible index disclosure")
+        print(code, len(data[code]), expected["range"], state["attempt"]["status"])
+    print("Offline verification passed: eight panels, seven raw/wrapper/artifact/quality replays")
 
 
 def main():

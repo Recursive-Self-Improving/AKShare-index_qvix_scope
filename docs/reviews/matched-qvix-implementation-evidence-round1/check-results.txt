@@ -1,0 +1,6 @@
+Independent review checks (observed, not implementation claims):
+sha256sum -c docs/matched-qvix-pre-edit.sha256: exit 0; 213 OK lines.
+.venv/bin/python -m app.verify --input data --report report.html: exit 0; eight panels, seven raw/wrapper/artifact/quality replays.
+Focused pytest command recorded in ../matched-qvix-implementation-review-round1.md: exit 0; 40 passed, 21 deselected, 2 upstream mini-racer warnings in 9.34s.
+PYTHONPATH=. .venv/bin/python docs/reviews/matched-qvix-implementation-evidence-round1/probe.py: exit 0; exact output in probe-output.txt.
+.venv/bin/ruff check docs/reviews/matched-qvix-implementation-evidence-round1/probe.py: exit 0; All checks passed!
