@@ -1,0 +1,171 @@
+name: Daily verified refresh
+on:
+  schedule:
+    - cron: '5 0 * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: daily-refresh-persistence
+  cancel-in-progress: false
+env:
+  DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+  PYTHONUNBUFFERED: '1'
+jobs:
+  prepare:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      eligible: ${{ steps.prepare.outputs.eligible }}
+      quality: ${{ steps.prepare.outputs.quality }}
+      receipt_hash: ${{ steps.prepare.outputs.receipt_hash }}
+      artifact_id: ${{ steps.payload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.14.4'
+      - uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
+        with:
+          version: '0.13.6'
+          enable-cache: false
+      - name: Refuse obsolete event before installing packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -I app/daily_transfer.py check
+      - run: uv sync --frozen --no-dev
+      - name: Prepare and independently verify
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: .venv/bin/python -m app.daily --work "$RUNNER_TEMP/daily"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        id: payload
+        with:
+          name: candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/daily/bundle/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Retain bounded attempt diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/daily/diagnostics/
+          if-no-files-found: error
+          retention-days: 14
+  persist:
+    needs: prepare
+    if: needs.prepare.outputs.eligible == 'true' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    outputs:
+      commit: ${{ steps.publish.outputs.commit }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.14.4'
+      - name: Require exact same-run artifact identifier
+        env:
+          ARTIFACT_ID: ${{ needs.prepare.outputs.artifact_id }}
+        run: '[[ "$ARTIFACT_ID" =~ ^[0-9]+$ ]]'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          artifact-ids: ${{ needs.prepare.outputs.artifact_id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/candidate
+      - name: Publish exact verified bytes (stdlib only)
+        id: publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_HASH: ${{ needs.prepare.outputs.receipt_hash }}
+        run: python3 -I app/daily_transfer.py publish --bundle "$RUNNER_TEMP/candidate" --receipt-hash "$RECEIPT_HASH"
+  deploy-pages:
+    needs: [prepare, persist]
+    if: vars.PUBLISH_PAGES == 'true' && needs.persist.result == 'success' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.14.4'
+      - name: Require exact same-run artifact identifier
+        env:
+          ARTIFACT_ID: ${{ needs.prepare.outputs.artifact_id }}
+        run: '[[ "$ARTIFACT_ID" =~ ^[0-9]+$ ]]'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          artifact-ids: ${{ needs.prepare.outputs.artifact_id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/candidate
+      - name: Package exact persisted HTML only
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_HASH: ${{ needs.prepare.outputs.receipt_hash }}
+          DATA_COMMIT: ${{ needs.persist.outputs.commit }}
+        run: python3 -I app/daily_transfer.py pages --bundle "$RUNNER_TEMP/candidate" --receipt-hash "$RECEIPT_HASH" --commit "$DATA_COMMIT" --site "$RUNNER_TEMP/site"
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: ${{ runner.temp }}/site
+          retention-days: 1
+      - name: Recheck persisted target immediately before deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECEIPT_HASH: ${{ needs.prepare.outputs.receipt_hash }}
+          DATA_COMMIT: ${{ needs.persist.outputs.commit }}
+        run: python3 -I app/daily_transfer.py pages --bundle "$RUNNER_TEMP/candidate" --receipt-hash "$RECEIPT_HASH" --commit "$DATA_COMMIT" --site "$RUNNER_TEMP/rechecked-site"
+      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        id: deployment
+  quality-status:
+    needs: [prepare, persist, deploy-pages]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Conclude without concealing partial publication
+        env:
+          PREPARE: ${{ needs.prepare.result }}
+          PERSIST: ${{ needs.persist.result }}
+          DEPLOY: ${{ needs.deploy-pages.result }}
+          PAGES_ENABLED: ${{ vars.PUBLISH_PAGES }}
+          QUALITY: ${{ needs.prepare.outputs.quality }}
+          DATA_COMMIT: ${{ needs.persist.outputs.commit }}
+          EVENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          deployment="$DEPLOY"
+          if [[ "$PAGES_ENABLED" != true ]]; then deployment=disabled; fi
+          printf 'Event code: %s\nData commit: %s\nPrepare: %s; persist: %s; quality: %s; Pages: %s\n' \
+            "$EVENT_SHA" "$DATA_COMMIT" "$PREPARE" "$PERSIST" "$QUALITY" "$deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [[ "$PREPARE" != success || "$PERSIST" != success || -z "$DATA_COMMIT" ]]; then
+            echo '::error::Refresh not proven persisted'; exit 1
+          fi
+          if [[ "$PAGES_ENABLED" == true && "$DEPLOY" != success ]]; then
+            echo '::error::Data persisted; Pages deployment failed/not reached (no rollback)'; exit 1
+          fi
+          if [[ "$QUALITY" != success ]]; then
+            echo '::error::Verified QVIX partial persisted; source quality remains partial'; exit 1
+          fi
