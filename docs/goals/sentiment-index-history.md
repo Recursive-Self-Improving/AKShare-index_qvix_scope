@@ -194,3 +194,33 @@
 - Only non-done historical work item: **W3 — superseded** by D9/user source replacement; AC9–16 and W13–20 cover the replacement and expansion. OriginalAC1/3supersededD9; AC10common50ETFmapping supersededD13/AC14. No activeblocker/deferral or forgotten workitem.
 - Delivered rootreport.html, raw/CSV/quality/provenance, reproducibleREADMEcommands and independent evidence. No push,deployment or scheduler.
 - Green implementation/data/report/review checkpoint committed as `a7477a7fb078577fc6a74bfd2463a916fae8f3ac`; final ledger closure follows separately. No uncommitted code or unrelated changes remain per selective-commit result.
+
+## Daily GitHub refresh — active goal
+### Control summary
+- Mode: proactive; assess evidence, choose the next move, delegate implementation/research/review, evaluate, and update this single durable ledger.
+- Scope is AC17–21; never silently weaken scope; only external missing access/services/state may block completion.
+- Implementation and review use different workers; implement only firm independently reviewed plan sections.
+- Commit every green checkpoint with Conventional Commits, preserve unrelated work, and do not push or deploy.
+- Final gate: Reread the ledger. The gate passes only when every AC has verified evidence or a valid recorded blocker or deferral; every dropped, weakened, superseded, or invalidated AC or work item cites its decision-log entry; no decision is open; no finding is open with triage Fix or Replan; no plan section is still unknown-until unless its trigger is recorded as blocked; a final whole-change REVIEW-LOOP has converged; and you have rerun the full project gates (build/typecheck, tests, lint as applicable) on the final tree after the last change, and they pass. If any item is still doable now, continue the loop instead.
+- At completion quote every non-done work item with status/reason, commit final ledger, then stop. Pause only for external missing tools, credentials, services/state or changes outside this repository.
+### Acceptance criteria
+- AC17: GitHub Actions scheduled daily at `5 0 * * *` UTC plus manual dispatch; explicit permissions, concurrency and bounded runtime; repository-owned automation can persist verified data and root `index.html` without exposing credentials.
+- AC18: exclude the current UTC day, handle weekends/holidays by actual observed dated data rather than inventing trading dates, preserve the complete historical chart. Investigate overlapping 30-calendar-day repair versus full-source replacement and choose with evidence.
+- AC19: refresh data and chart end-to-end with independent offline verification before publication; retain immutable provenance, honest partial/fatal/stale state and useful per-run diagnostics. Failures must not silently corrupt/publish invalid artifacts or erase prior valid history.
+- AC20: document schedule semantics, delayed GitHub execution, recovery/backfill strategy, source/publication limitations, permissions/setup and notification/failure behavior. No external deployment or push during implementation.
+- AC21: independent plan and final whole-change reviews converge; deterministic automation scenarios and full applicable project gates pass on final tree. Actual hosted scheduling/push requires external GitHub execution and is not falsely claimed locally verified.
+### Plan
+- P-D1 [tentative; unreviewed]: compare independent proposals against existing immutable snapshot/source behavior; choose bounded daily full refresh or overlap strategy without losing historical coverage.
+- P-D2 [unknown-until(P-D1 decision and plan review); unreviewed]: implementation files and verification scenarios to be selected from research; retain existing report surface unless required.
+### Work items
+- W21 research/design; AC17–20; active — independent proposals and source/automation inspection.
+- W22 review; AC17–21; todo — independently review selected firm plan.
+- W23 impl; AC17–20; todo — implement reviewed bounded automation slice and deterministic evidence.
+- W24 review/fix; AC17–21; todo — independent whole-change convergence and final project gates.
+### Decision log
+- D18: Resume at clean `6878fe9`, two existing worktrees and no leftover active work in this ledger. Adopt this existing ledger, not a competing plan. User explicitly requests scheduling, superseding earlier “no scheduler” exclusions only; all immutable-data, quality and disclosure contracts remain. Consider 30-day overlap and full refresh independently before deciding; no implementation edits by orchestrator.
+### Findings and open questions
+- D-Q1: open research — whether source APIs genuinely support reduced acquisition windows and whether rolling replacement can preserve provenance/history.
+- D-Q2: open research — safe persisted refresh behavior under expected QVIX partial status, GitHub token permission and branch-based Pages deployment.
+### Iteration log
+- I42: Choose two independent read-only proposals before implementation; reject blindly setting `--start` to 30 days ago, which may truncate the report. Evidence on API boundaries, preservation and GitHub publication changes the selected plan.
