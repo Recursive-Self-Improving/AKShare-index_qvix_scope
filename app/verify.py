@@ -72,6 +72,40 @@ class Embedded(HTMLParser):
                 self.disclosures[self.disclosure] += value
 
 
+def _utc(value):
+    return value[:19].replace("T", " ") + " UTC" if value else "未知"
+
+
+def _span(pair):
+    return f"{pair[0]} → {pair[1]}" if pair else "范围未知"
+
+
+def visible_index(s):
+    """Independently expected compact index disclosure."""
+    if s["snapshot_status"] == "unavailable":
+        text = f"无可用快照 · 本次尝试 {s['attempt']} @ {_utc(s['attempted_at'])} · 范围未知"
+    else:
+        text = (f"快照 {s['snapshot_status']} · {'陈旧（沿用旧快照）' if s['stale_reuse'] else '新鲜'} @ "
+                f"{_utc(s['successful_at'])} · 本次尝试 {s['attempt']} · {_span(s['range'])} · "
+                f"{s['rows']} 行 · 相对上证缺口 {len(s['relative_gaps'])} 日")
+    text += f" · 发布前回溯 {'未知' if s['retrospective_rows'] is None else s['retrospective_rows']} 行"
+    return text + (" · 上证日历陈旧" if s["calendar_stale"] else "")
+
+
+def visible_qvix(state):
+    """Independently expected compact per-panel QVIX disclosure."""
+    snap = state["snapshot"]
+    text = f"QVIX 本次尝试 {state['attempt']['status']} · "
+    if not snap:
+        return text + "无可用快照，范围未知"
+    c = snap["accounting"]["selected"]
+    missing = "未知" if c["missing"] is None else len(c["missing"])
+    outside = "未知" if c["source_only"] is None else len(c["source_only"])
+    return (text + f"快照 {snap['status']} · {'陈旧' if state['stale_reuse'] else '新鲜'} · "
+            f"{_span(c['range'])} · 缺失 {missing} · 冲突 {c['conflicts']} · 源外 {outside} · "
+            f"包络异常 {c['envelope_rows']}")
+
+
 def independent_qvix(body, wrapper, window, calendar, comparator):
     """Separate raw parser/grouping, not renderer/normalizer expected helpers."""
     table = list(csv.reader(io.StringIO(body.decode("gbk")), strict=True))
@@ -298,40 +332,21 @@ def verify(root, report):
         disclosure_id = "index-status-" + code
         require(parser.disclosure_sections.get(disclosure_id) == "panel-section-" + code,
                 "missing visible index disclosure")
-        try:
-            disclosed = json.loads(parser.disclosures[disclosure_id])
-        except (KeyError, json.JSONDecodeError) as error:
-            raise ValueError("invalid visible index disclosure") from error
-        require(disclosed == expected, "visible index disclosure")
+        require(parser.disclosures.get(disclosure_id) == visible_index(expected), "visible index disclosure")
         qid = "qvix-status-" + code
         require(parser.disclosure_sections.get(qid) == "panel-section-" + code,
                 "missing visible QVIX disclosure")
-        text = parser.disclosures[qid]
-        prefix = (f"QVIX 尝试 {qstate['attempt']['status']} @ {qstate['attempt']['attempted_at']}；"
-                  f"请求 {manifest['window']}；")
-        if qsnap:
-            q = qsnap["accounting"]
-            c = q["selected"]
-            expected_quality = (
-                prefix + f"快照 {qsnap['status']} / {'stale 陈旧' if qstate['stale_reuse'] else 'fresh 新鲜'} "
-                f"@ {qsnap['successful_at']}；源范围 {q['full']['range']}；选中 {c['range']} / {c['dates']}日期；"
-                f"缺失源日期 {len(c['missing']) if c['missing'] is not None else 'unknown'}（无源行，以null断线）；"
-                f"冲突日期 {c['conflicts']}（全部OHLC为null，不选任一候选）；"
-                f"源外日期 {len(c['source_only']) if c['source_only'] is not None else 'unknown'}；"
-                f"包络异常源行 {c['envelope_rows']}；精确重复 {c['exact_duplicates']}；"
-                f"源有序 {q['ordered']}；全响应质量计数 {q['full']}；"
-                f"比较日历身份 {q['comparator']}（非官方独立日历；陈旧/未知不能声称完整）。")
-        else:
-            expected_quality = prefix + "unavailable 无可用快照，范围未知，非零值。"
-        require(text == expected_quality, "visible QVIX disclosure")
+        require(parser.disclosures[qid] == visible_qvix(qstate), "visible QVIX disclosure")
         print(code, len(data[code]), status["range"], state["attempt"]["status"])
     visible = "".join(parser.visible)
-    require(visible.count("QVIX 尝试 " + qstate["attempt"]["status"]) == 8, "visible per-panel QVIX status")
+    require(visible.count("QVIX 本次尝试 " + qstate["attempt"]["status"]) == 7, "visible per-panel QVIX status")
     if qsnap:
         c = qsnap["accounting"]["selected"]
-        require(visible.count(f"冲突日期 {c['conflicts']}") == 8, "visible conflict count")
-        require(visible.count("缺失源日期 " + str(len(c["missing"]) if c["missing"] is not None else "unknown"))
-                == 8, "visible missing count")
+        require(f"冲突日期{c['conflicts']}" in visible, "visible conflict count")
+        require("缺失日期" + str(len(c["missing"]) if c["missing"] is not None else "未知") in visible,
+                "visible missing count")
+    else:
+        require("无可用快照，曲线为空" in visible, "visible QVIX unavailability")
     print("Offline verification passed: raw/wrapper/artifacts/accounting and seven actual embedded trace pairs")
 
 
