@@ -1,0 +1,420 @@
+{
+  "50index": {
+    "counts": {
+      "total": 2849,
+      "blank": 1922,
+      "complete": 927,
+      "finite_close_rows": 753,
+      "zero_close_rows": 33,
+      "nonempty_dates": 926,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2023-01-03",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {
+      "#VALUE!": 33,
+      "#DIV/0!": 24,
+      "#NUM!": 2,
+      "#NAME?": 728
+    },
+    "invalid_examples": [
+      [
+        2253,
+        "2024-05-20",
+        0,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        1,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        2,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        3,
+        "#VALUE!"
+      ],
+      [
+        2531,
+        "2025-07-21",
+        0,
+        "#VALUE!"
+      ],
+      [
+        2531,
+        "2025-07-21",
+        1,
+        "#VALUE!"
+      ],
+      [
+        2531,
+        "2025-07-21",
+        2,
+        "#VALUE!"
+      ],
+      [
+        2531,
+        "2025-07-21",
+        3,
+        "#VALUE!"
+      ]
+    ],
+    "raw_header": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "50etf": {
+    "counts": {
+      "total": 2849,
+      "complete": 2849,
+      "finite_close_rows": 2849,
+      "zero_close_rows": 0,
+      "nonempty_dates": 2848,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2015-02-09",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {},
+    "invalid_examples": [],
+    "raw_header": [
+      "",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "100etf": {
+    "counts": {
+      "total": 2849,
+      "blank": 1907,
+      "complete": 942,
+      "finite_close_rows": 942,
+      "zero_close_rows": 0,
+      "nonempty_dates": 941,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2022-12-12",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {
+      "#NUM!": 8
+    },
+    "invalid_examples": [
+      [
+        2146,
+        "2023-12-05",
+        1,
+        "#NUM!"
+      ],
+      [
+        2146,
+        "2023-12-05",
+        2,
+        "#NUM!"
+      ],
+      [
+        2188,
+        "2024-02-02",
+        1,
+        "#NUM!"
+      ],
+      [
+        2188,
+        "2024-02-02",
+        2,
+        "#NUM!"
+      ],
+      [
+        2206,
+        "2024-03-07",
+        1,
+        "#NUM!"
+      ],
+      [
+        2206,
+        "2024-03-07",
+        2,
+        "#NUM!"
+      ],
+      [
+        2419,
+        "2025-02-06",
+        1,
+        "#NUM!"
+      ],
+      [
+        2419,
+        "2025-02-06",
+        2,
+        "#NUM!"
+      ]
+    ],
+    "raw_header": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "300index": {
+    "counts": {
+      "total": 2849,
+      "blank": 1188,
+      "complete": 1661,
+      "finite_close_rows": 1482,
+      "zero_close_rows": 42,
+      "nonempty_dates": 1660,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2019-12-23",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {
+      "#VALUE!": 63,
+      "#N/A": 8,
+      "#DIV/0!": 26,
+      "#NAME?": 722
+    },
+    "invalid_examples": [
+      [
+        2155,
+        "2023-12-18",
+        0,
+        "#VALUE!"
+      ],
+      [
+        2155,
+        "2023-12-18",
+        1,
+        "#VALUE!"
+      ],
+      [
+        2155,
+        "2023-12-18",
+        2,
+        "#VALUE!"
+      ],
+      [
+        2155,
+        "2023-12-18",
+        3,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        0,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        1,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        2,
+        "#VALUE!"
+      ],
+      [
+        2253,
+        "2024-05-20",
+        3,
+        "#VALUE!"
+      ]
+    ],
+    "raw_header": [
+      "",
+      "18",
+      "19",
+      "20",
+      "21"
+    ]
+  },
+  "300etf": {
+    "counts": {
+      "total": 2849,
+      "blank": 1187,
+      "complete": 1662,
+      "finite_close_rows": 1661,
+      "zero_close_rows": 0,
+      "nonempty_dates": 1661,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2019-12-23",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {
+      "#VALUE!": 4,
+      "22。27": 1,
+      "#NUM!": 4
+    },
+    "invalid_examples": [
+      [
+        2256,
+        "2024-06-03",
+        0,
+        "#VALUE!"
+      ],
+      [
+        2256,
+        "2024-06-03",
+        1,
+        "#VALUE!"
+      ],
+      [
+        2256,
+        "2024-06-03",
+        2,
+        "#VALUE!"
+      ],
+      [
+        2256,
+        "2024-06-03",
+        3,
+        "#VALUE!"
+      ],
+      [
+        2401,
+        "2025-01-03",
+        1,
+        "22。27"
+      ],
+      [
+        2496,
+        "2025-05-30",
+        1,
+        "#NUM!"
+      ],
+      [
+        2496,
+        "2025-05-30",
+        2,
+        "#NUM!"
+      ],
+      [
+        2789,
+        "2026-08-13",
+        1,
+        "#NUM!"
+      ]
+    ],
+    "raw_header": [
+      "",
+      "10",
+      "11",
+      "12",
+      "13"
+    ]
+  },
+  "cyb": {
+    "counts": {
+      "total": 2849,
+      "blank": 1852,
+      "complete": 997,
+      "finite_close_rows": 997,
+      "zero_close_rows": 0,
+      "nonempty_dates": 996,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2022-09-19",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {},
+    "invalid_examples": [],
+    "raw_header": [
+      "",
+      "72",
+      "73",
+      "74",
+      ""
+    ]
+  },
+  "kcb": {
+    "counts": {
+      "total": 2849,
+      "blank": 2022,
+      "complete": 827,
+      "finite_close_rows": 827,
+      "zero_close_rows": 1,
+      "nonempty_dates": 826,
+      "duplicate_dates": 1
+    },
+    "nonempty_range": [
+      "2023-06-05",
+      "2026-11-13"
+    ],
+    "invalid_tokens": {
+      "#NUM!": 6
+    },
+    "invalid_examples": [
+      [
+        2230,
+        "2024-04-12",
+        1,
+        "#NUM!"
+      ],
+      [
+        2230,
+        "2024-04-12",
+        2,
+        "#NUM!"
+      ],
+      [
+        2233,
+        "2024-04-17",
+        1,
+        "#NUM!"
+      ],
+      [
+        2233,
+        "2024-04-17",
+        2,
+        "#NUM!"
+      ],
+      [
+        2384,
+        "2024-12-10",
+        1,
+        "#NUM!"
+      ],
+      [
+        2384,
+        "2024-12-10",
+        2,
+        "#NUM!"
+      ]
+    ],
+    "raw_header": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  }
+}

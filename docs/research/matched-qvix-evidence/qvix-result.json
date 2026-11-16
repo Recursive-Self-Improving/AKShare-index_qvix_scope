@@ -1,0 +1,399 @@
+{
+  "version": "1.20.53",
+  "started_at": "2026-11-16T01:01:59.018336+00:00",
+  "responses": [
+    {
+      "path": "response-0.body",
+      "sha256": "2e0f2edc8a6bd80cc4ec71fec22d01d933cc29af7de7b2337c406b0fea436071",
+      "bytes": 928727,
+      "url": "http://1.optbbs.com/d/csv/d/k.csv",
+      "requested_url": "http://1.optbbs.com/d/csv/d/k.csv",
+      "status": 200,
+      "headers": {
+        "Server": "nginx/1.0.15",
+        "Date": "Mon, 16 Nov 2026 01:01:59 GMT",
+        "Content-Type": "application/octet-stream",
+        "Content-Length": "928727",
+        "Last-Modified": "Fri, 13 Nov 2026 09:25:13 GMT",
+        "Connection": "keep-alive",
+        "Accept-Ranges": "bytes"
+      },
+      "retrieved_at": "2026-11-16T01:02:04.006797+00:00",
+      "http_decompressed": true
+    }
+  ],
+  "feeds": {
+    "50index": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        79,
+        80,
+        81,
+        82
+      ],
+      "wrapper_sha256": "24a1b2ffbb82cdd89a5e0c6ce6c7fbf0d9d46ab2196e19a0c205b5ec5a8b7098",
+      "rows": 2849,
+      "valid_ohlc_rows": 722,
+      "nonfinite_rows": 2127,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 722,
+      "range": [
+        "2023-01-03",
+        "2026-05-29"
+      ],
+      "conflicts": {},
+      "envelope_rows": 13,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        },
+        {
+          "date": "2015-02-10",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        }
+      ]
+    },
+    "50etf": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "wrapper_sha256": "31261ded64485ebbdf3620a13f8d718c25aec472d1e57536a6105480b3b6f63f",
+      "rows": 2849,
+      "valid_ohlc_rows": 2849,
+      "nonfinite_rows": 0,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 2848,
+      "range": [
+        "2015-02-09",
+        "2026-11-13"
+      ],
+      "conflicts": {
+        "2026-11-02": [
+          [
+            2841,
+            [
+              16.21,
+              17.48,
+              15.82,
+              15.92
+            ]
+          ],
+          [
+            2843,
+            [
+              16.71,
+              16.86,
+              15.81,
+              15.9
+            ]
+          ]
+        ]
+      },
+      "envelope_rows": 8,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": "28.8",
+          "high": "28.75687834",
+          "low": "27.82955519",
+          "close": "28.63"
+        },
+        {
+          "date": "2015-02-10",
+          "open": "28.63",
+          "high": "29.43502448",
+          "low": "28.49969991",
+          "close": "28.75"
+        }
+      ]
+    },
+    "100etf": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        75,
+        76,
+        77,
+        78
+      ],
+      "wrapper_sha256": "6ed8eb7c33b8c0c4b96015d81351dd063a3764a1e5863eeaa3e94f5d589e0edf",
+      "rows": 2849,
+      "valid_ohlc_rows": 938,
+      "nonfinite_rows": 1911,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 937,
+      "range": [
+        "2022-12-12",
+        "2026-11-13"
+      ],
+      "conflicts": {
+        "2026-11-02": [
+          [
+            2841,
+            [
+              26.35,
+              27.57,
+              26.35,
+              26.47
+            ]
+          ],
+          [
+            2843,
+            [
+              33.74,
+              36.23,
+              24.45,
+              29.38
+            ]
+          ]
+        ]
+      },
+      "envelope_rows": 4,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        },
+        {
+          "date": "2015-02-10",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        }
+      ]
+    },
+    "300index": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        17,
+        18,
+        19,
+        20
+      ],
+      "wrapper_sha256": "50a29326e8377835a4d62021c041f930ebb495c191005adf5671301cc61fe44e",
+      "rows": 2849,
+      "valid_ohlc_rows": 1447,
+      "nonfinite_rows": 1402,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 1447,
+      "range": [
+        "2019-12-23",
+        "2026-05-29"
+      ],
+      "conflicts": {},
+      "envelope_rows": 24,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        },
+        {
+          "date": "2015-02-10",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        }
+      ]
+    },
+    "300etf": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        9,
+        10,
+        11,
+        12
+      ],
+      "wrapper_sha256": "b2339ac8a02776cce8f778efd4735479913e24cc700be8f5e765b77a367020fd",
+      "rows": 2849,
+      "valid_ohlc_rows": 1658,
+      "nonfinite_rows": 1191,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 1657,
+      "range": [
+        "2019-12-23",
+        "2026-11-13"
+      ],
+      "conflicts": {
+        "2026-11-02": [
+          [
+            2841,
+            [
+              18.49,
+              19.15,
+              17.57,
+              17.82
+            ]
+          ],
+          [
+            2843,
+            [
+              21.44,
+              21.61,
+              19.16,
+              19.27
+            ]
+          ]
+        ]
+      },
+      "envelope_rows": 13,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        },
+        {
+          "date": "2015-02-10",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        }
+      ]
+    },
+    "cyb": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        71,
+        72,
+        73,
+        74
+      ],
+      "wrapper_sha256": "dd2810a81d72e36cfc2cb1a064bb033abf0f151ce0fcad2b57e8159777999773",
+      "rows": 2849,
+      "valid_ohlc_rows": 997,
+      "nonfinite_rows": 1852,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 996,
+      "range": [
+        "2022-09-19",
+        "2026-11-13"
+      ],
+      "conflicts": {
+        "2026-11-02": [
+          [
+            2841,
+            [
+              35.84,
+              36.85,
+              34.51,
+              34.7
+            ]
+          ],
+          [
+            2843,
+            [
+              51.86,
+              54.69,
+              41.9,
+              44.29
+            ]
+          ]
+        ]
+      },
+      "envelope_rows": 2,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        },
+        {
+          "date": "2015-02-10",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        }
+      ]
+    },
+    "kcb": {
+      "status": "wrapper_success",
+      "columns_zero_based": [
+        0,
+        83,
+        84,
+        85,
+        86
+      ],
+      "wrapper_sha256": "e70fb6a6849877d7c3832ab5af1cb1022da63072b39ec23e58992aaa62dc1352",
+      "rows": 2849,
+      "valid_ohlc_rows": 824,
+      "nonfinite_rows": 2025,
+      "invalid_dates_among_finite_rows": 0,
+      "valid_dates": 823,
+      "range": [
+        "2023-06-05",
+        "2026-11-13"
+      ],
+      "conflicts": {
+        "2026-11-02": [
+          [
+            2841,
+            [
+              41.15,
+              42.49,
+              39.67,
+              39.72
+            ]
+          ],
+          [
+            2843,
+            [
+              41.8,
+              61.4,
+              38.81,
+              56.88
+            ]
+          ]
+        ]
+      },
+      "envelope_rows": 6,
+      "head": [
+        {
+          "date": "2015-02-09",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        },
+        {
+          "date": "2015-02-10",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null
+        }
+      ]
+    }
+  },
+  "finished_at": "2026-11-16T01:02:04.197177+00:00"
+}
