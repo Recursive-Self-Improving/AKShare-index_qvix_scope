@@ -91,7 +91,7 @@ def prepare(root, work, identity, clock=utc_now, runner=execute):
     from app.core import load_manifest
     root, work = Path(root), Path(work)
     started = clock()
-    cutoff = (started.astimezone(timezone.utc).date() - timedelta(days=1)).isoformat()
+    cutoff = started.astimezone(timezone.utc).date().isoformat()
     work.mkdir(parents=True, exist_ok=False)
     diagnostics = work / "diagnostics"
     diagnostics.mkdir()

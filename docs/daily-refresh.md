@@ -5,11 +5,34 @@
 ## 调度与数据窗口
 
 工作流 [daily-refresh.yml](../.github/workflows/daily-refresh.yml) 在默认分支运行：
-`5 0 * * *`（UTC）与手动 **Run workflow**，不接受其他分支或日期输入。
-实际准备开始时冻结一次 UTC 日期，选择 **2000-01-01 至 UTC 昨天**，跨午夜不重算；
-延迟运行采用实际开始日，不补造名义 cron 日期。周末/节假日只保留源观察，不补交易行。
+`15 11 * * *`（11:15 UTC／北京时间 19:15）与手动 **Run workflow**，不接受其他分支或日期输入。
+实际准备开始时冻结一次 UTC 日期，选择 **2000-01-01 至 UTC 当天（含）**，跨午夜不重算；
+延迟运行采用实际开始日，不补造名义 cron 日期。各源保留窗口内实际观察到的最新交易日，
+不以周一至周五推算交易日，不补周末/节假日，也不要求不同源的最新日期一致。
+晚间调度为源日线发布留缓冲，不保证当天数据已齐；手动运行也用当天截止，盘中运行不保证收盘值。
 完整源每日替换能接收30天以前的修订；这些 wrapper 无上游窗口参数，30天选行会截断图表，
 不会减少下载。不是滚动合并，不把旧价格拼回新鲜 null。
+
+### 为什么不定在 09:00 UTC
+
+2026-11-17 01:19 UTC 对源端点的有界 HEAD 观察（各20秒上限）：
+- [QVIX 日线 CSV](https://1.optbbs.com/d/csv/d/k.csv)：HTTP200，
+  `Last-Modified: Mon, 16 Nov 2026 09:37:06 GMT`（北京时间17:37）。
+- [新浪深证100日线](https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4)：
+  HTTP200，`Last-Modified: Mon, 16 Nov 2026 10:24:55 GMT`（北京时间18:24）。
+
+`Last-Modified` 不是首次发布时间，也不证明修改涉及哪条记录；这些观察不能保证09:00 UTC数据已齐。
+源站曾在[2020年公告](https://www.optbbs.com/thread-11908257-1-1.html)称QVIX日K通常15:30左右更新，
+但这不是当前七条QVIX与八个新浪指数的统一发布承诺。11:15 UTC是保守缓冲，不是可用性SLA。
+应看各快照实际覆盖日期与质量，不能以当天请求成功或新获取时间冒充当天行情。
+
+### 未自动运行的排查
+
+2026-11-17 检查公开API时，默认分支为 `master`、工作流状态 `active`、运行记录数为0；
+默认分支已包含定时配置。尚无运行记录可解释具体漏触发原因，不能归因于获取脚本报错。
+[GitHub说明](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)
+调度在高负载时可能延迟或丢失，整点尤其拥挤；改为非整点只是降低风险，不是修复已证实的根因。
+修改须进入默认分支才生效；需要补跑时从默认分支使用 **Run workflow**，不要重跑旧发布任务。
 
 ## 启用前的外部设置
 
@@ -100,3 +123,8 @@ always诊断仅保存本次新增证据（最多512文件/256MiB，超限有TRUN
 实施时的本地确定性验证：`uv run --frozen pytest -q tests/test_daily.py`。
 使用留存/合成HTTP、真实worker/离线渲染与独立校验器、一次性本地bare remote，
 没有真实provider请求、远端推送或部署；[精确命令/证据与限制](daily-refresh-implementation-evidence.md)。
+
+2026-11-17 调度/当天截止调整后：`uv run --frozen pytest -q tests/test_daily.py` 为54通过，
+含当天行纳入、未来行排除、UTC跨日冻结及真实离线准备/发布边界；
+`uv run --frozen ruff check app/daily.py tests/test_daily.py` 与
+`actionlint .github/workflows/daily-refresh.yml` 均通过。未验证托管调度触发或当天源可用性。

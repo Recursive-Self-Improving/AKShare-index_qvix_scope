@@ -15,7 +15,7 @@ from app.core import INDICES, QVIX_FEEDS, dump, load_manifest, sha
 from app.daily_transfer import digest, git, inventory, publish, validate_bundle
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXED = datetime(2026, 11, 16, 0, 5, tzinfo=timezone.utc)
+FIXED = datetime(2026, 11, 16, 11, 15, tzinfo=timezone.utc)
 
 
 def repo_pair(tmp_path):
@@ -256,8 +256,13 @@ def test_invocation_and_cutoff_refusals(tmp_path, monkeypatch, attack):
                           FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
 
 
-@pytest.mark.parametrize("start,expected", [("2024-03-01T00:00:00+00:00", "2024-02-29"),
-                                            ("2027-01-01T00:00:00+00:00", "2026-12-31")])
+@pytest.mark.parametrize("start,expected", [
+    ("2026-11-16T11:15:00+00:00", "2026-11-16"),
+    ("2026-11-14T11:15:00+00:00", "2026-11-14"),
+    ("2024-02-29T23:59:59+00:00", "2024-02-29"),
+    ("2026-12-31T23:59:59+00:00", "2026-12-31"),
+    ("2027-01-01T01:00:00+08:00", "2026-12-31"),
+])
 def test_frozen_utc_cutoff_without_local_timezone(tmp_path, start, expected, monkeypatch):
     monkeypatch.setenv("TZ", "Pacific/Honolulu")
     root = tmp_path / "root"
@@ -295,6 +300,7 @@ def real_prepared(tmp_path_factory):
             for column in definition["columns"][1:]:
                 row[column] = ""
     records.append(["2026/11/16", *records[-1][1:]])
+    records.append(["2026/11/17", *records[-1][1:]])
     stream = io.StringIO(newline="")
     csv.writer(stream, lineterminator="\n").writerows(records)
     blank_body = stream.getvalue().encode("gbk")
@@ -325,7 +331,8 @@ def real_prepared(tmp_path_factory):
                 ticks = iter(range(1000))
                 patch.setattr("app.fetch.now",
                               lambda: (FIXED + timedelta(seconds=2, microseconds=next(ticks))).isoformat())
-                code = fetch(command[command.index("--output") + 1], daily.START, "2026-11-15")
+                code = fetch(command[command.index("--output") + 1],
+                             command[command.index("--start") + 1], command[command.index("--end") + 1])
             log.write_text(f"actual fetch exit={code}; retained HTTP fixture\n")
             return code
         if "app.chart" in command:
@@ -346,7 +353,7 @@ def real_prepared(tmp_path_factory):
 def test_real_orchestration_blank_partial_and_independent_verifier(real_prepared):
     root, work, outcome, identity = real_prepared
     assert outcome["eligible"] and outcome["quality"] == "partial" and outcome["fetch_exit"] == 1
-    assert outcome["window"] == [daily.START, "2026-11-15"]
+    assert outcome["window"] == [daily.START, "2026-11-16"]
     assert outcome["finished_at"].startswith("2026-11-17")  # Cutoff survives midnight.
     validate_bundle(work / "bundle", outcome["receipt_hash"], identity)
     candidate = load_manifest(work / "stage/data")
@@ -359,8 +366,9 @@ def test_real_orchestration_blank_partial_and_independent_verifier(real_prepared
             assert snap["acquired_at"] < snap["attempted_at"]
         assert all(row["close"] is None for row in read_csv(work / "stage/data" / snap["csv"]))
         days = {row["date"] for row in read_csv(work / "stage/data" / snap["csv"])}
-        assert days and max(days) == "2026-11-13" and min(days) < "2026-10-01"
-        assert "2026-11-16" in daily.source_dates(work / "stage/data", snap, feed)
+        assert days and max(days) == "2026-11-16" and min(days) < "2026-10-01"
+        assert "2026-11-17" not in days
+        assert "2026-11-17" in daily.source_dates(work / "stage/data", snap, feed)
     for log in ("baseline.log", "candidate.log"):
         assert "Offline verification passed: eight panels" in (work / "diagnostics" / log).read_text()
     assert not (root / "data" / candidate["run"]).exists()

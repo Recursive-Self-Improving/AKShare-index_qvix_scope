@@ -1,7 +1,7 @@
 name: Daily verified refresh
 on:
   schedule:
-    - cron: '5 0 * * *'
+    - cron: '15 11 * * *' # UTC; 19:15 Asia/Shanghai, after daily-source publication buffer.
   workflow_dispatch:
 permissions: {}
 concurrency:
