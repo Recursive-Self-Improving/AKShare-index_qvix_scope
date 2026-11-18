@@ -17,6 +17,11 @@ from app.core import (
 from app.identities import IDENTITIES
 
 
+INDEX_HTTP_TIMEOUT = (5, 12)
+QVIX_GROUP_SECONDS = 5 * 60
+QVIX_HTTP_TIMEOUT = (5, QVIX_GROUP_SECONDS)
+
+
 def durable_mkdir(path):
     path = Path(path)
     if path.exists():
@@ -38,7 +43,7 @@ def durable_bytes(path, content):
 
 
 @contextmanager
-def capture_http(root, directory):
+def capture_http(root, directory, timeout):
     import requests
     from akshare.utils import http
     captures = []
@@ -54,7 +59,7 @@ def capture_http(root, directory):
         atomic(directory / "transport.json", captures)
         return response
     def get(url, **kwargs):
-        return requests.get(url, **kwargs, timeout=(5, 12), hooks={"response": capture})
+        return requests.get(url, **kwargs, timeout=timeout, hooks={"response": capture})
     original = http.get
     http.get = get
     try:
@@ -67,7 +72,7 @@ def attempt(feed, window):
     return {"feed": feed, "attempted_at": now(), "window": window,
             "versions": {k: importlib.metadata.version(k)
                          for k in ("akshare", "requests", "pandas", "mini-racer")},
-            "request_timeout_seconds": [5, 12]}
+            "request_timeout_seconds": list(QVIX_HTTP_TIMEOUT if feed in QVIX_FEEDS else INDEX_HTTP_TIMEOUT)}
 
 
 def transport(root, directory, captures):
@@ -84,7 +89,7 @@ def worker(feed, directory, start, end):
     root = directory.parents[2]
     result = attempt(feed, [start, end])
     result["invocation"] = f"index_zh_daily_sina(symbol={feed!r})"
-    with capture_http(root, directory) as captures:
+    with capture_http(root, directory, INDEX_HTTP_TIMEOUT) as captures:
         try:
             ak.index_zh_daily_sina(symbol=feed)
             result.update(transport(root, directory, captures))
@@ -123,7 +128,7 @@ def group_worker(directory):
     group = None
     shared_error = None
     try:
-        with capture_http(root, directory) as captures:
+        with capture_http(root, directory, QVIX_HTTP_TIMEOUT) as captures:
             def loader():
                 nonlocal group, shared_error
                 if shared_error:
@@ -242,6 +247,7 @@ def fetch(root, start, end):
     run = "runs/" + now().replace(":", "-") + "-" + uuid.uuid4().hex[:8]
     manifest = {"schema": SCHEMA, "run": run, "attempted_at": now(), "window": [start, end],
                 "feeds": {}, "manifest_path": run + "/manifest.json", "worker_wall_seconds": 45,
+                "qvix_group_wall_seconds": QVIX_GROUP_SECONDS,
                 "operation": "acquisition",
                 "revision_policy": "whole snapshots only; not point-in-time"}
     if previous:
@@ -251,7 +257,7 @@ def fetch(root, start, end):
         durable_mkdir(directory)
         try:
             subprocess.run([sys.executable, "-m", "app.fetch", "--worker", feed, str(directory), start, end],
-                           timeout=45, check=True)
+                           timeout=manifest["worker_wall_seconds"], check=True)
             result = completed(root, directory / "result.json")
         except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
             result = attempt(feed, [start, end]) | {"status": "failure", "error": str(error),
@@ -268,7 +274,7 @@ def fetch(root, start, end):
     termination = None
     try:
         subprocess.run([sys.executable, "-m", "app.fetch", "--group-worker", str(directory)],
-                       timeout=45, check=True)
+                       timeout=manifest["qvix_group_wall_seconds"], check=True)
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
         termination = str(error)
         atomic(directory / "termination.json", {"error": termination, "finished_at": now()})

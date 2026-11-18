@@ -390,17 +390,19 @@ def test_fetch_sequential_workers_and_timeout_evidence(tmp_path, monkeypatch):
     def deadline(command, **kwargs):
         calls.append(command[3])
         if command[3] == "--group-worker":
-            raise subprocess.TimeoutExpired(command, 45)
+            raise subprocess.TimeoutExpired(command, kwargs["timeout"])
         directory = Path(command[5])
         body = b"received before timeout"
         (directory / "response-0.body").write_bytes(body)
         dump(directory / "transport.json", [{"body": str((directory / "response-0.body").relative_to(tmp_path)),
                                             "sha256": sha(body)}])
-        raise subprocess.TimeoutExpired(command, 45)
+        raise subprocess.TimeoutExpired(command, kwargs["timeout"])
     monkeypatch.setattr("app.fetch.subprocess.run", deadline)
     assert fetch(tmp_path, *WINDOW) == 1
     assert calls == ["--worker"] * 8 + ["--group-worker"]
     manifest = load_manifest(tmp_path)
+    assert manifest["worker_wall_seconds"] == 45 and manifest["qvix_group_wall_seconds"] == 300
+    assert all(manifest["feeds"][f]["attempt"]["request_timeout_seconds"] == [5, 300] for f in QVIX_FEEDS)
     assert all(manifest["feeds"][f]["attempt"]["captures"] for f in INDICES)
     assert all(s["snapshot"] is None for s in manifest["feeds"].values())
 

@@ -306,6 +306,9 @@ def real_prepared(tmp_path_factory):
     blank_body = stream.getvalue().encode("gbk")
     def retained_get(url, **kwargs):
         if "optbbs" in url:
+            # Simulate a slow but complete shared download without sleeping in CI.
+            if kwargs["timeout"][1] < 290:
+                raise requests.ReadTimeout("290s idle during QVIX transfer")
             body, encoding = blank_body, "gbk"
         else:
             feed = next(feed for feed in INDICES if feed in url)
@@ -319,6 +322,8 @@ def real_prepared(tmp_path_factory):
         return response
     def local_worker(command, **kwargs):
         if command[3] == "--group-worker":
+            if kwargs["timeout"] < 299:
+                raise subprocess.TimeoutExpired(command, kwargs["timeout"])
             group_worker(Path(command[4]))
         else:
             worker(*command[4:])

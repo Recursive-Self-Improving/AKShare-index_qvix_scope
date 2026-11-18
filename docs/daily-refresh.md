@@ -84,7 +84,9 @@ event代码SHA与数据commit分开记录。Git与Pages不跨服务原子，部�
 固定workflow并发组不取消运行中实例；pending可被替换、调度可能延迟/丢失，
 公共仓库不活跃可能禁用调度，并非exactly-once队列或“未运行”告警。
 prepare/persist/Pages/conclusion分别限30/5/10/2分钟，prepare内部25分钟deadline；
-原有8×45秒+共享45秒源预算不变，无provider重试、浏览器或后台服务。
+8 个指数各限 45 秒（连接 5 秒、读取空闲 12 秒）。7 条 QVIX 共用一次 CSV 请求：
+连接 5 秒、读取空闲最多 300 秒，整个共享子进程（含下载和解析）总计最多 5 分钟，不是每条各 5 分钟。
+仍然超时就停止发布，不重试、不把旧快照当作本次获取。
 候选最多512文件/256MiB；receipt最多1MiB，单命令日志最多4MiB（超限截断并失败）。
 always诊断仅保存本次新增证据（最多512文件/256MiB，超限有TRUNCATED标记）、
 候选HTML（最多256MiB）、阶段日志与outcome，申请保留14天；Pages制品1天。
@@ -130,3 +132,7 @@ always诊断仅保存本次新增证据（最多512文件/256MiB，超限有TRUN
 含当天行纳入、未来行排除、UTC跨日冻结及真实离线准备/发布边界；
 `uv run --frozen ruff check app/daily.py tests/test_daily.py` 与
 `actionlint .github/workflows/daily-refresh.yml` 均通过。未验证托管调度触发或当天源可用性。
+
+2026-11-18 在本地临时目录用新预算运行真实 `prepare`：QVIX 共享请求取得 930038 字节，
+首条调用至收到完整响应耗时 46 秒，已超过旧进程上限。8 个指数成功，7 条 QVIX 均为本次获取的 `partial`，
+独立验证通过，整次准备耗时 78 秒。未提交该次数据或部署到 Pages；这不是 GitHub runner 的耗时保证。
