@@ -1,6 +1,6 @@
 {
   "feed": "qvix_100etf",
-  "attempted_at": "2026-11-18T04:40:25.643429+00:00",
+  "attempted_at": "2026-11-18T18:05:03.680849+00:00",
   "window": [
     "2000-01-01",
     "2026-11-18"
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "170914574b87461e828a7efa85012003",
+  "group_id": "06dbe5584e064d41b4d9ef5ab04d3bbb",
   "invocation": "index_option_100etf_qvix()",
   "invoked": true,
   "columns": [
