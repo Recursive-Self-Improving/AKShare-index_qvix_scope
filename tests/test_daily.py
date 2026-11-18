@@ -256,6 +256,36 @@ def test_invocation_and_cutoff_refusals(tmp_path, monkeypatch, attack):
                           FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
 
 
+def test_retention_cut_is_bound_to_one_immutable_acquisition(tmp_path):
+    from app.core import SCHEMA, artifact_ref
+    from app.fetch import promote
+    feeds = {f: {"attempt": {"status": "failure"}, "snapshot": None, "stale_reuse": False}
+             for f in (*INDICES, *QVIX_FEEDS)}
+    retired = tmp_path / "runs/retired/manifest.json"
+    retired.parent.mkdir(parents=True)
+    dump(retired, {"run": "runs/retired"})
+    kept = {"schema": SCHEMA, "operation": "acquisition", "run": "runs/kept",
+            "manifest_path": "runs/kept/manifest.json", "feeds": feeds,
+            "previous": artifact_ref(tmp_path, "runs/retired/manifest.json")}
+    immutable = tmp_path / kept["manifest_path"]
+    immutable.parent.mkdir()
+    dump(immutable, kept)
+    anchor = artifact_ref(tmp_path, kept["manifest_path"])
+    dump(tmp_path / "history-root.json", anchor)
+    retired.unlink()
+    promote(tmp_path, kept)
+    successor = kept | {"run": "runs/next", "manifest_path": "runs/next/manifest.json", "previous": anchor}
+    (tmp_path / successor["run"]).mkdir()
+    promote(tmp_path, successor)
+    for forged in (successor | {"previous": kept["previous"]}, kept | {"window": ["2000-01-01", "2099-01-01"]}):
+        with pytest.raises(ValueError, match="outside retained history root"):
+            promote(tmp_path, forged)
+    dump(retired, {"run": "runs/substituted"})
+    with pytest.raises(ValueError, match="artifact reference hash"):
+        promote(tmp_path, kept)
+    assert load_manifest(tmp_path) == successor
+
+
 @pytest.mark.parametrize("start,expected", [
     ("2026-11-16T11:15:00+00:00", "2026-11-16"),
     ("2026-11-14T11:15:00+00:00", "2026-11-14"),

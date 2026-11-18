@@ -497,7 +497,18 @@ def validate_manifest(root, manifest):
     require(manifest.get("schema") == SCHEMA and set(manifest["feeds"]) == {*INDICES, *QVIX_FEEDS},
             "incompatible active schema")
     if manifest.get("previous"):
-        read_ref(root, manifest["previous"])
+        try:
+            read_ref(root, manifest["previous"])
+        except FileNotFoundError:
+            # An operator can cut history immediately before one exact, immutable
+            # acquisition. No other missing parent or corrupt artifact is excused.
+            marker = root / "history-root.json"
+            if not marker.is_file():
+                raise
+            anchor = json.loads(marker.read_bytes())
+            require(manifest.get("operation") == "acquisition" and
+                    anchor["path"] == manifest["manifest_path"] == manifest["run"] + "/manifest.json" and
+                    read_ref(root, anchor) == manifest, "missing predecessor outside retained history root")
     verified, cache = {}, {}
     for feed, state in manifest["feeds"].items():
         require(set(state) == {"attempt", "snapshot", "stale_reuse"}, "compact whole snapshot state")

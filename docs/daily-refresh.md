@@ -110,9 +110,20 @@ prepare/persist/Pages/conclusion分别限30/5/10/2分钟，prepare内部25分钟
 [pages build and deployment](https://github.com/Recursive-Self-Improving/AKShare-index_qvix_scope/actions/runs/44235293553)，制品37.55 MB。
 后者不是本工作流上传的单页包；应检查 Pages 来源，不要仅调短制品保留期。
 
-已发布的不可变证据不清理、不改写历史。一次完整发布仍可新增约10 MB工作树文件；Git会复用相同内容的blob，文件大小之和不是Git实际传输量。
+日常工作流不删除证据、不重写历史。每次发布仍可新增约10 MB工作树文件；Git会复用相同内容的blob，文件大小之和不是Git实际传输量。
 新鲜 partial 的警告可在该次运行中查看；它不触发工作流失败通知。
 失败通知依赖GitHub用户设置及调度创建/编辑/重新启用者；丢失/禁用的调度不一定产生通知。
+
+### 一次性历史清理
+
+2026-11-18 经维护者授权，从 `master` 的历史中移除了最新一次之前的7个 `data/runs/` 目录。
+保留快照的72个文件、`data/latest.json` 和 `index.html` 均未改写。
+[`data/history-root.json`](../data/history-root.json) 以原始路径和 SHA256 指定保留的首份 acquisition：
+仅它的直接前驱允许不在仓库内；有文件但哈希不符仍报错。之后的 acquisition 必须正常绑定前驱并通过完整校验。
+这不是自动轮换策略。旧报告或迁移记录中的早期 run 路径只作历史引用，完整回放需要清理前的备份。
+
+已有 clone 不应把旧 `master` 合并或推回；建议重新 clone，并单独移植未发布的工作。
+GitHub 的只读 PR 引用、fork 和他人的 clone 不会随 `master` 重写；托管端的实际空间回收不受一次 push 保证。
 
 ## 故障恢复
 

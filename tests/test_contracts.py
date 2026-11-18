@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 
 from app.core import (
-    INDICES, MAPPINGS, OHLC, QVIX_FEEDS, SCHEMA, atomic, compact_quality,
+    INDICES, MAPPINGS, OHLC, QVIX_FEEDS, SCHEMA, artifact_ref, atomic, compact_quality,
     csv_bytes, dump, histories, load_manifest, qvix_artifacts, raw_qvix, read_csv,
     replay_qvix, sha, validate,
 )
@@ -451,6 +451,7 @@ def test_visible_per_feed_and_index_disclosure_tampering(active, tmp_path, condi
     shutil.copytree(ROOT / "data", root)
     manifest = copy.deepcopy(active)
     if condition != "fresh":
+        manifest["previous"] = artifact_ref(root, active["manifest_path"])
         manifest["manifest_path"] = "tamper-manifest.json"
         for feed, state in manifest["feeds"].items():
             manifest["feeds"][feed] = state_after(
@@ -513,7 +514,9 @@ def test_visible_per_feed_and_index_disclosure_tampering(active, tmp_path, condi
 @pytest.mark.parametrize("feed", [FEED, "sh000001"])
 @pytest.mark.parametrize("attack", ["origin", "time", "transport"])
 def test_mandatory_provenance_and_original_time(active, feed, attack):
+    root = ROOT / "data"
     manifest = copy.deepcopy(active)
+    manifest["previous"] = artifact_ref(root, active["manifest_path"])
     snap = manifest["feeds"][feed]["snapshot"]
     if attack == "origin":
         snap.pop("origin")
@@ -524,8 +527,9 @@ def test_mandatory_provenance_and_original_time(active, feed, attack):
     else:
         snap.pop("transport")
     manifest["feeds"][feed]["attempt"] = snap
-    with pytest.raises((ValueError, KeyError)):
-        validate_manifest(ROOT / "data", manifest)
+    error = "mandatory origin provenance" if attack == "origin" else "immutable revision identity/time"
+    with pytest.raises(ValueError, match=error):
+        validate_manifest(root, manifest)
 
 
 def test_stale_comparator_is_partial_without_mutating_calendar():
@@ -577,15 +581,107 @@ def test_member_commit_atomic_failure_does_not_publish_incomplete_prices(tmp_pat
     assert results["qvix_50index"]["invoked"] and not results[FEED]["invoked"]
 
 
-def test_explicit_derived_v4_migration_preserves_original_times_and_artifacts():
-    root = ROOT / "data"
-    manifest = json.loads((root / "derived/matched-qvix-v4/manifest.json").read_text())
-    validate_manifest(root, manifest)
+@pytest.fixture
+def migrated_v4(tmp_path, active):
+    from app.core import decode
+    from app.fetch import bind_comparator, completed
+
+    # Model the old standalone 50ETF acquisition and its manifest-based comparator.
+    root = tmp_path
+    legacy_dir = root / "runs/legacy"
+    legacy_member = legacy_dir / FEED
+    legacy_member.mkdir(parents=True)
+    code = QVIX_FEEDS[FEED]["comparator"]
+    index = active["feeds"][code]["snapshot"].copy()
+    index.pop("origin")
+    index_dir = legacy_dir / code
+    index_dir.mkdir()
+    csv_path = index_dir / "observations.csv"
+    shutil.copyfile(ROOT / "data" / index["csv"], csv_path)
+    raw_path = index_dir / "response-0.body"
+    shutil.copyfile(ROOT / "data" / index["raw"]["body"], raw_path)
+    index["raw"] = index["raw"] | {"body": str(raw_path.relative_to(root))}
+    transport = index_dir / "transport.json"
+    dump(transport, [index["raw"]])
+    index.update(csv=str(csv_path.relative_to(root)), transport=str(transport.relative_to(root)),
+                 transport_sha256=sha(transport.read_bytes()))
+    calendar = {r["date"] for r in decode(code, raw_path.read_bytes(), index["raw"]["encoding"])}
+
+    window = ["2024-01-02", "2024-01-04"]
+    body = source([("2024/1/2", [1, 2, 1, 2]), ("2024/1/4", [2, 3, 1, 3])])
+    wrapper = replay_qvix(body, FEED)
+    raw_path = legacy_member / "response-0.body"
+    raw_path.write_bytes(body)
+    url = QVIX_FEEDS[FEED]["url"]
+    acquired = "2024-01-05T00:00:01Z"
+    raw = {"body": str(raw_path.relative_to(root)), "sha256": sha(body), "status": 200,
+           "url": url, "requested_url": url, "encoding": "gbk", "retrieved_at": acquired}
+    transport = legacy_member / "transport.json"
+    dump(transport, [raw])
+    evidence = {"raw": raw, "transport": str(transport.relative_to(root)),
+                "transport_sha256": sha(transport.read_bytes())}
+    fields = [*OHLC, "quality"]
+    legacy_rows, _, legacy_status = qvix_artifacts(body, wrapper, window, None, None, FEED)
+    wrapper_path = legacy_member / "wrapper.csv"
+    wrapper_path.write_bytes(wrapper)
+    legacy_csv = legacy_member / "observations.csv"
+    legacy_csv.write_bytes(csv_bytes(legacy_rows, fields))
+    original = {
+        "feed": FEED, "schema": "qvix-comparison-v2", "status": legacy_status, "window": window,
+        "attempted_at": "2024-01-05T00:00:00Z", "successful_at": "2024-01-05T00:00:02Z",
+        "finished_at": "2024-01-05T00:00:03Z", "wrapper": str(wrapper_path.relative_to(root)),
+        "wrapper_sha256": sha(wrapper), "csv": str(legacy_csv.relative_to(root)),
+        "csv_sha256": sha(legacy_csv.read_bytes()), **evidence,
+    }
+    legacy_manifest = legacy_dir / "manifest.json"
+    dump(legacy_manifest, {"schema": original["schema"], "feeds": {
+        FEED: state_after({}, original), code: state_after({}, index)}})
+    origin = artifact_ref(root, str(legacy_manifest.relative_to(root))) | {"kind": "manifest"}
+    index_state = state_after({}, index | {"origin": origin})
+    comparator = bind_comparator(FEED, {code: index_state})
+
+    # A derived completion binds the old acquisition and reaccounts against its calendar.
+    directory = root / "derived/v4"
+    member = directory / FEED
+    member.mkdir(parents=True)
+    group = directory / "group.json"
+    group_id = "derived-v4-fixture"
+    dump(group, evidence | {"group_id": group_id, "global_validated": True, "acquired_at": acquired})
+    rows, quality, status = qvix_artifacts(body, wrapper, window, calendar, comparator, FEED)
+    csv_path, quality_path = member / "observations.csv", member / "quality.json"
+    csv_path.write_bytes(csv_bytes(rows, fields))
+    dump(quality_path, quality)
+    result_path = member / "result.json"
+    result = {k: original[k] for k in (
+        "feed", "window", "attempted_at", "successful_at", "finished_at", "wrapper", "wrapper_sha256")}
+    dump(result_path, result | {
+        "schema": SCHEMA, "status": status, "migration": origin, "invoked": True,
+        "columns": QVIX_FEEDS[FEED]["columns"], "invocation": QVIX_FEEDS[FEED]["wrapper"] + "()",
+        "shared": artifact_ref(root, str(group.relative_to(root))),
+        "group_id": group_id, "acquired_at": acquired, "accounting": compact_quality(quality),
+        "count": len(rows), "range": window, "source_range": window,
+        "csv": str(csv_path.relative_to(root)), "csv_sha256": sha(csv_path.read_bytes()),
+        "quality": str(quality_path.relative_to(root)), "quality_sha256": sha(quality_path.read_bytes()),
+    })
+    manifest = empty_manifest() | {"window": window, "operation": "format-migration"}
+    manifest["feeds"][code] = index_state
+    manifest["feeds"][FEED] = state_after({}, completed(root, result_path))
+    return root, manifest
+
+
+def test_explicit_derived_v4_migration_preserves_original_times_and_artifacts(migrated_v4):
+    root, manifest = migrated_v4
+    verified = validate_manifest(root, manifest)
     snap = manifest["feeds"][FEED]["snapshot"]
     source_manifest = json.loads((root / snap["migration"]["path"]).read_text())
     original = source_manifest["feeds"][FEED]["snapshot"]
     assert all(snap[k] == original[k] for k in ("attempted_at", "successful_at", "finished_at"))
     assert snap["wrapper"] == original["wrapper"] and snap["csv"] != original["csv"]
+    assert snap["csv_sha256"] != original["csv_sha256"]
+    assert snap["accounting"]["comparator"]["origin"] == snap["migration"]
+    assert snap["accounting"]["full"]["holes"] == snap["accounting"]["selected"]["holes"] == 1
+    assert [(row["date"], row["close"]) for row in verified[FEED]] == [
+        ("2024-01-02", 2.0), ("2024-01-03", None), ("2024-01-04", 3.0)]
     assert all(manifest["feeds"][f]["snapshot"] is None for f in QVIX_FEEDS if f != FEED)
 
 
@@ -640,11 +736,9 @@ def test_durable_artifact_hash_failure_is_member_local(tmp_path, monkeypatch, ar
 
 
 @pytest.mark.parametrize("field", ["attempted_at", "successful_at", "finished_at"])
-def test_derived_completion_cannot_replace_original_times(tmp_path, field):
+def test_derived_completion_cannot_replace_original_times(migrated_v4, field):
     from app.fetch import completed
-    root = tmp_path / "data"
-    shutil.copytree(ROOT / "data", root)
-    manifest = json.loads((root / "derived/matched-qvix-v4/manifest.json").read_text())
+    root, manifest = migrated_v4
     snap = manifest["feeds"][FEED]["snapshot"]
     path = root / snap["origin"]["path"]
     result = json.loads(path.read_text())
