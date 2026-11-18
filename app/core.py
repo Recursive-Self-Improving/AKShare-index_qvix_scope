@@ -1,4 +1,4 @@
-"""Small immutable snapshot contract; no network in validation or rendering."""
+"""Single-snapshot data contract; no network in validation or rendering."""
 import csv
 import hashlib
 import io
@@ -86,8 +86,16 @@ def csv_bytes(rows, fields):
     return out.getvalue().encode()
 
 
-def read_csv(path):
-    with Path(path).open(newline="") as handle:
+def read_csv(path, *, expected_sha=None):
+    if expected_sha is None:
+        source = Path(path).open(newline="")
+    else:
+        # The stable path may have been replaced since the chart read its manifest.
+        body = Path(path).read_bytes()
+        if sha(body) != expected_sha:
+            raise ValueError(f"observations do not match the loaded manifest: {path}")
+        source = io.StringIO(body.decode(), newline="")
+    with source as handle:
         return [{k: (v if k in ("date", "quality") else float(v) if v else None)
                  for k, v in row.items()} for row in csv.DictReader(handle)]
 
@@ -136,16 +144,16 @@ def trace_points(rows, field, calendar, bounds=None):
 
 
 def load_manifest(root):
-    manifest = json.loads((Path(root) / "latest.json").read_text())
+    manifest = json.loads((Path(root) / "current" / "manifest.json").read_bytes())
     if manifest.get("schema") != SCHEMA or set(manifest.get("feeds", {})) != {*INDICES, *QVIX_FEEDS}:
-        raise ValueError("incompatible active schema; explicit v4 migration required")
+        raise ValueError("incompatible active schema")
     return manifest
 
 
 def histories(root, manifest):
     root = Path(root)
     return {
-        feed: read_csv(root / state["snapshot"]["csv"])
+        feed: read_csv(root / state["snapshot"]["csv"], expected_sha=state["snapshot"]["csv_sha256"])
         for feed, state in manifest["feeds"].items() if state.get("snapshot")
     }
 
@@ -159,29 +167,20 @@ def artifact_ref(root, path):
 
 
 def origin_snapshot(root, origin, feed):
+    directory = f"current/qvix-group/{feed}" if feed in QVIX_FEEDS else f"current/{feed}"
+    if origin.get("kind") != "result" or origin["path"] != f"{directory}/result.json":
+        raise ValueError("invalid acquisition origin")
     content = (Path(root) / origin["path"]).read_bytes()
     if sha(content) != origin["sha256"]:
-        raise ValueError("immutable origin hash")
-    value = json.loads(content)
-    if origin["kind"] == "manifest":
-        return value["feeds"][feed]["snapshot"], value
-    if origin["kind"] == "result":
-        return value, None
-    raise ValueError("unknown acquisition origin")
-
-
-def compact_snapshot(snapshot):
-    result = {k: v for k, v in snapshot.items() if k not in ("captures", "accounting")}
-    if "accounting" in snapshot:
-        result["accounting"] = compact_quality(snapshot["accounting"])
-    return result
+        raise ValueError("acquisition result hash")
+    return json.loads(content)
 
 
 def comparator_history(root, comparator):
     if not comparator:
         return None
     feed = comparator["feed"]
-    snapshot, _ = origin_snapshot(root, comparator["origin"], feed)
+    snapshot = origin_snapshot(root, comparator["origin"], feed)
     raw = snapshot["raw"]
     body = (Path(root) / raw["body"]).read_bytes()
     if sha(body) != raw["sha256"]:

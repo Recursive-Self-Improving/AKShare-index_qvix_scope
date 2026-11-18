@@ -1,0 +1,28 @@
+{
+  "feed": "qvix_300etf",
+  "attempted_at": "2026-11-18T04:40:26.007522+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-18"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    300
+  ],
+  "group_id": "170914574b87461e828a7efa85012003",
+  "invocation": "index_option_300etf_qvix()",
+  "invoked": true,
+  "columns": [
+    0,
+    9,
+    10,
+    11,
+    12
+  ]
+}

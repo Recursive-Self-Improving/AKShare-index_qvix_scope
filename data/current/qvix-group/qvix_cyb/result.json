@@ -1,0 +1,170 @@
+{
+  "feed": "qvix_cyb",
+  "attempted_at": "2026-11-18T04:40:26.198394+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-18"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    300
+  ],
+  "group_id": "170914574b87461e828a7efa85012003",
+  "invocation": "index_option_cyb_qvix()",
+  "invoked": true,
+  "columns": [
+    0,
+    71,
+    72,
+    73,
+    74
+  ],
+  "status": "partial",
+  "schema": "qvix-comparison-v4",
+  "successful_at": "2026-11-18T04:40:26.343298+00:00",
+  "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+  "shared": {
+    "path": "current/qvix-group/group.json",
+    "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+  },
+  "accounting": {
+    "algorithm": "qvix-comparison-v4",
+    "feed": "qvix_cyb",
+    "comparator": {
+      "origin": {
+        "path": "current/sz399006/result.json",
+        "sha256": "fc0b5af1ad51aa276e125e39660fe43ebfe798cea73fa49464ac4d4a7cb52481",
+        "kind": "result"
+      },
+      "csv": "current/sz399006/observations.csv",
+      "csv_sha256": "28d132b41ff1e3df8a96994254ab221437b4b47d143164233c58d3c6dc3d0427",
+      "successful_at": "2026-11-18T04:39:53.803783+00:00",
+      "feed": "sz399006",
+      "raw_sha256": "1cd8f93f297af436e596b088b343e95bd9f5be4904ee3bb19821d64111aaf67a",
+      "stale_reuse": false
+    },
+    "ordered": false,
+    "full": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-19"
+      ],
+      "range": [
+        "2022-09-19",
+        "2026-11-17"
+      ],
+      "close_range": [
+        "2022-09-19",
+        "2026-11-17"
+      ],
+      "source_rows": 2853,
+      "dates": 998,
+      "finite_close_dates": 997,
+      "all_cells_nonblank": 999,
+      "finite_complete_rows": 999,
+      "invalid_fields": 0,
+      "invalid_dates": 0,
+      "incomplete_rows": 0,
+      "zero_rows": 0,
+      "zero_close_rows": 0,
+      "envelope_rows": 2,
+      "distinct_candidates": 999,
+      "exact_duplicates": 0,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1852,
+      "blank_internal_rows": 0,
+      "blank_tail_rows": 2,
+      "blank_no_source_rows": 0,
+      "nonblank": 998,
+      "usable_close": 997,
+      "conflict": 1,
+      "invalid_close_dates": 0,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1852,
+      "blank_internal": 0,
+      "blank_tail": 2,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 0,
+      "conflict_holes": 1,
+      "invalid_close": 0,
+      "missing_close": 0,
+      "holes": 14,
+      "source_only": 4,
+      "blank_source_only": 2
+    },
+    "selected": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-18"
+      ],
+      "range": [
+        "2022-09-19",
+        "2026-11-17"
+      ],
+      "close_range": [
+        "2022-09-19",
+        "2026-11-17"
+      ],
+      "source_rows": 2852,
+      "dates": 998,
+      "finite_close_dates": 997,
+      "all_cells_nonblank": 999,
+      "finite_complete_rows": 999,
+      "invalid_fields": 0,
+      "invalid_dates": 0,
+      "incomplete_rows": 0,
+      "zero_rows": 0,
+      "zero_close_rows": 0,
+      "envelope_rows": 2,
+      "distinct_candidates": 999,
+      "exact_duplicates": 0,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1852,
+      "blank_internal_rows": 0,
+      "blank_tail_rows": 1,
+      "blank_no_source_rows": 0,
+      "nonblank": 998,
+      "usable_close": 997,
+      "conflict": 1,
+      "invalid_close_dates": 0,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1852,
+      "blank_internal": 0,
+      "blank_tail": 1,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 0,
+      "conflict_holes": 1,
+      "invalid_close": 0,
+      "missing_close": 0,
+      "holes": 14,
+      "source_only": 4,
+      "blank_source_only": 1
+    }
+  },
+  "count": 1012,
+  "range": [
+    "2022-09-19",
+    "2026-11-18"
+  ],
+  "source_range": [
+    "2022-09-19",
+    "2026-11-17"
+  ],
+  "csv": "current/qvix-group/qvix_cyb/observations.csv",
+  "csv_sha256": "687426d7c58148ca3cbbd25e4b0c42baa29c317071bb0859469265d2c135b984",
+  "quality": "current/qvix-group/qvix_cyb/quality.json",
+  "quality_sha256": "525dcf28565b00a49b5a6bbb11f2fb7a84b3776c2ecb61ee652182541d393826",
+  "wrapper": "current/qvix-group/qvix_cyb/wrapper.csv",
+  "wrapper_sha256": "3fc67417db43511fc505015cd2292a1c19244ada79a38618f761701731cb5836",
+  "finished_at": "2026-11-18T04:40:26.344555+00:00"
+}

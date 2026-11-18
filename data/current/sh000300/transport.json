@@ -1,0 +1,37 @@
+[
+  {
+    "body": "current/sh000300/response-0.body",
+    "sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000300/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000300/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "74695",
+      "Connection": "keep-alive",
+      "Date": "Wed, 18 Nov 2026 04:38:18 GMT",
+      "Expires": "Wed, 18 Nov 2026 04:39:25 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 ctc.guangzhou.union.59 (ApacheTrafficServer/6.2.1 [cRs f ]), cache26.l2so158-2[7,6,304-0,H], cache2.l2so158-2[9,0], cache2.l2so158-2[9,0], ens-cache27.l2hk11[0,0,304-0,H], ens-cache22.l2hk11[0,0], ens-cache22.l2hk11[1,0], ens-cache6.l2us5[219,219,304-0,H], ens-cache5.l2us5[221,0], ens-cache5.l2us5[221,0], ens-cache16.us33[222,222,200-0,H], ens-cache14.us33[225,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache14.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.5656.nb.sinaedge.com,c=113.96.59.26;f=Edge,s=ctc.guangzhou.union.59,c=10.33.67.56",
+      "X-Via-Edge": "17949766988570bcd090a3843210a2b69fa69",
+      "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+      "Edge-Copy-Time": "1794907914926",
+      "Last-Modified": "Tue, 17 Nov 2026 09:30:43 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "W/\"6afc1ec3-18b8c\"",
+      "Content-Encoding": "gzip",
+      "Age": "94",
+      "Ali-Swift-Global-Savetime": "1794976698",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:672822152",
+      "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:52 GMT",
+      "X-Swift-CacheTime": "26",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5f6a217949767920371671e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-18T04:39:52.327024+00:00",
+    "http_decompressed": true
+  }
+]

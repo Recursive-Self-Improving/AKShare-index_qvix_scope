@@ -1,0 +1,170 @@
+{
+  "feed": "qvix_300index",
+  "attempted_at": "2026-11-18T04:40:25.819100+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-18"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    300
+  ],
+  "group_id": "170914574b87461e828a7efa85012003",
+  "invocation": "index_option_300index_qvix()",
+  "invoked": true,
+  "columns": [
+    0,
+    17,
+    18,
+    19,
+    20
+  ],
+  "status": "partial",
+  "schema": "qvix-comparison-v4",
+  "successful_at": "2026-11-18T04:40:26.004814+00:00",
+  "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+  "shared": {
+    "path": "current/qvix-group/group.json",
+    "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+  },
+  "accounting": {
+    "algorithm": "qvix-comparison-v4",
+    "feed": "qvix_300index",
+    "comparator": {
+      "origin": {
+        "path": "current/sh000300/result.json",
+        "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+        "kind": "result"
+      },
+      "csv": "current/sh000300/observations.csv",
+      "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+      "successful_at": "2026-11-18T04:39:52.538815+00:00",
+      "feed": "sh000300",
+      "raw_sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+      "stale_reuse": false
+    },
+    "ordered": false,
+    "full": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-19"
+      ],
+      "range": [
+        "2019-12-23",
+        "2026-11-17"
+      ],
+      "close_range": [
+        "2019-12-23",
+        "2026-11-17"
+      ],
+      "source_rows": 2853,
+      "dates": 1662,
+      "finite_close_dates": 1484,
+      "all_cells_nonblank": 1663,
+      "finite_complete_rows": 1447,
+      "invalid_fields": 825,
+      "invalid_dates": 215,
+      "incomplete_rows": 0,
+      "zero_rows": 47,
+      "zero_close_rows": 44,
+      "envelope_rows": 24,
+      "distinct_candidates": 1662,
+      "exact_duplicates": 1,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1187,
+      "blank_internal_rows": 1,
+      "blank_tail_rows": 2,
+      "blank_no_source_rows": 0,
+      "nonblank": 1662,
+      "usable_close": 1484,
+      "conflict": 0,
+      "invalid_close_dates": 178,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1187,
+      "blank_internal": 1,
+      "blank_tail": 2,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 1,
+      "conflict_holes": 0,
+      "invalid_close": 174,
+      "missing_close": 0,
+      "holes": 188,
+      "source_only": 4,
+      "blank_source_only": 2
+    },
+    "selected": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-18"
+      ],
+      "range": [
+        "2019-12-23",
+        "2026-11-17"
+      ],
+      "close_range": [
+        "2019-12-23",
+        "2026-11-17"
+      ],
+      "source_rows": 2852,
+      "dates": 1662,
+      "finite_close_dates": 1484,
+      "all_cells_nonblank": 1663,
+      "finite_complete_rows": 1447,
+      "invalid_fields": 825,
+      "invalid_dates": 215,
+      "incomplete_rows": 0,
+      "zero_rows": 47,
+      "zero_close_rows": 44,
+      "envelope_rows": 24,
+      "distinct_candidates": 1662,
+      "exact_duplicates": 1,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1187,
+      "blank_internal_rows": 1,
+      "blank_tail_rows": 1,
+      "blank_no_source_rows": 0,
+      "nonblank": 1662,
+      "usable_close": 1484,
+      "conflict": 0,
+      "invalid_close_dates": 178,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1187,
+      "blank_internal": 1,
+      "blank_tail": 1,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 1,
+      "conflict_holes": 0,
+      "invalid_close": 174,
+      "missing_close": 0,
+      "holes": 188,
+      "source_only": 4,
+      "blank_source_only": 1
+    }
+  },
+  "count": 1677,
+  "range": [
+    "2019-12-23",
+    "2026-11-18"
+  ],
+  "source_range": [
+    "2019-12-23",
+    "2026-11-17"
+  ],
+  "csv": "current/qvix-group/qvix_300index/observations.csv",
+  "csv_sha256": "11b5d9c9b777ba0c630824ef57c50630ca3d9af8521c0d6d59b561b44a544f8a",
+  "quality": "current/qvix-group/qvix_300index/quality.json",
+  "quality_sha256": "359c03104847718d95e60938aa6b23d0474329da090181ca13a752af89bc8b1f",
+  "wrapper": "current/qvix-group/qvix_300index/wrapper.csv",
+  "wrapper_sha256": "da00a3fdb642f010da279502f87df1a6946c5e9ef619ef3bb15118066abe14cf",
+  "finished_at": "2026-11-18T04:40:26.006474+00:00"
+}

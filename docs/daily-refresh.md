@@ -52,25 +52,24 @@
 
 ## 安全发布
 
-`app.daily` 先独立验证现有 `data/` + `index.html`，普通复制到私有临时目录后运行一次真实fetch，
-渲染并再次执行 `app.verify`。必须是本次时间界内的新完整acquisition、正确previous、
-15个新鲜成员与固定窗口；全部选中CSV/图日期不得超过cutoff。
-比较重叠请求窗口中的指数raw日期、QVIX公共raw日期集合；丢失任何旧日期均拒绝自动发布，
+`app.daily` 先独立验证现有 `data/current/` 和 `index.html`，再在空的临时目录运行一次真实 fetch，
+渲染并独立校验候选。必须是本次调用时间内的新采集：15 个新鲜成员，均属于自己的固定证据路径，窗口正确，所有选中日期不超过截止日。
+基线和候选的相对路径相同，必须分别从各自的数据根读取原始响应。比较重叠请求窗口中的指数 raw 日期和 QVIX 公共 raw 日期；丢失任何旧日期均拒绝自动发布，
 包括首/中/尾和等计数替换。比较不使用有限close集合，新鲜空白/冲突可按已有规则取代旧价格。
 任何fatal、stale、未知/缺失、校验/执行错误均阻止整个更新；旧公开页面可能因此落后。
 
-**定时运行的去重发生在上述校验及旧文件不可变检查之后**：
+**定时运行的去重发生在上述校验及日期保留检查之后**：
 
 - 比较8份新浪、7条QVIX所用的完整响应内容哈希（QVIX共用源）、源地址/编码、调用/版本、各序列的CSV和状态。
-  QVIX还比较wrapper输出、全量/窗口质量统计及比较指数的数据身份和陈旧状态。新run路径、采集时钟和HTTP响应头不代表行情变化。
+  QVIX 还比较 wrapper 输出、全量/窗口质量统计及比较指数的数据身份和陈旧状态。采集时钟和 HTTP 响应头变化本身不代表行情变化。
 - 即使最后交易日、行数、收盘曲线不动，历史源字节修订也会触发发布。跨UTC日仅延长截止日、没有新选中行或质量变化时，不为日期另建快照。
-- 数据一致时，用当前渲染器重建**原快照**，与已提交的 `index.html` 逐字节比较，避免漏掉模板更新。两者也一致才记 `unchanged`：保留原run、窗口和获取时间，不生成候选包、不推送、不部署。
+- 数据一致时，用当前渲染器重建**原快照**，与已提交的 `index.html` 逐字节比较，避免漏掉模板更新。两者也一致才记 `unchanged`：保留原文件、窗口和获取时间，不生成候选包、不推送、不部署。
 - 最新检查时间看 Actions 运行与摘要；页面显示上次发布的快照时间。`unchanged` 是相对事件基线的结果，**不是对线上页面的健康检查**。手动 **Run workflow** 会重新获取、校验并请求发布，即使内容相同；不能跳过质量或旧日期保护。
 
-只允许新增本run子树、替换 `data/latest.json` 与根 `index.html`；不得删除或改写旧证据。
-独立 `app/daily_transfer.py` 在新runner校验同run/attempt制品ID、receipt SHA256及每个文件的
+候选包只含完整的 `data/current/` 和根 `index.html`；清单是 `data/current/manifest.json`，没有第二份指针或前驱目录。
+独立 `app/daily_transfer.py` 在新 runner 校验同一次 Actions run/attempt 的制品 ID、receipt SHA256 及各文件的
 path/size/hash，拒绝额外/缺失路径、link、可执行模式或其他代码路径，不执行制品。
-从精确event base一次提交数据、证据、指针和页面；验证新commit的**完整父列表恰为[receipt base]**，
+从精确 event base 用一条提交替换快照和页面；旧快照中不再有的文件一起移除，`data/` 的其他内容不参与替换。验证新 commit 的**完整父列表恰为 [receipt base]**，
 只推送该commit一次，使用显式 `--force-with-lease=refs/heads/<branch>:<base>` 原子比较并更新。
 这不是普通non-force push；sole-parent约束保证接受的base→commit严格快进，不改写已有历史。
 当前远端不是base（包括分叉、回退或删除）即拒绝；规则拒绝也不fallback，
@@ -81,7 +80,7 @@ path/size/hash，拒绝额外/缺失路径、link、可执行模式或其他代�
 
 需要发布时，新鲜 `success` 或通过独立验证的新鲜 QVIX `partial` 都可持久化并部署。`partial` 保留 null 和页面质量提示；
 预期步骤完成后，`quality-status` 成功并发出 warning，摘要记录 `quality: partial`。`unchanged` 也保留质量警告，不宣称本次部署。
-若共享 QVIX 采集超时、只能沿用旧快照，则不是这种 partial：`prepare` 拒绝发布，网站保留上一份报告。
+共享 QVIX 采集超时导致成员获取失败，不是可发布的 `partial`；`prepare` 拒绝发布，保留上一份完整快照和报告。
 应部署却失败或跳过，工作流仍失败，不把“已提交”误报成“已上线”。
 Pages仅打包精确已验证 `index.html`，部署前再次检查已持久化commit；
 event代码SHA与数据commit分开记录。Git与Pages不跨服务原子，部署失败不回滚数据，
@@ -101,7 +100,7 @@ prepare/persist/Pages/conclusion分别限30/5/10/2分钟，prepare内部25分钟
 |---|---|
 | 定时校验通过，无变化 | 仅 Actions 日志和摘要，**零制品**，不新增 Git 文件。 |
 | 有变化或手动请求发布 | 上传一份经校验的 `candidate-*`（14天），成功时不另传诊断副本。启用 Pages 时另传只含 HTML 的部署制品（1天）。 |
-| 准备失败 | 尽力上传 `diagnostics-*`（14天）：日志、outcome、本次新增证据（最多512文件/256MiB，超限有TRUNCATED标记）和已生成的候选HTML（最多256MiB）。不发布。 |
+| 准备失败 | 尽力上传 `diagnostics-*`（14天）：日志、outcome、本次候选证据（最多512文件/256MiB，超限有TRUNCATED标记）和已生成的候选HTML（最多256MiB）。不发布。 |
 
 候选上传失败时诊断中可有日志和outcome；persist/部署失败看该job日志与已上传的候选，不另复制原始数据。强制取消、安装、runner或上传故障可能没有制品。
 
@@ -110,20 +109,15 @@ prepare/persist/Pages/conclusion分别限30/5/10/2分钟，prepare内部25分钟
 [pages build and deployment](https://github.com/Recursive-Self-Improving/AKShare-index_qvix_scope/actions/runs/44235293553)，制品37.55 MB。
 后者不是本工作流上传的单页包；应检查 Pages 来源，不要仅调短制品保留期。
 
-日常工作流不删除证据、不重写历史。每次发布仍可新增约10 MB工作树文件；Git会复用相同内容的blob，文件大小之和不是Git实际传输量。
+每次发布都复用同一组工作树路径，不再按小时累积整份目录。Git 保留已提交的旧版本并复用内容相同的 blob；这不等于 Git 历史不再增长。
 新鲜 partial 的警告可在该次运行中查看；它不触发工作流失败通知。
 失败通知依赖GitHub用户设置及调度创建/编辑/重新启用者；丢失/禁用的调度不一定产生通知。
 
-### 一次性历史清理
+### 查看旧版本
 
-2026-11-18 经维护者授权，从 `master` 的历史中移除了最新一次之前的7个 `data/runs/` 目录。
-保留快照的72个文件、`data/latest.json` 和 `index.html` 均未改写。
-[`data/history-root.json`](../data/history-root.json) 以原始路径和 SHA256 指定保留的首份 acquisition：
-仅它的直接前驱允许不在仓库内；有文件但哈希不符仍报错。之后的 acquisition 必须正常绑定前驱并通过完整校验。
-这不是自动轮换策略。旧报告或迁移记录中的早期 run 路径只作历史引用，完整回放需要清理前的备份。
+用 `git log -- data/current/manifest.json` 查固定布局下的历次发布。`git show <提交>:data/current/manifest.json` 读取当时的清单；要离线回放，请在同一提交取出应用、完整 `data/` 和 `index.html`，不要把旧清单与当前证据混用。
 
-已有 clone 不应把旧 `master` 合并或推回；建议重新 clone，并单独移植未发布的工作。
-GitHub 的只读 PR 引用、fork 和他人的 clone 不会随 `master` 重写；托管端的实际空间回收不受一次 push 保证。
+本次布局迁移沿用 2026-11-18 04:39 UTC 的实际采集，不重新抓取。原始响应、CSV 和采集时间不变；含路径的元数据及其哈希随路径更新。迁移前的文档按当时提交的 `data/runs/`、`data/derived/` 布局阅读。更早已有七个 run 在一次独立的历史清理中移除，回看那些版本需要清理前的备份。
 
 ## 故障恢复
 

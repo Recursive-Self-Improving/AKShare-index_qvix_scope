@@ -30,6 +30,12 @@
 数据通过固定版本 AKShare 1.20.53 获取：指数来自新浪，QVIX 来自 [optbbs](https://1.optbbs.com/s/vix.shtml?100ETF)。
 同一 QVIX 在不同图中使用相同数据；名称沿用提供方，对照不表示期权标的与图中指数完全一致。
 
+## 数据放在哪里
+
+工作树只保留一份行情：[data/current/](data/current/)。[manifest.json](data/current/manifest.json) 记录请求窗口、采集时间和各源状态；八个指数各有自己的目录，七条 QVIX 共用 `qvix-group/` 下的一份原始响应。
+
+刷新覆盖同一路径，不再创建按时间命名的目录。用 `git log -- data/current/manifest.json` 查已提交的版本，例如用 `git show <提交>:data/current/sh000300/observations.csv` 读取当时的沪深300数据。采集时间看清单；Git 提交时间不是行情日期。
+
 ## 手动更新
 
 手动更新或重建图表需要 **Python 3.14** 和 **uv**。在仓库根目录执行：
@@ -42,9 +48,9 @@ uv run python -m app.fetch --start 2000-01-01
 可加 `--end YYYY-MM-DD`，默认当天；起止日期均包含。
 请求从 2000 年开始不表示源数据覆盖至该年，也不会补造早期历史。
 
-**`fetch` 遇到 `partial` 或失败会退出 `1`**，但仍会保存并尝试提升经验证的部分结果。
-失败的数据源仅在有自身历史快照时沿用旧数据，并标记为陈旧。
-检查获取结果后，单独执行以下离线命令；不要用 `&&` 把它们接在 `fetch` 后：
+本地覆盖已有快照需要文件系统支持原子目录交换；不支持时会报错，不先删旧数据。请在抓取结束后重建图表。
+`fetch` 先在临时目录抓取并校验。八个指数都成功、七条 QVIX 都有本次可用结果时，才整份替换 `data/current/`；任一源失败则保留原快照，不把新旧数据拼在一起。
+**新鲜 QVIX `partial` 可以覆盖，但退出码仍为 `1`；抓取失败也是 `1`。** 查看各源输出，再单独重建并校验页面，不要用 `&&` 接在 `fetch` 后：
 
 ```sh
 uv run python -m app.chart --input data --output index.html

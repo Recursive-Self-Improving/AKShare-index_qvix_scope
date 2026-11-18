@@ -311,7 +311,7 @@ def panel_section(i, p, manifest):
 
 def build(root, output):
     manifest = load_manifest(root)
-    payload = {"run": manifest["run"], "panels": panels(root, manifest),
+    payload = {"attempted_at": manifest["attempted_at"], "panels": panels(root, manifest),
                "qvix_status": {f: manifest["feeds"][f] for f in QVIX_FEEDS}, "window": manifest["window"]}
     encoded = json.dumps(payload, ensure_ascii=False, allow_nan=False).replace("<", "\\u003c")
     nav = "".join(f'<a href="#panel-section-{p["code"]}">{html.escape(p["name"])}</a>' for p in payload["panels"])

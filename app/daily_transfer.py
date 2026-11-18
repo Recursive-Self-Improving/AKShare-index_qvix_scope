@@ -2,6 +2,7 @@
 import argparse
 import base64
 import hashlib
+from datetime import datetime, timedelta
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -30,12 +31,13 @@ def inventory(root, bounded=True):
     result = {}
     total = 0
     for path in sorted(root.rglob("*")):
-        mode = path.lstat().st_mode
-        require(not stat.S_ISLNK(mode), f"link: {path}")
-        if stat.S_ISDIR(mode):
+        info = path.lstat()
+        require(not stat.S_ISLNK(info.st_mode), f"link: {path}")
+        if stat.S_ISDIR(info.st_mode):
             continue
-        require(stat.S_ISREG(mode) and not mode & 0o111, f"unsafe mode: {path}")
-        require(not bounded or total + path.stat().st_size <= MAX_BYTES, "payload exceeds byte bound")
+        require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1 and not info.st_mode & 0o111,
+                f"unsafe mode: {path}")
+        require(not bounded or total + info.st_size <= MAX_BYTES, "payload exceeds byte bound")
         body = path.read_bytes()
         total += len(body)
         require(not bounded or total <= MAX_BYTES, "payload exceeds byte bound")
@@ -43,12 +45,36 @@ def inventory(root, bounded=True):
     require(not bounded or len(result) <= MAX_FILES, "payload exceeds file bound")
     return result
 
-def allowed(path, run):
-    p = PurePosixPath(path)
-    return (str(p) == path and not p.is_absolute() and all(
-        re.fullmatch(r"[A-Za-z0-9_.+\-]+", part) and part not in (".", "..", ".git")
-        for part in p.parts) and (path in ("index.html", "data/latest.json") or
-                                  path.startswith("data/" + run + "/")))
+def payload_inventory(root):
+    files = inventory(root)
+    manifest = "data/current/manifest.json"
+    require({"index.html", manifest} <= files.keys(), "missing entry points")
+    snapshot = json.loads((root / manifest).read_bytes())
+    feeds = snapshot["feeds"]
+    require(isinstance(feeds, dict), "invalid feed registry")
+    current = PurePosixPath("data/current")
+    group = current / "qvix-group"
+    directories = {current, current.parent}
+    transport = {"transport.json"}
+    shared = transport | {"config.json", "group.json", "termination.json"}
+    index = transport | {"result.json", "observations.csv", "terminated.json"}
+    qvix = {"result.json", "observations.csv", "invocation.json", "wrapper.csv", "quality.json"}
+    expected = {group: shared}
+    for feed in feeds:
+        require(re.fullmatch(r"[A-Za-z0-9_+\-]+", feed), "invalid feed path")
+        if feed.startswith("qvix_"):
+            expected[group / feed] = qvix
+        else:
+            expected[current / feed] = index
+    for path in files.keys() - {"index.html", manifest}:
+        p = PurePosixPath(path)
+        names = expected.get(p.parent, ())
+        require(p.name in names or "transport.json" in names and re.fullmatch(r"response-[0-9]+\.body", p.name),
+                f"unexpected payload path: {path}")
+        directories.update(p.parents[:-1])
+    require({PurePosixPath(p.relative_to(root).as_posix()) for p in root.rglob("*") if p.is_dir()} ==
+            directories, "unexpected payload directory")
+    return files, snapshot["attempted_at"]
 
 
 def validate_bundle(bundle, receipt_hash, identity):
@@ -57,19 +83,17 @@ def validate_bundle(bundle, receipt_hash, identity):
     require(set(p.name for p in bundle.iterdir()) == {"receipt.json", "payload"}, "extra bundle entries")
     receipt_path = bundle / "receipt.json"
     require(receipt_path.is_file() and not receipt_path.is_symlink() and
-            not receipt_path.stat().st_mode & 0o111, "receipt mode")
+            receipt_path.stat().st_nlink == 1 and not receipt_path.stat().st_mode & 0o111, "receipt mode")
     require(receipt_path.stat().st_size <= 1024 * 1024, "receipt size")
     body = receipt_path.read_bytes()
     require(digest(body) == receipt_hash, "receipt hash mismatch")
     receipt = json.loads(body)
     require(receipt["identity"] == identity, "invocation identity mismatch")
-    require(re.fullmatch(r"runs/[A-Za-z0-9_.+\-]+", receipt["run"]), "run path")
     require(receipt["quality"] in ("success", "partial"), "ineligible quality")
-    files = inventory(bundle / "payload")
+    files, attempted_at = payload_inventory(bundle / "payload")
     require(files == receipt["files"], "payload inventory/hash mismatch")
-    require({"index.html", "data/latest.json", "data/" + receipt["run"] + "/manifest.json"} <= files.keys(),
-            "missing entry points")
-    require(all(allowed(path, receipt["run"]) for path in files), "unexpected payload path")
+    require(receipt["attempted_at"] == attempted_at and
+            datetime.fromisoformat(attempted_at).utcoffset() == timedelta(0), "acquisition identity")
     return receipt
 
 
@@ -94,29 +118,39 @@ def publish(root, bundle, receipt_hash, identity, env=None):
     require(git(root, "rev-parse", "HEAD").stdout.strip() == base, "checkout base mismatch")
     require(not git(root, "status", "--porcelain", "--untracked-files=all").stdout, "dirty publisher checkout")
     remote_head(root, branch, base, env)
-    run = root / "data" / receipt["run"]
-    require(not run.exists(), "acquisition already exists")
+    data, current, html = root / "data", root / "data/current", root / "index.html"
+    require(all(not p.is_symlink() for p in (root, *root.parents, data, current, html)), "destination link")
+    require(not current.exists() or current.is_dir(), "destination snapshot mode")
+    if current.exists():
+        shutil.rmtree(current)
+    html.unlink(missing_ok=True)
     for path in receipt["files"]:
         target = root / path
-        require(all(not p.is_symlink() for p in (target, *target.parents)), "destination link")
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(Path(bundle) / "payload" / path, target)
         target.chmod(0o644)
-    git(root, "add", "--", *receipt["files"])
-    changed = git(root, "diff", "--cached", "--name-only").stdout.splitlines()
-    require(set(changed) == set(receipt["files"]), "staged paths mismatch")
-    for path, facts in receipt["files"].items():
-        entry = git(root, "ls-files", "--stage", "--", path).stdout
-        require(entry.startswith("100644 "), "staged mode")
+    git(root, "add", "-Af", "--", "data/current", "index.html")
+    changed = git(root, "diff", "--cached", "--name-only", "-z", "--no-renames").stdout.split("\0")[:-1]
+    require(changed and all(path == "index.html" or path.startswith("data/current/") for path in changed),
+            "staged paths mismatch")
+    staged = git(root, "ls-files", "--stage", "-z", "--", "data/current", "index.html").stdout.split("\0")[:-1]
+    require(len(staged) == len(receipt["files"]), "staged snapshot inventory mismatch")
+    for entry in staged:
+        metadata, path = entry.split("\t", 1)
+        mode, _, stage = metadata.split()
+        require(mode == "100644" and stage == "0" and path in receipt["files"], "staged snapshot path/mode")
+        facts = receipt["files"][path]
         body = subprocess.run(["git", "-C", str(root), "show", ":" + path], check=True,
                               capture_output=True, timeout=60).stdout
         require(len(body) == facts["size"] and digest(body) == facts["sha256"], "staged bytes mismatch")
+    tree = git(root, "write-tree").stdout.strip()
     git(root, "-c", "user.name=github-actions[bot]", "-c",
         "user.email=41898282+github-actions[bot]@users.noreply.github.com", "commit", "-m",
-        "data: daily verified refresh " + receipt["run"].split("/")[1])
+        "data: daily verified refresh " + receipt["attempted_at"])
     commit = git(root, "rev-parse", "HEAD").stdout.strip()
     require(git(root, "rev-list", "--parents", "-n", "1", commit).stdout.split() == [commit, base],
             "publication parents must equal receipt base")
+    require(git(root, "rev-parse", commit + "^{tree}").stdout.strip() == tree, "publication tree changed")
     remote_head(root, branch, base, env)
     push_exit = "unknown"
     try:
@@ -168,6 +202,8 @@ def main():
         remote_head(Path.cwd(), identity["branch"], args.commit, auth_env())
         Path(args.site).mkdir()
         shutil.copyfile(Path(args.bundle) / "payload/index.html", Path(args.site) / "index.html")
+        packaged = Path(args.site) / "index.html"
+        require(digest(packaged.read_bytes()) == receipt["files"]["index.html"]["sha256"], "Pages HTML hash")
         return
     commit = publish(Path.cwd(), args.bundle, args.receipt_hash, identity, auth_env())
     with open(os.environ["GITHUB_OUTPUT"], "a") as output:

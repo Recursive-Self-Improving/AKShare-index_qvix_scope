@@ -1,0 +1,37 @@
+[
+  {
+    "body": "current/sz399673/response-0.body",
+    "sha256": "b0891aabde035b148538fb85e670fe35fe59a181fcf3d77589fe565f74739fbc",
+    "url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "39383",
+      "Connection": "keep-alive",
+      "Date": "Wed, 18 Nov 2026 04:39:54 GMT",
+      "Expires": "Wed, 18 Nov 2026 04:41:54 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 ctc.guangzhou.union.50 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache24.l2so158-2[56,55,304-0,H], cache6.l2so158-2[58,0], cache6.l2so158-2[58,0], ens-cache39.l2hk11[63,63,304-0,H], ens-cache6.l2hk11[65,0], ens-cache6.l2hk11[65,0], ens-cache5.l2us5[279,279,304-0,H], ens-cache15.l2us5[281,0], ens-cache15.l2us5[281,0], ens-cache13.us33[283,283,200-0,H], ens-cache13.us33[285,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache13.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.21.nb.sinaedge.com,c=120.241.4.148;f=Edge,s=ctc.guangzhou.union.50,c=10.67.2.21;f=edge,s=ctc.wuqing.bsd-storage.70.nb.sinaedge.com,c=10.54.255.68;",
+      "X-Via-Edge": "17949767947572210090a1502430a1dea90ec",
+      "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+      "Edge-Copy-Time": "1794944912745",
+      "Last-Modified": "Tue, 17 Nov 2026 10:28:11 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "\"6afc2c3b-c84f\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794976794",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:613478094",
+      "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:54 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5f6a117949767946201335e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-18T04:39:54.957410+00:00",
+    "http_decompressed": true
+  }
+]

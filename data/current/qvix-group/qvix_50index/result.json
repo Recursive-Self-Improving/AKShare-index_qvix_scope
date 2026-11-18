@@ -1,0 +1,170 @@
+{
+  "feed": "qvix_50index",
+  "attempted_at": "2026-11-18T04:39:58.188994+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-18"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    300
+  ],
+  "group_id": "170914574b87461e828a7efa85012003",
+  "invocation": "index_option_50index_qvix()",
+  "invoked": true,
+  "columns": [
+    0,
+    79,
+    80,
+    81,
+    82
+  ],
+  "status": "partial",
+  "schema": "qvix-comparison-v4",
+  "successful_at": "2026-11-18T04:40:25.395752+00:00",
+  "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+  "shared": {
+    "path": "current/qvix-group/group.json",
+    "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+  },
+  "accounting": {
+    "algorithm": "qvix-comparison-v4",
+    "feed": "qvix_50index",
+    "comparator": {
+      "origin": {
+        "path": "current/sh000001/result.json",
+        "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+        "kind": "result"
+      },
+      "csv": "current/sh000001/observations.csv",
+      "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+      "successful_at": "2026-11-18T04:39:48.541982+00:00",
+      "feed": "sh000001",
+      "raw_sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+      "stale_reuse": false
+    },
+    "ordered": false,
+    "full": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-19"
+      ],
+      "range": [
+        "2023-01-03",
+        "2026-11-17"
+      ],
+      "close_range": [
+        "2023-01-03",
+        "2026-11-17"
+      ],
+      "source_rows": 2853,
+      "dates": 928,
+      "finite_close_dates": 755,
+      "all_cells_nonblank": 929,
+      "finite_complete_rows": 722,
+      "invalid_fields": 793,
+      "invalid_dates": 206,
+      "incomplete_rows": 0,
+      "zero_rows": 36,
+      "zero_close_rows": 35,
+      "envelope_rows": 13,
+      "distinct_candidates": 928,
+      "exact_duplicates": 1,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1922,
+      "blank_internal_rows": 0,
+      "blank_tail_rows": 2,
+      "blank_no_source_rows": 0,
+      "nonblank": 928,
+      "usable_close": 755,
+      "conflict": 0,
+      "invalid_close_dates": 173,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1922,
+      "blank_internal": 0,
+      "blank_tail": 2,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 0,
+      "conflict_holes": 0,
+      "invalid_close": 169,
+      "missing_close": 0,
+      "holes": 182,
+      "source_only": 4,
+      "blank_source_only": 2
+    },
+    "selected": {
+      "common_range": [
+        "2015-02-09",
+        "2026-11-18"
+      ],
+      "range": [
+        "2023-01-03",
+        "2026-11-17"
+      ],
+      "close_range": [
+        "2023-01-03",
+        "2026-11-17"
+      ],
+      "source_rows": 2852,
+      "dates": 928,
+      "finite_close_dates": 755,
+      "all_cells_nonblank": 929,
+      "finite_complete_rows": 722,
+      "invalid_fields": 793,
+      "invalid_dates": 206,
+      "incomplete_rows": 0,
+      "zero_rows": 36,
+      "zero_close_rows": 35,
+      "envelope_rows": 13,
+      "distinct_candidates": 928,
+      "exact_duplicates": 1,
+      "blank_collision_rows": 0,
+      "blank_prefix_rows": 1922,
+      "blank_internal_rows": 0,
+      "blank_tail_rows": 1,
+      "blank_no_source_rows": 0,
+      "nonblank": 928,
+      "usable_close": 755,
+      "conflict": 0,
+      "invalid_close_dates": 173,
+      "missing_close_dates": 0,
+      "blank_collision": 0,
+      "blank_prefix": 1922,
+      "blank_internal": 0,
+      "blank_tail": 1,
+      "blank_no_source": 0,
+      "absent": 13,
+      "blank": 0,
+      "conflict_holes": 0,
+      "invalid_close": 169,
+      "missing_close": 0,
+      "holes": 182,
+      "source_only": 4,
+      "blank_source_only": 1
+    }
+  },
+  "count": 942,
+  "range": [
+    "2023-01-03",
+    "2026-11-18"
+  ],
+  "source_range": [
+    "2023-01-03",
+    "2026-11-17"
+  ],
+  "csv": "current/qvix-group/qvix_50index/observations.csv",
+  "csv_sha256": "20fc29d168a1d4130d9d2353af13d14f893da362edd3bd89438449a4c1d8f782",
+  "quality": "current/qvix-group/qvix_50index/quality.json",
+  "quality_sha256": "1b28b7b1466540827d70068f9c2e401fa5b4172f5cf742640e67e5b1ce45159f",
+  "wrapper": "current/qvix-group/qvix_50index/wrapper.csv",
+  "wrapper_sha256": "7e2b308c3794a6951d86cb1cecdf402af109e2579111000a06e10a12cbde5f4c",
+  "finished_at": "2026-11-18T04:40:25.396974+00:00"
+}

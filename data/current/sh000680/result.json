@@ -1,0 +1,74 @@
+{
+  "feed": "sh000680",
+  "attempted_at": "2026-11-18T04:39:55.704496+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-18"
+  ],
+  "versions": {
+    "akshare": "1.20.53",
+    "requests": "2.34.2",
+    "pandas": "3.1.1",
+    "mini-racer": "0.14.1"
+  },
+  "request_timeout_seconds": [
+    5,
+    12
+  ],
+  "invocation": "index_zh_daily_sina(symbol='sh000680')",
+  "raw": {
+    "body": "current/sh000680/response-0.body",
+    "sha256": "daedcec54bd631bca8945299872399e961dc844592d646358bfd7f91bd7a51c5",
+    "url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+    "requested_url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+    "status": 200,
+    "headers": {
+      "Server": "Tengine",
+      "Content-Type": "application/x-javascript",
+      "Content-Length": "21183",
+      "Connection": "keep-alive",
+      "Date": "Wed, 18 Nov 2026 04:39:56 GMT",
+      "Expires": "Wed, 18 Nov 2026 04:41:56 GMT",
+      "Cache-Control": "max-age=120",
+      "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[8,7,304-0,H], cache16.l2so158-2[9,0], cache16.l2so158-2[9,0], ens-cache20.l2hk11[14,14,304-0,H], ens-cache37.l2hk11[16,0], ens-cache37.l2hk11[17,0], ens-cache32.l2us5[231,231,304-0,H], ens-cache23.l2us5[233,0], ens-cache23.l2us5[233,0], ens-cache4.us33[236,244,200-0,H], ens-cache2.us33[247,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache2.us33,c=52.250.234.16;f=sinaedge,s=cnc.huanan2.union.38.nb.sinaedge.com,c=113.96.59.21;f=Edge,s=cnc.huanan2.union.38,c=10.67.1.38;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.34.253.25;",
+      "X-Via-Edge": "179497679603816cd090a2601430a079533d8",
+      "X-Via-SSL": "ssl.56.sinag1.hj4.lb.sinanode.com",
+      "Edge-Copy-Time": "1794910417505",
+      "Last-Modified": "Tue, 17 Nov 2026 09:30:43 GMT",
+      "Vary": "Accept-Encoding",
+      "ETag": "\"6afc1ec3-6c77\"",
+      "Content-Encoding": "gzip",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1794976796",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:120832838",
+      "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:56 GMT",
+      "X-Swift-CacheTime": "120",
+      "Timing-Allow-Origin": "*",
+      "EagleId": "a3b5f69617949767959077210e"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-18T04:39:56.192852+00:00",
+    "http_decompressed": true
+  },
+  "transport": "current/sh000680/transport.json",
+  "transport_sha256": "7eac94983c1f9a2772f11cab52c03116aa0d5ce3d746f0434b97a7fd1854271c",
+  "status": "success",
+  "csv": "current/sh000680/observations.csv",
+  "csv_sha256": "cbda5c3693b7e5c956de710dfea4b742da1729951d3a9ddaa79218d1919e045d",
+  "count": 1665,
+  "range": [
+    "2020-01-02",
+    "2026-11-17"
+  ],
+  "identity": {
+    "official_name": "上证科创板综合指数",
+    "base_date": "2019-12-31",
+    "release_date": "2025-01-20",
+    "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf",
+    "return_note": "包括股息，与科创50价格指数不同"
+  },
+  "retrospective_count": 1224,
+  "successful_at": "2026-11-18T04:39:56.285568+00:00",
+  "finished_at": "2026-11-18T04:39:56.285587+00:00"
+}

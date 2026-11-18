@@ -1,14 +1,18 @@
-"""Read-only preparation: real acquisition in a private, ordinary-copy stage."""
+"""Read-only preparation: real acquisition in a fresh, private stage."""
 import argparse
 from datetime import date, datetime, timedelta, timezone
 import filecmp
+from itertools import chain
 import json
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import sys
 
-from app.daily_transfer import MAX_BYTES, MAX_FILES, auth_env, digest, identity_from_env, inventory, remote_head, require
+from app.daily_transfer import (
+    MAX_BYTES, MAX_FILES, auth_env, digest, identity_from_env, payload_inventory, remote_head, require,
+)
 
 
 START = "2000-01-01"
@@ -34,13 +38,11 @@ def source_dates(root, snap, feed):
                                      snap["raw"]["encoding"])}
 
 
-def eligibility(root, previous, candidate, code, started, finished, cutoff):
-    from app.core import INDICES, QVIX_FEEDS, artifact_ref, read_csv
-    require(candidate["run"] != previous["run"] and candidate["operation"] == "acquisition",
-            "no new acquisition")
+def eligibility(baseline_root, candidate_root, previous, candidate, code, started, finished, cutoff):
+    from app.core import INDICES, QVIX_FEEDS, read_csv
+    require(candidate["operation"] == "acquisition" and
+            instant(candidate["attempted_at"]) != instant(previous["attempted_at"]), "no new acquisition")
     require(candidate["window"] == [START, cutoff], "incorrect full window")
-    require(candidate["previous"] == artifact_ref(root, previous["manifest_path"]), "previous binding")
-    require(candidate["manifest_path"] == candidate["run"] + "/manifest.json", "manifest membership")
     require(set(candidate["feeds"]) == {*INDICES, *QVIX_FEEDS}, "incomplete registry")
     begin, end = instant(candidate["attempted_at"]), instant(candidate["finished_at"])
     require(started <= begin <= end <= finished, "manifest outside invocation")
@@ -53,22 +55,28 @@ def eligibility(root, previous, candidate, code, started, finished, cutoff):
                 f"ineligible status {feed}")
         partial |= snap["status"] == "partial"
         require(snap["window"] == [START, cutoff], f"snapshot window {feed}")
-        require(snap["origin"]["kind"] == "result" and
-                snap["origin"]["path"].startswith(candidate["run"] + "/"), f"old origin {feed}")
+        require(snap["feed"] == feed, f"member identity {feed}")
+        directory = f"current/qvix-group/{feed}" if feed in QVIX_FEEDS else f"current/{feed}"
+        require(snap["origin"]["kind"] == "result" and snap["origin"]["path"] == f"{directory}/result.json" and
+                snap["csv"] == f"{directory}/observations.csv", f"snapshot paths {feed}")
+        if feed in QVIX_FEEDS:
+            require(snap["shared"]["path"] == "current/qvix-group/group.json" and
+                    snap["wrapper"] == f"{directory}/wrapper.csv" and snap["quality"] == f"{directory}/quality.json",
+                    f"QVIX paths {feed}")
         times = [instant(snap[k]) for k in ("attempted_at", "successful_at", "finished_at")]
         require(begin <= times[0] <= times[1] <= times[2] <= end, f"member time {feed}")
         acquired = snap.get("acquired_at", snap.get("raw", {}).get("retrieved_at"))
         # Cached QVIX siblings share one earlier response; the verifier binds its identity.
         lower, upper = (begin, times[1]) if feed in QVIX_FEEDS else (times[0], times[2])
         require(lower <= instant(acquired) <= upper, f"acquisition time {feed}")
-        require(all(START <= row["date"] <= cutoff for row in read_csv(root / snap["csv"])),
+        require(all(START <= row["date"] <= cutoff for row in read_csv(candidate_root / snap["csv"])),
                 f"selected cutoff {feed}")
         prior = previous["feeds"][feed]["snapshot"]
         require(prior is not None, f"missing baseline {feed}")
         low = max(START, previous["window"][0], prior["window"][0])
         high = min(cutoff, previous["window"][1], prior["window"][1])
-        old = {d for d in source_dates(root, prior, feed) if low <= d <= high}
-        new = source_dates(root, snap, feed)
+        old = {d for d in source_dates(baseline_root, prior, feed) if low <= d <= high}
+        new = source_dates(candidate_root, snap, feed)
         lost = sorted(old - new)
         require(not lost, f"source dates lost {feed}: {lost}; prior={prior['origin']}; new={snap['origin']}")
         details[feed] = {"status": snap["status"], "origin": snap["origin"],
@@ -94,14 +102,14 @@ def _feed_content(root, feed, snap):
             tuple(raw[k] for k in ("requested_url", "url", "encoding", "sha256")))
 
 
-def _same_data(root, previous, candidate):
+def _same_data(baseline_root, candidate_root, previous, candidate):
     # A later cutoff alone is not a revision. Selected CSVs *and* windowed quality
     # still change if a previously out-of-window row becomes material.
     return (previous.get("operation") == "acquisition" and previous["window"][0] == START and
             previous["window"][1] <= candidate["window"][1] and
             all(not old["stale_reuse"] and old["snapshot"]["window"] == previous["window"] and
-                _feed_content(root, feed, old["snapshot"]) ==
-                _feed_content(root, feed, candidate["feeds"][feed]["snapshot"])
+                _feed_content(baseline_root, feed, old["snapshot"]) ==
+                _feed_content(candidate_root, feed, candidate["feeds"][feed]["snapshot"])
                 for feed, old in previous["feeds"].items()))
 
 
@@ -115,6 +123,23 @@ def execute(command, log):
                 handle.truncate(4 * 1024 * 1024)
             raise ValueError("command diagnostic exceeded 4 MiB; truncated")
 
+def preserve_evidence(stage, diagnostics):
+    data, html = stage / "data", stage / "index.html"
+    paths = data.rglob("*") if data.is_dir() and not data.is_symlink() else ()
+    sources = ((p, diagnostics / "new-evidence" / p.relative_to(data)) for p in paths)
+    copied_bytes = copied_files = 0
+    for path, target in chain(sources, ((html, diagnostics / "candidate.html"),) if html.exists() else ()):
+        info = path.lstat()
+        if not stat.S_ISREG(info.st_mode):
+            continue
+        copied_files += 1
+        copied_bytes += info.st_size
+        if copied_files > MAX_FILES or copied_bytes > MAX_BYTES:
+            (diagnostics / "TRUNCATED").write_text("Evidence exceeds 512 files / 256 MiB\n")
+            break
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(path, target)
+
 
 def prepare(root, work, identity, clock=utc_now, runner=execute, *, publish_unchanged=False):
     from app.core import load_manifest
@@ -127,67 +152,54 @@ def prepare(root, work, identity, clock=utc_now, runner=execute, *, publish_unch
     outcome = {"identity": identity, "started_at": started.isoformat(), "window": [START, cutoff],
                "eligible": False, "phase": "baseline", "lock_sha256": digest((root / "uv.lock").read_bytes())}
     stage = work / "stage"
-    before = None
+    baseline_root, candidate_root = root / "data", stage / "data"
     try:
-        before = inventory(root / "data", bounded=False)
-        require(runner([sys.executable, "-m", "app.verify", "--input", str(root / "data"),
+        require(runner([sys.executable, "-m", "app.verify", "--input", str(baseline_root),
                         "--report", str(root / "index.html")], diagnostics / "baseline.log") == 0,
                 "baseline verification failed")
-        previous = load_manifest(root / "data")
+        previous = load_manifest(baseline_root)
         stage.mkdir()
-        shutil.copytree(root / "data", stage / "data")
         outcome["phase"] = "acquisition"
         invoked = clock()
-        code = runner([sys.executable, "-m", "app.fetch", "--output", str(stage / "data"),
+        code = runner([sys.executable, "-m", "app.fetch", "--candidate", "--output", str(candidate_root),
                        "--start", START, "--end", cutoff], diagnostics / "fetch.log")
         finished = clock()
         outcome.update(fetch_exit=code, invocation_start=invoked.isoformat(), invocation_finish=finished.isoformat())
-        candidate = load_manifest(stage / "data")
-        outcome["run"] = candidate["run"]
+        require(code in (0, 1), "unexpected fetch exit")
+        require((candidate_root / "current/manifest.json").is_file(), "no new acquisition")
+        candidate = load_manifest(candidate_root)
+        outcome["attempted_at"] = candidate["attempted_at"]
         outcome["feeds"] = {f: {"attempt": s["attempt"]["status"], "stale": s["stale_reuse"],
                                   "origin": s["snapshot"].get("origin") if s["snapshot"] else None}
                             for f, s in candidate["feeds"].items()}
-        require(code in (0, 1), "unexpected fetch exit")
         outcome["phase"] = "candidate verification"
-        require(runner([sys.executable, "-m", "app.chart", "--input", str(stage / "data"),
+        require(runner([sys.executable, "-m", "app.chart", "--input", str(candidate_root),
                         "--output", str(stage / "index.html")], diagnostics / "chart.log") == 0,
                 "chart failed")
-        require(runner([sys.executable, "-m", "app.verify", "--input", str(stage / "data"),
+        require(runner([sys.executable, "-m", "app.verify", "--input", str(candidate_root),
                         "--report", str(stage / "index.html")], diagnostics / "candidate.log") == 0,
                 "candidate verification failed")
-        quality, details = eligibility(stage / "data", previous, candidate, code, invoked, finished, cutoff)
+        quality, details = eligibility(baseline_root, candidate_root, previous, candidate, code, invoked, finished, cutoff)
         outcome.update(quality=quality, retention=details)
-        after = inventory(stage / "data", bounded=False)
-        require(all(path in after and (path == "latest.json" or facts == after[path])
-                    for path, facts in before.items()), "old immutable data changed/deleted")
-        additions = set(after) - set(before)
-        require(additions and all(p.startswith(candidate["run"] + "/") for p in additions),
-                "unexpected additions")
-        require(not any(p.startswith(candidate["run"] + "/") for p in before), "run already exists")
-        paths = additions | {"latest.json"}
-        require(len(paths) + 1 <= MAX_FILES and
-                sum(after[p]["size"] for p in paths) + (stage / "index.html").stat().st_size <= MAX_BYTES,
-                "candidate exceeds payload bound")
-        if not publish_unchanged and _same_data(stage / "data", previous, candidate):
+        files, attempted_at = payload_inventory(stage)
+        require(attempted_at == candidate["attempted_at"], "candidate acquisition identity changed")
+        if not publish_unchanged and _same_data(baseline_root, candidate_root, previous, candidate):
             # Compare at the same acquisition ID: a renderer-only change must still ship.
             rebuilt = work / "baseline.html"
-            require(runner([sys.executable, "-m", "app.chart", "--input", str(root / "data"),
+            require(runner([sys.executable, "-m", "app.chart", "--input", str(baseline_root),
                             "--output", str(rebuilt)], diagnostics / "baseline-chart.log") == 0,
                     "baseline chart rebuild failed")
             if filecmp.cmp(rebuilt, root / "index.html", shallow=False):
-                outcome.update(eligible=True, phase="unchanged", retained_run=previous["run"])
+                outcome.update(eligible=True, phase="unchanged", retained_attempted_at=previous["attempted_at"])
                 return outcome
         bundle = work / "bundle"
         payload = bundle / "payload"
-        payload.mkdir(parents=True)
-        for path in sorted(paths):
-            target = payload / "data" / path
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(stage / "data" / path, target)
-        shutil.copyfile(stage / "index.html", payload / "index.html")
-        receipt = {"identity": identity, "run": candidate["run"], "window": [START, cutoff],
+        shutil.copytree(stage, payload)
+        copied, _ = payload_inventory(payload)
+        require(copied == files, "candidate bytes changed during transfer")
+        receipt = {"identity": identity, "attempted_at": attempted_at, "window": [START, cutoff],
                    "started_at": started.isoformat(), "fetch_exit": code, "quality": quality,
-                   "verified": True, "files": inventory(payload)}
+                   "verified": True, "files": files}
         body = (json.dumps(receipt, sort_keys=True, indent=2) + "\n").encode()
         (bundle / "receipt.json").write_bytes(body)
         outcome.update(eligible=True, receipt_hash=digest(body), phase="publish")
@@ -198,22 +210,8 @@ def prepare(root, work, identity, clock=utc_now, runner=execute, *, publish_unch
     finally:
         outcome["finished_at"] = clock().isoformat()
         (diagnostics / "outcome.json").write_text(json.dumps(outcome, indent=2) + "\n")
-        # A verified candidate is either already in the bundle or deliberately not published.
-        if not outcome["eligible"] and stage.exists() and before is not None:
-            evidence = diagnostics / "new-evidence"
-            copied_bytes = copied_files = 0
-            for path in (stage / "data").rglob("*"):
-                if path.is_file() and not path.is_symlink() and path.relative_to(stage / "data").as_posix() not in before:
-                    copied_files += 1
-                    copied_bytes += path.stat().st_size
-                    if copied_files > MAX_FILES or copied_bytes > MAX_BYTES:
-                        (diagnostics / "TRUNCATED").write_text("New evidence exceeds 512 files / 256 MiB\n")
-                        break
-                    target = evidence / path.relative_to(stage / "data")
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copyfile(path, target)
-            if (stage / "index.html").is_file() and (stage / "index.html").stat().st_size <= MAX_BYTES:
-                shutil.copyfile(stage / "index.html", diagnostics / "candidate.html")
+        if not outcome["eligible"] and stage.exists():
+            preserve_evidence(stage, diagnostics)
 
 
 def main():
@@ -241,8 +239,8 @@ def main():
             with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
                 summary.write(f"UTC window: {outcome['window']}; eligible: {outcome['eligible']}; "
                               f"phase: {outcome['phase']}; fetch exit: {outcome.get('fetch_exit', 'not reached')}\n\n")
-                if outcome.get("retained_run"):
-                    summary.write(f"Verified unchanged against `{outcome['retained_run']}`; "
+                if outcome.get("retained_attempted_at"):
+                    summary.write(f"Verified unchanged against `{outcome['retained_attempted_at']}`; "
                                   "no new snapshot or deployment requested.\n\n")
                 if "receipt_hash" in outcome:
                     summary.write(f"Candidate receipt SHA256: `{outcome['receipt_hash']}`\n\n")

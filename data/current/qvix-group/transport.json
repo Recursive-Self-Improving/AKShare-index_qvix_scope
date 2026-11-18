@@ -1,0 +1,21 @@
+[
+  {
+    "body": "current/qvix-group/response-0.body",
+    "sha256": "d910696ee90b9b5359ebf7f51db7f2319caeea95ebca9d491724227674a5d50a",
+    "url": "http://1.optbbs.com/d/csv/d/k.csv",
+    "requested_url": "http://1.optbbs.com/d/csv/d/k.csv",
+    "status": 200,
+    "headers": {
+      "Server": "nginx/1.0.15",
+      "Date": "Wed, 18 Nov 2026 04:39:58 GMT",
+      "Content-Type": "application/octet-stream",
+      "Content-Length": "930038",
+      "Last-Modified": "Wed, 18 Nov 2026 00:49:01 GMT",
+      "Connection": "keep-alive",
+      "Accept-Ranges": "bytes"
+    },
+    "encoding": "utf-8",
+    "retrieved_at": "2026-11-18T04:40:25.080705+00:00",
+    "http_decompressed": true
+  }
+]

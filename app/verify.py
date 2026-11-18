@@ -10,7 +10,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 from app.core import (
-    INDICES, MAPPINGS, OHLC, QVIX_FEEDS, SCHEMA, compact_quality, compact_snapshot,
+    INDICES, MAPPINGS, OHLC, QVIX_FEEDS, SCHEMA, compact_quality,
     csv_bytes, decode, load_manifest, origin_snapshot, replay_qvix, sha,
 )
 from app.identities import IDENTITIES
@@ -379,23 +379,23 @@ def independent_qvix(body, wrapper, window, calendar, comparator, feed):
     return rows, quality, "partial" if defect else "success"
 
 
-def read_ref(root, ref):
+def read_ref(root, ref, expected):
+    require(ref["path"] == expected, "artifact outside its snapshot location")
     content = (Path(root) / ref["path"]).read_bytes()
     require(sha(content) == ref["sha256"], "artifact reference hash")
     return json.loads(content)
 
 
-def check_transport(root, evidence):
+def check_transport(root, evidence, directory):
     raw = evidence["raw"]
+    require(raw["body"] == f"{directory}/response-0.body" and
+            evidence["transport"] == f"{directory}/transport.json", "transport location")
     body = (root / raw["body"]).read_bytes()
     require(sha(body) == raw["sha256"] and raw["status"] == 200, "raw hash/status")
     transport = (root / evidence["transport"]).read_bytes()
     require(sha(transport) == evidence["transport_sha256"], "transport hash")
     _require_time(raw.get("retrieved_at"), "raw.retrieved_at")
-    captures = json.loads(transport)
-    require(len(captures) == 1 and
-            {k: v for k, v in captures[0].items() if k != "body"} ==
-            {k: v for k, v in raw.items() if k != "body"}, "consumed transport identity")
+    require(json.loads(transport) == [raw], "consumed transport identity")
     return body
 
 
@@ -418,50 +418,41 @@ def validate_snapshot(root, snap, feed, cache=None):
         return cache[key]
     require(snap["feed"] == feed and snap["status"] in ("success", "partial"), "snapshot identity")
     require("origin" in snap, "mandatory origin provenance")
-    original, _ = origin_snapshot(root, snap["origin"], feed)
-    for key in ("attempted_at", "successful_at", "finished_at"):
-        _require_time(original.get(key), key)
+    original = origin_snapshot(root, snap["origin"], feed)
+    for field in ("attempted_at", "successful_at", "finished_at"):
+        _require_time(original.get(field), field)
     actual = {k: v for k, v in snap.items() if k != "origin"}
-    require(actual == compact_snapshot(original), "immutable revision identity/time")
-    require(snap["origin"]["path"] == (str(Path(snap["csv"]).parent / "result.json")
-            if snap["origin"]["kind"] == "result" else
-            str(Path(snap["csv"]).parent.parent / "manifest.json")), "immutable origin membership")
+    require(actual == original, "immutable revision identity/time")
+    directory = "current/qvix-group" if feed in QVIX_FEEDS else f"current/{feed}"
+    member = f"{directory}/{feed}" if feed in QVIX_FEEDS else directory
+    require(snap["csv"] == f"{member}/observations.csv", "observation location")
     if feed in QVIX_FEEDS:
         require(snap["schema"] == SCHEMA and snap["columns"] == QVIX_FEEDS[feed]["columns"] and
                 snap["invocation"] == QVIX_FEEDS[feed]["wrapper"] + "()" and snap["invoked"],
                 "member callable/columns")
-        group = read_ref(root, snap["shared"])
+        require(snap["wrapper"] == f"{member}/wrapper.csv" and
+                snap["quality"] == f"{member}/quality.json", "member artifact location")
+        group = read_ref(root, snap["shared"], f"{directory}/group.json")
         _require_time(original.get("acquired_at"), "acquired_at")
         _require_time(group.get("acquired_at"), "shared.acquired_at")
-        body = check_transport(root, group)
+        body = check_transport(root, group, directory)
         require(group["group_id"] == snap["group_id"] and group["global_validated"] is True and
                 group["acquired_at"] == group["raw"]["retrieved_at"] == snap["acquired_at"],
                 "shared identity/time")
         require(group["raw"]["url"] == group["raw"]["requested_url"] == QVIX_FEEDS[feed]["url"],
                 "shared endpoint identity")
-        if "migration" not in snap:
-            directory = Path(snap["shared"]["path"]).parent
-            require(Path(snap["csv"]).parent == directory / feed, "cross-feed/body membership")
-            config = read_ref(root, group["config"])
-            invocation = json.loads((root / directory / feed / "invocation.json").read_text())
-            require(config["group_id"] == snap["group_id"] and snap["window"] == config["window"] and
-                    all(invocation[k] == snap[k] for k in invocation), "invocation identity/time")
-            require(snap["accounting"]["comparator"] == config["comparators"][feed], "bound comparator")
-            require(Path(group["raw"]["body"]).parent == directory and
-                    group["transport"] == str(directory / "transport.json"), "shared body membership")
-        else:
-            old, _ = origin_snapshot(root, snap["migration"], feed)
-            require(feed == "qvix_50etf" and all(snap[k] == old[k] for k in
-                    ("attempted_at", "successful_at", "finished_at", "window", "wrapper_sha256")) and
-                    group["raw"] == old["raw"] and group["transport"] == old["transport"] and
-                    group["transport_sha256"] == old["transport_sha256"], "migration origin/time")
+        config = read_ref(root, group["config"], f"{directory}/config.json")
+        invocation = json.loads((root / member / "invocation.json").read_bytes())
+        require(config["group_id"] == snap["group_id"] and snap["window"] == config["window"] and
+                all(invocation[k] == snap[k] for k in invocation), "invocation identity/time")
+        require(snap["accounting"]["comparator"] == config["comparators"][feed], "bound comparator")
         comparator = snap["accounting"]["comparator"]
         calendar = None
         if comparator:
             code = QVIX_FEEDS[feed]["comparator"]
             require(comparator["feed"] == code, "fixed comparator identity")
-            origin, _ = origin_snapshot(root, comparator["origin"], code)
-            csnap = compact_snapshot(origin) | {"origin": comparator["origin"]}
+            origin = origin_snapshot(root, comparator["origin"], code)
+            csnap = origin | {"origin": comparator["origin"]}
             validate_snapshot(root, csnap, code, cache)
             require(all(comparator[k] == csnap[k] for k in ("csv", "csv_sha256", "successful_at")) and
                     comparator["raw_sha256"] == csnap["raw"]["sha256"], "comparator origin/time/hash")
@@ -478,7 +469,7 @@ def validate_snapshot(root, snap, feed, cache=None):
         fields = [*OHLC, "quality"]
     else:
         require("transport" in snap and "transport_sha256" in snap, "mandatory transport provenance")
-        body = check_transport(root, snap)
+        body = check_transport(root, snap, directory)
         require(snap["identity"] == IDENTITIES[feed], "index identity")
         rows = [r for r in decode(feed, body, snap["raw"]["encoding"])
                 if snap["window"][0] <= r["date"] <= snap["window"][1]]
@@ -496,24 +487,15 @@ def validate_manifest(root, manifest):
     root = Path(root)
     require(manifest.get("schema") == SCHEMA and set(manifest["feeds"]) == {*INDICES, *QVIX_FEEDS},
             "incompatible active schema")
-    if manifest.get("previous"):
-        try:
-            read_ref(root, manifest["previous"])
-        except FileNotFoundError:
-            # An operator can cut history immediately before one exact, immutable
-            # acquisition. No other missing parent or corrupt artifact is excused.
-            marker = root / "history-root.json"
-            if not marker.is_file():
-                raise
-            anchor = json.loads(marker.read_bytes())
-            require(manifest.get("operation") == "acquisition" and
-                    anchor["path"] == manifest["manifest_path"] == manifest["run"] + "/manifest.json" and
-                    read_ref(root, anchor) == manifest, "missing predecessor outside retained history root")
+    _require_time(manifest.get("attempted_at"), "manifest.attempted_at")
+    _require_time(manifest.get("finished_at"), "manifest.finished_at")
     verified, cache = {}, {}
     for feed, state in manifest["feeds"].items():
         require(set(state) == {"attempt", "snapshot", "stale_reuse"}, "compact whole snapshot state")
-        for capture in state["attempt"].get("captures", []):
-            require(sha((root / capture["body"]).read_bytes()) == capture["sha256"], "attempt capture hash")
+        for i, capture in enumerate(state["attempt"].get("captures", [])):
+            directory = "current/qvix-group" if feed in QVIX_FEEDS else f"current/{feed}"
+            require(capture["body"] == f"{directory}/response-{i}.body" and
+                    sha((root / capture["body"]).read_bytes()) == capture["sha256"], "attempt capture")
         snap = state["snapshot"]
         usable = state["attempt"]["status"] in ("success", "partial")
         require(state["stale_reuse"] == (not usable and bool(snap)), "stale policy")
@@ -526,13 +508,13 @@ def validate_manifest(root, manifest):
 def verify(root, report):
     root = Path(root)
     manifest = load_manifest(root)
-    require(manifest == json.loads((root / manifest["manifest_path"]).read_text()), "immutable manifest")
     data = validate_manifest(root, manifest)
     parser = Embedded()
     parser.feed(Path(report).read_text())
     require(not parser.external, "external HTML resources")
     payload = json.loads(parser.payload)
-    require(payload["run"] == manifest["run"] and payload["window"] == manifest["window"], "HTML run")
+    require(payload["attempted_at"] == manifest["attempted_at"] and payload["window"] == manifest["window"],
+            "HTML acquisition identity")
     require(payload["qvix_status"] == {f: manifest["feeds"][f] for f in QVIX_FEEDS}, "HTML QVIX status")
     require([p["code"] for p in payload["panels"]] == list(INDICES), "eight ordered panels")
     require(parser.regions.get("summary") == visible_summary(manifest), "visible summary disclosure")

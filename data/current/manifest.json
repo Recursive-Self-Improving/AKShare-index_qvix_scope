@@ -1,0 +1,3764 @@
+{
+  "schema": "qvix-comparison-v4",
+  "attempted_at": "2026-11-18T04:39:46.897433+00:00",
+  "window": [
+    "2000-01-01",
+    "2026-11-18"
+  ],
+  "feeds": {
+    "sh000001": {
+      "attempt": {
+        "feed": "sh000001",
+        "attempted_at": "2026-11-18T04:39:47.398411+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000001')",
+        "raw": {
+          "body": "current/sh000001/response-0.body",
+          "sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000001/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000001/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "112491",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:38:49 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:38:49 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cRs f ]), cache22.l2so158-2[19,19,304-0,H], cache15.l2so158-2[22,0], cache15.l2so158-2[22,0], ens-cache22.l2hk11[0,0,304-0,H], ens-cache9.l2hk11[0,0], ens-cache9.l2hk11[1,0], ens-cache12.l2us5[232,232,304-0,H], ens-cache4.l2us5[233,0], ens-cache4.l2us5[234,0], ens-cache4.us33[235,234,200-0,H], ens-cache8.us33[241,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache8.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.35.nb.sinaedge.com,c=113.96.59.10;f=Edge,s=cnc.huanan2.union.30,c=10.67.2.35",
+            "X-Via-Edge": "17949767296561cd1090a2302430a6fd698a4",
+            "X-Via-SSL": "ssl.23.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794908049429",
+            "X-Ali-Tproxy-Consistent-Hash-Hot": "1",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:06 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc1e9e-23b6c\"",
+            "Content-Encoding": "gzip",
+            "Age": "59",
+            "Ali-Swift-Global-Savetime": "1794976729",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:608818003",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:48 GMT",
+            "X-Swift-CacheTime": "61",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69c17949767879133379e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:48.271651+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000001/transport.json",
+        "transport_sha256": "09db1688b807f735253415c82464d31fb1b39c83b497435d72b66feef388834c",
+        "status": "success",
+        "csv": "current/sh000001/observations.csv",
+        "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+        "count": 6511,
+        "range": [
+          "2000-01-04",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证综合指数",
+          "base_date": "1990-12-19",
+          "release_date": "1991-07-15",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000001factsheet.pdf"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:48.541982+00:00",
+        "finished_at": "2026-11-18T04:39:48.542006+00:00",
+        "origin": {
+          "path": "current/sh000001/result.json",
+          "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sh000001",
+        "attempted_at": "2026-11-18T04:39:47.398411+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000001')",
+        "raw": {
+          "body": "current/sh000001/response-0.body",
+          "sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000001/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000001/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "112491",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:38:49 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:38:49 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cRs f ]), cache22.l2so158-2[19,19,304-0,H], cache15.l2so158-2[22,0], cache15.l2so158-2[22,0], ens-cache22.l2hk11[0,0,304-0,H], ens-cache9.l2hk11[0,0], ens-cache9.l2hk11[1,0], ens-cache12.l2us5[232,232,304-0,H], ens-cache4.l2us5[233,0], ens-cache4.l2us5[234,0], ens-cache4.us33[235,234,200-0,H], ens-cache8.us33[241,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache8.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.35.nb.sinaedge.com,c=113.96.59.10;f=Edge,s=cnc.huanan2.union.30,c=10.67.2.35",
+            "X-Via-Edge": "17949767296561cd1090a2302430a6fd698a4",
+            "X-Via-SSL": "ssl.23.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794908049429",
+            "X-Ali-Tproxy-Consistent-Hash-Hot": "1",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:06 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc1e9e-23b6c\"",
+            "Content-Encoding": "gzip",
+            "Age": "59",
+            "Ali-Swift-Global-Savetime": "1794976729",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:608818003",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:48 GMT",
+            "X-Swift-CacheTime": "61",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69c17949767879133379e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:48.271651+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000001/transport.json",
+        "transport_sha256": "09db1688b807f735253415c82464d31fb1b39c83b497435d72b66feef388834c",
+        "status": "success",
+        "csv": "current/sh000001/observations.csv",
+        "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+        "count": 6511,
+        "range": [
+          "2000-01-04",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证综合指数",
+          "base_date": "1990-12-19",
+          "release_date": "1991-07-15",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000001factsheet.pdf"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:48.541982+00:00",
+        "finished_at": "2026-11-18T04:39:48.542006+00:00",
+        "origin": {
+          "path": "current/sh000001/result.json",
+          "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sh000016": {
+      "attempt": {
+        "feed": "sh000016",
+        "attempted_at": "2026-11-18T04:39:49.156687+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000016')",
+        "raw": {
+          "body": "current/sh000016/response-0.body",
+          "sha256": "47e08b4d3ab15a8756e57ba8c3276ae505477991ab30382538f374123519deb1",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "72299",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:49 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:50 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.60 (ApacheTrafficServer/6.2.1 [cRs f ]), cache19.l2so158-2[35,34,304-0,H], cache6.l2so158-2[36,0], cache6.l2so158-2[36,0], ens-cache21.l2hk11[41,41,304-0,H], ens-cache35.l2hk11[43,0], ens-cache35.l2hk11[43,0], ens-cache8.l2us5[255,281,304-0,H], ens-cache25.l2us5[282,0], ens-cache25.l2us5[283,0], ens-cache16.us33[284,284,200-0,H], ens-cache1.us33[287,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache1.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.49.nb.sinaedge.com,c=120.241.4.163;f=Edge,s=ctc.guangzhou.union.60,c=10.33.67.49",
+            "X-Via-Edge": "1794976789519280f090a3143210a14973f7a",
+            "X-Via-SSL": "ssl.23.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794908048441",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:06 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc1e9e-16ec5\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976789",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:462783426",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:49 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69517949767893414248e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:49.688428+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000016/transport.json",
+        "transport_sha256": "37825efa0269cf7f49befb2ffb083beceed4744601148e3825b10bc555f8565f",
+        "status": "success",
+        "csv": "current/sh000016/observations.csv",
+        "csv_sha256": "d50964b4cf62489954305b00fb386aba032e7c31ed1764645b209aa3331adfe8",
+        "count": 5554,
+        "range": [
+          "2004-01-02",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证50指数",
+          "base_date": "2003-12-31",
+          "release_date": "2004-01-02",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:49.893849+00:00",
+        "finished_at": "2026-11-18T04:39:49.893877+00:00",
+        "origin": {
+          "path": "current/sh000016/result.json",
+          "sha256": "26e4c400324c95e4fc7b3c143954421d86164032038358c3b93407fb8ba55339",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sh000016",
+        "attempted_at": "2026-11-18T04:39:49.156687+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000016')",
+        "raw": {
+          "body": "current/sh000016/response-0.body",
+          "sha256": "47e08b4d3ab15a8756e57ba8c3276ae505477991ab30382538f374123519deb1",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000016/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "72299",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:49 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:50 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.60 (ApacheTrafficServer/6.2.1 [cRs f ]), cache19.l2so158-2[35,34,304-0,H], cache6.l2so158-2[36,0], cache6.l2so158-2[36,0], ens-cache21.l2hk11[41,41,304-0,H], ens-cache35.l2hk11[43,0], ens-cache35.l2hk11[43,0], ens-cache8.l2us5[255,281,304-0,H], ens-cache25.l2us5[282,0], ens-cache25.l2us5[283,0], ens-cache16.us33[284,284,200-0,H], ens-cache1.us33[287,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache1.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.49.nb.sinaedge.com,c=120.241.4.163;f=Edge,s=ctc.guangzhou.union.60,c=10.33.67.49",
+            "X-Via-Edge": "1794976789519280f090a3143210a14973f7a",
+            "X-Via-SSL": "ssl.23.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794908048441",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:06 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc1e9e-16ec5\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976789",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:462783426",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:49 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69517949767893414248e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:49.688428+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000016/transport.json",
+        "transport_sha256": "37825efa0269cf7f49befb2ffb083beceed4744601148e3825b10bc555f8565f",
+        "status": "success",
+        "csv": "current/sh000016/observations.csv",
+        "csv_sha256": "d50964b4cf62489954305b00fb386aba032e7c31ed1764645b209aa3331adfe8",
+        "count": 5554,
+        "range": [
+          "2004-01-02",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证50指数",
+          "base_date": "2003-12-31",
+          "release_date": "2004-01-02",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:49.893849+00:00",
+        "finished_at": "2026-11-18T04:39:49.893877+00:00",
+        "origin": {
+          "path": "current/sh000016/result.json",
+          "sha256": "26e4c400324c95e4fc7b3c143954421d86164032038358c3b93407fb8ba55339",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sz399330": {
+      "attempt": {
+        "feed": "sz399330",
+        "attempted_at": "2026-11-18T04:39:50.531654+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sz399330')",
+        "raw": {
+          "body": "current/sz399330/response-0.body",
+          "sha256": "5742c991228a132c18e5907d119cee28bce78cb2250a886d667bc9ef4fac229f",
+          "url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "68114",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:50 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:31 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cHs f ]), cache1.l2so158-2[13,12,304-0,H], cache17.l2so158-2[14,0], cache17.l2so158-2[14,0], ens-cache25.l2hk11[19,19,304-0,H], ens-cache27.l2hk11[21,0], ens-cache27.l2hk11[22,0], ens-cache23.l2us5[240,244,304-0,H], ens-cache7.l2us5[245,0], ens-cache7.l2us5[247,0], ens-cache10.us33[247,247,200-0,H], ens-cache9.us33[252,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache9.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.300.nb.sinaedge.com,c=120.241.4.158;f=Edge,s=cnc.huanan2.union.30,c=10.33.79.30",
+            "X-Via-Edge": "17949767908602d0f090a1e4f210a17935ddc",
+            "X-Via-SSL": "ssl.23.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794914077724",
+            "Last-Modified": "Tue, 17 Nov 2026 10:25:56 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc2bb4-15a69\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976790",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:342499961",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:50 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69d17949767907062415e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:51.027685+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sz399330/transport.json",
+        "transport_sha256": "24d04bdab0c05d40b788cb4420bd35c054d14d28564531c1f3535675e5828416",
+        "status": "success",
+        "csv": "current/sz399330/observations.csv",
+        "csv_sha256": "93b9a62c5cc08029d377ca3e092203362169d4aa98aa4872bdd88add565ee483",
+        "count": 5055,
+        "range": [
+          "2006-01-24",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "深证100指数",
+          "base_date": "2002-12-31",
+          "release_date": "2006-01-24",
+          "citation": "https://www.cnindex.com.cn/html2pdf/preview/jj_399330.pdf",
+          "retained_evidence": "docs/research/matched-qvix-evidence/cnindex-399330-excerpt.md"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:51.216314+00:00",
+        "finished_at": "2026-11-18T04:39:51.216336+00:00",
+        "origin": {
+          "path": "current/sz399330/result.json",
+          "sha256": "22c228eda45620c2712f1e0cb9953b5b35d9ae4e2355b845cea72ee85b15e926",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sz399330",
+        "attempted_at": "2026-11-18T04:39:50.531654+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sz399330')",
+        "raw": {
+          "body": "current/sz399330/response-0.body",
+          "sha256": "5742c991228a132c18e5907d119cee28bce78cb2250a886d667bc9ef4fac229f",
+          "url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sz399330/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "68114",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:50 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:31 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cHs f ]), cache1.l2so158-2[13,12,304-0,H], cache17.l2so158-2[14,0], cache17.l2so158-2[14,0], ens-cache25.l2hk11[19,19,304-0,H], ens-cache27.l2hk11[21,0], ens-cache27.l2hk11[22,0], ens-cache23.l2us5[240,244,304-0,H], ens-cache7.l2us5[245,0], ens-cache7.l2us5[247,0], ens-cache10.us33[247,247,200-0,H], ens-cache9.us33[252,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache9.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.300.nb.sinaedge.com,c=120.241.4.158;f=Edge,s=cnc.huanan2.union.30,c=10.33.79.30",
+            "X-Via-Edge": "17949767908602d0f090a1e4f210a17935ddc",
+            "X-Via-SSL": "ssl.23.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794914077724",
+            "Last-Modified": "Tue, 17 Nov 2026 10:25:56 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc2bb4-15a69\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976790",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:342499961",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:50 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69d17949767907062415e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:51.027685+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sz399330/transport.json",
+        "transport_sha256": "24d04bdab0c05d40b788cb4420bd35c054d14d28564531c1f3535675e5828416",
+        "status": "success",
+        "csv": "current/sz399330/observations.csv",
+        "csv_sha256": "93b9a62c5cc08029d377ca3e092203362169d4aa98aa4872bdd88add565ee483",
+        "count": 5055,
+        "range": [
+          "2006-01-24",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "深证100指数",
+          "base_date": "2002-12-31",
+          "release_date": "2006-01-24",
+          "citation": "https://www.cnindex.com.cn/html2pdf/preview/jj_399330.pdf",
+          "retained_evidence": "docs/research/matched-qvix-evidence/cnindex-399330-excerpt.md"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:51.216314+00:00",
+        "finished_at": "2026-11-18T04:39:51.216336+00:00",
+        "origin": {
+          "path": "current/sz399330/result.json",
+          "sha256": "22c228eda45620c2712f1e0cb9953b5b35d9ae4e2355b845cea72ee85b15e926",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sh000300": {
+      "attempt": {
+        "feed": "sh000300",
+        "attempted_at": "2026-11-18T04:39:51.852840+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000300')",
+        "raw": {
+          "body": "current/sh000300/response-0.body",
+          "sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000300/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000300/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "74695",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:38:18 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:39:25 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.59 (ApacheTrafficServer/6.2.1 [cRs f ]), cache26.l2so158-2[7,6,304-0,H], cache2.l2so158-2[9,0], cache2.l2so158-2[9,0], ens-cache27.l2hk11[0,0,304-0,H], ens-cache22.l2hk11[0,0], ens-cache22.l2hk11[1,0], ens-cache6.l2us5[219,219,304-0,H], ens-cache5.l2us5[221,0], ens-cache5.l2us5[221,0], ens-cache16.us33[222,222,200-0,H], ens-cache14.us33[225,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache14.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.5656.nb.sinaedge.com,c=113.96.59.26;f=Edge,s=ctc.guangzhou.union.59,c=10.33.67.56",
+            "X-Via-Edge": "17949766988570bcd090a3843210a2b69fa69",
+            "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794907914926",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:43 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "W/\"6afc1ec3-18b8c\"",
+            "Content-Encoding": "gzip",
+            "Age": "94",
+            "Ali-Swift-Global-Savetime": "1794976698",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:672822152",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:52 GMT",
+            "X-Swift-CacheTime": "26",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f6a217949767920371671e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:52.327024+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000300/transport.json",
+        "transport_sha256": "6bae6662b0706fbaa13ed0e171b1510c92342d5b8b759563db566c557cc78104",
+        "status": "success",
+        "csv": "current/sh000300/observations.csv",
+        "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+        "count": 6032,
+        "range": [
+          "2002-01-04",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "沪深300指数",
+          "base_date": "2004-12-31",
+          "release_date": "2005-04-08",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf"
+        },
+        "retrospective_count": 782,
+        "successful_at": "2026-11-18T04:39:52.538815+00:00",
+        "finished_at": "2026-11-18T04:39:52.538838+00:00",
+        "origin": {
+          "path": "current/sh000300/result.json",
+          "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sh000300",
+        "attempted_at": "2026-11-18T04:39:51.852840+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000300')",
+        "raw": {
+          "body": "current/sh000300/response-0.body",
+          "sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000300/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000300/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "74695",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:38:18 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:39:25 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.59 (ApacheTrafficServer/6.2.1 [cRs f ]), cache26.l2so158-2[7,6,304-0,H], cache2.l2so158-2[9,0], cache2.l2so158-2[9,0], ens-cache27.l2hk11[0,0,304-0,H], ens-cache22.l2hk11[0,0], ens-cache22.l2hk11[1,0], ens-cache6.l2us5[219,219,304-0,H], ens-cache5.l2us5[221,0], ens-cache5.l2us5[221,0], ens-cache16.us33[222,222,200-0,H], ens-cache14.us33[225,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache14.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.5656.nb.sinaedge.com,c=113.96.59.26;f=Edge,s=ctc.guangzhou.union.59,c=10.33.67.56",
+            "X-Via-Edge": "17949766988570bcd090a3843210a2b69fa69",
+            "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794907914926",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:43 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "W/\"6afc1ec3-18b8c\"",
+            "Content-Encoding": "gzip",
+            "Age": "94",
+            "Ali-Swift-Global-Savetime": "1794976698",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:672822152",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:52 GMT",
+            "X-Swift-CacheTime": "26",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f6a217949767920371671e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:52.327024+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000300/transport.json",
+        "transport_sha256": "6bae6662b0706fbaa13ed0e171b1510c92342d5b8b759563db566c557cc78104",
+        "status": "success",
+        "csv": "current/sh000300/observations.csv",
+        "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+        "count": 6032,
+        "range": [
+          "2002-01-04",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "沪深300指数",
+          "base_date": "2004-12-31",
+          "release_date": "2005-04-08",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000300factsheet.pdf"
+        },
+        "retrospective_count": 782,
+        "successful_at": "2026-11-18T04:39:52.538815+00:00",
+        "finished_at": "2026-11-18T04:39:52.538838+00:00",
+        "origin": {
+          "path": "current/sh000300/result.json",
+          "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sz399006": {
+      "attempt": {
+        "feed": "sz399006",
+        "attempted_at": "2026-11-18T04:39:53.167132+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sz399006')",
+        "raw": {
+          "body": "current/sz399006/response-0.body",
+          "sha256": "1cd8f93f297af436e596b088b343e95bd9f5be4904ee3bb19821d64111aaf67a",
+          "url": "https://finance.sina.com.cn/realstock/company/sz399006/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sz399006/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "52292",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:53 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:33 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.444 (ApacheTrafficServer/6.2.1 [cRs f ]), cache18.l2so158-2[9,8,304-0,H], cache7.l2so158-2[10,0], cache7.l2so158-2[10,0], ens-cache15.l2hk11[15,15,304-0,H], ens-cache7.l2hk11[17,0], ens-cache7.l2hk11[18,0], ens-cache4.l2us5[233,233,304-0,H], ens-cache25.l2us5[234,0], ens-cache25.l2us5[235,0], ens-cache8.us33[236,236,200-0,H], ens-cache4.us33[239,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache4.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.36.nb.sinaedge.com,c=113.96.59.19;f=Edge,s=ctc.guangzhou.union.444,c=10.67.2.36",
+            "X-Via-Edge": "17949767934840dcd090a2402430a557547de",
+            "X-Via-SSL": "ssl.24.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794911117361",
+            "Last-Modified": "Tue, 17 Nov 2026 10:24:55 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "W/\"6afc2b77-109db\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976793",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:722981827",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:53 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69817949767933644428e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:53.644554+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sz399006/transport.json",
+        "transport_sha256": "0bd1b7e372333ab49fefdbb153c6ab0f9e88a7899e9621c6e676c63fd46efb93",
+        "status": "success",
+        "csv": "current/sz399006/observations.csv",
+        "csv_sha256": "28d132b41ff1e3df8a96994254ab221437b4b47d143164233c58d3c6dc3d0427",
+        "count": 3997,
+        "range": [
+          "2010-06-01",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "创业板指数P",
+          "base_date": "2010-05-31",
+          "release_date": "2010-06-01",
+          "citation": "https://www.szse.cn/disclosure/notice/general/t20100531_500454.html"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:53.803783+00:00",
+        "finished_at": "2026-11-18T04:39:53.803806+00:00",
+        "origin": {
+          "path": "current/sz399006/result.json",
+          "sha256": "fc0b5af1ad51aa276e125e39660fe43ebfe798cea73fa49464ac4d4a7cb52481",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sz399006",
+        "attempted_at": "2026-11-18T04:39:53.167132+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sz399006')",
+        "raw": {
+          "body": "current/sz399006/response-0.body",
+          "sha256": "1cd8f93f297af436e596b088b343e95bd9f5be4904ee3bb19821d64111aaf67a",
+          "url": "https://finance.sina.com.cn/realstock/company/sz399006/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sz399006/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "52292",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:53 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:33 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.444 (ApacheTrafficServer/6.2.1 [cRs f ]), cache18.l2so158-2[9,8,304-0,H], cache7.l2so158-2[10,0], cache7.l2so158-2[10,0], ens-cache15.l2hk11[15,15,304-0,H], ens-cache7.l2hk11[17,0], ens-cache7.l2hk11[18,0], ens-cache4.l2us5[233,233,304-0,H], ens-cache25.l2us5[234,0], ens-cache25.l2us5[235,0], ens-cache8.us33[236,236,200-0,H], ens-cache4.us33[239,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache4.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.36.nb.sinaedge.com,c=113.96.59.19;f=Edge,s=ctc.guangzhou.union.444,c=10.67.2.36",
+            "X-Via-Edge": "17949767934840dcd090a2402430a557547de",
+            "X-Via-SSL": "ssl.24.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794911117361",
+            "Last-Modified": "Tue, 17 Nov 2026 10:24:55 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "W/\"6afc2b77-109db\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976793",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:722981827",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:53 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69817949767933644428e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:53.644554+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sz399006/transport.json",
+        "transport_sha256": "0bd1b7e372333ab49fefdbb153c6ab0f9e88a7899e9621c6e676c63fd46efb93",
+        "status": "success",
+        "csv": "current/sz399006/observations.csv",
+        "csv_sha256": "28d132b41ff1e3df8a96994254ab221437b4b47d143164233c58d3c6dc3d0427",
+        "count": 3997,
+        "range": [
+          "2010-06-01",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "创业板指数P",
+          "base_date": "2010-05-31",
+          "release_date": "2010-06-01",
+          "citation": "https://www.szse.cn/disclosure/notice/general/t20100531_500454.html"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:53.803783+00:00",
+        "finished_at": "2026-11-18T04:39:53.803806+00:00",
+        "origin": {
+          "path": "current/sz399006/result.json",
+          "sha256": "fc0b5af1ad51aa276e125e39660fe43ebfe798cea73fa49464ac4d4a7cb52481",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sz399673": {
+      "attempt": {
+        "feed": "sz399673",
+        "attempted_at": "2026-11-18T04:39:54.436502+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sz399673')",
+        "raw": {
+          "body": "current/sz399673/response-0.body",
+          "sha256": "b0891aabde035b148538fb85e670fe35fe59a181fcf3d77589fe565f74739fbc",
+          "url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "39383",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:54 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:41:54 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.50 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache24.l2so158-2[56,55,304-0,H], cache6.l2so158-2[58,0], cache6.l2so158-2[58,0], ens-cache39.l2hk11[63,63,304-0,H], ens-cache6.l2hk11[65,0], ens-cache6.l2hk11[65,0], ens-cache5.l2us5[279,279,304-0,H], ens-cache15.l2us5[281,0], ens-cache15.l2us5[281,0], ens-cache13.us33[283,283,200-0,H], ens-cache13.us33[285,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache13.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.21.nb.sinaedge.com,c=120.241.4.148;f=Edge,s=ctc.guangzhou.union.50,c=10.67.2.21;f=edge,s=ctc.wuqing.bsd-storage.70.nb.sinaedge.com,c=10.54.255.68;",
+            "X-Via-Edge": "17949767947572210090a1502430a1dea90ec",
+            "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794944912745",
+            "Last-Modified": "Tue, 17 Nov 2026 10:28:11 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc2c3b-c84f\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976794",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:613478094",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:54 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f6a117949767946201335e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:54.957410+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sz399673/transport.json",
+        "transport_sha256": "d5bdb734df66922f09ce2589b09280e8eeca725d40e85a894bb988b6ddc4a54f",
+        "status": "success",
+        "csv": "current/sz399673/observations.csv",
+        "csv_sha256": "2e7cdc2391e53ccc19189ff52fdb5b4143482e11c6a0da4568323e93931fa631",
+        "count": 3019,
+        "range": [
+          "2014-06-18",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "创业板50指数",
+          "base_date": "2010-05-31",
+          "release_date": "2014-06-18",
+          "citation": "https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:55.096808+00:00",
+        "finished_at": "2026-11-18T04:39:55.096829+00:00",
+        "origin": {
+          "path": "current/sz399673/result.json",
+          "sha256": "37b0d2f31209068bee3b24b8076d311f4308aee00a8ec2529c0971976a27bb9f",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sz399673",
+        "attempted_at": "2026-11-18T04:39:54.436502+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sz399673')",
+        "raw": {
+          "body": "current/sz399673/response-0.body",
+          "sha256": "b0891aabde035b148538fb85e670fe35fe59a181fcf3d77589fe565f74739fbc",
+          "url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "39383",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:54 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:41:54 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 ctc.guangzhou.union.50 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache24.l2so158-2[56,55,304-0,H], cache6.l2so158-2[58,0], cache6.l2so158-2[58,0], ens-cache39.l2hk11[63,63,304-0,H], ens-cache6.l2hk11[65,0], ens-cache6.l2hk11[65,0], ens-cache5.l2us5[279,279,304-0,H], ens-cache15.l2us5[281,0], ens-cache15.l2us5[281,0], ens-cache13.us33[283,283,200-0,H], ens-cache13.us33[285,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache13.us33,c=52.250.234.16;f=sinaedge,s=cmcc.huanan2.union.21.nb.sinaedge.com,c=120.241.4.148;f=Edge,s=ctc.guangzhou.union.50,c=10.67.2.21;f=edge,s=ctc.wuqing.bsd-storage.70.nb.sinaedge.com,c=10.54.255.68;",
+            "X-Via-Edge": "17949767947572210090a1502430a1dea90ec",
+            "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+            "Edge-Copy-Time": "1794944912745",
+            "Last-Modified": "Tue, 17 Nov 2026 10:28:11 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc2c3b-c84f\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976794",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:613478094",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:54 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f6a117949767946201335e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:54.957410+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sz399673/transport.json",
+        "transport_sha256": "d5bdb734df66922f09ce2589b09280e8eeca725d40e85a894bb988b6ddc4a54f",
+        "status": "success",
+        "csv": "current/sz399673/observations.csv",
+        "csv_sha256": "2e7cdc2391e53ccc19189ff52fdb5b4143482e11c6a0da4568323e93931fa631",
+        "count": 3019,
+        "range": [
+          "2014-06-18",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "创业板50指数",
+          "base_date": "2010-05-31",
+          "release_date": "2014-06-18",
+          "citation": "https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html"
+        },
+        "retrospective_count": 0,
+        "successful_at": "2026-11-18T04:39:55.096808+00:00",
+        "finished_at": "2026-11-18T04:39:55.096829+00:00",
+        "origin": {
+          "path": "current/sz399673/result.json",
+          "sha256": "37b0d2f31209068bee3b24b8076d311f4308aee00a8ec2529c0971976a27bb9f",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sh000680": {
+      "attempt": {
+        "feed": "sh000680",
+        "attempted_at": "2026-11-18T04:39:55.704496+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000680')",
+        "raw": {
+          "body": "current/sh000680/response-0.body",
+          "sha256": "daedcec54bd631bca8945299872399e961dc844592d646358bfd7f91bd7a51c5",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "21183",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:56 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:41:56 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[8,7,304-0,H], cache16.l2so158-2[9,0], cache16.l2so158-2[9,0], ens-cache20.l2hk11[14,14,304-0,H], ens-cache37.l2hk11[16,0], ens-cache37.l2hk11[17,0], ens-cache32.l2us5[231,231,304-0,H], ens-cache23.l2us5[233,0], ens-cache23.l2us5[233,0], ens-cache4.us33[236,244,200-0,H], ens-cache2.us33[247,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache2.us33,c=52.250.234.16;f=sinaedge,s=cnc.huanan2.union.38.nb.sinaedge.com,c=113.96.59.21;f=Edge,s=cnc.huanan2.union.38,c=10.67.1.38;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.34.253.25;",
+            "X-Via-Edge": "179497679603816cd090a2601430a079533d8",
+            "X-Via-SSL": "ssl.56.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794910417505",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:43 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc1ec3-6c77\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976796",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:120832838",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:56 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69617949767959077210e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:56.192852+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000680/transport.json",
+        "transport_sha256": "7eac94983c1f9a2772f11cab52c03116aa0d5ce3d746f0434b97a7fd1854271c",
+        "status": "success",
+        "csv": "current/sh000680/observations.csv",
+        "csv_sha256": "cbda5c3693b7e5c956de710dfea4b742da1729951d3a9ddaa79218d1919e045d",
+        "count": 1665,
+        "range": [
+          "2020-01-02",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证科创板综合指数",
+          "base_date": "2019-12-31",
+          "release_date": "2025-01-20",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf",
+          "return_note": "包括股息，与科创50价格指数不同"
+        },
+        "retrospective_count": 1224,
+        "successful_at": "2026-11-18T04:39:56.285568+00:00",
+        "finished_at": "2026-11-18T04:39:56.285587+00:00",
+        "origin": {
+          "path": "current/sh000680/result.json",
+          "sha256": "dc0a17920cdf4d79e5fcb2d54054e87bb2f9fae3f460606a1a6bb1d813c6b13e",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sh000680",
+        "attempted_at": "2026-11-18T04:39:55.704496+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000680')",
+        "raw": {
+          "body": "current/sh000680/response-0.body",
+          "sha256": "daedcec54bd631bca8945299872399e961dc844592d646358bfd7f91bd7a51c5",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "21183",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:56 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:41:56 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[8,7,304-0,H], cache16.l2so158-2[9,0], cache16.l2so158-2[9,0], ens-cache20.l2hk11[14,14,304-0,H], ens-cache37.l2hk11[16,0], ens-cache37.l2hk11[17,0], ens-cache32.l2us5[231,231,304-0,H], ens-cache23.l2us5[233,0], ens-cache23.l2us5[233,0], ens-cache4.us33[236,244,200-0,H], ens-cache2.us33[247,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache2.us33,c=52.250.234.16;f=sinaedge,s=cnc.huanan2.union.38.nb.sinaedge.com,c=113.96.59.21;f=Edge,s=cnc.huanan2.union.38,c=10.67.1.38;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.34.253.25;",
+            "X-Via-Edge": "179497679603816cd090a2601430a079533d8",
+            "X-Via-SSL": "ssl.56.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794910417505",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:43 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "\"6afc1ec3-6c77\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976796",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:120832838",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:56 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f69617949767959077210e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:56.192852+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000680/transport.json",
+        "transport_sha256": "7eac94983c1f9a2772f11cab52c03116aa0d5ce3d746f0434b97a7fd1854271c",
+        "status": "success",
+        "csv": "current/sh000680/observations.csv",
+        "csv_sha256": "cbda5c3693b7e5c956de710dfea4b742da1729951d3a9ddaa79218d1919e045d",
+        "count": 1665,
+        "range": [
+          "2020-01-02",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证科创板综合指数",
+          "base_date": "2019-12-31",
+          "release_date": "2025-01-20",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000680factsheet.pdf",
+          "return_note": "包括股息，与科创50价格指数不同"
+        },
+        "retrospective_count": 1224,
+        "successful_at": "2026-11-18T04:39:56.285568+00:00",
+        "finished_at": "2026-11-18T04:39:56.285587+00:00",
+        "origin": {
+          "path": "current/sh000680/result.json",
+          "sha256": "dc0a17920cdf4d79e5fcb2d54054e87bb2f9fae3f460606a1a6bb1d813c6b13e",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "sh000688": {
+      "attempt": {
+        "feed": "sh000688",
+        "attempted_at": "2026-11-18T04:39:56.913917+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000688')",
+        "raw": {
+          "body": "current/sh000688/response-0.body",
+          "sha256": "a3eaf033a0454c25b87e133b8b2e384c34517910e9785f1578c538334dbe5b83",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "20692",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:57 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:37 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cmcc.huanan2.union.23 (ApacheTrafficServer/6.2.1 [cRs f ]), cache10.l2so158-2[37,36,304-0,H], cache27.l2so158-2[38,0], cache27.l2so158-2[39,0], ens-cache35.l2hk11[44,44,304-0,H], ens-cache37.l2hk11[55,0], ens-cache37.l2hk11[55,0], ens-cache10.l2us5[289,290,304-0,H], ens-cache23.l2us5[291,0], ens-cache23.l2us5[291,0], ens-cache10.us33[293,293,200-0,H], ens-cache21.us33[297,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache21.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.5757.nb.sinaedge.com,c=120.241.4.134;f=Edge,s=cmcc.huanan2.union.23,c=10.33.79.57",
+            "X-Via-Edge": "1794976797272210f090a394f210a2c56599f",
+            "X-Via-SSL": "ssl.56.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794907933874",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:42 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "W/\"6afc1ec2-69df\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976797",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:481647259",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:57 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f6a917949767970965823e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:57.440614+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000688/transport.json",
+        "transport_sha256": "5abcc31b152fc51d7ee42e3b2f3eafe9c6fdcde7cdb1abbc27bc11c441a3ac09",
+        "status": "success",
+        "csv": "current/sh000688/observations.csv",
+        "csv_sha256": "294a04393917d63a21d873a44dff29123df623425adf2406c0c4f05dce577256",
+        "count": 1665,
+        "range": [
+          "2020-01-02",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证科创板50成份指数",
+          "base_date": "2019-12-31",
+          "release_date": "2020-07-23",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf"
+        },
+        "retrospective_count": 133,
+        "successful_at": "2026-11-18T04:39:57.537785+00:00",
+        "finished_at": "2026-11-18T04:39:57.537803+00:00",
+        "origin": {
+          "path": "current/sh000688/result.json",
+          "sha256": "be371abaa9ae0863febd6d844ee1535915870d742c1fedfab026b435da95811b",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "sh000688",
+        "attempted_at": "2026-11-18T04:39:56.913917+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          12
+        ],
+        "invocation": "index_zh_daily_sina(symbol='sh000688')",
+        "raw": {
+          "body": "current/sh000688/response-0.body",
+          "sha256": "a3eaf033a0454c25b87e133b8b2e384c34517910e9785f1578c538334dbe5b83",
+          "url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+          "requested_url": "https://finance.sina.com.cn/realstock/company/sh000688/hisdata/klc_kl.js?d=2020_2_4",
+          "status": 200,
+          "headers": {
+            "Server": "Tengine",
+            "Content-Type": "application/x-javascript",
+            "Content-Length": "20692",
+            "Connection": "keep-alive",
+            "Date": "Wed, 18 Nov 2026 04:39:57 GMT",
+            "Expires": "Wed, 18 Nov 2026 04:40:37 GMT",
+            "Cache-Control": "max-age=120",
+            "Via": "http/1.1 cmcc.huanan2.union.23 (ApacheTrafficServer/6.2.1 [cRs f ]), cache10.l2so158-2[37,36,304-0,H], cache27.l2so158-2[38,0], cache27.l2so158-2[39,0], ens-cache35.l2hk11[44,44,304-0,H], ens-cache37.l2hk11[55,0], ens-cache37.l2hk11[55,0], ens-cache10.l2us5[289,290,304-0,H], ens-cache23.l2us5[291,0], ens-cache23.l2us5[291,0], ens-cache10.us33[293,293,200-0,H], ens-cache21.us33[297,0]",
+            "X-Via-CDN": "f=aliyun,s=ens-cache21.us33,c=52.250.234.16;f=sinaedge,s=ctc.guangzhou.union.5757.nb.sinaedge.com,c=120.241.4.134;f=Edge,s=cmcc.huanan2.union.23,c=10.33.79.57",
+            "X-Via-Edge": "1794976797272210f090a394f210a2c56599f",
+            "X-Via-SSL": "ssl.56.sinag1.hj4.lb.sinanode.com",
+            "Edge-Copy-Time": "1794907933874",
+            "Last-Modified": "Tue, 17 Nov 2026 09:30:42 GMT",
+            "Vary": "Accept-Encoding",
+            "ETag": "W/\"6afc1ec2-69df\"",
+            "Content-Encoding": "gzip",
+            "Age": "0",
+            "Ali-Swift-Global-Savetime": "1794976797",
+            "X-Cache": "HIT TCP_REFRESH_HIT dirn:12:481647259",
+            "X-Swift-SaveTime": "Wed, 18 Nov 2026 04:39:57 GMT",
+            "X-Swift-CacheTime": "120",
+            "Timing-Allow-Origin": "*",
+            "EagleId": "a3b5f6a917949767970965823e"
+          },
+          "encoding": "utf-8",
+          "retrieved_at": "2026-11-18T04:39:57.440614+00:00",
+          "http_decompressed": true
+        },
+        "transport": "current/sh000688/transport.json",
+        "transport_sha256": "5abcc31b152fc51d7ee42e3b2f3eafe9c6fdcde7cdb1abbc27bc11c441a3ac09",
+        "status": "success",
+        "csv": "current/sh000688/observations.csv",
+        "csv_sha256": "294a04393917d63a21d873a44dff29123df623425adf2406c0c4f05dce577256",
+        "count": 1665,
+        "range": [
+          "2020-01-02",
+          "2026-11-17"
+        ],
+        "identity": {
+          "official_name": "上证科创板50成份指数",
+          "base_date": "2019-12-31",
+          "release_date": "2020-07-23",
+          "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000688factsheet.pdf"
+        },
+        "retrospective_count": 133,
+        "successful_at": "2026-11-18T04:39:57.537785+00:00",
+        "finished_at": "2026-11-18T04:39:57.537803+00:00",
+        "origin": {
+          "path": "current/sh000688/result.json",
+          "sha256": "be371abaa9ae0863febd6d844ee1535915870d742c1fedfab026b435da95811b",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_50index": {
+      "attempt": {
+        "feed": "qvix_50index",
+        "attempted_at": "2026-11-18T04:39:58.188994+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_50index_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          79,
+          80,
+          81,
+          82
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:25.395752+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_50index",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000001/result.json",
+              "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+              "kind": "result"
+            },
+            "csv": "current/sh000001/observations.csv",
+            "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+            "successful_at": "2026-11-18T04:39:48.541982+00:00",
+            "feed": "sh000001",
+            "raw_sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 928,
+            "finite_close_dates": 755,
+            "all_cells_nonblank": 929,
+            "finite_complete_rows": 722,
+            "invalid_fields": 793,
+            "invalid_dates": 206,
+            "incomplete_rows": 0,
+            "zero_rows": 36,
+            "zero_close_rows": 35,
+            "envelope_rows": 13,
+            "distinct_candidates": 928,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1922,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 928,
+            "usable_close": 755,
+            "conflict": 0,
+            "invalid_close_dates": 173,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1922,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 0,
+            "invalid_close": 169,
+            "missing_close": 0,
+            "holes": 182,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 928,
+            "finite_close_dates": 755,
+            "all_cells_nonblank": 929,
+            "finite_complete_rows": 722,
+            "invalid_fields": 793,
+            "invalid_dates": 206,
+            "incomplete_rows": 0,
+            "zero_rows": 36,
+            "zero_close_rows": 35,
+            "envelope_rows": 13,
+            "distinct_candidates": 928,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1922,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 928,
+            "usable_close": 755,
+            "conflict": 0,
+            "invalid_close_dates": 173,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1922,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 0,
+            "invalid_close": 169,
+            "missing_close": 0,
+            "holes": 182,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 942,
+        "range": [
+          "2023-01-03",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2023-01-03",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_50index/observations.csv",
+        "csv_sha256": "20fc29d168a1d4130d9d2353af13d14f893da362edd3bd89438449a4c1d8f782",
+        "quality": "current/qvix-group/qvix_50index/quality.json",
+        "quality_sha256": "1b28b7b1466540827d70068f9c2e401fa5b4172f5cf742640e67e5b1ce45159f",
+        "wrapper": "current/qvix-group/qvix_50index/wrapper.csv",
+        "wrapper_sha256": "7e2b308c3794a6951d86cb1cecdf402af109e2579111000a06e10a12cbde5f4c",
+        "finished_at": "2026-11-18T04:40:25.396974+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_50index/result.json",
+          "sha256": "025aaea0ae29a3ef991495b374d6570010e1ffe7a8fb06c80563f90865c1482b",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_50index",
+        "attempted_at": "2026-11-18T04:39:58.188994+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_50index_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          79,
+          80,
+          81,
+          82
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:25.395752+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_50index",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000001/result.json",
+              "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+              "kind": "result"
+            },
+            "csv": "current/sh000001/observations.csv",
+            "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+            "successful_at": "2026-11-18T04:39:48.541982+00:00",
+            "feed": "sh000001",
+            "raw_sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 928,
+            "finite_close_dates": 755,
+            "all_cells_nonblank": 929,
+            "finite_complete_rows": 722,
+            "invalid_fields": 793,
+            "invalid_dates": 206,
+            "incomplete_rows": 0,
+            "zero_rows": 36,
+            "zero_close_rows": 35,
+            "envelope_rows": 13,
+            "distinct_candidates": 928,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1922,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 928,
+            "usable_close": 755,
+            "conflict": 0,
+            "invalid_close_dates": 173,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1922,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 0,
+            "invalid_close": 169,
+            "missing_close": 0,
+            "holes": 182,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-01-03",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 928,
+            "finite_close_dates": 755,
+            "all_cells_nonblank": 929,
+            "finite_complete_rows": 722,
+            "invalid_fields": 793,
+            "invalid_dates": 206,
+            "incomplete_rows": 0,
+            "zero_rows": 36,
+            "zero_close_rows": 35,
+            "envelope_rows": 13,
+            "distinct_candidates": 928,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1922,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 928,
+            "usable_close": 755,
+            "conflict": 0,
+            "invalid_close_dates": 173,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1922,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 0,
+            "invalid_close": 169,
+            "missing_close": 0,
+            "holes": 182,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 942,
+        "range": [
+          "2023-01-03",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2023-01-03",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_50index/observations.csv",
+        "csv_sha256": "20fc29d168a1d4130d9d2353af13d14f893da362edd3bd89438449a4c1d8f782",
+        "quality": "current/qvix-group/qvix_50index/quality.json",
+        "quality_sha256": "1b28b7b1466540827d70068f9c2e401fa5b4172f5cf742640e67e5b1ce45159f",
+        "wrapper": "current/qvix-group/qvix_50index/wrapper.csv",
+        "wrapper_sha256": "7e2b308c3794a6951d86cb1cecdf402af109e2579111000a06e10a12cbde5f4c",
+        "finished_at": "2026-11-18T04:40:25.396974+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_50index/result.json",
+          "sha256": "025aaea0ae29a3ef991495b374d6570010e1ffe7a8fb06c80563f90865c1482b",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_50etf": {
+      "attempt": {
+        "feed": "qvix_50etf",
+        "attempted_at": "2026-11-18T04:40:25.398053+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_50etf_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:25.640289+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_50etf",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000001/result.json",
+              "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+              "kind": "result"
+            },
+            "csv": "current/sh000001/observations.csv",
+            "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+            "successful_at": "2026-11-18T04:39:48.541982+00:00",
+            "feed": "sh000001",
+            "raw_sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 2850,
+            "finite_close_dates": 2849,
+            "all_cells_nonblank": 2851,
+            "finite_complete_rows": 2851,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 8,
+            "distinct_candidates": 2851,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 0,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 2850,
+            "usable_close": 2849,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 0,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 2850,
+            "finite_close_dates": 2849,
+            "all_cells_nonblank": 2851,
+            "finite_complete_rows": 2851,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 8,
+            "distinct_candidates": 2851,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 0,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 2850,
+            "usable_close": 2849,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 0,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 2864,
+        "range": [
+          "2015-02-09",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2015-02-09",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_50etf/observations.csv",
+        "csv_sha256": "234d37dd8e0cd86d4bb51c8d2fb32bfb27ffc95c10fb59e0a2486d8574b6ef7c",
+        "quality": "current/qvix-group/qvix_50etf/quality.json",
+        "quality_sha256": "3a645fe48bce94030adae15b4112c5109f58a7bed9ae781eb9bd5d794af9a151",
+        "wrapper": "current/qvix-group/qvix_50etf/wrapper.csv",
+        "wrapper_sha256": "ed5a96292bc70b0e260ebae40d96d925e61ab591a616aa3222d8b16203db20ac",
+        "finished_at": "2026-11-18T04:40:25.642374+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_50etf/result.json",
+          "sha256": "72fa9c41314f1a456aa282e9ca379639dc5ce588eb5817b80bb17befd5889f75",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_50etf",
+        "attempted_at": "2026-11-18T04:40:25.398053+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_50etf_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:25.640289+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_50etf",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000001/result.json",
+              "sha256": "a83743fc13dcdc1e444018962ce9cfea24a04dff179c7b0ca098b96af2b9ae11",
+              "kind": "result"
+            },
+            "csv": "current/sh000001/observations.csv",
+            "csv_sha256": "b5d70e2fcdb669c7a41e16bf78b41d06b56bb989a39a5360db9b4271b4c6cf2a",
+            "successful_at": "2026-11-18T04:39:48.541982+00:00",
+            "feed": "sh000001",
+            "raw_sha256": "8bdad3e0a174837a9790a404c856c9e52b7322eb18078cf2c91a725f9aebd9be",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 2850,
+            "finite_close_dates": 2849,
+            "all_cells_nonblank": 2851,
+            "finite_complete_rows": 2851,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 8,
+            "distinct_candidates": 2851,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 0,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 2850,
+            "usable_close": 2849,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 0,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2015-02-09",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 2850,
+            "finite_close_dates": 2849,
+            "all_cells_nonblank": 2851,
+            "finite_complete_rows": 2851,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 8,
+            "distinct_candidates": 2851,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 0,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 2850,
+            "usable_close": 2849,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 0,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 2864,
+        "range": [
+          "2015-02-09",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2015-02-09",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_50etf/observations.csv",
+        "csv_sha256": "234d37dd8e0cd86d4bb51c8d2fb32bfb27ffc95c10fb59e0a2486d8574b6ef7c",
+        "quality": "current/qvix-group/qvix_50etf/quality.json",
+        "quality_sha256": "3a645fe48bce94030adae15b4112c5109f58a7bed9ae781eb9bd5d794af9a151",
+        "wrapper": "current/qvix-group/qvix_50etf/wrapper.csv",
+        "wrapper_sha256": "ed5a96292bc70b0e260ebae40d96d925e61ab591a616aa3222d8b16203db20ac",
+        "finished_at": "2026-11-18T04:40:25.642374+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_50etf/result.json",
+          "sha256": "72fa9c41314f1a456aa282e9ca379639dc5ce588eb5817b80bb17befd5889f75",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_100etf": {
+      "attempt": {
+        "feed": "qvix_100etf",
+        "attempted_at": "2026-11-18T04:40:25.643429+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_100etf_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          75,
+          76,
+          77,
+          78
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:25.816736+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_100etf",
+          "comparator": {
+            "origin": {
+              "path": "current/sz399330/result.json",
+              "sha256": "22c228eda45620c2712f1e0cb9953b5b35d9ae4e2355b845cea72ee85b15e926",
+              "kind": "result"
+            },
+            "csv": "current/sz399330/observations.csv",
+            "csv_sha256": "93b9a62c5cc08029d377ca3e092203362169d4aa98aa4872bdd88add565ee483",
+            "successful_at": "2026-11-18T04:39:51.216314+00:00",
+            "feed": "sz399330",
+            "raw_sha256": "5742c991228a132c18e5907d119cee28bce78cb2250a886d667bc9ef4fac229f",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 943,
+            "finite_close_dates": 942,
+            "all_cells_nonblank": 944,
+            "finite_complete_rows": 940,
+            "invalid_fields": 8,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 4,
+            "distinct_candidates": 944,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1907,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 943,
+            "usable_close": 942,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1907,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 943,
+            "finite_close_dates": 942,
+            "all_cells_nonblank": 944,
+            "finite_complete_rows": 940,
+            "invalid_fields": 8,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 4,
+            "distinct_candidates": 944,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1907,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 943,
+            "usable_close": 942,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1907,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 957,
+        "range": [
+          "2022-12-12",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2022-12-12",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_100etf/observations.csv",
+        "csv_sha256": "23fcafd9efb8d985b78790a6b1fe02a36359eaae03961d2d42ec72bf5a0ff437",
+        "quality": "current/qvix-group/qvix_100etf/quality.json",
+        "quality_sha256": "28e26063abac0c1c6589d75cf3e759b8eff76c11ddfaf06849945db91ec18d67",
+        "wrapper": "current/qvix-group/qvix_100etf/wrapper.csv",
+        "wrapper_sha256": "5801ce606061855ee8a0bb7072098351ace6842307330c175266f620b24b2891",
+        "finished_at": "2026-11-18T04:40:25.817969+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_100etf/result.json",
+          "sha256": "189dbca588acea9b6b67af5c36e2dbf631ecc4771094eaf10667f1bba612b03b",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_100etf",
+        "attempted_at": "2026-11-18T04:40:25.643429+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_100etf_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          75,
+          76,
+          77,
+          78
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:25.816736+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_100etf",
+          "comparator": {
+            "origin": {
+              "path": "current/sz399330/result.json",
+              "sha256": "22c228eda45620c2712f1e0cb9953b5b35d9ae4e2355b845cea72ee85b15e926",
+              "kind": "result"
+            },
+            "csv": "current/sz399330/observations.csv",
+            "csv_sha256": "93b9a62c5cc08029d377ca3e092203362169d4aa98aa4872bdd88add565ee483",
+            "successful_at": "2026-11-18T04:39:51.216314+00:00",
+            "feed": "sz399330",
+            "raw_sha256": "5742c991228a132c18e5907d119cee28bce78cb2250a886d667bc9ef4fac229f",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 943,
+            "finite_close_dates": 942,
+            "all_cells_nonblank": 944,
+            "finite_complete_rows": 940,
+            "invalid_fields": 8,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 4,
+            "distinct_candidates": 944,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1907,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 943,
+            "usable_close": 942,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1907,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-12-12",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 943,
+            "finite_close_dates": 942,
+            "all_cells_nonblank": 944,
+            "finite_complete_rows": 940,
+            "invalid_fields": 8,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 4,
+            "distinct_candidates": 944,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1907,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 943,
+            "usable_close": 942,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1907,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 957,
+        "range": [
+          "2022-12-12",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2022-12-12",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_100etf/observations.csv",
+        "csv_sha256": "23fcafd9efb8d985b78790a6b1fe02a36359eaae03961d2d42ec72bf5a0ff437",
+        "quality": "current/qvix-group/qvix_100etf/quality.json",
+        "quality_sha256": "28e26063abac0c1c6589d75cf3e759b8eff76c11ddfaf06849945db91ec18d67",
+        "wrapper": "current/qvix-group/qvix_100etf/wrapper.csv",
+        "wrapper_sha256": "5801ce606061855ee8a0bb7072098351ace6842307330c175266f620b24b2891",
+        "finished_at": "2026-11-18T04:40:25.817969+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_100etf/result.json",
+          "sha256": "189dbca588acea9b6b67af5c36e2dbf631ecc4771094eaf10667f1bba612b03b",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_300index": {
+      "attempt": {
+        "feed": "qvix_300index",
+        "attempted_at": "2026-11-18T04:40:25.819100+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_300index_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          17,
+          18,
+          19,
+          20
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.004814+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_300index",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000300/result.json",
+              "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+              "kind": "result"
+            },
+            "csv": "current/sh000300/observations.csv",
+            "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+            "successful_at": "2026-11-18T04:39:52.538815+00:00",
+            "feed": "sh000300",
+            "raw_sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 1662,
+            "finite_close_dates": 1484,
+            "all_cells_nonblank": 1663,
+            "finite_complete_rows": 1447,
+            "invalid_fields": 825,
+            "invalid_dates": 215,
+            "incomplete_rows": 0,
+            "zero_rows": 47,
+            "zero_close_rows": 44,
+            "envelope_rows": 24,
+            "distinct_candidates": 1662,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 1,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 1662,
+            "usable_close": 1484,
+            "conflict": 0,
+            "invalid_close_dates": 178,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 1,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 1,
+            "conflict_holes": 0,
+            "invalid_close": 174,
+            "missing_close": 0,
+            "holes": 188,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 1662,
+            "finite_close_dates": 1484,
+            "all_cells_nonblank": 1663,
+            "finite_complete_rows": 1447,
+            "invalid_fields": 825,
+            "invalid_dates": 215,
+            "incomplete_rows": 0,
+            "zero_rows": 47,
+            "zero_close_rows": 44,
+            "envelope_rows": 24,
+            "distinct_candidates": 1662,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 1,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 1662,
+            "usable_close": 1484,
+            "conflict": 0,
+            "invalid_close_dates": 178,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 1,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 1,
+            "conflict_holes": 0,
+            "invalid_close": 174,
+            "missing_close": 0,
+            "holes": 188,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 1677,
+        "range": [
+          "2019-12-23",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2019-12-23",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_300index/observations.csv",
+        "csv_sha256": "11b5d9c9b777ba0c630824ef57c50630ca3d9af8521c0d6d59b561b44a544f8a",
+        "quality": "current/qvix-group/qvix_300index/quality.json",
+        "quality_sha256": "359c03104847718d95e60938aa6b23d0474329da090181ca13a752af89bc8b1f",
+        "wrapper": "current/qvix-group/qvix_300index/wrapper.csv",
+        "wrapper_sha256": "da00a3fdb642f010da279502f87df1a6946c5e9ef619ef3bb15118066abe14cf",
+        "finished_at": "2026-11-18T04:40:26.006474+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_300index/result.json",
+          "sha256": "922e9131c1be343e4c6ffe2cee16ff0e4a6ec7380d6ddd6b61cad2bfb56e6bd4",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_300index",
+        "attempted_at": "2026-11-18T04:40:25.819100+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_300index_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          17,
+          18,
+          19,
+          20
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.004814+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_300index",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000300/result.json",
+              "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+              "kind": "result"
+            },
+            "csv": "current/sh000300/observations.csv",
+            "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+            "successful_at": "2026-11-18T04:39:52.538815+00:00",
+            "feed": "sh000300",
+            "raw_sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 1662,
+            "finite_close_dates": 1484,
+            "all_cells_nonblank": 1663,
+            "finite_complete_rows": 1447,
+            "invalid_fields": 825,
+            "invalid_dates": 215,
+            "incomplete_rows": 0,
+            "zero_rows": 47,
+            "zero_close_rows": 44,
+            "envelope_rows": 24,
+            "distinct_candidates": 1662,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 1,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 1662,
+            "usable_close": 1484,
+            "conflict": 0,
+            "invalid_close_dates": 178,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 1,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 1,
+            "conflict_holes": 0,
+            "invalid_close": 174,
+            "missing_close": 0,
+            "holes": 188,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 1662,
+            "finite_close_dates": 1484,
+            "all_cells_nonblank": 1663,
+            "finite_complete_rows": 1447,
+            "invalid_fields": 825,
+            "invalid_dates": 215,
+            "incomplete_rows": 0,
+            "zero_rows": 47,
+            "zero_close_rows": 44,
+            "envelope_rows": 24,
+            "distinct_candidates": 1662,
+            "exact_duplicates": 1,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 1,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 1662,
+            "usable_close": 1484,
+            "conflict": 0,
+            "invalid_close_dates": 178,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 1,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 1,
+            "conflict_holes": 0,
+            "invalid_close": 174,
+            "missing_close": 0,
+            "holes": 188,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 1677,
+        "range": [
+          "2019-12-23",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2019-12-23",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_300index/observations.csv",
+        "csv_sha256": "11b5d9c9b777ba0c630824ef57c50630ca3d9af8521c0d6d59b561b44a544f8a",
+        "quality": "current/qvix-group/qvix_300index/quality.json",
+        "quality_sha256": "359c03104847718d95e60938aa6b23d0474329da090181ca13a752af89bc8b1f",
+        "wrapper": "current/qvix-group/qvix_300index/wrapper.csv",
+        "wrapper_sha256": "da00a3fdb642f010da279502f87df1a6946c5e9ef619ef3bb15118066abe14cf",
+        "finished_at": "2026-11-18T04:40:26.006474+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_300index/result.json",
+          "sha256": "922e9131c1be343e4c6ffe2cee16ff0e4a6ec7380d6ddd6b61cad2bfb56e6bd4",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_300etf": {
+      "attempt": {
+        "feed": "qvix_300etf",
+        "attempted_at": "2026-11-18T04:40:26.007522+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_300etf_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          9,
+          10,
+          11,
+          12
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.195671+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_300etf",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000300/result.json",
+              "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+              "kind": "result"
+            },
+            "csv": "current/sh000300/observations.csv",
+            "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+            "successful_at": "2026-11-18T04:39:52.538815+00:00",
+            "feed": "sh000300",
+            "raw_sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 1663,
+            "finite_close_dates": 1661,
+            "all_cells_nonblank": 1664,
+            "finite_complete_rows": 1660,
+            "invalid_fields": 9,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 13,
+            "distinct_candidates": 1664,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 1663,
+            "usable_close": 1661,
+            "conflict": 1,
+            "invalid_close_dates": 1,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 1,
+            "missing_close": 0,
+            "holes": 15,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 1663,
+            "finite_close_dates": 1661,
+            "all_cells_nonblank": 1664,
+            "finite_complete_rows": 1660,
+            "invalid_fields": 9,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 13,
+            "distinct_candidates": 1664,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 1663,
+            "usable_close": 1661,
+            "conflict": 1,
+            "invalid_close_dates": 1,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 1,
+            "missing_close": 0,
+            "holes": 15,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 1677,
+        "range": [
+          "2019-12-23",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2019-12-23",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_300etf/observations.csv",
+        "csv_sha256": "cee9b08c814f590f23cd26d32377f36786203e25a14783b2b1a1fa50f19eacbd",
+        "quality": "current/qvix-group/qvix_300etf/quality.json",
+        "quality_sha256": "73cf656a02981de02722776b091c125fc3e5beec1b50270e8e8b588a0b8ba3a5",
+        "wrapper": "current/qvix-group/qvix_300etf/wrapper.csv",
+        "wrapper_sha256": "234769fe85e1a8e2569804da6c33b2e228b910a4a8c4507adf8c0e1504eb17fd",
+        "finished_at": "2026-11-18T04:40:26.197319+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_300etf/result.json",
+          "sha256": "f9eeafd60766d1c661b6309f492ddc338cb5c502cbbe44e31ec093e5ae072a6e",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_300etf",
+        "attempted_at": "2026-11-18T04:40:26.007522+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_300etf_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          9,
+          10,
+          11,
+          12
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.195671+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_300etf",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000300/result.json",
+              "sha256": "9ca158716346a1ba9008522764559c3e3400faf8106d890920995a939db00d6c",
+              "kind": "result"
+            },
+            "csv": "current/sh000300/observations.csv",
+            "csv_sha256": "cad4239f61dbf28e261c7fbfd1240439c3e7e15ac525ffbccb8d5abb3cceae35",
+            "successful_at": "2026-11-18T04:39:52.538815+00:00",
+            "feed": "sh000300",
+            "raw_sha256": "a53f6afaf6382a3b20fa2b0cdacc3bc8d0991a549ceb28acb21f031e0f0bb0ce",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 1663,
+            "finite_close_dates": 1661,
+            "all_cells_nonblank": 1664,
+            "finite_complete_rows": 1660,
+            "invalid_fields": 9,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 13,
+            "distinct_candidates": 1664,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 1663,
+            "usable_close": 1661,
+            "conflict": 1,
+            "invalid_close_dates": 1,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 1,
+            "missing_close": 0,
+            "holes": 15,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2019-12-23",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 1663,
+            "finite_close_dates": 1661,
+            "all_cells_nonblank": 1664,
+            "finite_complete_rows": 1660,
+            "invalid_fields": 9,
+            "invalid_dates": 4,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 13,
+            "distinct_candidates": 1664,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1187,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 1663,
+            "usable_close": 1661,
+            "conflict": 1,
+            "invalid_close_dates": 1,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1187,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 1,
+            "missing_close": 0,
+            "holes": 15,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 1677,
+        "range": [
+          "2019-12-23",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2019-12-23",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_300etf/observations.csv",
+        "csv_sha256": "cee9b08c814f590f23cd26d32377f36786203e25a14783b2b1a1fa50f19eacbd",
+        "quality": "current/qvix-group/qvix_300etf/quality.json",
+        "quality_sha256": "73cf656a02981de02722776b091c125fc3e5beec1b50270e8e8b588a0b8ba3a5",
+        "wrapper": "current/qvix-group/qvix_300etf/wrapper.csv",
+        "wrapper_sha256": "234769fe85e1a8e2569804da6c33b2e228b910a4a8c4507adf8c0e1504eb17fd",
+        "finished_at": "2026-11-18T04:40:26.197319+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_300etf/result.json",
+          "sha256": "f9eeafd60766d1c661b6309f492ddc338cb5c502cbbe44e31ec093e5ae072a6e",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_cyb": {
+      "attempt": {
+        "feed": "qvix_cyb",
+        "attempted_at": "2026-11-18T04:40:26.198394+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_cyb_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          71,
+          72,
+          73,
+          74
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.343298+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_cyb",
+          "comparator": {
+            "origin": {
+              "path": "current/sz399006/result.json",
+              "sha256": "fc0b5af1ad51aa276e125e39660fe43ebfe798cea73fa49464ac4d4a7cb52481",
+              "kind": "result"
+            },
+            "csv": "current/sz399006/observations.csv",
+            "csv_sha256": "28d132b41ff1e3df8a96994254ab221437b4b47d143164233c58d3c6dc3d0427",
+            "successful_at": "2026-11-18T04:39:53.803783+00:00",
+            "feed": "sz399006",
+            "raw_sha256": "1cd8f93f297af436e596b088b343e95bd9f5be4904ee3bb19821d64111aaf67a",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 998,
+            "finite_close_dates": 997,
+            "all_cells_nonblank": 999,
+            "finite_complete_rows": 999,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 2,
+            "distinct_candidates": 999,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1852,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 998,
+            "usable_close": 997,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1852,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 998,
+            "finite_close_dates": 997,
+            "all_cells_nonblank": 999,
+            "finite_complete_rows": 999,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 2,
+            "distinct_candidates": 999,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1852,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 998,
+            "usable_close": 997,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1852,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 1012,
+        "range": [
+          "2022-09-19",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2022-09-19",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_cyb/observations.csv",
+        "csv_sha256": "687426d7c58148ca3cbbd25e4b0c42baa29c317071bb0859469265d2c135b984",
+        "quality": "current/qvix-group/qvix_cyb/quality.json",
+        "quality_sha256": "525dcf28565b00a49b5a6bbb11f2fb7a84b3776c2ecb61ee652182541d393826",
+        "wrapper": "current/qvix-group/qvix_cyb/wrapper.csv",
+        "wrapper_sha256": "3fc67417db43511fc505015cd2292a1c19244ada79a38618f761701731cb5836",
+        "finished_at": "2026-11-18T04:40:26.344555+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_cyb/result.json",
+          "sha256": "73e078a49e387012c8f84ae01bc5ecf45c1ef669193ca5598a3730a653584aa0",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_cyb",
+        "attempted_at": "2026-11-18T04:40:26.198394+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_cyb_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          71,
+          72,
+          73,
+          74
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.343298+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_cyb",
+          "comparator": {
+            "origin": {
+              "path": "current/sz399006/result.json",
+              "sha256": "fc0b5af1ad51aa276e125e39660fe43ebfe798cea73fa49464ac4d4a7cb52481",
+              "kind": "result"
+            },
+            "csv": "current/sz399006/observations.csv",
+            "csv_sha256": "28d132b41ff1e3df8a96994254ab221437b4b47d143164233c58d3c6dc3d0427",
+            "successful_at": "2026-11-18T04:39:53.803783+00:00",
+            "feed": "sz399006",
+            "raw_sha256": "1cd8f93f297af436e596b088b343e95bd9f5be4904ee3bb19821d64111aaf67a",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 998,
+            "finite_close_dates": 997,
+            "all_cells_nonblank": 999,
+            "finite_complete_rows": 999,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 2,
+            "distinct_candidates": 999,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1852,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 998,
+            "usable_close": 997,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1852,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 2
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2022-09-19",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 998,
+            "finite_close_dates": 997,
+            "all_cells_nonblank": 999,
+            "finite_complete_rows": 999,
+            "invalid_fields": 0,
+            "invalid_dates": 0,
+            "incomplete_rows": 0,
+            "zero_rows": 0,
+            "zero_close_rows": 0,
+            "envelope_rows": 2,
+            "distinct_candidates": 999,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 1852,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 998,
+            "usable_close": 997,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 1852,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1
+          }
+        },
+        "count": 1012,
+        "range": [
+          "2022-09-19",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2022-09-19",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_cyb/observations.csv",
+        "csv_sha256": "687426d7c58148ca3cbbd25e4b0c42baa29c317071bb0859469265d2c135b984",
+        "quality": "current/qvix-group/qvix_cyb/quality.json",
+        "quality_sha256": "525dcf28565b00a49b5a6bbb11f2fb7a84b3776c2ecb61ee652182541d393826",
+        "wrapper": "current/qvix-group/qvix_cyb/wrapper.csv",
+        "wrapper_sha256": "3fc67417db43511fc505015cd2292a1c19244ada79a38618f761701731cb5836",
+        "finished_at": "2026-11-18T04:40:26.344555+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_cyb/result.json",
+          "sha256": "73e078a49e387012c8f84ae01bc5ecf45c1ef669193ca5598a3730a653584aa0",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    },
+    "qvix_kcb": {
+      "attempt": {
+        "feed": "qvix_kcb",
+        "attempted_at": "2026-11-18T04:40:26.345560+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_kcb_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          83,
+          84,
+          85,
+          86
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.455343+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_kcb",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000688/result.json",
+              "sha256": "be371abaa9ae0863febd6d844ee1535915870d742c1fedfab026b435da95811b",
+              "kind": "result"
+            },
+            "csv": "current/sh000688/observations.csv",
+            "csv_sha256": "294a04393917d63a21d873a44dff29123df623425adf2406c0c4f05dce577256",
+            "successful_at": "2026-11-18T04:39:57.537785+00:00",
+            "feed": "sh000688",
+            "raw_sha256": "a3eaf033a0454c25b87e133b8b2e384c34517910e9785f1578c538334dbe5b83",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 828,
+            "finite_close_dates": 827,
+            "all_cells_nonblank": 829,
+            "finite_complete_rows": 826,
+            "invalid_fields": 6,
+            "invalid_dates": 3,
+            "incomplete_rows": 0,
+            "zero_rows": 1,
+            "zero_close_rows": 1,
+            "envelope_rows": 6,
+            "distinct_candidates": 829,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 2022,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 828,
+            "usable_close": 827,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 2022,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1196
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 828,
+            "finite_close_dates": 827,
+            "all_cells_nonblank": 829,
+            "finite_complete_rows": 826,
+            "invalid_fields": 6,
+            "invalid_dates": 3,
+            "incomplete_rows": 0,
+            "zero_rows": 1,
+            "zero_close_rows": 1,
+            "envelope_rows": 6,
+            "distinct_candidates": 829,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 2022,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 828,
+            "usable_close": 827,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 2022,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1195
+          }
+        },
+        "count": 842,
+        "range": [
+          "2023-06-05",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2023-06-05",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_kcb/observations.csv",
+        "csv_sha256": "6d6a08b660ec3176a8e9f45834ea159ccfdd15a52f72eb8d6b969c3b7323287c",
+        "quality": "current/qvix-group/qvix_kcb/quality.json",
+        "quality_sha256": "1fd6f135f719cff65efa45c1682243edf191198ff8f91a4666d922f124bec1d3",
+        "wrapper": "current/qvix-group/qvix_kcb/wrapper.csv",
+        "wrapper_sha256": "f39f5e9615a8cd8b0745c896a4bf7c5e466c62aa86ac96bd331b4e0dd84a5695",
+        "finished_at": "2026-11-18T04:40:26.456532+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_kcb/result.json",
+          "sha256": "b0a2bb76566308ed0f3226e1a03bfb34f94adf2a68c4e1bc06d323d1b11827a5",
+          "kind": "result"
+        }
+      },
+      "snapshot": {
+        "feed": "qvix_kcb",
+        "attempted_at": "2026-11-18T04:40:26.345560+00:00",
+        "window": [
+          "2000-01-01",
+          "2026-11-18"
+        ],
+        "versions": {
+          "akshare": "1.20.53",
+          "requests": "2.34.2",
+          "pandas": "3.1.1",
+          "mini-racer": "0.14.1"
+        },
+        "request_timeout_seconds": [
+          5,
+          300
+        ],
+        "group_id": "170914574b87461e828a7efa85012003",
+        "invocation": "index_option_kcb_qvix()",
+        "invoked": true,
+        "columns": [
+          0,
+          83,
+          84,
+          85,
+          86
+        ],
+        "status": "partial",
+        "schema": "qvix-comparison-v4",
+        "successful_at": "2026-11-18T04:40:26.455343+00:00",
+        "acquired_at": "2026-11-18T04:40:25.080705+00:00",
+        "shared": {
+          "path": "current/qvix-group/group.json",
+          "sha256": "bfb65584ad7b2b721b3c081711080069022b398433b5372cba5eeb12da9dde63"
+        },
+        "accounting": {
+          "algorithm": "qvix-comparison-v4",
+          "feed": "qvix_kcb",
+          "comparator": {
+            "origin": {
+              "path": "current/sh000688/result.json",
+              "sha256": "be371abaa9ae0863febd6d844ee1535915870d742c1fedfab026b435da95811b",
+              "kind": "result"
+            },
+            "csv": "current/sh000688/observations.csv",
+            "csv_sha256": "294a04393917d63a21d873a44dff29123df623425adf2406c0c4f05dce577256",
+            "successful_at": "2026-11-18T04:39:57.537785+00:00",
+            "feed": "sh000688",
+            "raw_sha256": "a3eaf033a0454c25b87e133b8b2e384c34517910e9785f1578c538334dbe5b83",
+            "stale_reuse": false
+          },
+          "ordered": false,
+          "full": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-19"
+            ],
+            "range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "source_rows": 2853,
+            "dates": 828,
+            "finite_close_dates": 827,
+            "all_cells_nonblank": 829,
+            "finite_complete_rows": 826,
+            "invalid_fields": 6,
+            "invalid_dates": 3,
+            "incomplete_rows": 0,
+            "zero_rows": 1,
+            "zero_close_rows": 1,
+            "envelope_rows": 6,
+            "distinct_candidates": 829,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 2022,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 2,
+            "blank_no_source_rows": 0,
+            "nonblank": 828,
+            "usable_close": 827,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 2022,
+            "blank_internal": 0,
+            "blank_tail": 2,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1196
+          },
+          "selected": {
+            "common_range": [
+              "2015-02-09",
+              "2026-11-18"
+            ],
+            "range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "close_range": [
+              "2023-06-05",
+              "2026-11-17"
+            ],
+            "source_rows": 2852,
+            "dates": 828,
+            "finite_close_dates": 827,
+            "all_cells_nonblank": 829,
+            "finite_complete_rows": 826,
+            "invalid_fields": 6,
+            "invalid_dates": 3,
+            "incomplete_rows": 0,
+            "zero_rows": 1,
+            "zero_close_rows": 1,
+            "envelope_rows": 6,
+            "distinct_candidates": 829,
+            "exact_duplicates": 0,
+            "blank_collision_rows": 0,
+            "blank_prefix_rows": 2022,
+            "blank_internal_rows": 0,
+            "blank_tail_rows": 1,
+            "blank_no_source_rows": 0,
+            "nonblank": 828,
+            "usable_close": 827,
+            "conflict": 1,
+            "invalid_close_dates": 0,
+            "missing_close_dates": 0,
+            "blank_collision": 0,
+            "blank_prefix": 2022,
+            "blank_internal": 0,
+            "blank_tail": 1,
+            "blank_no_source": 0,
+            "absent": 13,
+            "blank": 0,
+            "conflict_holes": 1,
+            "invalid_close": 0,
+            "missing_close": 0,
+            "holes": 14,
+            "source_only": 4,
+            "blank_source_only": 1195
+          }
+        },
+        "count": 842,
+        "range": [
+          "2023-06-05",
+          "2026-11-18"
+        ],
+        "source_range": [
+          "2023-06-05",
+          "2026-11-17"
+        ],
+        "csv": "current/qvix-group/qvix_kcb/observations.csv",
+        "csv_sha256": "6d6a08b660ec3176a8e9f45834ea159ccfdd15a52f72eb8d6b969c3b7323287c",
+        "quality": "current/qvix-group/qvix_kcb/quality.json",
+        "quality_sha256": "1fd6f135f719cff65efa45c1682243edf191198ff8f91a4666d922f124bec1d3",
+        "wrapper": "current/qvix-group/qvix_kcb/wrapper.csv",
+        "wrapper_sha256": "f39f5e9615a8cd8b0745c896a4bf7c5e466c62aa86ac96bd331b4e0dd84a5695",
+        "finished_at": "2026-11-18T04:40:26.456532+00:00",
+        "origin": {
+          "path": "current/qvix-group/qvix_kcb/result.json",
+          "sha256": "b0a2bb76566308ed0f3226e1a03bfb34f94adf2a68c4e1bc06d323d1b11827a5",
+          "kind": "result"
+        }
+      },
+      "stale_reuse": false
+    }
+  },
+  "worker_wall_seconds": 45,
+  "qvix_group_wall_seconds": 300,
+  "operation": "acquisition",
+  "revision_policy": "whole snapshots only; not point-in-time",
+  "finished_at": "2026-11-18T04:40:29.215731+00:00"
+}

@@ -1,18 +1,22 @@
 """Sequential bounded index workers and one durable shared-cache QVIX worker."""
 import argparse
+import ctypes
+import errno
 import importlib.metadata
 import json
 import os
+import stat
 import subprocess
 import sys
 import uuid
 from contextlib import contextmanager
 from datetime import date
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from app.core import (
     INDICES, OHLC, QVIX_FEEDS, SCHEMA, artifact_ref, atomic, bounds, common_qvix,
-    compact_quality, comparator_history, csv_bytes, decode, now, qvix_artifacts, selected, sha,
+    compact_quality, comparator_history, csv_bytes, decode, load_manifest, now, qvix_artifacts, selected, sha,
 )
 from app.identities import IDENTITIES
 
@@ -86,7 +90,7 @@ def transport(root, directory, captures):
 def worker(feed, directory, start, end):
     import akshare as ak
     directory = Path(directory)
-    root = directory.parents[2]
+    root = directory.parents[1]
     result = attempt(feed, [start, end])
     result["invocation"] = f"index_zh_daily_sina(symbol={feed!r})"
     with capture_http(root, directory, INDEX_HTTP_TIMEOUT) as captures:
@@ -109,19 +113,18 @@ def worker(feed, directory, start, end):
 
 def bind_comparator(feed, states):
     code = QVIX_FEEDS[feed]["comparator"]
-    state = states[code]
-    snap = state["snapshot"]
+    snap = states[code]["snapshot"]
     if not snap:
         return None
     return {k: snap[k] for k in ("origin", "csv", "csv_sha256", "successful_at")} | {
-        "feed": code, "raw_sha256": snap["raw"]["sha256"], "stale_reuse": state["stale_reuse"]}
+        "feed": code, "raw_sha256": snap["raw"]["sha256"], "stale_reuse": False}
 
 
 def group_worker(directory):
     import akshare as ak
     import akshare.index.index_option_qvix as module
     directory = Path(directory)
-    root = directory.parents[2]
+    root = directory.parents[1]
     config = json.loads((directory / "config.json").read_text())
     cache = getattr(module, "__get_optbbs_daily")
     cache.cache_clear()
@@ -187,10 +190,9 @@ def group_worker(directory):
         cache.cache_clear()
 
 
-def state_after(old, result):
-    usable = result["status"] in ("success", "partial")
-    snapshot = result if usable else old.get("snapshot")
-    return {"attempt": result, "snapshot": snapshot, "stale_reuse": not usable and bool(snapshot)}
+def _fresh_state(result):
+    snapshot = result if result["status"] in ("success", "partial") else None
+    return {"attempt": result, "snapshot": snapshot, "stale_reuse": False}
 
 
 def completed(root, path):
@@ -226,48 +228,47 @@ def recover_group(root, directory, termination=None):
     return results
 
 
-def promote(root, manifest):
+def _worker_error(error):
+    if isinstance(error, subprocess.TimeoutExpired):
+        return f"worker exceeded {error.timeout}s wall deadline"
+    return f"worker exited with status {error.returncode}"
+
+
+def _print_result(feed, result):
+    print(feed, result["status"], result.get("error", result.get("count", "unknown")), flush=True)
+
+
+def acquire(root, start, end):
+    """Write one verified candidate to a private, empty data root."""
     from app.verify import validate_manifest
-    validate_manifest(root, manifest)
-    path = root / manifest["manifest_path"]
-    if path.exists():
-        if json.loads(path.read_text()) != manifest:
-            raise ValueError("refusing immutable manifest overwrite")
-    else:
-        atomic(path, manifest)
-    atomic(root / "latest.json", manifest)
 
-
-def fetch(root, start, end):
     root = Path(root).resolve()
     durable_mkdir(root)
-    previous = json.loads((root / "latest.json").read_text()) if (root / "latest.json").exists() else {}
-    if previous and previous.get("schema") != SCHEMA:
-        raise ValueError("incompatible active schema; explicit derived migration required")
-    run = "runs/" + now().replace(":", "-") + "-" + uuid.uuid4().hex[:8]
-    manifest = {"schema": SCHEMA, "run": run, "attempted_at": now(), "window": [start, end],
-                "feeds": {}, "manifest_path": run + "/manifest.json", "worker_wall_seconds": 45,
-                "qvix_group_wall_seconds": QVIX_GROUP_SECONDS,
-                "operation": "acquisition",
-                "revision_policy": "whole snapshots only; not point-in-time"}
-    if previous:
-        manifest["previous"] = artifact_ref(root, previous["manifest_path"])
+    if any(root.iterdir()):
+        raise FileExistsError(f"candidate output must be empty: {root}")
+    current = root / "current"
+    current.mkdir()
+    manifest = {"schema": SCHEMA, "attempted_at": now(), "window": [start, end],
+                "feeds": {}, "worker_wall_seconds": 45, "qvix_group_wall_seconds": QVIX_GROUP_SECONDS,
+                "operation": "acquisition", "revision_policy": "whole snapshots only; not point-in-time"}
     for feed in INDICES:
-        directory = root / run / feed
+        directory = current / feed
         durable_mkdir(directory)
+        attempted_at = now()
         try:
             subprocess.run([sys.executable, "-m", "app.fetch", "--worker", feed, str(directory), start, end],
                            timeout=manifest["worker_wall_seconds"], check=True)
             result = completed(root, directory / "result.json")
         except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
-            result = attempt(feed, [start, end]) | {"status": "failure", "error": str(error),
-                                                   "finished_at": now()}
+            result = attempt(feed, [start, end]) | {
+                "attempted_at": attempted_at, "status": "failure", "error": _worker_error(error),
+                "finished_at": now()}
             if (directory / "transport.json").exists():
                 result["captures"] = json.loads((directory / "transport.json").read_text())
             atomic(directory / "terminated.json", result)
-        manifest["feeds"][feed] = state_after(previous.get("feeds", {}).get(feed, {}), result)
-        print(feed, result["status"], result.get("count", "unknown"), flush=True)
-    directory = root / run / "qvix-group"
+        manifest["feeds"][feed] = _fresh_state(result)
+        _print_result(feed, result)
+    directory = current / "qvix-group"
     durable_mkdir(directory)
     atomic(directory / "config.json", {"group_id": uuid.uuid4().hex, "window": [start, end],
                                       "comparators": {f: bind_comparator(f, manifest["feeds"]) for f in QVIX_FEEDS}})
@@ -276,14 +277,65 @@ def fetch(root, start, end):
         subprocess.run([sys.executable, "-m", "app.fetch", "--group-worker", str(directory)],
                        timeout=manifest["qvix_group_wall_seconds"], check=True)
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
-        termination = str(error)
+        termination = _worker_error(error)
         atomic(directory / "termination.json", {"error": termination, "finished_at": now()})
     for feed, result in recover_group(root, directory, termination).items():
-        manifest["feeds"][feed] = state_after(previous.get("feeds", {}).get(feed, {}), result)
-        print(feed, result["status"], result.get("count", "unknown"), flush=True)
+        manifest["feeds"][feed] = _fresh_state(result)
+        _print_result(feed, result)
     manifest["finished_at"] = now()
-    promote(root, manifest)
+    validate_manifest(root, manifest)
+    atomic(current / "manifest.json", manifest)
     return int(any(s["attempt"]["status"] != "success" for s in manifest["feeds"].values()))
+
+
+def _install_current(candidate, live):
+    """Install or exchange the directory in one rename; never unlink the live tree first."""
+    try:
+        candidate.rename(live)  # New output, or an empty destination.
+        return
+    except OSError as error:
+        if error.errno not in (errno.ENOTEMPTY, errno.EEXIST):
+            raise
+    if not stat.S_ISDIR(live.lstat().st_mode):
+        raise NotADirectoryError(str(live))
+    try:
+        load_manifest(live.parent)
+    except FileNotFoundError as error:
+        raise FileExistsError(f"refusing to replace unmanaged directory: {live}") from error
+
+    libc = ctypes.CDLL(None, use_errno=True)
+    src, dst = os.fsencode(candidate), os.fsencode(live)
+    if sys.platform == "darwin":
+        rename = libc.renamex_np
+        rename.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint)
+        args = (src, dst, 2)  # RENAME_SWAP
+    elif hasattr(libc, "renameat2"):
+        rename = libc.renameat2
+        rename.argtypes = (ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint)
+        args = (-100, src, -100, dst, 2)  # AT_FDCWD, RENAME_EXCHANGE
+    else:
+        raise OSError(errno.ENOTSUP, "atomic directory exchange unavailable", str(live))
+    rename.restype = ctypes.c_int
+    if rename(*args):
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), str(live))
+
+
+def fetch(root, start, end):
+    """Atomically install an eligible tree; multi-file readers must not span cutover."""
+    root = Path(root).resolve()
+    durable_mkdir(root)
+    with TemporaryDirectory(prefix=".fetch-", dir=root) as stage:
+        stage = Path(stage)
+        status = acquire(stage, start, end)
+        candidate = stage / "current"
+        feeds = load_manifest(stage)["feeds"]
+        if (all(feeds[f]["attempt"]["status"] == "success" for f in INDICES)
+                and all(feeds[f]["attempt"]["status"] in ("success", "partial") for f in QVIX_FEEDS)):
+            _install_current(candidate, root / "current")
+        else:
+            print("Acquisition has fatal feed failures; current dataset not changed.", file=sys.stderr)
+        return status
 
 
 def main():
@@ -294,13 +346,18 @@ def main():
         group_worker(sys.argv[2])
         return 0
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="data")
+    parser.add_argument("--output")
+    parser.add_argument("--candidate", action="store_true", help="write diagnostics to an empty private output")
     parser.add_argument("--start", default="2000-01-01")
     parser.add_argument("--end", default=date.today().isoformat())
     args = parser.parse_args()
     if date.fromisoformat(args.start) > date.fromisoformat(args.end):
         parser.error("start must precede end")
-    return fetch(args.output, args.start, args.end)
+    if args.candidate:
+        if args.output is None:
+            parser.error("--candidate requires --output")
+        return acquire(args.output, args.start, args.end)
+    return fetch(args.output or "data", args.start, args.end)
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ import subprocess
 import pytest
 
 from app import daily
-from app.core import INDICES, QVIX_FEEDS, dump, load_manifest, sha
+from app.core import INDICES, QVIX_FEEDS, dump, load_manifest
 from app.daily_transfer import digest, git, inventory, publish, validate_bundle
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,16 +32,22 @@ def repo_pair(tmp_path):
     return repo, remote, identity
 
 
-def small_bundle(tmp_path, identity, quality="success"):
+def small_bundle(tmp_path, identity, quality="success", *, revision=0):
     bundle = tmp_path / "bundle"
     payload = bundle / "payload"
-    (payload / "data/runs/new").mkdir(parents=True)
-    (payload / "data/runs/new/manifest.json").write_text('{"run":"runs/new"}\n')
-    (payload / "data/latest.json").write_text('{"run":"runs/new"}\n')
+    current = payload / "data/current"
+    index = current / "sh000001"
+    index.mkdir(parents=True)
+    attempted_at = (FIXED + timedelta(hours=revision)).isoformat()
+    dump(current / "manifest.json", {"attempted_at": attempted_at, "feeds": {"sh000001": {}}})
+    (index / "observations.csv").write_text(f"observations {revision}\n")
+    (index / "response-0.body").write_bytes(b"unchanged raw bytes")
+    if revision == 0:
+        (index / "response-1.body").write_bytes(b"obsolete raw response")
     (payload / "index.html").write_text("verified page\n")
-    receipt = {"identity": identity, "run": "runs/new", "quality": quality, "files": inventory(payload)}
+    receipt = {"identity": identity, "attempted_at": attempted_at, "quality": quality, "files": inventory(payload)}
     dump(bundle / "receipt.json", receipt)
-    return bundle, sha((bundle / "receipt.json").read_bytes())
+    return bundle, digest((bundle / "receipt.json").read_bytes())
 
 
 def test_exact_atomic_tree_and_replay_refusal(tmp_path):
@@ -59,7 +65,39 @@ def test_exact_atomic_tree_and_replay_refusal(tmp_path):
     assert git(remote, "rev-parse", "main").stdout.strip() == commit
 
 
-@pytest.mark.parametrize("attack", ["hash", "extra", "symlink", "executable", "identity", "traversal", "missing"])
+def test_repeated_publication_replaces_only_current_and_html(tmp_path):
+    repo, remote, identity = repo_pair(tmp_path)
+    static = repo / "data/documentation-example/fixture.csv"
+    static.parent.mkdir(parents=True)
+    static.write_bytes(b"unrelated evidence")
+    git(repo, "add", "data/documentation-example")
+    git(repo, "-c", "user.name=test", "-c", "user.email=test@example.invalid", "commit", "-m", "static evidence")
+    git(repo, "push", "origin", "HEAD:main")
+    identity["base_sha"] = git(repo, "rev-parse", "HEAD").stdout.strip()
+    first, first_hash = small_bundle(tmp_path / "first", identity)
+    first_commit = publish(repo, first, first_hash, identity)
+    assert git(remote, "show", "main:data/current/sh000001/response-1.body").stdout == "obsolete raw response"
+    next_identity = identity | {"base_sha": first_commit, "run_id": "124"}
+    second, second_hash = small_bundle(tmp_path / "second", next_identity, revision=1)
+    second_commit = publish(repo, second, second_hash, next_identity)
+    files = inventory(second / "payload")
+    assert set(git(remote, "ls-tree", "-r", "--name-only", second_commit).stdout.splitlines()) == {
+        *files, "README", "data/documentation-example/fixture.csv",
+    }
+    assert not (repo / "data/current/sh000001/response-1.body").exists()
+    for path, facts in files.items():
+        body = subprocess.run(["git", "--git-dir", str(remote), "show", f"main:{path}"],
+                              check=True, capture_output=True).stdout
+        assert digest(body) == facts["sha256"]
+    assert git(remote, "show", "main:data/documentation-example/fixture.csv").stdout == "unrelated evidence"
+    assert git(remote, "show", "main:README").stdout == "baseline\n"
+    assert git(remote, "rev-parse", "main^").stdout.strip() == first_commit
+
+
+@pytest.mark.parametrize("attack", [
+    "hash", "extra", "empty directory", "old layout", "wrong feed", "unexpected artifact", "symlink",
+    "hard link", "executable", "identity", "acquisition identity", "traversal", "missing",
+])
 def test_transfer_rejections_preserve_remote(tmp_path, attack):
     repo, remote, identity = repo_pair(tmp_path)
     bundle, receipt_hash = small_bundle(tmp_path, identity)
@@ -69,20 +107,36 @@ def test_transfer_rejections_preserve_remote(tmp_path, attack):
     elif attack == "extra":
         (bundle / "payload/evil.py").write_text("bad")
         receipt["files"] = inventory(bundle / "payload")
+    elif attack == "empty directory":
+        (bundle / "payload/data/unexpected").mkdir()
+    elif attack == "old layout":
+        (bundle / "payload/data/latest.json").write_text("obsolete")
+        receipt["files"] = inventory(bundle / "payload")
+    elif attack == "wrong feed":
+        member = bundle / "payload/data/current/other"
+        member.mkdir()
+        (member / "observations.csv").write_text("unexpected")
+        receipt["files"] = inventory(bundle / "payload")
+    elif attack == "unexpected artifact":
+        (bundle / "payload/data/current/sh000001/evil.py").write_text("not an acquisition artifact")
+        receipt["files"] = inventory(bundle / "payload")
     elif attack == "symlink":
         (bundle / "payload/index.html").unlink()
         (bundle / "payload/index.html").symlink_to(repo / "README")
+    elif attack == "hard link":
+        (tmp_path / "outside.html").hardlink_to(bundle / "payload/index.html")
     elif attack == "executable":
         (bundle / "payload/index.html").chmod(0o755)
     elif attack == "identity":
         receipt["identity"]["run_attempt"] = "2"
+    elif attack == "acquisition identity":
+        receipt["attempted_at"] = (FIXED + timedelta(seconds=1)).isoformat()
     elif attack == "traversal":
         receipt["files"]["../evil"] = {"size": 0, "sha256": digest(b"")}
     else:
-        (bundle / "payload/data/runs/new/manifest.json").unlink()
-    if attack in ("identity", "traversal", "extra"):
-        dump(bundle / "receipt.json", receipt)
-        receipt_hash = digest((bundle / "receipt.json").read_bytes())
+        (bundle / "payload/data/current/manifest.json").unlink()
+    dump(bundle / "receipt.json", receipt)
+    receipt_hash = digest((bundle / "receipt.json").read_bytes())
     with pytest.raises(ValueError):
         publish(repo, bundle, receipt_hash, identity)
     assert git(remote, "rev-parse", "main").stdout.strip() == identity["base_sha"]
@@ -176,20 +230,26 @@ def test_publication_refuses_non_exact_parent_list(tmp_path, monkeypatch, parent
 
 
 def policy_fixture():
-    previous = {"run": "runs/old", "manifest_path": "runs/old/manifest.json",
+    previous = {"attempted_at": (FIXED - timedelta(hours=1)).isoformat(),
                 "window": [daily.START, "2026-11-16"], "feeds": {}}
-    candidate = {"run": "runs/new", "manifest_path": "runs/new/manifest.json", "operation": "acquisition",
+    candidate = {"operation": "acquisition",
                  "window": [daily.START, "2026-11-15"], "attempted_at": FIXED.isoformat(),
                  "finished_at": (FIXED + timedelta(seconds=10)).isoformat(), "feeds": {}}
     for feed in [*INDICES, *QVIX_FEEDS]:
-        snap = {"status": "success", "origin": {"kind": "result", "path": f"runs/new/{feed}/result.json"},
-                "window": candidate["window"], "csv": feed, "range": ["2024-01-02", "2024-01-04"],
+        directory = f"current/qvix-group/{feed}" if feed in QVIX_FEEDS else f"current/{feed}"
+        snap = {"status": "success", "feed": feed,
+                "origin": {"kind": "result", "path": f"{directory}/result.json"},
+                "window": candidate["window"], "csv": f"{directory}/observations.csv",
+                "range": ["2024-01-02", "2024-01-04"],
                 "raw": {"retrieved_at": (FIXED + timedelta(seconds=2)).isoformat()},
                 "attempted_at": (FIXED + timedelta(seconds=1)).isoformat(),
                 "successful_at": (FIXED + timedelta(seconds=3)).isoformat(),
                 "finished_at": (FIXED + timedelta(seconds=4)).isoformat()}
+        if feed in QVIX_FEEDS:
+            snap.update(shared={"path": "current/qvix-group/group.json"},
+                        wrapper=f"{directory}/wrapper.csv", quality=f"{directory}/quality.json")
         candidate["feeds"][feed] = {"attempt": snap, "snapshot": snap, "stale_reuse": False}
-        previous["feeds"][feed] = {"snapshot": copy.deepcopy(snap) | {"origin": {"path": "old"}}}
+        previous["feeds"][feed] = {"snapshot": copy.deepcopy(snap)}
     return previous, candidate
 
 
@@ -197,8 +257,6 @@ def policy_fixture():
 @pytest.mark.parametrize("attack", ["old", "future", "completion-bound", "member-order"])
 def test_acquisition_temporal_boundaries(tmp_path, monkeypatch, feed, attack):
     previous, candidate = policy_fixture()
-    candidate["previous"] = "previous-hash"
-    monkeypatch.setattr("app.core.artifact_ref", lambda *args: "previous-hash")
     monkeypatch.setattr("app.core.read_csv", lambda *args: [{"date": "2024-01-03"}])
     monkeypatch.setattr(daily, "source_dates", lambda *args: {"2024-01-03"})
     snap = candidate["feeds"][feed]["snapshot"]
@@ -208,7 +266,7 @@ def test_acquisition_temporal_boundaries(tmp_path, monkeypatch, feed, attack):
         seconds = {"old": -1, "future": 11, "completion-bound": 3.5 if feed in QVIX_FEEDS else 0}[attack]
         snap["acquired_at"] = (FIXED + timedelta(seconds=seconds)).isoformat()
     with pytest.raises(ValueError, match="member time|acquisition time"):
-        daily.eligibility(tmp_path, previous, candidate, 0, FIXED,
+        daily.eligibility(tmp_path / "baseline", tmp_path / "candidate", previous, candidate, 0, FIXED,
                           FIXED + timedelta(seconds=11), "2026-11-15")
 
 
@@ -217,34 +275,40 @@ def test_acquisition_temporal_boundaries(tmp_path, monkeypatch, feed, attack):
 def test_date_loss_equal_count_endpoints_and_null_retention(tmp_path, monkeypatch, feed, lost):
     previous, candidate = policy_fixture()
     days = {"2024-01-02", "2024-01-03", "2024-01-04"}
-    monkeypatch.setattr("app.core.artifact_ref", lambda *args: "previous-hash")
-    candidate["previous"] = "previous-hash"
     monkeypatch.setattr("app.core.read_csv", lambda *args: [{"date": "2024-01-03", "close": None}])
     def dates(root, snap, code):
-        return days if snap["origin"]["path"] == "old" or code != feed else days - {lost} | {"2024-01-01"}
+        return days if root == tmp_path / "baseline" or code != feed else days - {lost} | {"2024-01-01"}
     monkeypatch.setattr(daily, "source_dates", dates)
     with pytest.raises(ValueError, match=f"source dates lost {feed}.*{lost}"):
-        daily.eligibility(tmp_path, previous, candidate, 0, FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
+        daily.eligibility(tmp_path / "baseline", tmp_path / "candidate", previous, candidate,
+                          0, FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
     monkeypatch.setattr(daily, "source_dates", lambda *args: days)
     candidate["feeds"]["qvix_100etf"]["snapshot"]["status"] = "partial"
-    quality, _ = daily.eligibility(tmp_path, previous, candidate, 1, FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
+    quality, _ = daily.eligibility(tmp_path / "baseline", tmp_path / "candidate", previous, candidate,
+                                   1, FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
     assert quality == "partial"  # Nulls do not create source date loss.
 
 
-@pytest.mark.parametrize("attack", ["old", "window", "origin", "stale", "failure", "time", "current", "exit"])
+@pytest.mark.parametrize("attack", [
+    "old", "window", "member", "origin", "csv", "shared", "stale", "failure", "time", "current", "exit",
+])
 def test_invocation_and_cutoff_refusals(tmp_path, monkeypatch, attack):
     previous, candidate = policy_fixture()
-    candidate["previous"] = "previous-hash"
-    monkeypatch.setattr("app.core.artifact_ref", lambda *args: "previous-hash")
     monkeypatch.setattr("app.core.read_csv", lambda *args: [{"date": "2026-11-16" if attack == "current" else "2024-01-03"}])
     monkeypatch.setattr(daily, "source_dates", lambda *args: {"2024-01-03"})
     snap = candidate["feeds"]["sh000001"]["snapshot"]
     if attack == "old":
-        candidate["run"] = previous["run"]
+        candidate["attempted_at"] = previous["attempted_at"]
     elif attack == "window":
         candidate["window"] = ["2026-10-15", "2026-11-15"]
+    elif attack == "member":
+        snap["feed"] = "sh000016"
     elif attack == "origin":
-        snap["origin"]["path"] = "runs/old/result.json"
+        snap["origin"]["path"] = "current/sh000016/result.json"
+    elif attack == "csv":
+        snap["csv"] = "current/sh000016/observations.csv"
+    elif attack == "shared":
+        candidate["feeds"]["qvix_50etf"]["snapshot"]["shared"]["path"] = "current/qvix_50etf/group.json"
     elif attack == "stale":
         candidate["feeds"]["sh000001"]["stale_reuse"] = True
     elif attack == "failure":
@@ -252,38 +316,29 @@ def test_invocation_and_cutoff_refusals(tmp_path, monkeypatch, attack):
     elif attack == "time":
         snap["finished_at"] = "2026-11-15T00:00:00+00:00"
     with pytest.raises(ValueError):
-        daily.eligibility(tmp_path, previous, candidate, 1 if attack == "exit" else 0,
+        daily.eligibility(tmp_path / "baseline", tmp_path / "candidate", previous, candidate,
+                          1 if attack == "exit" else 0,
                           FIXED, FIXED + timedelta(seconds=11), "2026-11-15")
 
 
-def test_retention_cut_is_bound_to_one_immutable_acquisition(tmp_path):
-    from app.core import SCHEMA, artifact_ref
-    from app.fetch import promote
-    feeds = {f: {"attempt": {"status": "failure"}, "snapshot": None, "stale_reuse": False}
-             for f in (*INDICES, *QVIX_FEEDS)}
-    retired = tmp_path / "runs/retired/manifest.json"
-    retired.parent.mkdir(parents=True)
-    dump(retired, {"run": "runs/retired"})
-    kept = {"schema": SCHEMA, "operation": "acquisition", "run": "runs/kept",
-            "manifest_path": "runs/kept/manifest.json", "feeds": feeds,
-            "previous": artifact_ref(tmp_path, "runs/retired/manifest.json")}
-    immutable = tmp_path / kept["manifest_path"]
-    immutable.parent.mkdir()
-    dump(immutable, kept)
-    anchor = artifact_ref(tmp_path, kept["manifest_path"])
-    dump(tmp_path / "history-root.json", anchor)
-    retired.unlink()
-    promote(tmp_path, kept)
-    successor = kept | {"run": "runs/next", "manifest_path": "runs/next/manifest.json", "previous": anchor}
-    (tmp_path / successor["run"]).mkdir()
-    promote(tmp_path, successor)
-    for forged in (successor | {"previous": kept["previous"]}, kept | {"window": ["2000-01-01", "2099-01-01"]}):
-        with pytest.raises(ValueError, match="outside retained history root"):
-            promote(tmp_path, forged)
-    dump(retired, {"run": "runs/substituted"})
-    with pytest.raises(ValueError, match="artifact reference hash"):
-        promote(tmp_path, kept)
-    assert load_manifest(tmp_path) == successor
+def test_same_data_uses_each_roots_qvix_group_at_the_same_path(tmp_path):
+    baseline_root, candidate_root = tmp_path / "baseline", tmp_path / "candidate"
+    feed = "qvix_50etf"
+    shared_path = "current/qvix-group/group.json"
+    snap = {"shared": {"path": shared_path}, "accounting": {"comparator": None},
+            "status": "success", "versions": {}, "invocation": "wrapper()", "csv_sha256": "same",
+            "wrapper_sha256": "same", "window": [daily.START, "2026-11-16"]}
+    previous = {"operation": "acquisition", "window": snap["window"], "attempted_at": FIXED.isoformat(),
+                "feeds": {feed: {"snapshot": snap, "stale_reuse": False}}}
+    candidate = copy.deepcopy(previous)
+    candidate["attempted_at"] = (FIXED + timedelta(hours=1)).isoformat()
+    raw = {"requested_url": "source", "url": "source", "encoding": "gbk", "sha256": "same"}
+    for root in (baseline_root, candidate_root):
+        (root / shared_path).parent.mkdir(parents=True)
+        dump(root / shared_path, {"raw": raw})
+    assert daily._same_data(baseline_root, candidate_root, previous, candidate)
+    dump(candidate_root / shared_path, {"raw": raw | {"sha256": "revised"}})
+    assert not daily._same_data(baseline_root, candidate_root, previous, candidate)
 
 
 @pytest.mark.parametrize("start,expected", [
@@ -341,7 +396,7 @@ def real_prepared(tmp_path_factory):
 
 def _prepare_retained(root, work, identity, baseline, qvix_body, start, *, publish_unchanged=False):
     from app.chart import build
-    from app.fetch import fetch, group_worker, worker
+    from app.fetch import acquire, group_worker, worker
     import requests
 
     def retained_get(url, **kwargs):
@@ -370,14 +425,16 @@ def _prepare_retained(root, work, identity, baseline, qvix_body, start, *, publi
         return subprocess.CompletedProcess(command, 0)
     def runner(command, log):
         if "app.fetch" in command:
+            destination = Path(command[command.index("--output") + 1])
+            assert "--candidate" in command and not destination.exists()
             with pytest.MonkeyPatch.context() as patch:
                 patch.setattr("requests.get", retained_get)
                 patch.setattr("app.fetch.subprocess.run", local_worker)
                 ticks = iter(range(1000))
                 patch.setattr("app.fetch.now",
                               lambda: (start + timedelta(seconds=2, microseconds=next(ticks))).isoformat())
-                code = fetch(command[command.index("--output") + 1],
-                             command[command.index("--start") + 1], command[command.index("--end") + 1])
+                code = acquire(destination, command[command.index("--start") + 1],
+                               command[command.index("--end") + 1])
             log.write_text(f"actual fetch exit={code}; retained HTTP fixture\n")
             return code
         if "app.chart" in command:
@@ -411,7 +468,8 @@ def test_real_orchestration_blank_partial_and_independent_verifier(real_prepared
         assert "2026-11-17" in daily.source_dates(work / "stage/data", snap, feed)
     for log in ("baseline.log", "candidate.log"):
         assert "Offline verification passed: eight panels" in (work / "diagnostics" / log).read_text()
-    assert not (root / "data" / candidate["run"]).exists()
+    assert load_manifest(root / "data")["attempted_at"] != candidate["attempted_at"]
+    assert {p.name for p in (work / "stage/data").iterdir()} == {"current"}
     assert not (work / "diagnostics/new-evidence").exists()
     assert not (work / "diagnostics/candidate.html").exists()
 
@@ -439,18 +497,18 @@ def test_repeat_verified_refresh(real_prepared, tmp_path, monkeypatch, case):
     work = tmp_path / "repeat"
     outcome = _prepare_retained(root, work, identity, previous, body, when, publish_unchanged=case == "manual")
     candidate = load_manifest(work / "stage/data")
-    assert outcome["quality"] == "partial" and candidate["run"] != previous["run"]
+    assert outcome["quality"] == "partial" and candidate["attempted_at"] != previous["attempted_at"]
     assert load_manifest(root / "data") == previous
     csv_changed = any(state["snapshot"]["csv_sha256"] != previous["feeds"][feed]["snapshot"]["csv_sha256"]
                       for feed, state in candidate["feeds"].items())
     assert csv_changed == (case == "next cutoff")
     if case == "unchanged":
-        assert outcome["phase"] == "unchanged" and outcome["retained_run"] == previous["run"]
+        assert outcome["phase"] == "unchanged" and outcome["retained_attempted_at"] == previous["attempted_at"]
         assert not (work / "bundle").exists() and "receipt_hash" not in outcome
     else:
         assert outcome["phase"] == "publish"
         receipt = validate_bundle(work / "bundle", outcome["receipt_hash"], identity)
-        assert receipt["run"] == candidate["run"]
+        assert receipt["attempted_at"] == candidate["attempted_at"]
     assert not (work / "diagnostics/new-evidence").exists()
     assert not (work / "diagnostics/candidate.html").exists()
 
@@ -466,7 +524,8 @@ def test_real_verified_payload_commits_exactly_together(real_prepared, tmp_path)
     receipt_hash = digest((bundle / "receipt.json").read_bytes())
     commit = publish(repo, bundle, receipt_hash, local_identity)
     assert git(remote, "rev-parse", "main").stdout.strip() == commit
-    assert git(remote, "show", "main:data/latest.json").stdout == (bundle / "payload/data/latest.json").read_text()
+    manifest = "data/current/manifest.json"
+    assert git(remote, "show", f"main:{manifest}").stdout == (bundle / "payload" / manifest).read_text()
     committed_html = subprocess.run(["git", "--git-dir", str(remote), "show", "main:index.html"],
                                     check=True, capture_output=True).stdout
     assert digest(committed_html) == receipt["files"]["index.html"]["sha256"]
@@ -476,11 +535,9 @@ def test_real_verified_payload_commits_exactly_together(real_prepared, tmp_path)
 
 def test_clean_eligibility_and_changed_old_values(tmp_path, monkeypatch):
     previous, candidate = policy_fixture()
-    candidate["previous"] = "previous-hash"
-    monkeypatch.setattr("app.core.artifact_ref", lambda *args: "previous-hash")
     monkeypatch.setattr("app.core.read_csv", lambda *args: [{"date": "2001-01-02", "close": 9876}])
     monkeypatch.setattr(daily, "source_dates", lambda *args: {"2001-01-02", "2026-11-16"})
-    quality, details = daily.eligibility(tmp_path, previous, candidate, 0, FIXED,
+    quality, details = daily.eligibility(tmp_path / "baseline", tmp_path / "candidate", previous, candidate, 0, FIXED,
                                          FIXED + timedelta(seconds=11), "2026-11-15")
     assert quality == "success" and details["sh000001"]["retained_dates"] == 1
 
@@ -545,39 +602,35 @@ def _workflow_conclusion(tmp_path, quality, pages, deploy, **overrides):
 
 @pytest.mark.parametrize("attack,reason", [
     ("crash", "no new acquisition"),
-    ("immutable", "old immutable data changed"),
+    ("extra", "unexpected payload path"),
     ("hidden", "candidate verification failed"),
     ("fatal", "fatal/stale"),
 ])
 def test_real_preparation_withholds_invalid_candidates(real_prepared, tmp_path, attack, reason):
     from app.chart import build
-    from app.fetch import promote, state_after
     root, accepted, _, identity = real_prepared
     original_inventory = inventory(root / "data", bounded=False)
     original_html = digest((root / "index.html").read_bytes())
-    baseline = load_manifest(root / "data")
     candidate = load_manifest(accepted / "stage/data")
     def runner(command, log):
         if "app.fetch" in command:
             destination = Path(command[command.index("--output") + 1])
             if attack != "crash":
-                shutil.copytree(accepted / "stage/data" / candidate["run"], destination / candidate["run"])
+                shutil.copytree(accepted / "stage/data/current", destination / "current")
                 fresh = copy.deepcopy(candidate)
                 if attack == "fatal":
-                    feed = "sh000001"
-                    failed = {"status": "failure", "feed": feed, "attempted_at": FIXED.isoformat(),
-                              "finished_at": FIXED.isoformat(), "error": "deterministic provider outage"}
-                    fresh["feeds"][feed] = state_after(baseline["feeds"][feed], failed)
-                    # Retain the real stale contract; the independent verifier accepts it.
-                    (destination / fresh["manifest_path"]).unlink()
-                dump(destination / "latest.json", fresh)
-                if attack == "fatal":
-                    promote(destination, fresh)
-                if attack == "immutable":
-                    # Unreferenced historical evidence still must never be rewritten.
-                    (destination / "documentation-example/UNREFERENCED").write_text("unexpected addition")
-                    historical = next((destination / "documentation-example").glob("*.csv"))
-                    historical.write_bytes(historical.read_bytes() + b"\n")
+                    feed = "sz399673"  # Not a comparator for any successful QVIX member.
+                    snap = fresh["feeds"][feed]["snapshot"]
+                    failed = {"status": "failure", "feed": feed, "window": fresh["window"],
+                              "attempted_at": snap["attempted_at"], "finished_at": snap["finished_at"],
+                              "error": "deterministic provider outage"}
+                    dump(destination / snap["origin"]["path"], failed)
+                    fresh["feeds"][feed] = {"attempt": failed, "snapshot": None, "stale_reuse": False}
+                dump(destination / "current/manifest.json", fresh)
+                if attack == "extra":
+                    unrelated = destination / "documentation-example/UNREFERENCED"
+                    unrelated.parent.mkdir()
+                    unrelated.write_text("not part of the fresh current subtree")
             log.write_text("retained completed acquisition, or deliberate crash without promotion\n")
             return 1
         if "app.chart" in command:
@@ -597,7 +650,7 @@ def test_real_preparation_withholds_invalid_candidates(real_prepared, tmp_path, 
     assert not outcome["eligible"] and reason in outcome["error"]
     assert not (work / "bundle").exists()
     if attack != "crash":
-        assert (work / "diagnostics/new-evidence" / candidate["manifest_path"]).is_file()
+        assert (work / "diagnostics/new-evidence/current/manifest.json").is_file()
         assert (work / "diagnostics/candidate.html").is_file()
     assert inventory(root / "data", bounded=False) == original_inventory
     assert digest((root / "index.html").read_bytes()) == original_html
