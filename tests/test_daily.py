@@ -281,9 +281,6 @@ def test_frozen_utc_cutoff_without_local_timezone(tmp_path, start, expected, mon
 @pytest.fixture(scope="module")
 def real_prepared(tmp_path_factory):
     """Real fetch workers, renderer and independent verifier; retained HTTP only."""
-    from app.chart import build
-    from app.fetch import fetch, group_worker, worker
-    import requests
     temporary = tmp_path_factory.mktemp("daily-real")
     root = temporary / "root"
     root.mkdir()
@@ -304,12 +301,25 @@ def real_prepared(tmp_path_factory):
     stream = io.StringIO(newline="")
     csv.writer(stream, lineterminator="\n").writerows(records)
     blank_body = stream.getvalue().encode("gbk")
+    identity = {"repository": "test/local", "branch": "main", "base_sha": "a" * 40,
+                "run_id": "123", "run_attempt": "1"}
+    work = temporary / "work"
+    outcome = _prepare_retained(root, work, identity, baseline, blank_body, FIXED)
+    assert inventory(root / "data", bounded=False) == original_inventory
+    return root, work, outcome, identity
+
+
+def _prepare_retained(root, work, identity, baseline, qvix_body, start, *, publish_unchanged=False):
+    from app.chart import build
+    from app.fetch import fetch, group_worker, worker
+    import requests
+
     def retained_get(url, **kwargs):
         if "optbbs" in url:
             # Simulate a slow but complete shared download without sleeping in CI.
             if kwargs["timeout"][1] < 290:
                 raise requests.ReadTimeout("290s idle during QVIX transfer")
-            body, encoding = blank_body, "gbk"
+            body, encoding = qvix_body, "gbk"
         else:
             feed = next(feed for feed in INDICES if feed in url)
             snap = baseline["feeds"][feed]["snapshot"]
@@ -335,7 +345,7 @@ def real_prepared(tmp_path_factory):
                 patch.setattr("app.fetch.subprocess.run", local_worker)
                 ticks = iter(range(1000))
                 patch.setattr("app.fetch.now",
-                              lambda: (FIXED + timedelta(seconds=2, microseconds=next(ticks))).isoformat())
+                              lambda: (start + timedelta(seconds=2, microseconds=next(ticks))).isoformat())
                 code = fetch(command[command.index("--output") + 1],
                              command[command.index("--start") + 1], command[command.index("--end") + 1])
             log.write_text(f"actual fetch exit={code}; retained HTTP fixture\n")
@@ -345,14 +355,9 @@ def real_prepared(tmp_path_factory):
             log.write_text("actual renderer completed\n")
             return 0
         return daily.execute(command, log)  # Real separate-process independent verifier.
-    ticks = iter([FIXED, FIXED + timedelta(seconds=1), FIXED + timedelta(seconds=3),
-                  FIXED + timedelta(days=1)])
-    identity = {"repository": "test/local", "branch": "main", "base_sha": "a" * 40,
-                "run_id": "123", "run_attempt": "1"}
-    work = temporary / "work"
-    outcome = daily.prepare(root, work, identity, clock=lambda: next(ticks), runner=runner)
-    assert inventory(root / "data", bounded=False) == original_inventory
-    return root, work, outcome, identity
+    ticks = iter([start, start + timedelta(seconds=1), start + timedelta(seconds=3), start + timedelta(days=1)])
+    return daily.prepare(root, work, identity, clock=lambda: next(ticks), runner=runner,
+                         publish_unchanged=publish_unchanged)
 
 
 def test_real_orchestration_blank_partial_and_independent_verifier(real_prepared):
@@ -377,6 +382,47 @@ def test_real_orchestration_blank_partial_and_independent_verifier(real_prepared
     for log in ("baseline.log", "candidate.log"):
         assert "Offline verification passed: eight panels" in (work / "diagnostics" / log).read_text()
     assert not (root / "data" / candidate["run"]).exists()
+    assert not (work / "diagnostics/new-evidence").exists()
+    assert not (work / "diagnostics/candidate.html").exists()
+
+
+@pytest.mark.parametrize("case", ["unchanged", "old raw revision", "next cutoff", "renderer", "manual"])
+def test_repeat_verified_refresh(real_prepared, tmp_path, monkeypatch, case):
+    from app import chart
+    initial, accepted, _, identity = real_prepared
+    root = tmp_path / "root"
+    shutil.copytree(accepted / "stage", root)
+    shutil.copyfile(initial / "uv.lock", root / "uv.lock")
+    previous = load_manifest(root / "data")
+    ref = previous["feeds"]["qvix_50etf"]["snapshot"]["shared"]
+    group = json.loads((root / "data" / ref["path"]).read_bytes())
+    body = (root / "data" / group["raw"]["body"]).read_bytes()
+    if case == "old raw revision":
+        records = list(csv.reader(io.StringIO(body.decode("gbk"))))
+        records[1][5] = "123" if records[1][5] != "123" else "456"  # Outside all seven wrappers.
+        stream = io.StringIO(newline="")
+        csv.writer(stream, lineterminator="\n").writerows(records)
+        body = stream.getvalue().encode("gbk")
+    elif case == "renderer":
+        monkeypatch.setattr(chart, "CSS", chart.CSS + "\nnav{gap:8px}\n")
+    when = FIXED + (timedelta(days=1) if case == "next cutoff" else timedelta(hours=1))
+    work = tmp_path / "repeat"
+    outcome = _prepare_retained(root, work, identity, previous, body, when, publish_unchanged=case == "manual")
+    candidate = load_manifest(work / "stage/data")
+    assert outcome["quality"] == "partial" and candidate["run"] != previous["run"]
+    assert load_manifest(root / "data") == previous
+    csv_changed = any(state["snapshot"]["csv_sha256"] != previous["feeds"][feed]["snapshot"]["csv_sha256"]
+                      for feed, state in candidate["feeds"].items())
+    assert csv_changed == (case == "next cutoff")
+    if case == "unchanged":
+        assert outcome["phase"] == "unchanged" and outcome["retained_run"] == previous["run"]
+        assert not (work / "bundle").exists() and "receipt_hash" not in outcome
+    else:
+        assert outcome["phase"] == "publish"
+        receipt = validate_bundle(work / "bundle", outcome["receipt_hash"], identity)
+        assert receipt["run"] == candidate["run"]
+    assert not (work / "diagnostics/new-evidence").exists()
+    assert not (work / "diagnostics/candidate.html").exists()
 
 
 def test_real_verified_payload_commits_exactly_together(real_prepared, tmp_path):
@@ -437,17 +483,34 @@ def test_accepted_push_with_lost_response_is_proven_by_readback(tmp_path, monkey
     ("success", "true", "failure", 1, "no rollback"),
 ])
 def test_actual_workflow_conclusion(tmp_path, quality, pages, deploy, expected, notice):
+    result = _workflow_conclusion(tmp_path, quality, pages, deploy)
+    assert result.returncode == expected and notice in result.stdout
+    assert "Data commit: verified-commit" in (tmp_path / "summary").read_text()
+
+
+@pytest.mark.parametrize("override,expected", [
+    ({}, 0), ({"PREPARE": "failure"}, 1), ({"PERSIST": "failure"}, 1), ({"DEPLOY": "success"}, 1),
+    ({"PUBLICATION": ""}, 1), ({"DATA_COMMIT": "unexpected"}, 1), ({"QUALITY": ""}, 1),
+])
+def test_unchanged_workflow_conclusion(tmp_path, override, expected):
+    env = {"PUBLICATION": "unchanged", "PERSIST": "skipped", "DATA_COMMIT": ""} | override
+    result = _workflow_conclusion(tmp_path, "partial", "true", "skipped", **env)
+    assert result.returncode == expected
+    if expected == 0:
+        assert "Pages: not requested (unchanged)" in (tmp_path / "summary").read_text()
+        assert "::warning::" in result.stdout
+
+
+def _workflow_conclusion(tmp_path, quality, pages, deploy, **overrides):
     import os
     import textwrap
     # Execute the workflow's real concluding shell, not an assertion about its source.
     shell = (ROOT / ".github/workflows/daily-refresh.yml").read_text().rsplit("        run: |\n", 1)[1]
-    env = os.environ | {"PREPARE": "success", "PERSIST": "success", "DEPLOY": deploy,
+    env = os.environ | {"PREPARE": "success", "PERSIST": "success", "DEPLOY": deploy, "PUBLICATION": "publish",
                         "PAGES_ENABLED": pages, "QUALITY": quality, "DATA_COMMIT": "verified-commit",
-                        "EVENT_SHA": "event-code", "GITHUB_STEP_SUMMARY": str(tmp_path / "summary")}
-    result = subprocess.run(["bash", "-e", "-c", textwrap.dedent(shell)], env=env,
-                            text=True, capture_output=True, timeout=10)
-    assert result.returncode == expected and notice in result.stdout
-    assert "Data commit: verified-commit" in (tmp_path / "summary").read_text()
+                        "EVENT_SHA": "event-code", "GITHUB_STEP_SUMMARY": str(tmp_path / "summary")} | overrides
+    return subprocess.run(["bash", "-e", "-c", textwrap.dedent(shell)], env=env,
+                          text=True, capture_output=True, timeout=10)
 
 
 @pytest.mark.parametrize("attack,reason", [
@@ -503,6 +566,9 @@ def test_real_preparation_withholds_invalid_candidates(real_prepared, tmp_path, 
     outcome = json.loads((work / "diagnostics/outcome.json").read_text())
     assert not outcome["eligible"] and reason in outcome["error"]
     assert not (work / "bundle").exists()
+    if attack != "crash":
+        assert (work / "diagnostics/new-evidence" / candidate["manifest_path"]).is_file()
+        assert (work / "diagnostics/candidate.html").is_file()
     assert inventory(root / "data", bounded=False) == original_inventory
     assert digest((root / "index.html").read_bytes()) == original_html
 

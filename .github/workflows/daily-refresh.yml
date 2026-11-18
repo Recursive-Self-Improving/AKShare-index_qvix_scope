@@ -18,7 +18,7 @@ jobs:
     permissions:
       contents: read
     outputs:
-      eligible: ${{ steps.prepare.outputs.eligible }}
+      publication: ${{ steps.prepare.outputs.publication }}
       quality: ${{ steps.prepare.outputs.quality }}
       receipt_hash: ${{ steps.prepare.outputs.receipt_hash }}
       artifact_id: ${{ steps.payload.outputs.artifact-id }}
@@ -47,13 +47,14 @@ jobs:
         run: .venv/bin/python -m app.daily --work "$RUNNER_TEMP/daily"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         id: payload
+        if: steps.prepare.outputs.publication == 'publish'
         with:
           name: candidate-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/daily/bundle/
           if-no-files-found: error
           retention-days: 14
-      - name: Retain bounded attempt diagnostics
-        if: always()
+      - name: Retain bounded failure diagnostics
+        if: failure() || cancelled()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
@@ -62,7 +63,7 @@ jobs:
           retention-days: 14
   persist:
     needs: prepare
-    if: needs.prepare.outputs.eligible == 'true' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: needs.prepare.outputs.publication == 'publish' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -149,6 +150,7 @@ jobs:
       - name: Conclude without concealing partial publication
         env:
           PREPARE: ${{ needs.prepare.result }}
+          PUBLICATION: ${{ needs.prepare.outputs.publication }}
           PERSIST: ${{ needs.persist.result }}
           DEPLOY: ${{ needs.deploy-pages.result }}
           PAGES_ENABLED: ${{ needs.prepare.outputs.pages_enabled }}
@@ -158,17 +160,23 @@ jobs:
         shell: bash
         run: |
           deployment="$DEPLOY"
-          if [[ "$PAGES_ENABLED:$DEPLOY" == false:skipped ]]; then deployment=disabled; fi
-          printf 'Event code: %s\nData commit: %s\nPrepare: %s; persist: %s; quality: %s; Pages: %s\n' \
-            "$EVENT_SHA" "$DATA_COMMIT" "$PREPARE" "$PERSIST" "$QUALITY" "$deployment" | tee -a "$GITHUB_STEP_SUMMARY"
-          if [[ "$PREPARE" != success || "$PERSIST" != success || -z "$DATA_COMMIT" ]]; then
+          if [[ "$PUBLICATION:$DEPLOY" == unchanged:skipped ]]; then deployment='not requested (unchanged)'
+          elif [[ "$PAGES_ENABLED:$DEPLOY" == false:skipped ]]; then deployment=disabled; fi
+          printf 'Event code: %s\nData commit: %s\nPrepare: %s; publication: %s; persist: %s; quality: %s; Pages: %s\n' \
+            "$EVENT_SHA" "$DATA_COMMIT" "$PREPARE" "$PUBLICATION" "$PERSIST" "$QUALITY" "$deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          if [[ "$PREPARE" != success ]]; then
+            echo '::error::Refresh preparation did not complete'; exit 1
+          elif [[ "$PUBLICATION" == unchanged ]]; then
+            if [[ "$PERSIST:$DEPLOY" != skipped:skipped || -n "$DATA_COMMIT" ]]; then
+              echo '::error::Unexpected publication for an unchanged refresh'; exit 1
+            fi
+          elif [[ "$PUBLICATION" != publish || "$PERSIST" != success || -z "$DATA_COMMIT" ]]; then
             echo '::error::Refresh not proven persisted'; exit 1
-          fi
-          if [[ "$PAGES_ENABLED:$DEPLOY" != true:success && "$PAGES_ENABLED:$DEPLOY" != false:skipped ]]; then
+          elif [[ "$PAGES_ENABLED:$DEPLOY" != true:success && "$PAGES_ENABLED:$DEPLOY" != false:skipped ]]; then
             echo '::error::Data persisted; Pages did not complete as configured (no rollback)'; exit 1
           fi
           if [[ "$QUALITY" == partial ]]; then
-            echo '::warning::Verified QVIX partial persisted; source quality remains partial'
+            echo "::warning::Verified QVIX data remains partial (publication: $PUBLICATION)"
           elif [[ "$QUALITY" != success ]]; then
             echo '::error::Missing or unrecognized source quality'; exit 1
           fi

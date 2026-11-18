@@ -43,10 +43,10 @@
 - 允许短期 `GITHUB_TOKEN` 直接更新默认分支，且分支保护/ruleset须兼容；不修改保护、不用PAT，
   不绕过必须PR/签名的规则。默认权限为空；prepare只读，独立publisher仅contents-write；
   不持久化checkout凭据。获取/安装/渲染只在只读job；writer仅运行标准库/Git与固定Actions工具。
-- Git持久化**不等于网站部署**。`GITHUB_TOKEN` 推送不会触发branch Pages构建。
-  要部署网站，先启用 Pages（推荐 Source = **GitHub Actions**），允许默认分支部署到 `github-pages` 环境。
-  未设置仓库变量 `PUBLISH_PAGES` 时，根据事件的 `repository.has_pages` 决定是否部署；
-  `false` 仅更新仓库，`true` 明确要求部署。工作流不会创建站点或绕过审批。`Pages: disabled` 不代表网站已更新。
+- Git持久化**不等于网站部署**。要只部署图表，在仓库 **Settings → Pages → Build and deployment → Source**
+  选择 **GitHub Actions**，允许默认分支部署到 `github-pages` 环境。显式部署只含 `index.html`，不提供仓库中的 `data/`、`docs/` 路径。
+  未设置 `PUBLISH_PAGES` 时，本工作流根据事件的 `repository.has_pages` 决定是否部署；
+  `false` 仅关闭这里的部署，`true` 明确要求部署。该变量不会切换 Pages 来源，也不会关闭独立的分支构建。
 - 部署/公开仓库前确认原始、派生及HTML内嵌数据再分发授权；当前实验声明不是许可证。
   GitHub runner连通性、token/分支策略、通知、真实调度和部署须在托管环境另行验证。
 
@@ -58,6 +58,14 @@
 比较重叠请求窗口中的指数raw日期、QVIX公共raw日期集合；丢失任何旧日期均拒绝自动发布，
 包括首/中/尾和等计数替换。比较不使用有限close集合，新鲜空白/冲突可按已有规则取代旧价格。
 任何fatal、stale、未知/缺失、校验/执行错误均阻止整个更新；旧公开页面可能因此落后。
+
+**定时运行的去重发生在上述校验及旧文件不可变检查之后**：
+
+- 比较8份新浪、7条QVIX所用的完整响应内容哈希（QVIX共用源）、源地址/编码、调用/版本、各序列的CSV和状态。
+  QVIX还比较wrapper输出、全量/窗口质量统计及比较指数的数据身份和陈旧状态。新run路径、采集时钟和HTTP响应头不代表行情变化。
+- 即使最后交易日、行数、收盘曲线不动，历史源字节修订也会触发发布。跨UTC日仅延长截止日、没有新选中行或质量变化时，不为日期另建快照。
+- 数据一致时，用当前渲染器重建**原快照**，与已提交的 `index.html` 逐字节比较，避免漏掉模板更新。两者也一致才记 `unchanged`：保留原run、窗口和获取时间，不生成候选包、不推送、不部署。
+- 最新检查时间看 Actions 运行与摘要；页面显示上次发布的快照时间。`unchanged` 是相对事件基线的结果，**不是对线上页面的健康检查**。手动 **Run workflow** 会重新获取、校验并请求发布，即使内容相同；不能跳过质量或旧日期保护。
 
 只允许新增本run子树、替换 `data/latest.json` 与根 `index.html`；不得删除或改写旧证据。
 独立 `app/daily_transfer.py` 在新runner校验同run/attempt制品ID、receipt SHA256及每个文件的
@@ -71,8 +79,8 @@ path/size/hash，拒绝额外/缺失路径、link、可执行模式或其他代�
 
 ## 质量状态与部署结果
 
-新鲜 `success` 或通过独立验证的新鲜 QVIX `partial` 都可持久化并部署。`partial` 保留 null 和页面质量提示；
-预期的发布步骤完成后，`quality-status` 成功并发出 warning，摘要记录 `quality: partial`。
+需要发布时，新鲜 `success` 或通过独立验证的新鲜 QVIX `partial` 都可持久化并部署。`partial` 保留 null 和页面质量提示；
+预期步骤完成后，`quality-status` 成功并发出 warning，摘要记录 `quality: partial`。`unchanged` 也保留质量警告，不宣称本次部署。
 若共享 QVIX 采集超时、只能沿用旧快照，则不是这种 partial：`prepare` 拒绝发布，网站保留上一份报告。
 应部署却失败或跳过，工作流仍失败，不把“已提交”误报成“已上线”。
 Pages仅打包精确已验证 `index.html`，部署前再次检查已持久化commit；
@@ -88,12 +96,21 @@ prepare/persist/Pages/conclusion分别限30/5/10/2分钟，prepare内部25分钟
 连接 5 秒、读取空闲最多 300 秒，整个共享子进程（含下载和解析）总计最多 5 分钟，不是每条各 5 分钟。
 仍然超时就停止发布，不重试、不把旧快照当作本次获取。
 候选最多512文件/256MiB；receipt最多1MiB，单命令日志最多4MiB（超限截断并失败）。
-always诊断仅保存本次新增证据（最多512文件/256MiB，超限有TRUNCATED标记）、
-候选HTML（最多256MiB）、阶段日志与outcome，申请保留14天；Pages制品1天。
-强制取消/安装/runner故障可能没有诊断，上传失败仍为失败，不保证制品永久可用。
 
-接受的不可变证据持续增长，不自动清理；
-实施时每次发布约新增10MB；若每天24次均发布，约新增240MB/日，需预算Git历史、clone和制品存储。
+| 本工作流结果 | 上传及保留 |
+|---|---|
+| 定时校验通过，无变化 | 仅 Actions 日志和摘要，**零制品**，不新增 Git 文件。 |
+| 有变化或手动请求发布 | 上传一份经校验的 `candidate-*`（14天），成功时不另传诊断副本。启用 Pages 时另传只含 HTML 的部署制品（1天）。 |
+| 准备失败 | 尽力上传 `diagnostics-*`（14天）：日志、outcome、本次新增证据（最多512文件/256MiB，超限有TRUNCATED标记）和已生成的候选HTML（最多256MiB）。不发布。 |
+
+候选上传失败时诊断中可有日志和outcome；persist/部署失败看该job日志与已上传的候选，不另复制原始数据。强制取消、安装、runner或上传故障可能没有制品。
+
+实测旧[刷新运行 #44235114468](https://github.com/Recursive-Self-Improving/AKShare-index_qvix_scope/actions/runs/44235114468)
+的候选、诊断、Pages 压缩制品分别为3.44、3.43、1.80 MB；同一数据提交还有一次独立的
+[pages build and deployment](https://github.com/Recursive-Self-Improving/AKShare-index_qvix_scope/actions/runs/44235293553)，制品37.55 MB。
+后者不是本工作流上传的单页包；应检查 Pages 来源，不要仅调短制品保留期。
+
+已发布的不可变证据不清理、不改写历史。一次完整发布仍可新增约10 MB工作树文件；Git会复用相同内容的blob，文件大小之和不是Git实际传输量。
 新鲜 partial 的警告可在该次运行中查看；它不触发工作流失败通知。
 失败通知依赖GitHub用户设置及调度创建/编辑/重新启用者；丢失/禁用的调度不一定产生通知。
 
@@ -136,3 +153,7 @@ always诊断仅保存本次新增证据（最多512文件/256MiB，超限有TRUN
 2026-11-18 在本地临时目录用新预算运行真实 `prepare`：QVIX 共享请求取得 930038 字节，
 首条调用至收到完整响应耗时 46 秒，已超过旧进程上限。8 个指数成功，7 条 QVIX 均为本次获取的 `partial`，
 独立验证通过，整次准备耗时 78 秒。未提交该次数据或部署到 Pages；这不是 GitHub runner 的耗时保证。
+
+按变化发布的本地验证：`uv run --frozen --offline pytest -q tests/test_daily.py`，70项通过。
+重复获取相同内容不出候选包；旧源字段修订（15份选中CSV均未变）、截止日纳入新行、仅渲染器变化及手动发布均生成可校验的候选。
+`actionlint` 和变更Python文件的 `ruff check` 通过；未触发托管工作流、推送或部署。

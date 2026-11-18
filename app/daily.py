@@ -1,6 +1,7 @@
 """Read-only preparation: real acquisition in a private, ordinary-copy stage."""
 import argparse
 from datetime import date, datetime, timedelta, timezone
+import filecmp
 import json
 from pathlib import Path
 import shutil
@@ -76,6 +77,34 @@ def eligibility(root, previous, candidate, code, started, finished, cutoff):
     return "partial" if partial else "success", details
 
 
+def _feed_content(root, feed, snap):
+    """Publication inputs of an independently replayed snapshot, not its acquisition ID."""
+    from app.core import QVIX_FEEDS
+    if feed in QVIX_FEEDS:
+        raw = json.loads((root / snap["shared"]["path"]).read_bytes())["raw"]
+        quality = snap["accounting"]
+        comp = quality["comparator"]
+        # A fresh comparator has new paths/timestamps even when its history is identical.
+        binding = comp and {k: comp[k] for k in ("feed", "raw_sha256", "csv_sha256", "stale_reuse")}
+        derived = (snap["wrapper_sha256"], quality | {"comparator": binding})
+    else:
+        raw = snap["raw"]
+        derived = snap["identity"]
+    return (snap["status"], snap["versions"], snap["invocation"], snap["csv_sha256"], derived,
+            tuple(raw[k] for k in ("requested_url", "url", "encoding", "sha256")))
+
+
+def _same_data(root, previous, candidate):
+    # A later cutoff alone is not a revision. Selected CSVs *and* windowed quality
+    # still change if a previously out-of-window row becomes material.
+    return (previous.get("operation") == "acquisition" and previous["window"][0] == START and
+            previous["window"][1] <= candidate["window"][1] and
+            all(not old["stale_reuse"] and old["snapshot"]["window"] == previous["window"] and
+                _feed_content(root, feed, old["snapshot"]) ==
+                _feed_content(root, feed, candidate["feeds"][feed]["snapshot"])
+                for feed, old in previous["feeds"].items()))
+
+
 def execute(command, log):
     try:
         with log.open("w") as handle:
@@ -87,7 +116,7 @@ def execute(command, log):
             raise ValueError("command diagnostic exceeded 4 MiB; truncated")
 
 
-def prepare(root, work, identity, clock=utc_now, runner=execute):
+def prepare(root, work, identity, clock=utc_now, runner=execute, *, publish_unchanged=False):
     from app.core import load_manifest
     root, work = Path(root), Path(work)
     started = clock()
@@ -135,10 +164,23 @@ def prepare(root, work, identity, clock=utc_now, runner=execute):
         require(additions and all(p.startswith(candidate["run"] + "/") for p in additions),
                 "unexpected additions")
         require(not any(p.startswith(candidate["run"] + "/") for p in before), "run already exists")
+        paths = additions | {"latest.json"}
+        require(len(paths) + 1 <= MAX_FILES and
+                sum(after[p]["size"] for p in paths) + (stage / "index.html").stat().st_size <= MAX_BYTES,
+                "candidate exceeds payload bound")
+        if not publish_unchanged and _same_data(stage / "data", previous, candidate):
+            # Compare at the same acquisition ID: a renderer-only change must still ship.
+            rebuilt = work / "baseline.html"
+            require(runner([sys.executable, "-m", "app.chart", "--input", str(root / "data"),
+                            "--output", str(rebuilt)], diagnostics / "baseline-chart.log") == 0,
+                    "baseline chart rebuild failed")
+            if filecmp.cmp(rebuilt, root / "index.html", shallow=False):
+                outcome.update(eligible=True, phase="unchanged", retained_run=previous["run"])
+                return outcome
         bundle = work / "bundle"
         payload = bundle / "payload"
         payload.mkdir(parents=True)
-        for path in sorted(additions | {"latest.json"}):
+        for path in sorted(paths):
             target = payload / "data" / path
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(stage / "data" / path, target)
@@ -148,7 +190,7 @@ def prepare(root, work, identity, clock=utc_now, runner=execute):
                    "verified": True, "files": inventory(payload)}
         body = (json.dumps(receipt, sort_keys=True, indent=2) + "\n").encode()
         (bundle / "receipt.json").write_bytes(body)
-        outcome.update(eligible=True, receipt_hash=digest(body), phase="eligible")
+        outcome.update(eligible=True, receipt_hash=digest(body), phase="publish")
         return outcome
     except Exception as error:
         outcome["error"] = f"{type(error).__name__}: {error}"[:32768]
@@ -156,8 +198,8 @@ def prepare(root, work, identity, clock=utc_now, runner=execute):
     finally:
         outcome["finished_at"] = clock().isoformat()
         (diagnostics / "outcome.json").write_text(json.dumps(outcome, indent=2) + "\n")
-        # Only new evidence, never the baseline, enters expiring failure diagnostics.
-        if stage.exists() and before is not None:
+        # A verified candidate is either already in the bundle or deliberately not published.
+        if not outcome["eligible"] and stage.exists() and before is not None:
             evidence = diagnostics / "new-evidence"
             copied_bytes = copied_files = 0
             for path in (stage / "data").rglob("*"):
@@ -189,7 +231,8 @@ def main():
     signal.signal(signal.SIGALRM, deadline)
     signal.alarm(25 * 60)
     try:
-        result = prepare(Path.cwd(), args.work, identity)
+        result = prepare(Path.cwd(), args.work, identity,
+                         publish_unchanged=os.environ["GITHUB_EVENT_NAME"] == "workflow_dispatch")
     finally:
         signal.alarm(0)
         outcome_path = Path(args.work) / "diagnostics/outcome.json"
@@ -198,11 +241,18 @@ def main():
             with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
                 summary.write(f"UTC window: {outcome['window']}; eligible: {outcome['eligible']}; "
                               f"phase: {outcome['phase']}; fetch exit: {outcome.get('fetch_exit', 'not reached')}\n\n")
+                if outcome.get("retained_run"):
+                    summary.write(f"Verified unchanged against `{outcome['retained_run']}`; "
+                                  "no new snapshot or deployment requested.\n\n")
+                if "receipt_hash" in outcome:
+                    summary.write(f"Candidate receipt SHA256: `{outcome['receipt_hash']}`\n\n")
                 summary.write("| Feed | Attempt | Stale |\n|---|---|---|\n")
                 for feed, state in outcome.get("feeds", {}).items():
                     summary.write(f"| {feed} | {state['attempt']} | {state['stale']} |\n")
     with open(os.environ["GITHUB_OUTPUT"], "a") as handle:
-        handle.write(f"eligible=true\nquality={result['quality']}\nreceipt_hash={result['receipt_hash']}\n")
+        handle.write(f"publication={result['phase']}\nquality={result['quality']}\n")
+        if result["phase"] == "publish":
+            handle.write(f"receipt_hash={result['receipt_hash']}\n")
 
 
 if __name__ == "__main__":
