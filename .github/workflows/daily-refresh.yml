@@ -22,6 +22,7 @@ jobs:
       quality: ${{ steps.prepare.outputs.quality }}
       receipt_hash: ${{ steps.prepare.outputs.receipt_hash }}
       artifact_id: ${{ steps.payload.outputs.artifact-id }}
+      pages_enabled: ${{ vars.PUBLISH_PAGES == 'true' || (vars.PUBLISH_PAGES == '' && github.event.repository.has_pages == true) }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -93,7 +94,7 @@ jobs:
         run: python3 -I app/daily_transfer.py publish --bundle "$RUNNER_TEMP/candidate" --receipt-hash "$RECEIPT_HASH"
   deploy-pages:
     needs: [prepare, persist]
-    if: vars.PUBLISH_PAGES == 'true' && needs.persist.result == 'success' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: needs.prepare.outputs.pages_enabled == 'true' && needs.persist.result == 'success' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -150,22 +151,24 @@ jobs:
           PREPARE: ${{ needs.prepare.result }}
           PERSIST: ${{ needs.persist.result }}
           DEPLOY: ${{ needs.deploy-pages.result }}
-          PAGES_ENABLED: ${{ vars.PUBLISH_PAGES }}
+          PAGES_ENABLED: ${{ needs.prepare.outputs.pages_enabled }}
           QUALITY: ${{ needs.prepare.outputs.quality }}
           DATA_COMMIT: ${{ needs.persist.outputs.commit }}
           EVENT_SHA: ${{ github.sha }}
         shell: bash
         run: |
           deployment="$DEPLOY"
-          if [[ "$PAGES_ENABLED" != true ]]; then deployment=disabled; fi
+          if [[ "$PAGES_ENABLED:$DEPLOY" == false:skipped ]]; then deployment=disabled; fi
           printf 'Event code: %s\nData commit: %s\nPrepare: %s; persist: %s; quality: %s; Pages: %s\n' \
             "$EVENT_SHA" "$DATA_COMMIT" "$PREPARE" "$PERSIST" "$QUALITY" "$deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           if [[ "$PREPARE" != success || "$PERSIST" != success || -z "$DATA_COMMIT" ]]; then
             echo '::error::Refresh not proven persisted'; exit 1
           fi
-          if [[ "$PAGES_ENABLED" == true && "$DEPLOY" != success ]]; then
-            echo '::error::Data persisted; Pages deployment failed/not reached (no rollback)'; exit 1
+          if [[ "$PAGES_ENABLED:$DEPLOY" != true:success && "$PAGES_ENABLED:$DEPLOY" != false:skipped ]]; then
+            echo '::error::Data persisted; Pages did not complete as configured (no rollback)'; exit 1
           fi
-          if [[ "$QUALITY" != success ]]; then
-            echo '::error::Verified QVIX partial persisted; source quality remains partial'; exit 1
+          if [[ "$QUALITY" == partial ]]; then
+            echo '::warning::Verified QVIX partial persisted; source quality remains partial'
+          elif [[ "$QUALITY" != success ]]; then
+            echo '::error::Missing or unrecognized source quality'; exit 1
           fi

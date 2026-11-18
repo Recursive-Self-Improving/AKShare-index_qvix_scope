@@ -44,9 +44,9 @@
   不绕过必须PR/签名的规则。默认权限为空；prepare只读，独立publisher仅contents-write；
   不持久化checkout凭据。获取/安装/渲染只在只读job；writer仅运行标准库/Git与固定Actions工具。
 - Git持久化**不等于网站部署**。`GITHUB_TOKEN` 推送不会触发branch Pages构建。
-  自动部署需 Settings → Pages → Source = **GitHub Actions**，配置 `github-pages` 环境、
-  默认分支授权/审批，再设置仓库变量 **`PUBLISH_PAGES=true`**（精确小写）。
-  未启用时明确为 `Pages: disabled`，不声称网站已更新；仅合并工作流不代表外部部署设置已完成。
+  要部署网站，先启用 Pages（推荐 Source = **GitHub Actions**），允许默认分支部署到 `github-pages` 环境。
+  未设置仓库变量 `PUBLISH_PAGES` 时，根据事件的 `repository.has_pages` 决定是否部署；
+  `false` 仅更新仓库，`true` 明确要求部署。工作流不会创建站点或绕过审批。`Pages: disabled` 不代表网站已更新。
 - 部署/公开仓库前确认原始、派生及HTML内嵌数据再分发授权；当前实验声明不是许可证。
   GitHub runner连通性、token/分支策略、通知、真实调度和部署须在托管环境另行验证。
 
@@ -71,8 +71,10 @@ path/size/hash，拒绝额外/缺失路径、link、可执行模式或其他代�
 
 ## 质量状态与部署结果
 
-新鲜success或独立验证的QVIX partial可持久化；partial保持null/警告，先持久化和可选部署，
-最后 `quality-status` **红色退出1**，不以绿色掩盖质量。全部success才可绿色。
+新鲜 `success` 或通过独立验证的新鲜 QVIX `partial` 都可持久化并部署。`partial` 保留 null 和页面质量提示；
+预期的发布步骤完成后，`quality-status` 成功并发出 warning，摘要记录 `quality: partial`。
+若共享 QVIX 采集超时、只能沿用旧快照，则不是这种 partial：`prepare` 拒绝发布，网站保留上一份报告。
+应部署却失败或跳过，工作流仍失败，不把“已提交”误报成“已上线”。
 Pages仅打包精确已验证 `index.html`，部署前再次检查已持久化commit；
 event代码SHA与数据commit分开记录。Git与Pages不跨服务原子，部署失败不回滚数据，
 最后一刻检查后的外部竞争也不能由Git锁保证；所有自动site writer应共用并发组。
@@ -90,8 +92,8 @@ always诊断仅保存本次新增证据（最多512文件/256MiB，超限有TRUN
 
 接受的不可变证据持续增长，不自动清理；
 实施时每次发布约新增10MB；若每天24次均发布，约新增240MB/日，需预算Git历史、clone和制品存储。
-通知依赖GitHub用户设置及调度创建/编辑/重新启用者；预期partial会告警，可能造成告警疲劳，
-不要把该质量job设为代码合并必需check。丢失/禁用的调度不一定产生通知。
+新鲜 partial 的警告可在该次运行中查看；它不触发工作流失败通知。
+失败通知依赖GitHub用户设置及调度创建/编辑/重新启用者；丢失/禁用的调度不一定产生通知。
 
 ## 故障恢复
 

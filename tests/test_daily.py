@@ -390,8 +390,7 @@ def test_real_verified_payload_commits_exactly_together(real_prepared, tmp_path)
                                     check=True, capture_output=True).stdout
     assert digest(committed_html) == receipt["files"]["index.html"]["sha256"]
     assert outcome["quality"] == "partial"
-    test_actual_workflow_conclusion(tmp_path, outcome["quality"], "", "skipped", 1,
-                                   "Verified QVIX partial persisted")
+    test_actual_workflow_conclusion(tmp_path, outcome["quality"], "false", "skipped", 0, "::warning::")
 
 
 def test_clean_eligibility_and_changed_old_values(tmp_path, monkeypatch):
@@ -423,9 +422,13 @@ def test_accepted_push_with_lost_response_is_proven_by_readback(tmp_path, monkey
 
 
 @pytest.mark.parametrize("quality,pages,deploy,expected,notice", [
-    ("success", "", "skipped", 0, "Pages: disabled"),
-    ("partial", "", "skipped", 1, "Verified QVIX partial persisted"),
-    ("partial", "true", "success", 1, "Verified QVIX partial persisted"),
+    ("success", "false", "skipped", 0, "Pages: disabled"),
+    ("success", "true", "success", 0, "Pages: success"),
+    ("partial", "false", "skipped", 0, "::warning::"),
+    ("partial", "true", "success", 0, "::warning::"),
+    ("partial", "true", "failure", 1, "::error::"),
+    ("partial", "true", "skipped", 1, "::error::"),
+    ("", "true", "success", 1, "::error::"),
     ("success", "true", "failure", 1, "no rollback"),
 ])
 def test_actual_workflow_conclusion(tmp_path, quality, pages, deploy, expected, notice):

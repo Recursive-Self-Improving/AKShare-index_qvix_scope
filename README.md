@@ -65,12 +65,12 @@ uv run python -m app.verify --input data --report index.html
 启用前：
 
 1. 确认再分发许可，允许 Actions 运行及 `GITHUB_TOKEN` 更新默认分支；分支规则须兼容，不绕过保护。
-2. 需要自动部署时，在 Settings → Pages 选择 **GitHub Actions**，配置 `github-pages` 环境及默认分支授权／审批。
-3. 将仓库变量 **`PUBLISH_PAGES` 设为 `true`**（小写）。未启用时只更新仓库，不部署网站。
+2. 要部署网站，先启用 Pages（推荐 Source = **GitHub Actions**），允许默认分支部署到 `github-pages` 环境。
+3. 已启用 Pages 的仓库默认自动部署，无需设置变量。只想更新仓库时，设仓库变量 `PUBLISH_PAGES=false`。
 
 自动发布比手动 `fetch` 更严格：
 
-- 新鲜 QVIX `partial` 通过校验后可以发布，但最后的质量检查仍为红色；**红色不一定表示没有更新**。
+- 新鲜 QVIX `partial` 通过校验后照常发布；工作流发出警告，页面保留缺失值。`deploy-pages` 成功才表示本次更新了网站。
 - 任一获取失败、陈旧快照、旧日期丢失或校验失败，会阻止整次自动更新，保留此前公开版本。
 - 数据提交与 Pages 部署不是原子操作；部署失败不回滚数据，也不能靠重跑旧任务恢复部署。
 
