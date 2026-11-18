@@ -1,7 +1,7 @@
-name: Daily verified refresh
+name: Hourly verified refresh
 on:
   schedule:
-    - cron: '15 11 * * *' # UTC; 19:15 Asia/Shanghai, after daily-source publication buffer.
+    - cron: '15 * * * *' # UTC; run at :15 to avoid top-of-hour congestion.
   workflow_dispatch:
 permissions: {}
 concurrency:

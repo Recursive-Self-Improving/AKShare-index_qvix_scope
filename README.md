@@ -56,11 +56,11 @@ uv run python -m app.verify --input data --report index.html
 
 ## 自动更新与 Pages
 
-[Daily verified refresh](.github/workflows/daily-refresh.yml) 按每天 **11:15 UTC（北京时间 19:15）** 调度，
+[Hourly verified refresh](.github/workflows/daily-refresh.yml) 每小时第 **15 分钟（UTC）** 调度，
 也可在 Actions 页面从默认分支 **Run workflow**。每次获取完整源历史，图表窗口为
 **2000-01-01 至实际准备开始时的 UTC 当天（含）**，不是滚动 30 天合并。
 各源保留窗口内实际返回的最新交易日，不补周末／节假日；当天是否已齐取决于上游发布，
-不能把请求成功当成当天数据已齐。选择晚间并避开整点是留出缓冲，不是准点或数据完整性保证。
+不能把请求成功当成当天数据已齐。避开整点并不保证准时触发。
 
 启用前：
 
