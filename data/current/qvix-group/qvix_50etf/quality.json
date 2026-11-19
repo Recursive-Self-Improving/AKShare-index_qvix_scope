@@ -4,14 +4,14 @@
   "comparator": {
     "origin": {
       "path": "current/sh000001/result.json",
-      "sha256": "c8bd75894ff56b570e71394443edede204336468bea16d0ed913caf305472581",
+      "sha256": "ff90c7479148281015282df95e893d6c238c5e9cc9cbc1076549ebd5962bc974",
       "kind": "result"
     },
     "csv": "current/sh000001/observations.csv",
-    "csv_sha256": "fdc330f71db28ec33940b2c019101b07e3a2a4c18e091f15dff89a77f001993b",
-    "successful_at": "2026-11-19T08:49:21.467251+00:00",
+    "csv_sha256": "49f3841ba556041983a8026edc56692a473faf9b60801dda6603148d704ad1cc",
+    "successful_at": "2026-11-19T18:17:40.813780+00:00",
     "feed": "sh000001",
-    "raw_sha256": "a6bbd128d2408e3b57c331579292c7b6f6182b519dec654153dc64124b39dd2c",
+    "raw_sha256": "ca6924020d4c62e5533332ce86f218b46b7474b6f15f6d2dff175a6ec341a157",
     "stale_reuse": false
   },
   "dates": {
@@ -62818,9 +62818,7 @@
       "2026-09-13",
       "2026-11-01"
     ],
-    "blank_source_only": [
-      "2026-11-19"
-    ]
+    "blank_source_only": []
   },
   "ordered": false,
   "full": {
@@ -62871,7 +62869,7 @@
     "missing_close": 0,
     "holes": 14,
     "source_only": 4,
-    "blank_source_only": 1
+    "blank_source_only": 0
   },
   "selected": {
     "common_range": [
@@ -62921,6 +62919,6 @@
     "missing_close": 0,
     "holes": 14,
     "source_only": 4,
-    "blank_source_only": 1
+    "blank_source_only": 0
   }
 }

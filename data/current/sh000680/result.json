@@ -1,6 +1,6 @@
 {
   "feed": "sh000680",
-  "attempted_at": "2026-11-19T08:49:27.854921+00:00",
+  "attempted_at": "2026-11-19T18:17:47.557995+00:00",
   "window": [
     "2000-01-01",
     "2026-11-19"
@@ -18,48 +18,48 @@
   "invocation": "index_zh_daily_sina(symbol='sh000680')",
   "raw": {
     "body": "current/sh000680/response-0.body",
-    "sha256": "bb0d102ce598a6f8d94b83c6b825601cf1599d20ae95c9f086ab1b0f90cc0f2c",
+    "sha256": "75ed9f508189b3c1251908545ed2a2e756ed483877dc7173eef8a57ec32ed92b",
     "url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
     "requested_url": "https://finance.sina.com.cn/realstock/company/sh000680/hisdata/klc_kl.js?d=2020_2_4",
     "status": 200,
     "headers": {
       "Server": "Tengine",
       "Content-Type": "application/x-javascript",
-      "Content-Length": "21198",
+      "Content-Length": "21213",
       "Connection": "keep-alive",
-      "Date": "Thu, 19 Nov 2026 08:49:28 GMT",
-      "Expires": "Thu, 19 Nov 2026 08:51:28 GMT",
+      "Date": "Thu, 19 Nov 2026 18:17:47 GMT",
+      "Expires": "Thu, 19 Nov 2026 18:19:47 GMT",
       "Cache-Control": "max-age=120",
-      "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[102,101,304-0,H], cache6.l2so158-2[103,0], cache6.l2so158-2[104,0], ens-cache20.l2hk11[109,108,304-0,H], ens-cache32.l2hk11[110,0], ens-cache32.l2hk11[110,0], ens-cache32.l2us5[326,423,304-0,H], ens-cache6.l2us5[424,0], ens-cache6.l2us5[425,0], ens-cache5.us27[431,432,200-0,H], ens-cache6.us27[435,0]",
-      "X-Via-CDN": "f=aliyun,s=ens-cache6.us27,c=3.42.157.172;f=sinaedge,s=ctc.guangzhou.union.444.nb.sinaedge.com,c=113.96.59.21;f=Edge,s=cnc.huanan2.union.38,c=10.33.67.44;f=edge,s=ctc.guangzhou.bsd-storage.205.nb.sinaedge.com,c=10.54.255.26;",
-      "X-Via-Edge": "179507816828322d1090a2c43210a10dc9b41",
-      "X-Via-SSL": "ssl.24.sinag1.hn1.lb.sinanode.com",
-      "Edge-Copy-Time": "1794997317242",
-      "Last-Modified": "Wed, 18 Nov 2026 09:31:05 GMT",
+      "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[36,36,304-0,H], cache13.l2so158-2[38,0], cache13.l2so158-2[38,0], ens-cache20.l2hk11[42,43,304-0,H], ens-cache30.l2hk11[45,0], ens-cache30.l2hk11[45,0], ens-cache32.l2us5[276,276,200-0,H], ens-cache33.l2us5[277,0], ens-cache33.l2us5[278,0], ens-cache5.us27[284,285,200-0,M], ens-cache5.us27[287,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache5.us27,c=3.42.157.142;f=sinaedge,s=ctc.guangzhou.union.5656.nb.sinaedge.com,c=120.241.4.149;f=Edge,s=cnc.huanan2.union.38,c=10.33.67.56;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.34.253.26;",
+      "X-Via-Edge": "1795112267912100e090a3843210a73348faa",
+      "X-Via-SSL": "ssl.27.sinag1.hn1.lb.sinanode.com",
+      "Edge-Copy-Time": "1795084022735",
+      "Last-Modified": "Thu, 19 Nov 2026 09:30:52 GMT",
       "Vary": "Accept-Encoding",
-      "ETag": "\"6afd7059-6c88\"",
+      "ETag": "\"6afec1cc-6c98\"",
       "Content-Encoding": "gzip",
-      "Age": "0",
-      "Ali-Swift-Global-Savetime": "1795078168",
-      "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:673990695",
-      "X-Swift-SaveTime": "Thu, 19 Nov 2026 08:49:28 GMT",
-      "X-Swift-CacheTime": "120",
+      "Age": "1",
+      "Ali-Swift-Global-Savetime": "1795112267",
+      "X-Cache": "MISS TCP_REFRESH_MISS dirn:11:819481360",
+      "X-Swift-SaveTime": "Thu, 19 Nov 2026 18:17:48 GMT",
+      "X-Swift-CacheTime": "119",
       "Timing-Allow-Origin": "*",
-      "EagleId": "2ff6169a17950781680542120e"
+      "EagleId": "2ff6169917951122677655850e"
     },
     "encoding": "utf-8",
-    "retrieved_at": "2026-11-19T08:49:28.542480+00:00",
+    "retrieved_at": "2026-11-19T18:17:48.095999+00:00",
     "http_decompressed": true
   },
   "transport": "current/sh000680/transport.json",
-  "transport_sha256": "3f7c4b12a61a85ecd6c4b760bca1303d81cd8c108d4a1a2a75bebd4801825191",
+  "transport_sha256": "596055e171db503aecb46fd2fd2211dd7ce5a88360a12531aecd9e8a09867f03",
   "status": "success",
   "csv": "current/sh000680/observations.csv",
-  "csv_sha256": "d01d40997d7a90108b9fffc4efcd900e65fea5a1802ab2701acc8f02f7111336",
-  "count": 1666,
+  "csv_sha256": "39ebcfee30c530689b0bbbde3f2d1f1d6623f74603c844a5755a5f625b79bb30",
+  "count": 1667,
   "range": [
     "2020-01-02",
-    "2026-11-18"
+    "2026-11-19"
   ],
   "identity": {
     "official_name": "上证科创板综合指数",
@@ -69,6 +69,6 @@
     "return_note": "包括股息，与科创50价格指数不同"
   },
   "retrospective_count": 1224,
-  "successful_at": "2026-11-19T08:49:28.613493+00:00",
-  "finished_at": "2026-11-19T08:49:28.613512+00:00"
+  "successful_at": "2026-11-19T18:17:48.186260+00:00",
+  "finished_at": "2026-11-19T18:17:48.186279+00:00"
 }
