@@ -1,19 +1,19 @@
 {
-  "group_id": "06dbe5584e064d41b4d9ef5ab04d3bbb",
+  "group_id": "3ffd43836eec4c2db6d1f16d07f84bfb",
   "window": [
     "2000-01-01",
-    "2026-11-18"
+    "2026-11-19"
   ],
   "comparators": {
     "qvix_50index": {
       "origin": {
         "path": "current/sh000001/result.json",
-        "sha256": "30950d5b1de8ce6a4d765b66405762f2170bad58814c9975a091a5cc2d08bf44",
+        "sha256": "d537ffc14636013dd57888b7b1d358a33c4f05c8b230251ef4fc7764914dcad1",
         "kind": "result"
       },
       "csv": "current/sh000001/observations.csv",
       "csv_sha256": "fdc330f71db28ec33940b2c019101b07e3a2a4c18e091f15dff89a77f001993b",
-      "successful_at": "2026-11-18T18:04:39.789689+00:00",
+      "successful_at": "2026-11-19T00:23:47.203628+00:00",
       "feed": "sh000001",
       "raw_sha256": "a6bbd128d2408e3b57c331579292c7b6f6182b519dec654153dc64124b39dd2c",
       "stale_reuse": false
@@ -21,12 +21,12 @@
     "qvix_50etf": {
       "origin": {
         "path": "current/sh000001/result.json",
-        "sha256": "30950d5b1de8ce6a4d765b66405762f2170bad58814c9975a091a5cc2d08bf44",
+        "sha256": "d537ffc14636013dd57888b7b1d358a33c4f05c8b230251ef4fc7764914dcad1",
         "kind": "result"
       },
       "csv": "current/sh000001/observations.csv",
       "csv_sha256": "fdc330f71db28ec33940b2c019101b07e3a2a4c18e091f15dff89a77f001993b",
-      "successful_at": "2026-11-18T18:04:39.789689+00:00",
+      "successful_at": "2026-11-19T00:23:47.203628+00:00",
       "feed": "sh000001",
       "raw_sha256": "a6bbd128d2408e3b57c331579292c7b6f6182b519dec654153dc64124b39dd2c",
       "stale_reuse": false
@@ -34,12 +34,12 @@
     "qvix_100etf": {
       "origin": {
         "path": "current/sz399330/result.json",
-        "sha256": "d93982c3fe5e773d08460820b6b3098e546027af9dcf4a9a4bb7b2d4d43a11d8",
+        "sha256": "c4f9bab4721148b6d9edcd343e28c92a246e6baccd33c08e095d35feddd4702c",
         "kind": "result"
       },
       "csv": "current/sz399330/observations.csv",
       "csv_sha256": "bbab64e2f050b33c6d80c7c76187445319a4158d79eefb5f6053089d43f46fa5",
-      "successful_at": "2026-11-18T18:04:42.399798+00:00",
+      "successful_at": "2026-11-19T00:23:50.925697+00:00",
       "feed": "sz399330",
       "raw_sha256": "45b28f4aa284ccc258286166aabb26b31568d2e3f67480a8d565715de9649ebf",
       "stale_reuse": false
@@ -47,12 +47,12 @@
     "qvix_300index": {
       "origin": {
         "path": "current/sh000300/result.json",
-        "sha256": "67ce3b179e9905e42163e09582ea7b552d4458bef5e24ba482096fb76b2468b5",
+        "sha256": "b7f16b76d2ba74951563e4f08fddb9f9fbf35eb29055cadf9b30eb3f1bf90ba7",
         "kind": "result"
       },
       "csv": "current/sh000300/observations.csv",
       "csv_sha256": "8f013fef1753cef5bb4d16cf5880d4c4bfe8828c6aa08ee53b8657e2441308fe",
-      "successful_at": "2026-11-18T18:04:43.613739+00:00",
+      "successful_at": "2026-11-19T00:23:52.433352+00:00",
       "feed": "sh000300",
       "raw_sha256": "d72f599df391f5aaccde0bb929872437637f6026cbe8dffd1e8bca50b9411508",
       "stale_reuse": false
@@ -60,12 +60,12 @@
     "qvix_300etf": {
       "origin": {
         "path": "current/sh000300/result.json",
-        "sha256": "67ce3b179e9905e42163e09582ea7b552d4458bef5e24ba482096fb76b2468b5",
+        "sha256": "b7f16b76d2ba74951563e4f08fddb9f9fbf35eb29055cadf9b30eb3f1bf90ba7",
         "kind": "result"
       },
       "csv": "current/sh000300/observations.csv",
       "csv_sha256": "8f013fef1753cef5bb4d16cf5880d4c4bfe8828c6aa08ee53b8657e2441308fe",
-      "successful_at": "2026-11-18T18:04:43.613739+00:00",
+      "successful_at": "2026-11-19T00:23:52.433352+00:00",
       "feed": "sh000300",
       "raw_sha256": "d72f599df391f5aaccde0bb929872437637f6026cbe8dffd1e8bca50b9411508",
       "stale_reuse": false
@@ -73,12 +73,12 @@
     "qvix_cyb": {
       "origin": {
         "path": "current/sz399006/result.json",
-        "sha256": "633ee78710d3ff5916a96cdfe5b296d480d675add254f8af9396ec295f503356",
+        "sha256": "a72a157f80159f9dc275b24d8e686f09f08825858a1279fcab1e1cac766f7f39",
         "kind": "result"
       },
       "csv": "current/sz399006/observations.csv",
       "csv_sha256": "a041dae1bcc1cf7510bda9de8e467340dc365454cdbd57cd8168ec1bd142abf8",
-      "successful_at": "2026-11-18T18:04:44.704803+00:00",
+      "successful_at": "2026-11-19T00:23:54.393915+00:00",
       "feed": "sz399006",
       "raw_sha256": "2adc92dcf5b71ae1f1d5c8d34682924bc05bce3edcb4d815156aa60dee6bede5",
       "stale_reuse": false
@@ -86,12 +86,12 @@
     "qvix_kcb": {
       "origin": {
         "path": "current/sh000688/result.json",
-        "sha256": "d7594f5394fa2fa55029291d272b012eff213953517acf7e4befb64605c64ca4",
+        "sha256": "5a0af0be6b5ebc3e1421a09e4356baae510e8b1fc9eb2f1dc58edfbccd1f1371",
         "kind": "result"
       },
       "csv": "current/sh000688/observations.csv",
       "csv_sha256": "4a91b53487432558a65f2fb996367c74d1c6ede826116b88433d9351897aa9b1",
-      "successful_at": "2026-11-18T18:04:48.242966+00:00",
+      "successful_at": "2026-11-19T00:23:59.105239+00:00",
       "feed": "sh000688",
       "raw_sha256": "a8534edcb353b94a649050d9d1727d61a50d680e798cdee04d68e7881e4729a3",
       "stale_reuse": false

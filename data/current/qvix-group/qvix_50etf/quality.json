@@ -4,12 +4,12 @@
   "comparator": {
     "origin": {
       "path": "current/sh000001/result.json",
-      "sha256": "30950d5b1de8ce6a4d765b66405762f2170bad58814c9975a091a5cc2d08bf44",
+      "sha256": "d537ffc14636013dd57888b7b1d358a33c4f05c8b230251ef4fc7764914dcad1",
       "kind": "result"
     },
     "csv": "current/sh000001/observations.csv",
     "csv_sha256": "fdc330f71db28ec33940b2c019101b07e3a2a4c18e091f15dff89a77f001993b",
-    "successful_at": "2026-11-18T18:04:39.789689+00:00",
+    "successful_at": "2026-11-19T00:23:47.203628+00:00",
     "feed": "sh000001",
     "raw_sha256": "a6bbd128d2408e3b57c331579292c7b6f6182b519dec654153dc64124b39dd2c",
     "stale_reuse": false
@@ -57028,20 +57028,20 @@
       "conflict": false,
       "blank_ordinals": []
     },
-    "2026-11-19": {
-      "occurrences": [],
-      "distinct_candidates": 0,
-      "conflict": false,
-      "blank_ordinals": [
-        2853
-      ]
-    },
     "2026-11-18": {
       "occurrences": [],
       "distinct_candidates": 0,
       "conflict": false,
       "blank_ordinals": [
         2852
+      ]
+    },
+    "2026-11-19": {
+      "occurrences": [],
+      "distinct_candidates": 0,
+      "conflict": false,
+      "blank_ordinals": [
+        2853
       ]
     }
   },
@@ -62863,7 +62863,7 @@
   "selected": {
     "common_range": [
       "2015-02-09",
-      "2026-11-18"
+      "2026-11-19"
     ],
     "range": [
       "2015-02-09",
@@ -62873,7 +62873,7 @@
       "2015-02-09",
       "2026-11-17"
     ],
-    "source_rows": 2852,
+    "source_rows": 2853,
     "dates": 2850,
     "finite_close_dates": 2849,
     "all_cells_nonblank": 2851,
@@ -62889,7 +62889,7 @@
     "blank_collision_rows": 0,
     "blank_prefix_rows": 0,
     "blank_internal_rows": 0,
-    "blank_tail_rows": 1,
+    "blank_tail_rows": 2,
     "blank_no_source_rows": 0,
     "nonblank": 2850,
     "usable_close": 2849,
@@ -62899,7 +62899,7 @@
     "blank_collision": 0,
     "blank_prefix": 0,
     "blank_internal": 0,
-    "blank_tail": 1,
+    "blank_tail": 2,
     "blank_no_source": 0,
     "absent": 13,
     "blank": 0,
@@ -62908,6 +62908,6 @@
     "missing_close": 0,
     "holes": 14,
     "source_only": 4,
-    "blank_source_only": 0
+    "blank_source_only": 1
   }
 }

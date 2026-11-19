@@ -1,9 +1,9 @@
 {
   "feed": "qvix_50etf",
-  "attempted_at": "2026-11-18T18:05:03.496481+00:00",
+  "attempted_at": "2026-11-19T00:24:13.817755+00:00",
   "window": [
     "2000-01-01",
-    "2026-11-18"
+    "2026-11-19"
   ],
   "versions": {
     "akshare": "1.20.53",
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "06dbe5584e064d41b4d9ef5ab04d3bbb",
+  "group_id": "3ffd43836eec4c2db6d1f16d07f84bfb",
   "invocation": "index_option_50etf_qvix()",
   "invoked": true,
   "columns": [

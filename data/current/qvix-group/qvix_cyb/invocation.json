@@ -1,9 +1,9 @@
 {
   "feed": "qvix_cyb",
-  "attempted_at": "2026-11-18T18:05:04.063128+00:00",
+  "attempted_at": "2026-11-19T00:24:14.372099+00:00",
   "window": [
     "2000-01-01",
-    "2026-11-18"
+    "2026-11-19"
   ],
   "versions": {
     "akshare": "1.20.53",
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "06dbe5584e064d41b4d9ef5ab04d3bbb",
+  "group_id": "3ffd43836eec4c2db6d1f16d07f84bfb",
   "invocation": "index_option_cyb_qvix()",
   "invoked": true,
   "columns": [

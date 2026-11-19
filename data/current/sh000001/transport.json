@@ -10,12 +10,12 @@
       "Content-Type": "application/x-javascript",
       "Content-Length": "112502",
       "Connection": "keep-alive",
-      "Date": "Wed, 18 Nov 2026 18:04:39 GMT",
-      "Expires": "Wed, 18 Nov 2026 18:05:27 GMT",
+      "Date": "Thu, 19 Nov 2026 00:23:46 GMT",
+      "Expires": "Thu, 19 Nov 2026 00:25:46 GMT",
       "Cache-Control": "max-age=120",
-      "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cRs f ]), cache22.l2so158-2[6,6,304-0,H], cache27.l2so158-2[7,0], cache27.l2so158-2[8,0], ens-cache22.l2hk11[12,13,304-0,H], ens-cache31.l2hk11[14,0], ens-cache31.l2hk11[15,0], ens-cache12.l2us5[229,229,304-0,H], ens-cache17.l2us5[231,0], ens-cache17.l2us5[231,0], ens-cache4.us27[241,240,200-0,H], ens-cache9.us27[244,0]",
-      "X-Via-CDN": "f=aliyun,s=ens-cache9.us27,c=3.42.157.129;f=sinaedge,s=ctc.guangzhou.union.52.nb.sinaedge.com,c=113.96.59.10;f=Edge,s=cnc.huanan2.union.30,c=10.33.67.52",
-      "X-Via-Edge": "179502507934416cd090a3443210a3dc0ddb9",
+      "Via": "http/1.1 cnc.huanan2.union.30 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache22.l2so158-2[138,137,304-0,H], cache1.l2so158-2[139,0], cache1.l2so158-2[139,0], ens-cache22.l2hk11[145,144,304-0,H], ens-cache9.l2hk11[146,0], ens-cache9.l2hk11[147,0], ens-cache4.l2us3[364,365,304-0,H], ens-cache30.l2us3[532,0], ens-cache30.l2us3[536,0], ens-cache4.us27[557,558,200-0,H], ens-cache9.us27[570,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache9.us27,c=3.42.157.136;f=sinaedge,s=ctc.guangzhou.union.52.nb.sinaedge.com,c=120.241.4.138;f=Edge,s=cnc.huanan2.union.30,c=10.33.67.52;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.54.255.69;",
+      "X-Via-Edge": "17950478263861f0b090a3443210a73ebe23c",
       "X-Via-SSL": "ssl.50.sinag1.hj4.lb.sinanode.com",
       "Edge-Copy-Time": "1794994253055",
       "Last-Modified": "Wed, 18 Nov 2026 09:30:22 GMT",
@@ -23,15 +23,15 @@
       "ETag": "W/\"6afd702e-23b7d\"",
       "Content-Encoding": "gzip",
       "Age": "0",
-      "Ali-Swift-Global-Savetime": "1795025079",
-      "X-Cache": "HIT TCP_REFRESH_HIT dirn:-2:-2",
-      "X-Swift-SaveTime": "Wed, 18 Nov 2026 18:04:39 GMT",
+      "Ali-Swift-Global-Savetime": "1795047826",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:11:640098714",
+      "X-Swift-SaveTime": "Thu, 19 Nov 2026 00:23:46 GMT",
       "X-Swift-CacheTime": "120",
       "Timing-Allow-Origin": "*",
-      "EagleId": "2ff6169d17950250792215761e"
+      "EagleId": "2ff6169d17950478262075410e"
     },
     "encoding": "utf-8",
-    "retrieved_at": "2026-11-18T18:04:39.585349+00:00",
+    "retrieved_at": "2026-11-19T00:23:47.003874+00:00",
     "http_decompressed": true
   }
 ]
