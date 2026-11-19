@@ -4,12 +4,12 @@
   "comparator": {
     "origin": {
       "path": "current/sh000001/result.json",
-      "sha256": "d537ffc14636013dd57888b7b1d358a33c4f05c8b230251ef4fc7764914dcad1",
+      "sha256": "c8bd75894ff56b570e71394443edede204336468bea16d0ed913caf305472581",
       "kind": "result"
     },
     "csv": "current/sh000001/observations.csv",
     "csv_sha256": "fdc330f71db28ec33940b2c019101b07e3a2a4c18e091f15dff89a77f001993b",
-    "successful_at": "2026-11-19T00:23:47.203628+00:00",
+    "successful_at": "2026-11-19T08:49:21.467251+00:00",
     "feed": "sh000001",
     "raw_sha256": "a6bbd128d2408e3b57c331579292c7b6f6182b519dec654153dc64124b39dd2c",
     "stale_reuse": false
@@ -57029,12 +57029,24 @@
       "blank_ordinals": []
     },
     "2026-11-18": {
-      "occurrences": [],
-      "distinct_candidates": 0,
+      "occurrences": [
+        {
+          "date": "2026-11-18",
+          "ordinal": 2852,
+          "ohlc": [
+            14.86,
+            15.25,
+            14.3,
+            14.8
+          ],
+          "invalid": {},
+          "blank_fields": [],
+          "envelope_anomaly": false
+        }
+      ],
+      "distinct_candidates": 1,
       "conflict": false,
-      "blank_ordinals": [
-        2852
-      ]
+      "blank_ordinals": []
     },
     "2026-11-19": {
       "occurrences": [],
@@ -59896,7 +59908,8 @@
       "2026-11-12",
       "2026-11-13",
       "2026-11-16",
-      "2026-11-17"
+      "2026-11-17",
+      "2026-11-18"
     ],
     "usable_close": [
       "2015-02-09",
@@ -62747,7 +62760,8 @@
       "2026-11-12",
       "2026-11-13",
       "2026-11-16",
-      "2026-11-17"
+      "2026-11-17",
+      "2026-11-18"
     ],
     "conflict": [
       "2026-11-02"
@@ -62758,7 +62772,6 @@
     "blank_prefix": [],
     "blank_internal": [],
     "blank_tail": [
-      "2026-11-18",
       "2026-11-19"
     ],
     "blank_no_source": [],
@@ -62817,39 +62830,39 @@
     ],
     "range": [
       "2015-02-09",
-      "2026-11-17"
+      "2026-11-18"
     ],
     "close_range": [
       "2015-02-09",
-      "2026-11-17"
+      "2026-11-18"
     ],
     "source_rows": 2853,
-    "dates": 2850,
-    "finite_close_dates": 2849,
-    "all_cells_nonblank": 2851,
-    "finite_complete_rows": 2851,
+    "dates": 2851,
+    "finite_close_dates": 2850,
+    "all_cells_nonblank": 2852,
+    "finite_complete_rows": 2852,
     "invalid_fields": 0,
     "invalid_dates": 0,
     "incomplete_rows": 0,
     "zero_rows": 0,
     "zero_close_rows": 0,
     "envelope_rows": 8,
-    "distinct_candidates": 2851,
+    "distinct_candidates": 2852,
     "exact_duplicates": 0,
     "blank_collision_rows": 0,
     "blank_prefix_rows": 0,
     "blank_internal_rows": 0,
-    "blank_tail_rows": 2,
+    "blank_tail_rows": 1,
     "blank_no_source_rows": 0,
-    "nonblank": 2850,
-    "usable_close": 2849,
+    "nonblank": 2851,
+    "usable_close": 2850,
     "conflict": 1,
     "invalid_close_dates": 0,
     "missing_close_dates": 0,
     "blank_collision": 0,
     "blank_prefix": 0,
     "blank_internal": 0,
-    "blank_tail": 2,
+    "blank_tail": 1,
     "blank_no_source": 0,
     "absent": 13,
     "blank": 0,
@@ -62867,39 +62880,39 @@
     ],
     "range": [
       "2015-02-09",
-      "2026-11-17"
+      "2026-11-18"
     ],
     "close_range": [
       "2015-02-09",
-      "2026-11-17"
+      "2026-11-18"
     ],
     "source_rows": 2853,
-    "dates": 2850,
-    "finite_close_dates": 2849,
-    "all_cells_nonblank": 2851,
-    "finite_complete_rows": 2851,
+    "dates": 2851,
+    "finite_close_dates": 2850,
+    "all_cells_nonblank": 2852,
+    "finite_complete_rows": 2852,
     "invalid_fields": 0,
     "invalid_dates": 0,
     "incomplete_rows": 0,
     "zero_rows": 0,
     "zero_close_rows": 0,
     "envelope_rows": 8,
-    "distinct_candidates": 2851,
+    "distinct_candidates": 2852,
     "exact_duplicates": 0,
     "blank_collision_rows": 0,
     "blank_prefix_rows": 0,
     "blank_internal_rows": 0,
-    "blank_tail_rows": 2,
+    "blank_tail_rows": 1,
     "blank_no_source_rows": 0,
-    "nonblank": 2850,
-    "usable_close": 2849,
+    "nonblank": 2851,
+    "usable_close": 2850,
     "conflict": 1,
     "invalid_close_dates": 0,
     "missing_close_dates": 0,
     "blank_collision": 0,
     "blank_prefix": 0,
     "blank_internal": 0,
-    "blank_tail": 2,
+    "blank_tail": 1,
     "blank_no_source": 0,
     "absent": 13,
     "blank": 0,

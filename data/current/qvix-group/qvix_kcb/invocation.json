@@ -1,6 +1,6 @@
 {
   "feed": "qvix_kcb",
-  "attempted_at": "2026-11-19T00:24:14.474516+00:00",
+  "attempted_at": "2026-11-19T08:49:38.786226+00:00",
   "window": [
     "2000-01-01",
     "2026-11-19"
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "3ffd43836eec4c2db6d1f16d07f84bfb",
+  "group_id": "48d2b9d88ef74059b5014acafd833560",
   "invocation": "index_option_kcb_qvix()",
   "invoked": true,
   "columns": [
