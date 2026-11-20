@@ -1,6 +1,6 @@
 {
   "feed": "qvix_50index",
-  "attempted_at": "2026-11-20T10:02:47.788183+00:00",
+  "attempted_at": "2026-11-20T18:37:30.002360+00:00",
   "window": [
     "2000-01-01",
     "2026-11-20"
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "45c794d754e34f4090044ac8af3b652b",
+  "group_id": "3df4bd4d431a47fa91d06fa2ee516dd9",
   "invocation": "index_option_50index_qvix()",
   "invoked": true,
   "columns": [

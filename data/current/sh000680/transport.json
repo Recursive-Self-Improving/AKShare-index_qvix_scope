@@ -10,12 +10,12 @@
       "Content-Type": "application/x-javascript",
       "Content-Length": "21226",
       "Connection": "keep-alive",
-      "Date": "Fri, 20 Nov 2026 10:02:45 GMT",
-      "Expires": "Fri, 20 Nov 2026 10:04:45 GMT",
+      "Date": "Fri, 20 Nov 2026 18:37:28 GMT",
+      "Expires": "Fri, 20 Nov 2026 18:39:28 GMT",
       "Cache-Control": "max-age=120",
-      "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[76,75,304-0,H], cache27.l2so158-2[76,0], cache27.l2so158-2[77,0], ens-cache20.l2hk11[84,83,200-0,H], ens-cache30.l2hk11[86,0], ens-cache30.l2hk11[86,0], ens-cache32.l2us5[298,310,200-0,M], ens-cache25.l2us5[311,0], ens-cache25.l2us5[313,0], ens-cache2.us25[343,343,200-0,M], ens-cache6.us25[345,0]",
-      "X-Via-CDN": "f=aliyun,s=ens-cache6.us25,c=40.65.58.135;f=sinaedge,s=ctc.guangzhou.union.59.nb.sinaedge.com,c=157.255.168.85;f=Edge,s=cnc.huanan2.union.38,c=10.33.79.59;f=edge,s=cnc.zhangjiakou.bsd-storage.148.nb.sinaedge.com,c=10.34.253.25;",
-      "X-Via-Edge": "17951689654761e0b090a3b4f210a4b16a39e",
+      "Via": "http/1.1 cnc.huanan2.union.38 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache14.l2so158-2[9,16,304-0,H], cache9.l2so158-2[17,0], cache9.l2so158-2[17,0], ens-cache20.l2hk11[22,22,200-0,H], ens-cache15.l2hk11[24,0], ens-cache15.l2hk11[25,0], ens-cache13.l2us3[248,248,200-0,M], ens-cache5.l2us3[250,0], ens-cache5.l2us3[250,0], ens-cache5.us27[260,260,200-0,M], ens-cache7.us27[263,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache7.us27,c=20.15.231.72;f=sinaedge,s=ctc.guangzhou.union.49.nb.sinaedge.com,c=113.96.59.21;f=Edge,s=cnc.huanan2.union.38,c=10.33.67.49;f=edge,s=ctc.guangzhou.bsd-storage.200.nb.sinaedge.com,c=10.34.253.28;",
+      "X-Via-Edge": "17951998483921ac8090a3143210a2ef074f8",
       "X-Via-SSL": "ssl.26.sinag1.hj4.lb.sinanode.com",
       "Edge-Copy-Time": "1795167347714",
       "Last-Modified": "Fri, 20 Nov 2026 09:30:55 GMT",
@@ -23,15 +23,15 @@
       "ETag": "\"6b00134f-6cad\"",
       "Content-Encoding": "gzip",
       "Age": "0",
-      "Ali-Swift-Global-Savetime": "1795168965",
-      "X-Cache": "MISS TCP_MISS dirn:11:221098006",
-      "X-Swift-SaveTime": "Fri, 20 Nov 2026 10:02:45 GMT",
+      "Ali-Swift-Global-Savetime": "1795199848",
+      "X-Cache": "MISS TCP_REFRESH_MISS dirn:11:165154930",
+      "X-Swift-SaveTime": "Fri, 20 Nov 2026 18:37:28 GMT",
       "X-Swift-CacheTime": "120",
       "Timing-Allow-Origin": "*",
-      "EagleId": "2ff6149a17951689653291575e"
+      "EagleId": "2ff6169b17951998482468021e"
     },
     "encoding": "utf-8",
-    "retrieved_at": "2026-11-20T10:02:45.690200+00:00",
+    "retrieved_at": "2026-11-20T18:37:28.534527+00:00",
     "http_decompressed": true
   }
 ]
