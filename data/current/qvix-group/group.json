@@ -7,7 +7,7 @@
     "status": 200,
     "headers": {
       "Server": "nginx/1.0.15",
-      "Date": "Fri, 20 Nov 2026 18:37:30 GMT",
+      "Date": "Mon, 23 Nov 2026 21:26:28 GMT",
       "Content-Type": "application/octet-stream",
       "Content-Length": "930497",
       "Last-Modified": "Thu, 19 Nov 2026 00:50:18 GMT",
@@ -15,16 +15,16 @@
       "Accept-Ranges": "bytes"
     },
     "encoding": "utf-8",
-    "retrieved_at": "2026-11-20T18:37:33.083420+00:00",
+    "retrieved_at": "2026-11-23T21:26:38.770454+00:00",
     "http_decompressed": true
   },
   "transport": "current/qvix-group/transport.json",
-  "transport_sha256": "69a7b64ad8bf9864cddd541eea68b59cdff67b134310b20e25fb1ee8e500dc34",
-  "group_id": "3df4bd4d431a47fa91d06fa2ee516dd9",
-  "acquired_at": "2026-11-20T18:37:33.083420+00:00",
+  "transport_sha256": "8747b4d859c3115a516d3c65198d87b88f5dd82988f13fa903680f4008004dc6",
+  "group_id": "49f9e6264ab74a4c9dc8450427e21a17",
+  "acquired_at": "2026-11-23T21:26:38.770454+00:00",
   "global_validated": true,
   "config": {
     "path": "current/qvix-group/config.json",
-    "sha256": "9a13fc465753b477d84efc3df04cae17e3b1ff1b27c91769214adbfe0e3ce2d6"
+    "sha256": "4669fdd0fcaa0b7c3f9d4858132239439b0220b3fe5c41a2ded62d89c3f50b20"
   }
 }
