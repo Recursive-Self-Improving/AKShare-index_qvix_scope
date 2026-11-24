@@ -1,9 +1,9 @@
 {
   "feed": "sz399673",
-  "attempted_at": "2026-11-23T21:26:24.331597+00:00",
+  "attempted_at": "2026-11-24T17:45:32.094687+00:00",
   "window": [
     "2000-01-01",
-    "2026-11-23"
+    "2026-11-24"
   ],
   "versions": {
     "akshare": "1.20.53",
@@ -18,48 +18,48 @@
   "invocation": "index_zh_daily_sina(symbol='sz399673')",
   "raw": {
     "body": "current/sz399673/response-0.body",
-    "sha256": "c5182a4e04dcb6c879f0146935dcb4269d04497361008243bd92b57117d5a042",
+    "sha256": "cf85f87f7338e6b54955efc864a9346e72bcba8601d1b08b9d9683dee0aca69e",
     "url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
     "requested_url": "https://finance.sina.com.cn/realstock/company/sz399673/hisdata/klc_kl.js?d=2020_2_4",
     "status": 200,
     "headers": {
       "Server": "Tengine",
       "Content-Type": "application/x-javascript",
-      "Content-Length": "39436",
+      "Content-Length": "39452",
       "Connection": "keep-alive",
-      "Date": "Mon, 23 Nov 2026 21:26:24 GMT",
-      "Expires": "Mon, 23 Nov 2026 21:28:24 GMT",
-      "Cache-Control": "max-age=120",
-      "Via": "http/1.1 ctc.guangzhou.union.50 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache24.l2so158-2[38,37,304-0,H], cache26.l2so158-2[39,0], cache26.l2so158-2[40,0], ens-cache39.l2hk11[44,60,304-0,H], ens-cache36.l2hk11[61,0], ens-cache36.l2hk11[61,0], ens-cache5.l2us5[283,283,200-0,H], ens-cache25.l2us5[284,0], ens-cache25.l2us5[284,0], ens-cache10.us27[295,295,200-0,M], ens-cache4.us27[298,0]",
-      "X-Via-CDN": "f=aliyun,s=ens-cache4.us27,c=51.57.144.136;f=sinaedge,s=ctc.guangzhou.union.444.nb.sinaedge.com,c=157.255.168.84;f=Edge,s=ctc.guangzhou.union.50,c=10.33.67.44;f=edge,s=ctc.guangzhou.bsd-storage.200.nb.sinaedge.com,c=10.34.253.28;",
-      "X-Via-Edge": "1795469184584250f090a2c43210a147df8f6",
-      "X-Via-SSL": "ssl.31.sinag1.hj4.lb.sinanode.com",
-      "Edge-Copy-Time": "1795433202025",
-      "Last-Modified": "Mon, 23 Nov 2026 10:29:38 GMT",
+      "Date": "Tue, 24 Nov 2026 17:45:32 GMT",
+      "Last-Modified": "Tue, 24 Nov 2026 10:37:42 GMT",
       "Vary": "Accept-Encoding",
-      "ETag": "\"6b041592-c894\"",
+      "ETag": "\"6b0568f6-c8aa\"",
+      "Expires": "Tue, 24 Nov 2026 17:47:32 GMT",
+      "Cache-Control": "max-age=120",
       "Content-Encoding": "gzip",
+      "X-Via-SSL": "ssl.31.sinag1.hj4.lb.sinanode.com",
+      "Edge-Copy-Time": "1795542332588",
+      "Via": "http/1.1 ctc.guangzhou.union.50 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache24.l2so158-2[122,121,200-0,M], cache7.l2so158-2[123,0], cache7.l2so158-2[124,0], ens-cache39.l2hk11[137,153,200-0,M], ens-cache19.l2hk11[154,0], ens-cache19.l2hk11[155,0], ens-cache5.l2us5[373,378,200-0,M], ens-cache2.l2us5[379,0], ens-cache2.l2us5[381,0], ens-cache10.us27[388,402,200-0,M], ens-cache3.us27[404,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache3.us27,c=3.42.157.139;f=sinaedge,s=ctc.guangzhou.union.56.nb.sinaedge.com,c=113.96.59.20;f=Edge,s=ctc.guangzhou.union.50,c=10.33.66.56;f=edge,s=ctc.guangzhou.bsd-storage.205.nb.sinaedge.com,c=10.54.255.31;",
+      "X-Via-Edge": "179554233248629c8090a3842210a0f6b8014",
       "Age": "0",
-      "Ali-Swift-Global-Savetime": "1795469184",
-      "X-Cache": "MISS TCP_REFRESH_MISS dirn:11:396206141",
-      "X-Swift-SaveTime": "Mon, 23 Nov 2026 21:26:24 GMT",
+      "Ali-Swift-Global-Savetime": "1795542332",
+      "X-Cache": "MISS TCP_REFRESH_MISS dirn:7:891879444",
+      "X-Swift-SaveTime": "Tue, 24 Nov 2026 17:45:32 GMT",
       "X-Swift-CacheTime": "120",
       "Timing-Allow-Origin": "*",
-      "EagleId": "2ff6169817954691844145349e"
+      "EagleId": "2ff6169717955423323166824e"
     },
     "encoding": "utf-8",
-    "retrieved_at": "2026-11-23T21:26:24.829617+00:00",
+    "retrieved_at": "2026-11-24T17:45:32.779403+00:00",
     "http_decompressed": true
   },
   "transport": "current/sz399673/transport.json",
-  "transport_sha256": "2a346db4ed82f0f1751a79e5a7ebb6cb7864652d1287ebb106ca64a06386f62a",
+  "transport_sha256": "4faa2703fee7c4d354f90dc0ee3aaffd1d3da74b0cd25860020b591c15bd347a",
   "status": "success",
   "csv": "current/sz399673/observations.csv",
-  "csv_sha256": "64ed41cf9c36688af962fbe61edd5a1332da56405fd849683e655de351211f5d",
-  "count": 3023,
+  "csv_sha256": "00103c03db28575c170c8c46f2a166153af92b2806f07f2643e3e1d4d5bd7de9",
+  "count": 3024,
   "range": [
     "2014-06-18",
-    "2026-11-23"
+    "2026-11-24"
   ],
   "identity": {
     "official_name": "创业板50指数",
@@ -68,6 +68,6 @@
     "citation": "https://www.szse.cn/www/disclosure/notice/general/t20140617_501247.html"
   },
   "retrospective_count": 0,
-  "successful_at": "2026-11-23T21:26:25.050009+00:00",
-  "finished_at": "2026-11-23T21:26:25.050039+00:00"
+  "successful_at": "2026-11-24T17:45:32.878975+00:00",
+  "finished_at": "2026-11-24T17:45:32.879017+00:00"
 }
