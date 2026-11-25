@@ -1,9 +1,9 @@
 {
   "feed": "qvix_cyb",
-  "attempted_at": "2026-11-24T17:45:47.717758+00:00",
+  "attempted_at": "2026-11-25T12:56:20.563485+00:00",
   "window": [
     "2000-01-01",
-    "2026-11-24"
+    "2026-11-25"
   ],
   "versions": {
     "akshare": "1.20.53",
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "b9c5710017b845fcb0ef4058b4d20230",
+  "group_id": "fad940d54c554239966477e1a0ba96f5",
   "invocation": "index_option_cyb_qvix()",
   "invoked": true,
   "columns": [
@@ -27,11 +27,11 @@
   ],
   "status": "partial",
   "schema": "qvix-comparison-v4",
-  "successful_at": "2026-11-24T17:45:47.820799+00:00",
-  "acquired_at": "2026-11-24T17:45:46.908411+00:00",
+  "successful_at": "2026-11-25T12:56:20.668935+00:00",
+  "acquired_at": "2026-11-25T12:56:19.749896+00:00",
   "shared": {
     "path": "current/qvix-group/group.json",
-    "sha256": "5207060470606f121124f119f7abeef79dc7e858103f0dad60a8e5f915978514"
+    "sha256": "962485011caa771d65ec92b7a974dc2fc3a3aead3e62dda90a827a46fb744790"
   },
   "accounting": {
     "algorithm": "qvix-comparison-v4",
@@ -39,14 +39,14 @@
     "comparator": {
       "origin": {
         "path": "current/sz399006/result.json",
-        "sha256": "6df038193185efb86a00c2fbce9a7f7be70f6123b9cc85d63580d76edc06d4d6",
+        "sha256": "d7bb79b0a879bcdd9ca47611641bd30c1de554cfd7c7d1cb3f2d765835a0cb2b",
         "kind": "result"
       },
       "csv": "current/sz399006/observations.csv",
-      "csv_sha256": "4dd8a925f84bcfe83deff3c8c79e30251e3a715dec7b69d7cfb8d038a8f0ca9d",
-      "successful_at": "2026-11-24T17:45:31.592823+00:00",
+      "csv_sha256": "62f487e1eef703b00d971c366ce951c6f7f573da95912ec1c2e72670b16b9b6a",
+      "successful_at": "2026-11-25T12:56:05.367888+00:00",
       "feed": "sz399006",
-      "raw_sha256": "ed5014e8141e8b19d39465978cde256e00b64a9e8991e26b7e91a43a4ede6fb9",
+      "raw_sha256": "14c7b10d410b70af66d5fcc2c674587577eeddfe4851b0556d0d5b1376ac62b2",
       "stale_reuse": false
     },
     "ordered": false,
@@ -163,8 +163,8 @@
   "csv": "current/qvix-group/qvix_cyb/observations.csv",
   "csv_sha256": "6ca66a259ad5f13ccaf5e05e5bb25aabe7b4619863accdbfe5ae2449d84ccffe",
   "quality": "current/qvix-group/qvix_cyb/quality.json",
-  "quality_sha256": "32f22578bffae4d0485347967afa6152961e87bedf0d2f2d5419c741e05a78da",
+  "quality_sha256": "f3ab876862bc8a9a81b1ca90eeaf10124cdddce7466d943640cbcd2aa4584f05",
   "wrapper": "current/qvix-group/qvix_cyb/wrapper.csv",
   "wrapper_sha256": "a55792675eec1049540072bad4efbcf99073ab1f32a2bf31aca94e6d576df80d",
-  "finished_at": "2026-11-24T17:45:47.821669+00:00"
+  "finished_at": "2026-11-25T12:56:20.669847+00:00"
 }
