@@ -1,9 +1,9 @@
 {
   "feed": "qvix_300index",
-  "attempted_at": "2026-11-25T12:56:20.296752+00:00",
+  "attempted_at": "2026-11-26T15:19:16.450030+00:00",
   "window": [
     "2000-01-01",
-    "2026-11-25"
+    "2026-11-26"
   ],
   "versions": {
     "akshare": "1.20.53",
@@ -15,7 +15,7 @@
     5,
     300
   ],
-  "group_id": "fad940d54c554239966477e1a0ba96f5",
+  "group_id": "9f1541c4eb114836838c11251282d9a5",
   "invocation": "index_option_300index_qvix()",
   "invoked": true,
   "columns": [
