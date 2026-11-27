@@ -4,12 +4,12 @@
   "comparator": {
     "origin": {
       "path": "current/sh000001/result.json",
-      "sha256": "82956b33e2eafc5c6c00b65d1ed14be68c992734c2d2e71764ad378416beeab4",
+      "sha256": "85ed7efe11236374031bc12b42ec617e02a209fd110b2e720ed4f99d2cbd78df",
       "kind": "result"
     },
     "csv": "current/sh000001/observations.csv",
     "csv_sha256": "b2a5e64a2532828894fb7edd978abb6420444c403eae5097d7de7571d3d505dd",
-    "successful_at": "2026-11-27T09:41:13.003717+00:00",
+    "successful_at": "2026-11-27T19:28:42.406099+00:00",
     "feed": "sh000001",
     "raw_sha256": "cc42e68edeb71506254d40fd605d7f3491d7caaa7ba2d819d3d0542ce5ed298f",
     "stale_reuse": false

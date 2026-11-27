@@ -1,6 +1,6 @@
 {
   "feed": "sh000016",
-  "attempted_at": "2026-11-27T09:41:13.477479+00:00",
+  "attempted_at": "2026-11-27T19:28:43.086865+00:00",
   "window": [
     "2000-01-01",
     "2026-11-27"
@@ -27,32 +27,32 @@
       "Content-Type": "application/x-javascript",
       "Content-Length": "72411",
       "Connection": "keep-alive",
-      "Date": "Fri, 27 Nov 2026 09:39:39 GMT",
-      "Expires": "Fri, 27 Nov 2026 09:41:39 GMT",
+      "Date": "Fri, 27 Nov 2026 19:28:43 GMT",
+      "Expires": "Fri, 27 Nov 2026 19:28:46 GMT",
       "Cache-Control": "max-age=120",
-      "Via": "http/1.1 ctc.guangzhou.union.60 (ApacheTrafficServer/6.2.1 [cSsNfU]), cache19.l2so158-2[8,7,304-0,H], cache30.l2so158-2[9,0], cache30.l2so158-2[9,0], ens-cache21.l2hk11[15,14,200-0,H], ens-cache36.l2hk11[16,0], ens-cache36.l2hk11[17,0], ens-cache8.l2us5[0,0,200-0,H], ens-cache10.l2us5[1,0], ens-cache10.l2us5[2,0], ens-cache38.us34[21,21,200-0,M], ens-cache12.us34[26,0]",
-      "X-Via-CDN": "f=aliyun,s=ens-cache12.us34,c=3.41.210.122;f=sinaedge,s=ctc.guangzhou.union.50.nb.sinaedge.com,c=113.96.59.35;f=Edge,s=ctc.guangzhou.union.60,c=10.33.67.50;f=edge,s=ctc.guangzhou.bsd-storage.201.nb.sinaedge.com,c=10.34.253.26;",
-      "X-Via-Edge": "17957723795462bd6090a3243210a01aaf5fb",
+      "Via": "http/1.1 ctc.guangzhou.union.60 (ApacheTrafficServer/6.2.1 [cHs f ]), cache19.l2so158-2[33,43,304-0,H], cache9.l2so158-2[45,0], cache9.l2so158-2[45,0], ens-cache21.l2hk11[50,60,304-0,H], ens-cache20.l2hk11[62,0], ens-cache20.l2hk11[62,0], ens-cache8.l2us5[280,280,304-0,H], ens-cache24.l2us5[282,0], ens-cache24.l2us5[282,0], ens-cache17.us37[283,302,200-0,H], ens-cache15.us37[304,0]",
+      "X-Via-CDN": "f=aliyun,s=ens-cache15.us37,c=13.71.236.244;f=sinaedge,s=ctc.guangzhou.union.49.nb.sinaedge.com,c=157.255.168.99;f=Edge,s=ctc.guangzhou.union.60,c=10.33.67.49",
+      "X-Via-Edge": "1795807723395130f090a3143210a6fcc4ff3",
       "X-Via-SSL": "ssl.28.sinag1.hn1.lb.sinanode.com",
       "Edge-Copy-Time": "1795772251057",
       "Last-Modified": "Fri, 27 Nov 2026 09:29:54 GMT",
       "Vary": "Accept-Encoding",
       "ETag": "\"6b094d92-16f57\"",
       "Content-Encoding": "gzip",
-      "Age": "94",
-      "Ali-Swift-Global-Savetime": "1795772379",
-      "X-Cache": "MISS TCP_REFRESH_MISS dirn:12:137512941",
-      "X-Swift-SaveTime": "Fri, 27 Nov 2026 09:41:13 GMT",
-      "X-Swift-CacheTime": "26",
+      "Age": "0",
+      "Ali-Swift-Global-Savetime": "1795807723",
+      "X-Cache": "HIT TCP_REFRESH_HIT dirn:2:11686943",
+      "X-Swift-SaveTime": "Fri, 27 Nov 2026 19:28:43 GMT",
+      "X-Swift-CacheTime": "120",
       "Timing-Allow-Origin": "*",
-      "EagleId": "a3b53ca017957724735323581e"
+      "EagleId": "9b6682a317958077232013758e"
     },
     "encoding": "utf-8",
-    "retrieved_at": "2026-11-27T09:41:13.588406+00:00",
+    "retrieved_at": "2026-11-27T19:28:43.546510+00:00",
     "http_decompressed": true
   },
   "transport": "current/sh000016/transport.json",
-  "transport_sha256": "4ba70ed1ba01c60b43c6908239230cdbe4ba48c5d841f9fd7ed3af33e3cbb264",
+  "transport_sha256": "cf16b75d47bda8b49d721a39c2179fb1e12eeb0914e66698c9f7c7d75f258ed5",
   "status": "success",
   "csv": "current/sh000016/observations.csv",
   "csv_sha256": "d9ddf8eea0e517d949c94268d7911601b7c43e9ae200fc32115a29840316ba55",
@@ -68,6 +68,6 @@
     "citation": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000016factsheet.pdf"
   },
   "retrospective_count": 0,
-  "successful_at": "2026-11-27T09:41:13.732570+00:00",
-  "finished_at": "2026-11-27T09:41:13.732594+00:00"
+  "successful_at": "2026-11-27T19:28:43.742860+00:00",
+  "finished_at": "2026-11-27T19:28:43.742876+00:00"
 }
